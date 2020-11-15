@@ -1,0 +1,24 @@
+body {
+  font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+  background-image: url('../images/index_background.png');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.bg-primary {
+  background-color: #3f51b5 !important;
+}
+
+/* For webpack purposes only */
+.preview {
+  background-image: url('../images/preview.png');
+}

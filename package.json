@@ -1,0 +1,74 @@
+{
+  "name": "aramacademy",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npm-run-all --parallel dev:frontend dev:backend",
+    "dev:frontend": "webpack --mode development --progress --colors --watch",
+    "dev:backend": "nodemon ./bin/www",
+    "build": "webpack --mode production",
+    "prod": "npm-run-all --parallel build dev:backend",
+    "lint": "prettier app.js src --write",
+    "lint-staged": "pretty-quick --staged --no-restage --bail"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "abort-controller": "^3.0.0",
+    "axios": "^0.21.0",
+    "axios-rate-limit": "^1.3.0",
+    "body-parser": "^1.19.0",
+    "cli-progress": "^3.8.2",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
+    "express": "^4.16.4",
+    "http-errors": "~1.6.3",
+    "is-mobile": "^2.2.2",
+    "kayn": "^0.10.2",
+    "moment": "^2.27.0",
+    "mongoose": "^5.9.21",
+    "morgan": "~1.9.1",
+    "node-fetch": "^2.6.1",
+    "node-schedule": "^1.3.2",
+    "npm-run-all": "^4.1.5",
+    "path": "^0.12.7",
+    "react": "^16.13.1",
+    "react-bootstrap": "^1.0.1",
+    "react-cookie": "^4.0.3",
+    "react-dom": "^16.13.1",
+    "react-minimal-pie-chart": "^8.0.1",
+    "react-router-dom": "^5.2.0",
+    "sleep": "^6.3.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^3.6.0",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.3.0",
+    "husky": "^4.2.5",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.0.5",
+    "pretty-quick": "^2.0.1",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "proxy": "http://localhost:3000",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint-staged"
+    }
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true
+  }
+}
