@@ -17,6 +17,9 @@ Whitelist IP in MongoDB Atlas project
 Start server with `npm run start` or `npm run prod`
 
 Create a .env file in the root folder with the following definitions
+
 RIOT_API_KEY=key
+
 DEV_MODE=dev | prod
+
 DB_URI=uri
