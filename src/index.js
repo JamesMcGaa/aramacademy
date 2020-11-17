@@ -9,6 +9,8 @@ import Navigation from './components/navigation.js';
 import Leaderboards from './components/leaderboard/leaderboard_page.js';
 import About from './components/about/about_page.js';
 import Faq from './components/faq/faq_page.js';
+import ChampionsPage from './components/champions/champions_page.js';
+import Champion from './components/champions/champion.js';
 import { Container } from '@material-ui/core';
 import './stylesheets/style.css';
 import { CookiesProvider } from 'react-cookie';
@@ -46,6 +48,12 @@ function App() {
             </Route>
             <Route path="/leaderboards/:region">
               <Leaderboards />
+            </Route>
+            <Route path="/champions/:champion">
+              <Champion />
+            </Route>
+            <Route path="/champions">
+              <ChampionsPage />
             </Route>
             <Route path="/about">
               <About />
