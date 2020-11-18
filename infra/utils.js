@@ -25,7 +25,7 @@ const PLATFORM_ID_TO_REGION = Object.freeze({
   LA1: 'lan',
   LA2: 'las',
   OC1: 'oce',
-  RU1: 'ru',
+  RU: 'ru',
   TR1: 'tr',
   JP1: 'jp',
   KR: 'kr',
