@@ -229,7 +229,7 @@ function logDate() {
   );
 }
 
-var job = schedule.scheduleJob('0 30 3 * * *', entrypoint);
+var job = schedule.scheduleJob('0 30 7 * * *', entrypoint); // 7:30AM UTC
 
 async function entrypoint() {
   console.log('Started');
