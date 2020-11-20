@@ -51,6 +51,10 @@ two_word_champs.set('TwistedFate', 'Twisted Fate');
 two_word_champs.set('Velkoz', "Vel'koz");
 two_word_champs.set('XinZhao', 'Xin Zhao');
 
+const social_svgs = importAll(
+  require.context('../images/social_icons/', false, /\.(png|jpe?g|svg)$/)
+);
+
 export default {
   Resources: {
     ranked_badges: rankedBadgeDict,

@@ -20,6 +20,65 @@ export default class Navigation extends React.Component {
             <Nav.Link href="/about">About</Nav.Link>
             <Nav.Link href="/FAQ">FAQ</Nav.Link>
           </Nav>
+          <Nav className="mr-sm-2">
+            <div>
+              <a href="https://discord.gg/MydvqhqWmM" target="_blank">
+                <img
+                  style={{
+                    marginRight: '5px',
+                    padding: '4px',
+                    borderRadius: '5px',
+                    backgroundColor: '#7289DA',
+                  }}
+                  height="32"
+                  width="32"
+                  src="/static/discord.svg"
+                />
+              </a>
+              <a href="https://www.facebook.com/aramdotacademy" target="_blank">
+                <img
+                  style={{
+                    marginRight: '5px',
+                    padding: '4px',
+                    borderRadius: '5px',
+                    backgroundColor: '#1877F2',
+                  }}
+                  height="32"
+                  width="32"
+                  src="/static/facebook.svg"
+                />
+              </a>
+              <a href="https://www.patreon.com/aramacademy" target="_blank">
+                <img
+                  style={{
+                    marginRight: '5px',
+                    padding: '4px',
+                    borderRadius: '5px',
+                    backgroundColor: '#F96854',
+                  }}
+                  height="32"
+                  width="32"
+                  src="/static/patreon.svg"
+                />
+              </a>{' '}
+              <a
+                href="https://www.instagram.com/aramdotacademy/"
+                target="_blank"
+              >
+                <img
+                  style={{
+                    marginRight: '5px',
+                    padding: '4px',
+                    borderRadius: '5px',
+                    backgroundColor: '#E4405F',
+                  }}
+                  height="32"
+                  width="32"
+                  src="/static/instagram.svg"
+                />{' '}
+              </a>
+            </div>
+          </Nav>
         </Navbar.Collapse>
       </Navbar>
     );
