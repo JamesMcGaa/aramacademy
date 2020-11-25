@@ -131,7 +131,7 @@ export default function Home() {
       </header>
       <main role="main" className="inner cover">
         <h1 className="cover-heading">Welcome to the Howling Abyss</h1>
-        <p className="lead">
+        <p className="lead" style={mobile() ? { fontSize: '16px' } : {}}>
           ARAM Academy helps you analyze your performance, identify winning
           strategies, and climb the ARAM ladder.
         </p>
@@ -201,13 +201,18 @@ export default function Home() {
                 }}
                 key={searchTerm}
                 classes={{ root: classes.previousSearches }}
+                style={mobile() ? { textAlign: 'center' } : {}}
               >
                 {searchTerm}
               </FormHelperText>
             ))}
 
         {error && (
-          <FormHelperText error={true} classes={{ root: classes.error }}>
+          <FormHelperText
+            error={true}
+            classes={{ root: classes.error }}
+            style={mobile() ? { textAlign: 'center' } : {}}
+          >
             Summoner name is required!
           </FormHelperText>
         )}
