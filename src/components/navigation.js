@@ -1,5 +1,6 @@
 import React from 'react';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { isAndroid } from 'mobile-device-detect';
 
 export default class Navigation extends React.Component {
   render() {
@@ -35,7 +36,14 @@ export default class Navigation extends React.Component {
                   src="/static/discord.svg"
                 />
               </a>
-              <a href="https://www.facebook.com/aramdotacademy" target="_blank">
+              <a
+                href={
+                  isAndroid
+                    ? 'fb://page/106500547936727'
+                    : 'https://www.facebook.com/aramdotacademy'
+                }
+                target="_blank"
+              >
                 <img
                   style={{
                     marginRight: '5px',

@@ -26,6 +26,7 @@
     "http-errors": "~1.6.3",
     "is-mobile": "^2.2.2",
     "kayn": "^0.10.2",
+    "mobile-device-detect": "^0.4.3",
     "moment": "^2.27.0",
     "mongoose": "^5.9.21",
     "morgan": "~1.9.1",
