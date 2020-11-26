@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useHistory } from 'react-router-dom';
-import { Container } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 import {
   FormGroup,
   FormHelperText,
   Select,
   FilledInput,
   MenuItem,
+  Container,
+  Snackbar,
   Button,
+  IconButton,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useCookies } from 'react-cookie';
@@ -86,9 +89,14 @@ export default function Home() {
   const [error, setError] = useState(false);
   const [focused, setFocused] = useState(false);
   const [cookies, setCookie] = useCookies(['recentlySearched']);
+  const [open, setOpen] = useState(true);
 
   const COOKIE_EXPIRATION_IN_DAYS = 365;
   const SECONDS_TO_DAYS = 24 * 60 * 60;
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   function handleSearchCookie(search) {
     let searched_array;
@@ -217,6 +225,17 @@ export default function Home() {
           </FormHelperText>
         )}
       </main>
+      <Snackbar
+        open={open}
+        onClose={handleClose}
+        autoHideDuration={6000}
+        message="hello james, i am a snackbar"
+        action={
+          <IconButton aria-label="close" color="inherit" onClick={handleClose}>
+            <CloseIcon />
+          </IconButton>
+        }
+      />
     </Container>
   );
 }
