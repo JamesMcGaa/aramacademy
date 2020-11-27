@@ -134,7 +134,10 @@ export default function Home() {
 
   return (
     <Container>
-      <header className="masthead" style={{ marginBottom: '40vh' }}>
+      <header
+        className="masthead"
+        style={mobile() ? { marginBottom: '30vh' } : { marginBottom: '40vh' }}
+      >
         <div className="inner"></div>
       </header>
       <main role="main" className="inner cover">
@@ -228,12 +231,24 @@ export default function Home() {
       <Snackbar
         open={open}
         onClose={handleClose}
-        autoHideDuration={6000}
-        message="hello james, i am a snackbar"
+        message="Make feature requests, share bugs, or contribute to open source"
         action={
-          <IconButton aria-label="close" color="inherit" onClick={handleClose}>
-            <CloseIcon />
-          </IconButton>
+          <Container>
+            <Button
+              color="primary"
+              size="medium"
+              href="https://discord.gg/MydvqhqWmM"
+            >
+              Join the ARAM Academy Discord
+            </Button>
+            <IconButton
+              aria-label="close"
+              color="inherit"
+              onClick={handleClose}
+            >
+              <CloseIcon />
+            </IconButton>
+          </Container>
         }
       />
     </Container>
