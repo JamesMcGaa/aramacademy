@@ -89,7 +89,7 @@ export default function Home() {
   const [error, setError] = useState(false);
   const [focused, setFocused] = useState(false);
   const [cookies, setCookie] = useCookies(['recentlySearched']);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(!mobile());
 
   const COOKIE_EXPIRATION_IN_DAYS = 365;
   const SECONDS_TO_DAYS = 24 * 60 * 60;
