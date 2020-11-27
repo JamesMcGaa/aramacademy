@@ -69,22 +69,6 @@ export default class Navigation extends React.Component {
                   src="/static/patreon.svg"
                 />
               </a>{' '}
-              <a
-                href="https://www.instagram.com/aramdotacademy/"
-                target="_blank"
-              >
-                <img
-                  style={{
-                    marginRight: '5px',
-                    padding: '4px',
-                    borderRadius: '5px',
-                    backgroundColor: '#E4405F',
-                  }}
-                  height="32"
-                  width="32"
-                  src="/static/instagram.svg"
-                />{' '}
-              </a>
             </div>
           </Nav>
         </Navbar.Collapse>
