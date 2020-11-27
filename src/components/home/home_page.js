@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useHistory } from 'react-router-dom';
-import { Container } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 import {
   FormGroup,
   FormHelperText,
   Select,
   FilledInput,
   MenuItem,
+  Container,
+  Snackbar,
   Button,
+  IconButton,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useCookies } from 'react-cookie';
@@ -86,9 +89,14 @@ export default function Home() {
   const [error, setError] = useState(false);
   const [focused, setFocused] = useState(false);
   const [cookies, setCookie] = useCookies(['recentlySearched']);
+  const [open, setOpen] = useState(!mobile());
 
   const COOKIE_EXPIRATION_IN_DAYS = 365;
   const SECONDS_TO_DAYS = 24 * 60 * 60;
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   function handleSearchCookie(search) {
     let searched_array;
@@ -126,7 +134,10 @@ export default function Home() {
 
   return (
     <Container>
-      <header className="masthead" style={{ marginBottom: '40vh' }}>
+      <header
+        className="masthead"
+        style={mobile() ? { marginBottom: '30vh' } : { marginBottom: '40vh' }}
+      >
         <div className="inner"></div>
       </header>
       <main role="main" className="inner cover">
@@ -217,6 +228,29 @@ export default function Home() {
           </FormHelperText>
         )}
       </main>
+      <Snackbar
+        open={open}
+        onClose={handleClose}
+        message="Make feature requests, share bugs, or contribute to open source"
+        action={
+          <Container>
+            <Button
+              color="primary"
+              size="medium"
+              href="https://discord.gg/MydvqhqWmM"
+            >
+              Join the ARAM Academy Discord
+            </Button>
+            <IconButton
+              aria-label="close"
+              color="inherit"
+              onClick={handleClose}
+            >
+              <CloseIcon />
+            </IconButton>
+          </Container>
+        }
+      />
     </Container>
   );
 }
