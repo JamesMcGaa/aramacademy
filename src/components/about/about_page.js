@@ -32,7 +32,7 @@ export default function About() {
       img: '/static/Vayne_about_cropped.png',
       link: '/users/na/crushsquid/',
       bio:
-        "I'm Crushsquid. There aren't any squid champions in League yet, but I'd main one if it were out there. Until that day, I'm a Vayne main. I am also a frequent OSU and chess player.",
+        "I'm Crushsquid. There aren't any squid champions in League yet, but I'd main one if it were out there. Until that day, I'm a Vayne main. I am also a frequent osu! and chess player.",
       name: 'Crushsquid',
     },
   ];

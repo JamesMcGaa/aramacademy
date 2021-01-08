@@ -14,7 +14,7 @@ export default function AboutPageDesktop({ data }) {
         <Typography variant="body1" align="left">
           ARAM Academy is dedicated to providing an ARAM exclusive analytics
           page. Unlike other League statistics sites, ARAM Academy provides data
-          of all ARAMs played since account creation.
+          of all ARAMs available from the Riot API.
         </Typography>
         <br></br>
 
