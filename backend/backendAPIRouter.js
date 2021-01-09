@@ -35,7 +35,7 @@ const RANKS = {
 };
 
 const REQUEST_TIMEOUT_EXTERNAL_FETCH_MS = 15000;
-const MAX_ASYNC_USERS_QUEUE = 7;
+const MAX_ASYNC_USERS_QUEUE = 20;
 
 let processUser = require('../infra/infra_entrypoint.js');
 

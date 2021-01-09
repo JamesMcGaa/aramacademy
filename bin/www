@@ -11,6 +11,7 @@ const DOTENV_DEV_MODES = {
   DEV: 'dev',
   ERROR: 'no dev mode provided',
 }
+const SERVER_TIMEOUT = 1000*60*15; //15 minutes
 
 let port;
 let server;
@@ -29,6 +30,7 @@ else if(process.env.DEV_MODE == DOTENV_DEV_MODES.PROD){
     fs.readFileSync('/etc/letsencrypt/live/aram.academy/privkey.pem'), cert: 
     fs.readFileSync('/etc/letsencrypt/live/aram.academy/fullchain.pem'),
   }, app);
+  server.setTimeout(SERVER_TIMEOUT);
 }
 else {
   throw DOTENV_DEV_MODES.ERROR; 
