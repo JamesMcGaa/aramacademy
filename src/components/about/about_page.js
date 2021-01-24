@@ -54,7 +54,7 @@ export default function About() {
         name: 'cake id',
       },
       {
-        img: '/static/Ashe_about_cropped.png',
+        img: '/static/Jinx_about_cropped.png',
         link: '/users/na/ionviv/',
         bio:
           'Ionviv is our graphic design lead. She produces the art and assets for ARAM Academy. Find her on',
