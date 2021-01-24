@@ -137,9 +137,7 @@ export default function Home() {
       <header
         className="masthead"
         style={mobile() ? { marginBottom: '30vh' } : { marginBottom: '40vh' }}
-      >
-        <div className="inner"></div>
-      </header>
+      ></header>
       <main role="main" className="inner cover">
         <h1 className="cover-heading">Welcome to the Howling Abyss</h1>
         <p className="lead" style={mobile() ? { fontSize: '16px' } : {}}>

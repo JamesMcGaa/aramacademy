@@ -6,7 +6,9 @@ export default class Navigation extends React.Component {
   render() {
     return (
       <Navbar bg="primary" expand="lg" variant="dark" fixed="top">
-        <Navbar.Brand href="/">ARAM Academy</Navbar.Brand>
+        <Navbar.Brand href="/">
+          <img src="/static/logo.png" height="30px" />
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
