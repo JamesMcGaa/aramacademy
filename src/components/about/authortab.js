@@ -51,7 +51,7 @@ export default function AuthorTab({ lad }) {
                   {' '}
                   <a href={lad.twitch} target="_blank">
                     {' '}
-                    {lad.twitch}
+                    Twitch
                   </a>{' '}
                 </div>
               ) : null}
