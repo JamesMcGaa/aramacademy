@@ -68,7 +68,7 @@ def save_about_champ(champ_name):
 for champ in get_champ_list():
     save_champ_image(champ)
 
-about_champs = ['MonkeyKing', 'Zed', 'Vayne', 'Draven']
+about_champs = ['MonkeyKing', 'Zed', 'Vayne', 'Draven', 'Ashe', 'Samira', 'Heimerdinger']
 for champ in about_champs:
     save_about_champ(champ)
 

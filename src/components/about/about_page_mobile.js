@@ -35,8 +35,12 @@ export default function AboutPageDesktop({ data }) {
 
         <Typography variant="body1" align="left">
           We are a small team of ARAM players and software engineers. ARAM
-          Academy is non-profit, our infra is funded by our team alone. Contact
-          us at aramdotacademy@gmail.com
+          Academy is non-profit, our infra is funded by our team alone. Join our
+          <a href="https://discord.gg/MydvqhqWmM" target="_blank">
+            {' '}
+            Discord{' '}
+          </a>{' '}
+          or Contact us at aramdotacademy@gmail.com.
         </Typography>
         <br></br>
         <br></br>
