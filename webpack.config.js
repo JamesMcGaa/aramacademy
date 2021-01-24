@@ -16,7 +16,7 @@ module.exports = {
     publicPath: '/',
     filename: '[name].js',
   },
-  plugins: [htmlPlugin],
+  plugins: [htmlPlugin, new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
   module: {
     rules: [
       {

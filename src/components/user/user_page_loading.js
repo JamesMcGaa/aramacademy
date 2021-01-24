@@ -1,5 +1,5 @@
 import React from 'react';
-import nunu_gif from '../../images/nunu_dancing.gif';
+import nunu_gif from '../../images/nunu_dancing_compressed.gif';
 
 export default function UserPageLoading({ summonerName }) {
   return (
