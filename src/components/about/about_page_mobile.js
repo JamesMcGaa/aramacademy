@@ -42,7 +42,7 @@ export default function AboutPageDesktop({ data }) {
         <br></br>
       </Container>
       <Container>
-        {data.map(function (lad) {
+        {data.flat().map(function (lad) {
           return (
             <Grid item component={Card} key={lad.name} xs>
               <AuthorTab lad={lad} />

@@ -42,21 +42,29 @@ export default function AboutPageDesktop({ data }) {
         <br></br>
       </Container>
 
-      <Grid container alignItems="stretch">
-        {data.map(function (lad) {
-          return (
-            <Grid
-              item
-              component={Card}
-              key={lad.name}
-              xs
-              style={{ margin: '5px' }}
-            >
-              <AuthorTab lad={lad} />
-            </Grid>
-          );
-        })}
-      </Grid>
+      {data.map(function (row, index) {
+        return (
+          <Grid
+            container
+            alignItems="stretch"
+            style={{ placeContent: 'center' }}
+          >
+            {row.map(function (lad) {
+              return (
+                <Grid
+                  item
+                  component={Card}
+                  key={lad.name}
+                  xs
+                  style={{ margin: '5px', maxWidth: '25%' }}
+                >
+                  <AuthorTab lad={lad} />
+                </Grid>
+              );
+            })}
+          </Grid>
+        );
+      })}
     </div>
   );
 }
