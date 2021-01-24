@@ -1,13 +1,13 @@
 import React from 'react';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { isAndroid } from 'mobile-device-detect';
-
+import logo from '../images/logo.png';
 export default class Navigation extends React.Component {
   render() {
     return (
       <Navbar bg="primary" expand="lg" variant="dark" fixed="top">
         <Navbar.Brand href="/">
-          <img src="/static/logo.png" height="30px" />
+          <img src={logo} height="30px" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
