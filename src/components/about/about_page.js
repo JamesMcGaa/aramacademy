@@ -42,8 +42,9 @@ export default function About() {
         img: '/static/Samira_about_cropped.png',
         link: '/users/na/Gated/',
         bio:
-          "Gated is ARAM Academy's product manager. He is also the coach for Penn State D1 League. Find him at ttv: gatedlol",
+          "Gated is ARAM Academy's product manager. He is also the coach for Penn State D1 League. Find him at",
         name: 'Gated',
+        twitch: 'https://www.twitch.tv/gatedlol',
       },
       {
         img: '/static/Heimerdinger_about_cropped.png',
@@ -56,8 +57,9 @@ export default function About() {
         img: '/static/Ashe_about_cropped.png',
         link: '/users/na/ionviv/',
         bio:
-          'Ionviv is our graphic design lead. She produces the art and assets for ARAM Academy. Find her at ttv: ianviv',
+          'Ionviv is our graphic design lead. She produces the art and assets for ARAM Academy. Find her at',
         name: 'ionviv',
+        twitch: 'https://www.twitch.tv/ianviv',
       },
     ],
   ];

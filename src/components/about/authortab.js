@@ -46,6 +46,15 @@ export default function AuthorTab({ lad }) {
               align="left"
             >
               {lad.bio}
+              {lad.hasOwnProperty('twitch') ? (
+                <div>
+                  {' '}
+                  <a href={lad.twitch} target="_blank">
+                    {' '}
+                    {lad.twitch}
+                  </a>{' '}
+                </div>
+              ) : null}
             </Typography>
           </CardContent>
         </CardActionArea>
