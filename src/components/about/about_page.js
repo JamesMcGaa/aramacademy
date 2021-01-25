@@ -4,6 +4,9 @@ import AboutPageDesktop from './about_page_desktop.js';
 import AboutPageMobile from './about_page_mobile';
 
 const mobile = require('is-mobile');
+import PaletteIcon from '@material-ui/icons/Palette';
+import KeyboardIcon from '@material-ui/icons/Keyboard';
+import ShowChartIcon from '@material-ui/icons/ShowChart';
 
 export default function About() {
   const ladData = [
@@ -14,6 +17,7 @@ export default function About() {
         bio:
           'DeusExAnimo is a fullstack engineer. He also manages the AWS hosting and MongoDB clusters.',
         name: 'DeusExAnimo',
+        icon: <KeyboardIcon />,
       },
       {
         img: '/static/Zed_about_cropped.png',
@@ -21,6 +25,7 @@ export default function About() {
         bio:
           'Kirito Sensei is a fullstack engineer. He helped create the frontend components and backend Riot calls.',
         name: 'Kirito Sensei',
+        icon: <KeyboardIcon />,
       },
       {
         img: '/static/Draven_about_cropped.png',
@@ -28,6 +33,7 @@ export default function About() {
         bio:
           'Dsetreg is a fullstack engineer. He helped design our technology stack, configuration, and system flow.',
         name: 'Dsetreg',
+        icon: <KeyboardIcon />,
       },
       {
         img: '/static/Vayne_about_cropped.png',
@@ -35,6 +41,7 @@ export default function About() {
         bio:
           'Crushsquid is an infra engineer. He developed the initial prototype that eventually became ARAM Academy.',
         name: 'crushsquid',
+        icon: <KeyboardIcon />,
       },
     ],
     [
@@ -45,6 +52,7 @@ export default function About() {
           "Gated is ARAM Academy's product manager. He is also the coach for Penn State D1 League. Find him at",
         name: 'Gated',
         twitch: 'https://www.twitch.tv/gatedlol',
+        icon: <ShowChartIcon />,
       },
       {
         img: '/static/Heimerdinger_about_cropped.png',
@@ -52,6 +60,7 @@ export default function About() {
         bio:
           'cake id is our marketing manager, and creates many of the memes and advertisements used by ARAM Academy. ',
         name: 'cake id',
+        icon: <PaletteIcon />,
       },
       {
         img: '/static/Ashe_about_cropped.png',
@@ -60,6 +69,7 @@ export default function About() {
           'Ionviv is our graphic design lead. She produces the art and assets for ARAM Academy. Find her at',
         name: 'ionviv',
         twitch: 'https://www.twitch.tv/ianviv',
+        icon: <PaletteIcon />,
       },
     ],
   ];
