@@ -7,12 +7,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
-const useStyles = makeStyles((theme) => ({
-  root: {},
-}));
 
 export default function AboutPageDesktop({ data }) {
-  const classes = useStyles();
   return (
     <div style={{ width: '95%', margin: '0 auto', marginTop: '80px' }}>
       <Container style={{}}>
@@ -56,16 +52,15 @@ export default function AboutPageDesktop({ data }) {
           Our Staff
         </Typography>
 
-        <List component="nav" className={classes.root}>
+        <List component="nav">
           {data.flat().map(function (lad) {
             return (
-              <Link href={lad.link} style={{ textDecoration: 'none' }}>
-                <ListItem button style={{ textDecoration: 'none' }}>
+              <Link href={lad.link}>
+                <ListItem button>
                   <ListItemIcon>{lad.icon}</ListItemIcon>
-                  <ListItemText
-                    primary={lad.name}
-                    style={{ textDecoration: 'none' }}
-                  />
+                  <Typography variant="caption" color="textPrimary">
+                    {lad.name}
+                  </Typography>
                 </ListItem>
               </Link>
             );
