@@ -1,4 +1,5 @@
 body {
+  min-height: 100%;
   font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
   background-image: url('../images/index_background_compressed.jpg');
   -webkit-background-size: cover;
@@ -15,11 +16,22 @@ body {
   text-align: center;
 }
 
+html {
+  min-height: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    background-image: none;
+    background: linear-gradient(black, transparent); /* the standard */
+  }
+}
+
 .bg-primary {
   background-color: #3f51b5 !important;
 }
 
 /* For webpack purposes only */
 .preview {
-  background-image: url('../images/preview.png');
+  background-image: url('../images/og_preview.png');
 }

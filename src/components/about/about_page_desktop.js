@@ -6,7 +6,14 @@ import React from 'react';
 import AuthorTab from './authortab.js';
 export default function AboutPageDesktop({ data }) {
   return (
-    <div style={{ width: '80%', margin: '0 auto', marginTop: '80px' }}>
+    <div
+      style={{
+        width: '80%',
+        margin: '0 auto',
+        marginTop: '80px',
+        marginBottom: '80px',
+      }}
+    >
       <Container style={{}}>
         <Typography variant="h4" align="left" style={{ marginBottom: '4px' }}>
           Our Mission
@@ -40,7 +47,7 @@ export default function AboutPageDesktop({ data }) {
             {' '}
             Discord{' '}
           </a>{' '}
-          or Contact us at aramdotacademy@gmail.com.
+          or contact us at aramdotacademy@gmail.com.
         </Typography>
         <br></br>
         <br></br>

@@ -16,6 +16,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import { useCookies } from 'react-cookie';
 var mobile = require('is-mobile');
+import Background from '../../images/index_background_compressed.jpg';
 
 const UPPERCASE_REGIONS_FOR_SELECTOR = [
   'NA',
@@ -93,6 +94,12 @@ export default function Home() {
 
   const COOKIE_EXPIRATION_IN_DAYS = 365;
   const SECONDS_TO_DAYS = 24 * 60 * 60;
+
+  if (mobile()) {
+    document.body.style.backgroundImage = `url(${Background})`;
+    document.body.style.backgroundPosition = `top`;
+    document.body.style.backgroundSize = `cover`;
+  }
 
   const handleClose = () => {
     setOpen(false);

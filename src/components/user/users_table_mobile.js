@@ -11,6 +11,7 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Resources from '../resources.js';
+var mobile = require('is-mobile');
 
 var resources = Resources.Resources;
 const COLORED_WINRATE_CUTOFF = 60.0;
@@ -165,6 +166,9 @@ function nice_round(num) {
 }
 
 export default function UserTableMobile({ per_champion_data }) {
+  if (mobile()) {
+    document.body.style.backgroundImage = 'none';
+  }
   console.log('render mobile table');
   const raw_rows = per_champion_data;
   const rows = raw_rows.filter(

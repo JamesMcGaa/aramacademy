@@ -16,9 +16,6 @@ import { CookiesProvider } from 'react-cookie';
 const theme = createMuiTheme({
   palette: {
     type: 'dark',
-    background: {
-      default: '#fff',
-    },
   },
   typography: {
     useNextVariants: true,
