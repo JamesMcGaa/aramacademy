@@ -29,10 +29,25 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|svg|jpg|gif|txt)$/,
+        test: /\.(png|svg|jpg|gif)$/,
         loader: 'file-loader',
         options: { name: 'static/[name].[ext]' },
       },
+      {
+        test: /\.txt$/,
+        use: 'raw-loader',
+      },
+      // {
+      //   test: /\.md$/,
+      //   use: [
+      //     {
+      //       loader: 'markdown-loader',
+      //       options: {
+      //         /* your options here */
+      //       },
+      //     },
+      //   ],
+      // },
     ],
   },
 };
