@@ -45,20 +45,13 @@ const headCells = [
   { id: 'image', numeric: false, disablePadding: false, label: '' },
   { id: 'champion', numeric: false, disablePadding: true, label: 'Champion' },
 
+  { id: 'tier', numeric: true, disablePadding: false, label: 'Tier' },
+  { id: 'winrate', numeric: true, disablePadding: false, label: 'Winrate' },
   {
     id: 'total_games',
     numeric: true,
     disablePadding: false,
-    label: 'Total ARAMs',
-  },
-  { id: 'wins', numeric: true, disablePadding: false, label: 'Wins' },
-  { id: 'winrate', numeric: true, disablePadding: false, label: 'Winrate' },
-  { id: 'kda', numeric: true, disablePadding: false, label: 'K/D/A' },
-  {
-    id: 'pentakills',
-    numeric: true,
-    disablePadding: false,
-    label: 'Pentakills',
+    label: 'Total Games',
   },
 ];
 
@@ -82,7 +75,6 @@ function EnhancedTableHead(props) {
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
-              hideSortIcon={headCell.id === 'kda'}
             >
               {headCell.label}
               {orderBy === headCell.id ? (
@@ -180,35 +172,28 @@ function nice_round(num) {
   return Math.round(num * 10) / 10;
 }
 
-export default function EnhancedTable({ per_champion_data }) {
-  console.log('render_user_table');
-  const raw_rows = per_champion_data;
-  const rows = raw_rows.filter(
-    (r) => r.champion !== 'overall' && r.total_games !== 0
-  );
-  console.log(rows);
-
+export default function TierlistTable({ tierlist_data }) {
+  console.log('tierlist_table');
+  console.log(tierlist_data);
+  const raw_rows = tierlist_data;
+  // const rows = raw_rows.filter(
+  //     (r) => r.champion !== 'overall' && r.total_games !== 0
+  // );
+  const rows = raw_rows;
   rows.forEach((row) => {
     row.winrate = nice_round((row.wins * 100) / row.total_games);
-    row.average_gold = nice_round(row.gold / row.total_games);
-    row.average_cs = nice_round(row.cs / row.total_games);
-    row.average_kills = nice_round(row.kills / row.total_games);
-    row.average_deaths = nice_round(row.deaths / row.total_games);
-    row.average_assists = nice_round(row.assists / row.total_games);
   });
 
   const classes = useStyles();
   const [order, setOrder] = React.useState('desc');
-  const [orderBy, setOrderBy] = React.useState('total_games');
+  const [orderBy, setOrderBy] = React.useState('winrate');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(rows.length);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
-    if (property === 'kda') {
-      return;
-    }
+
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
@@ -279,9 +264,8 @@ export default function EnhancedTable({ per_champion_data }) {
                         : row.champion}
                     </TableCell>
 
-                    <TableCell align="right">{row.total_games}</TableCell>
+                    <TableCell align="right">{row.tier}</TableCell>
 
-                    <TableCell align="right">{row.wins}</TableCell>
                     <TableCell align="right">
                       <span
                         style={{
@@ -294,24 +278,8 @@ export default function EnhancedTable({ per_champion_data }) {
                         {row.winrate.toFixed(1)}
                       </span>
                     </TableCell>
-                    <TableCell
-                      align="right"
-                      style={{
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                      }}
-                    >
-                      <span style={{ color: 'deepskyblue' }}>
-                        {row.average_kills}
-                      </span>
-                      <span>{' / '}</span>
-                      <span style={{ color: 'red' }}>{row.average_deaths}</span>
-                      <span>{' / '}</span>
-                      <span style={{ color: 'yellow' }}>
-                        {row.average_assists}
-                      </span>
-                    </TableCell>
-                    <TableCell align="right">{row.pentakills}</TableCell>
+
+                    <TableCell align="right">{row.total_games}</TableCell>
                   </TableRow>
                 );
               })}

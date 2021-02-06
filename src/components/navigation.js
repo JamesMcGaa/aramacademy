@@ -18,6 +18,7 @@ export default class Navigation extends React.Component {
               </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link href="/champions">Champions</Nav.Link>
+            <Nav.Link href="/tierlist">Tier List</Nav.Link>
             <Nav.Link href="/about">About</Nav.Link>
             <Nav.Link href="/FAQ">FAQ</Nav.Link>
           </Nav>
