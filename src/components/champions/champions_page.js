@@ -37,28 +37,24 @@ export default function ChampionsPage() {
   const params = useParams();
 
   return (
-    <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-      <Container fixed classes={{ root: classes.largeContainer }}>
-        <Grid container spacing={3}>
-          <Grid item xs={8}>
-            <div
-              className={classes.root}
-              style={{
-                marginTop: '100px',
-                backgroundColor: 'rgba(66, 66, 66, .6)',
-                marginRight: '15px',
-              }}
-            >
-              <ChampionsGrid />
-            </div>
-          </Grid>
-          <Grid item xs={4} style={{ marginTop: '100px' }}>
-            <Paper classes={{ root: classes.paperRoot }}>
-              <RoleTable role_winrate_data={null} />
-            </Paper>
-          </Grid>
-        </Grid>
-      </Container>
-    </div>
+    <Grid container spacing={3}>
+      <Grid item xs={8}>
+        <div
+          className={classes.root}
+          style={{
+            marginTop: '100px',
+            backgroundColor: 'rgba(66, 66, 66, .6)',
+            marginRight: '15px',
+          }}
+        >
+          <ChampionsGrid />
+        </div>
+      </Grid>
+      <Grid item xs={4} style={{ marginTop: '100px' }}>
+        <Paper classes={{ root: classes.paperRoot }}>
+          <RoleTable role_winrate_data={null} />
+        </Paper>
+      </Grid>
+    </Grid>
   );
 }
