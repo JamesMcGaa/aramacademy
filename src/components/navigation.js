@@ -2,6 +2,7 @@ import React from 'react';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { isAndroid } from 'mobile-device-detect';
 import logo from '../images/logo.png';
+import { Container } from '@material-ui/core';
 export default class Navigation extends React.Component {
   render() {
     return (
@@ -21,11 +22,12 @@ export default class Navigation extends React.Component {
               </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link href="/research">Research</Nav.Link>
-            <Nav.Link href="/about">About</Nav.Link>
-            <Nav.Link href="/FAQ">FAQ</Nav.Link>
+            <Nav.Link href="/champions">Champions</Nav.Link>
           </Nav>
           <Nav className="mr-sm-2">
-            <div>
+            <Nav.Link href="/about">About</Nav.Link>
+            <Nav.Link href="/FAQ">FAQ</Nav.Link>
+            <div style={{ marginLeft: '10px', marginRight: '10px' }}>
               <a href="https://discord.gg/MydvqhqWmM" target="_blank">
                 <img
                   style={{

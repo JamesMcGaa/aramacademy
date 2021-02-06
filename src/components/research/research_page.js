@@ -6,24 +6,23 @@ import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import readme from './README.txt';
 
-const markdown = `Here is some JavaScript code:
-
-~~~js
-console.log('It works!')
-~~~
-`;
-
 const useStyles = makeStyles({
   paperRoot: {
-    'background-color': 'rgba(67,67,67,.95)',
+    'background-color': 'rgba(45,45,45,.95)',
+    textAlign: 'left',
+    color: 'none',
+    padding: mobile() ? '20px' : '60px',
   },
 });
 
 export default function Research() {
   const classes = useStyles();
   return (
-    <Container className={classes.paperRoot} style={{ marginTop: '100px' }}>
+    <div
+      className={classes.paperRoot}
+      style={{ marginTop: mobile() ? '80px' : '100px' }}
+    >
       <ReactMarkdown children={readme} />
-    </Container>
+    </div>
   );
 }

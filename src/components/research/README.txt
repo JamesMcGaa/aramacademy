@@ -1,6 +1,6 @@
-# [ARAM Academy](https://aram.academy)
+# ARAM Academy
 
-![image](src/images/og_preview.png)
+![image](/static/Ahri.png)
 
 ARAM Academy is an ARAM-exclusive statistics aggregator for League of Legends. We provide leaderboards, rank badge estimates, and champion-level winrates across the entirety of a players ARAM data provided by the Riot API.
 
