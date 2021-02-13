@@ -13,12 +13,53 @@ import React from 'react';
 import Resources from '../resources.js';
 
 var resources = Resources.Resources;
-const COLORED_WINRATE_CUTOFF = 60.0;
+const DARK_GREEN_WINRATE_CUTOFF = 55.0;
+const DARK_GREEN_COLOR = '#00ff00'; //'#fc9d03';
+const GREEN_WINRATE_CUTOFF = 52.5;
+const GREEN_COLOR = '#75ff75';
+const WHITE_WINRATE_CUTOFF = 50.0;
+const WHITE_COLOR = 'white';
+const PINK_WINRATE_CUTOFF = 48.0;
+const PINK_COLOR = '#ff8595';
+const RED_WINRATE_CUTOFF = 45.0;
+const RED_COLOR = '#fc354f';
+
+function winrateColor(winrate) {
+  if (winrate > DARK_GREEN_WINRATE_CUTOFF) {
+    return DARK_GREEN_COLOR;
+  } else if (winrate > GREEN_WINRATE_CUTOFF) {
+    return GREEN_COLOR;
+  } else if (winrate > WHITE_WINRATE_CUTOFF) {
+    return WHITE_COLOR;
+  } else if (winrate > PINK_WINRATE_CUTOFF) {
+    return PINK_COLOR;
+  } else {
+    return RED_COLOR;
+  }
+}
+
+const TIER_SORT_MAP = {
+  S: 0,
+  A: 1,
+  B: 2,
+  C: 3,
+  D: 4,
+};
+
 function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
+  //Hardcoded for tier rank sorting - kinda monka
+  let a_value = a[orderBy];
+  let b_value = b[orderBy];
+
+  if (orderBy == 'tier') {
+    a_value = TIER_SORT_MAP[a_value];
+    b_value = TIER_SORT_MAP[b_value];
+  }
+
+  if (b_value < a_value) {
     return -1;
   }
-  if (b[orderBy] > a[orderBy]) {
+  if (b_value > a_value) {
     return 1;
   }
   return 0;
@@ -135,7 +176,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: '100%',
     marginBottom: theme.spacing(2),
-    'background-color': 'rgba(66, 66, 66, .8)',
+    'background-color': 'rgba(66, 66, 66, .85)',
   },
   table: {
     minWidth: 750,
@@ -164,6 +205,14 @@ const useStyles = makeStyles((theme) => ({
     height: 'auto',
     width: '100%',
     borderRadius: '50%',
+    padding: '0px',
+  },
+  resizeTierIcon: {
+    minWidth: '31px',
+    maxWidth: '31px',
+    height: 'auto',
+    width: '100%',
+    //borderRadius: '50%',
     padding: '0px',
   },
 }));
@@ -218,7 +267,6 @@ export default function TierlistTable({ tierlist_data }) {
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-
   return (
     <Paper classes={{ root: classes.paper }}>
       <EnhancedTableToolbar numSelected={selected.length} />
@@ -264,15 +312,20 @@ export default function TierlistTable({ tierlist_data }) {
                         : row.champion}
                     </TableCell>
 
-                    <TableCell align="right">{row.tier}</TableCell>
+                    <TableCell
+                      align="right"
+                      classes={{ root: classes.iconCell }}
+                    >
+                      <img
+                        className={classes.resizeTierIcon}
+                        src={resources.tier_badges[row.tier.toLowerCase()]}
+                      />
+                    </TableCell>
 
                     <TableCell align="right">
                       <span
                         style={{
-                          color:
-                            row.winrate > COLORED_WINRATE_CUTOFF
-                              ? '#73ed53'
-                              : 'white',
+                          color: winrateColor(row.winrate),
                         }}
                       >
                         {row.winrate.toFixed(1)}
