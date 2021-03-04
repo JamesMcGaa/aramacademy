@@ -9,7 +9,8 @@ import Navigation from './components/navigation.js';
 import Leaderboards from './components/leaderboard/leaderboard_page.js';
 import About from './components/about/about_page.js';
 import Faq from './components/faq/faq_page.js';
-import Research from './components/research/research_page.js';
+import ResearchPost from './components/research/research_post.js';
+import ResearchList from './components/research/research_list.js';
 import { Container } from '@material-ui/core';
 import './stylesheets/style.css';
 import { CookiesProvider } from 'react-cookie';
@@ -51,8 +52,11 @@ function App() {
             <Route path="/FAQ">
               <Faq />
             </Route>
+            <Route path="/research/:summonerName">
+              <ResearchPost />
+            </Route>
             <Route path="/research">
-              <Research />
+              <ResearchList />
             </Route>
             <Route path="/">
               <Home />

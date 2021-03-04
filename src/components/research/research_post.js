@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Research() {
+export default function ResearchPost() {
   const classes = useStyles();
   return (
     <div
