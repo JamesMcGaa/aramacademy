@@ -38,13 +38,13 @@ function winrateColor(winrate) {
   }
 }
 
-const TIER_SORT_MAP = {
-  S: 0,
-  A: 1,
-  B: 2,
-  C: 3,
-  D: 4,
-};
+// const TIER_SORT_MAP = {
+//   S: 0,
+//   A: 1,
+//   B: 2,
+//   C: 3,
+//   D: 4,
+// };
 
 function descendingComparator(a, b, orderBy) {
   //Hardcoded for tier rank sorting - kinda monka
@@ -52,8 +52,8 @@ function descendingComparator(a, b, orderBy) {
   let b_value = b[orderBy];
 
   if (orderBy == 'tier') {
-    a_value = TIER_SORT_MAP[a_value];
-    b_value = TIER_SORT_MAP[b_value];
+    a_value = a['winrate'];
+    b_value = b['winrate'];
   }
 
   if (b_value < a_value) {
@@ -85,15 +85,8 @@ function stableSort(array, comparator) {
 const headCells = [
   { id: 'image', numeric: false, disablePadding: false, label: '' },
   { id: 'champion', numeric: false, disablePadding: true, label: 'Champion' },
-
   { id: 'tier', numeric: true, disablePadding: false, label: 'Tier' },
   { id: 'winrate', numeric: true, disablePadding: false, label: 'Winrate' },
-  {
-    id: 'total_games',
-    numeric: true,
-    disablePadding: false,
-    label: 'Total Games',
-  },
 ];
 
 function EnhancedTableHead(props) {
@@ -108,6 +101,7 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
+            className={classes.headCell}
             align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'default'}
             sortDirection={orderBy === headCell.id ? order : false}
@@ -178,9 +172,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
     'background-color': 'rgba(66, 66, 66, .85)',
   },
-  table: {
-    minWidth: 750,
-  },
+
   visuallyHidden: {
     border: 0,
     clip: 'rect(0 0 0 0)',
@@ -200,37 +192,56 @@ const useStyles = makeStyles((theme) => ({
     padding: '12px',
   },
   resizeChampIcon: {
-    minWidth: '40px',
-    maxWidth: '40px',
+    minWidth: '30px',
+    maxWidth: '30px',
     height: 'auto',
     width: '100%',
     borderRadius: '50%',
     padding: '0px',
   },
   resizeTierIcon: {
-    minWidth: '31px',
-    maxWidth: '31px',
+    minWidth: '25px',
+    maxWidth: '25px',
     height: 'auto',
     width: '100%',
     //borderRadius: '50%',
     padding: '0px',
   },
+  mobileCell: {
+    paddingRight: '5px',
+    paddingLeft: '5px',
+    fontSize: '.8rem',
+    paddingTop: '8px',
+    paddingBottom: '8px',
+  },
+  nameCell: {
+    paddingRight: '5px',
+    paddingLeft: '5px',
+    fontSize: '.8rem',
+  },
+  headCell: {
+    paddingRight: '10px',
+    paddingLeft: '5px',
+    fontSize: '.8rem',
+  },
+  winrateCell: {
+    paddingRight: '15px',
+    paddingLeft: '5px',
+    fontSize: '.8rem',
+  },
 }));
 
 function nice_round(num) {
-  return Math.round(num * 10) / 10;
+  return Math.round(num * 10000) / 10000;
 }
 
-export default function TierlistTable({ tierlist_data }) {
-  console.log('tierlist_table');
-  console.log(tierlist_data);
-  const raw_rows = tierlist_data;
+export default function TierlistTableMobile({ tierlist_data }) {
   // const rows = raw_rows.filter(
   //     (r) => r.champion !== 'overall' && r.total_games !== 0
   // );
-  const rows = raw_rows;
+  const rows = tierlist_data;
   rows.forEach((row) => {
-    row.winrate = nice_round((row.wins * 100) / row.total_games);
+    row.winrate = nice_round(row.wins * 100);
   });
 
   const classes = useStyles();
@@ -298,7 +309,8 @@ export default function TierlistTable({ tierlist_data }) {
                     key={row.champion}
                   >
                     <TableCell
-                      classes={{ root: classes.iconCell }}
+                      //classes={{ root: classes.iconCell }}
+                      className={classes.mobileCell}
                       align="center"
                     >
                       <img
@@ -306,7 +318,7 @@ export default function TierlistTable({ tierlist_data }) {
                         src={resources.champ_icons[row.champion]}
                       />
                     </TableCell>
-                    <TableCell align="left" style={{ paddingLeft: '0px' }}>
+                    <TableCell align="left" className={classes.nameCell}>
                       {resources.two_word_champs.has(row.champion)
                         ? resources.two_word_champs.get(row.champion)
                         : row.champion}
@@ -314,7 +326,8 @@ export default function TierlistTable({ tierlist_data }) {
 
                     <TableCell
                       align="right"
-                      classes={{ root: classes.iconCell }}
+                      //classes={{ root: classes.iconCell }}
+                      className={classes.mobileCell}
                     >
                       <img
                         className={classes.resizeTierIcon}
@@ -322,17 +335,19 @@ export default function TierlistTable({ tierlist_data }) {
                       />
                     </TableCell>
 
-                    <TableCell align="right">
+                    <TableCell
+                      align="right"
+                      className={classes.winrateCell}
+                      // width={'45%'}
+                    >
                       <span
                         style={{
                           color: winrateColor(row.winrate),
                         }}
                       >
-                        {row.winrate.toFixed(1)}
+                        {row.winrate.toFixed(2)}
                       </span>
                     </TableCell>
-
-                    <TableCell align="right">{row.total_games}</TableCell>
                   </TableRow>
                 );
               })}

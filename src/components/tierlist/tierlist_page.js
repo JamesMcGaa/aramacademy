@@ -5,16 +5,12 @@ import TierlistPageMobile from './tierlist_page_mobile.js';
 
 const mobile = require('is-mobile');
 
+import tierlist_json from '../../jsons/tierlist.json';
+
 export default function TierlistPage() {
-  const [state, setState] = useState({
-    tierlist_data: undefined,
-  });
-
-  //return null;
-
   if (mobile()) {
-    return <TierlistPageMobile />;
+    return <TierlistPageMobile props={tierlist_json} />;
   } else {
-    return <TierlistPageDesktop />;
+    return <TierlistPageDesktop props={tierlist_json} />;
   }
 }
