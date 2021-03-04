@@ -105,6 +105,15 @@ async function getLeaderboardData(region) {
   return mongo_docs;
 }
 
+/*
+ * this patch gets the current patch prefix, e.g. getCurrentPatch returns 11.3.1, and this returns 11.3, the patch number people want to see\
+ */
+async function getCurrentPatchPrefix() {
+  const patch = await getCurrentPatch();
+  const tokens = patch.split('.');
+  return tokens.slice(0, 2).join('.');
+}
+
 function getRankEstimate(region, mmr) {
   if (mmr === globals.UNAVAILABLE) {
     return RANKS.UNRANKED;
@@ -297,6 +306,18 @@ router.get('/update/:region/:standardized_summoner_name', async (req, res) => {
 router.get('/leaderboard/:region', async (req, res) => {
   let matches = await getLeaderboardData(req.params.region);
   res.send(matches);
+  return;
+});
+
+/*
+ * Returns current patch
+ */
+router.get('/patch', async (req, res) => {
+  const current_patch = await getCurrentPatchPrefix();
+  const resp = {
+    patch: current_patch,
+  };
+  res.send(resp);
   return;
 });
 
