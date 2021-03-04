@@ -44,13 +44,13 @@ function stableSort(array, comparator) {
 
 const headCells = [
   { id: 'image', numeric: false, disablePadding: false, label: '' },
-  { id: 'champion', numeric: false, disablePadding: true, label: 'Champion' },
+  //{ id: 'champion', numeric: false, disablePadding: true, label: 'Champion' },
 
   {
     id: 'total_games',
     numeric: true,
     disablePadding: false,
-    label: 'Total ARAMs',
+    label: 'ARAMs',
   },
   { id: 'winrate', numeric: true, disablePadding: false, label: 'Winrate' },
   { id: 'kda', numeric: true, disablePadding: false, label: 'K/D/A' },
@@ -137,9 +137,11 @@ const useStyles = makeStyles((theme) => ({
     padding: '0px',
   },
   mobileCell: {
-    paddingRight: '0px',
-    paddingLeft: '0px',
-    fontSize: '.65rem',
+    paddingRight: '5px',
+    paddingLeft: '5px',
+    fontSize: '.7rem',
+    paddingTop: '8px',
+    paddingBottom: '8px',
   },
   table: {},
   visuallyHidden: {
@@ -156,8 +158,19 @@ const useStyles = makeStyles((theme) => ({
     padding: '12px',
   },
   resizeChampIcon: {
+    minWidth: '34px',
+    maxWidth: '34px',
+    height: 'auto',
     width: '100%',
     borderRadius: '50%',
+    padding: '0px',
+  },
+  totalAramsCell: {
+    paddingRight: '30px',
+    paddingLeft: '5px',
+    fontSize: '.7rem',
+    paddingTop: '8px',
+    paddingBottom: '8px',
   },
 }));
 
@@ -227,13 +240,6 @@ export default function UserTableMobile({ per_champion_data }) {
           size={'medium'} //not small
           aria-label="enhanced table"
         >
-          <colgroup>
-            <col style={{ width: '25%' }} />
-            <col style={{ width: '15%' }} />
-            <col style={{ width: '5%' }} />
-            <col style={{ width: '5%' }} />
-            <col style={{ width: '50%' }} />
-          </colgroup>
           <EnhancedTableHead
             classes={classes}
             numSelected={selected.length}
@@ -254,24 +260,28 @@ export default function UserTableMobile({ per_champion_data }) {
                     tabIndex={-1}
                     key={row.champion}
                   >
-                    <TableCell className={classes.mobileCell} width={'25%'}>
+                    <TableCell className={classes.mobileCell}>
                       <img
                         className={classes.resizeChampIcon}
                         src={resources.champ_icons[row.champion]}
                       />
                     </TableCell>
-                    <TableCell className={classes.mobileCell} width={'15%'}>
+                    {/* <TableCell className={classes.mobileCell} >
                       {resources.two_word_champs.has(row.champion)
                         ? resources.two_word_champs.get(row.champion)
                         : row.champion}
-                    </TableCell>
+                    </TableCell> */}
 
-                    <TableCell width={'5%'} className={classes.mobileCell}>
+                    <TableCell
+                      className={classes.totalAramsCell}
+                      style={{
+                        textAlign: 'center',
+                      }}
+                    >
                       {row.total_games}
                     </TableCell>
 
                     <TableCell
-                      width={'5%'}
                       className={classes.mobileCell}
                       style={{
                         color:
@@ -280,10 +290,9 @@ export default function UserTableMobile({ per_champion_data }) {
                             : 'white',
                       }}
                     >
-                      {row.winrate}
+                      {row.winrate}%
                     </TableCell>
                     <TableCell
-                      width={'50%'}
                       className={classes.mobileCell}
                       style={{
                         whiteSpace: 'nowrap',
