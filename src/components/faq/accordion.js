@@ -46,6 +46,21 @@ export default function SimpleAccordion() {
 
   var faqElements = [
     {
+      question: 'Q: Do you have a Discord Server?',
+      answer: (
+        <Container className={classes.answerWithLink}>
+          A: Yes,
+          <Link
+            underline="none"
+            colr="initial"
+            href="https://discord.gg/MydvqhqWmM"
+          >
+            {' https://discord.gg/MydvqhqWmM'}
+          </Link>
+        </Container>
+      ),
+    },
+    {
       question: 'Q: How long does it take to aggregate data?',
       answer:
         'A: ARAM Academy can take up to 5 minutes to process summoners, depending on length of match history.',
@@ -78,21 +93,6 @@ export default function SimpleAccordion() {
       question: 'Q: What tech does ARAM Academy use?',
       answer:
         'A: Node / Express powers our backend. Our Frontend uses React with Material-UI for component styling. Our data processing is done using the Kayn library for async performance. ARAM Academy is hosted on AWS.',
-    },
-    {
-      question: 'Q: Best ARAM Champions?',
-      answer: (
-        <Container className={classes.answerWithLink}>
-          A:
-          <Link
-            underline="none"
-            colr="initial"
-            href="https://tierlist.gg/game/lol/list/gAXKa"
-          >
-            {' Our tierlist'}
-          </Link>
-        </Container>
-      ),
     },
   ];
 

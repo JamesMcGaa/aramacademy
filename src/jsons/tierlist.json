@@ -1,0 +1,926 @@
+[
+  {
+    "champion": "Seraphine",
+    "wins": 0.6043929592297277,
+    "tier": "S",
+    "total_games": 33235
+  },
+  {
+    "champion": "Sivir",
+    "wins": 0.5766705941760646,
+    "tier": "S",
+    "total_games": 41587
+  },
+  {
+    "champion": "Sona",
+    "wins": 0.5764889419106176,
+    "tier": "S",
+    "total_games": 32691
+  },
+  {
+    "champion": "Nami",
+    "wins": 0.5683871474585592,
+    "tier": "S",
+    "total_games": 25458
+  },
+  {
+    "champion": "Ivern",
+    "wins": 0.5657516339869281,
+    "tier": "S",
+    "total_games": 15300
+  },
+  {
+    "champion": "Rell",
+    "wins": 0.5612841091492777,
+    "tier": "S",
+    "total_games": 15575
+  },
+  {
+    "champion": "Senna",
+    "wins": 0.5577127026383568,
+    "tier": "S",
+    "total_games": 46203
+  },
+  {
+    "champion": "Lulu",
+    "wins": 0.5562057283646443,
+    "tier": "S",
+    "total_games": 35717
+  },
+  {
+    "champion": "Caitlyn",
+    "wins": 0.5537791498980098,
+    "tier": "S",
+    "total_games": 54417
+  },
+  {
+    "champion": "Janna",
+    "wins": 0.5499323185723363,
+    "tier": "S",
+    "total_games": 36199
+  },
+  {
+    "champion": "Jinx",
+    "wins": 0.5466713494107547,
+    "tier": "S",
+    "total_games": 51252
+  },
+  {
+    "champion": "Leona",
+    "wins": 0.5421682773178534,
+    "tier": "S",
+    "total_games": 30319
+  },
+  {
+    "champion": "Morgana",
+    "wins": 0.5409327020758659,
+    "tier": "S",
+    "total_games": 52171
+  },
+  {
+    "champion": "Alistar",
+    "wins": 0.5377423524342956,
+    "tier": "A",
+    "total_games": 23210
+  },
+  {
+    "champion": "Varus",
+    "wins": 0.5351033037229265,
+    "tier": "A",
+    "total_games": 50095
+  },
+  {
+    "champion": "Graves",
+    "wins": 0.5345533569712914,
+    "tier": "A",
+    "total_games": 43715
+  },
+  {
+    "champion": "Maokai",
+    "wins": 0.5343354874964877,
+    "tier": "A",
+    "total_games": 35590
+  },
+  {
+    "champion": "Karthus",
+    "wins": 0.5340527716699456,
+    "tier": "A",
+    "total_games": 34564
+  },
+  {
+    "champion": "Trundle",
+    "wins": 0.5328998903336989,
+    "tier": "A",
+    "total_games": 12766
+  },
+  {
+    "champion": "Zyra",
+    "wins": 0.5313023221955303,
+    "tier": "A",
+    "total_games": 27474
+  },
+  {
+    "champion": "Brand",
+    "wins": 0.528514706753847,
+    "tier": "A",
+    "total_games": 50623
+  },
+  {
+    "champion": "Ashe",
+    "wins": 0.5279685966633955,
+    "tier": "A",
+    "total_games": 55026
+  },
+  {
+    "champion": "Amumu",
+    "wins": 0.5278759758432758,
+    "tier": "A",
+    "total_games": 27156
+  },
+  {
+    "champion": "Nasus",
+    "wins": 0.5277670403298544,
+    "tier": "A",
+    "total_games": 23283
+  },
+  {
+    "champion": "Sett",
+    "wins": 0.5270180817336168,
+    "tier": "A",
+    "total_games": 28703
+  },
+  {
+    "champion": "Velkoz",
+    "wins": 0.5264374004531485,
+    "tier": "A",
+    "total_games": 44577
+  },
+  {
+    "champion": "Viktor",
+    "wins": 0.5258202038924931,
+    "tier": "A",
+    "total_games": 26975
+  },
+  {
+    "champion": "Annie",
+    "wins": 0.525316898942503,
+    "tier": "A",
+    "total_games": 28558
+  },
+  {
+    "champion": "Ornn",
+    "wins": 0.5248502679415782,
+    "tier": "A",
+    "total_games": 19034
+  },
+  {
+    "champion": "Ziggs",
+    "wins": 0.5240768094534712,
+    "tier": "A",
+    "total_games": 33850
+  },
+  {
+    "champion": "Malzahar",
+    "wins": 0.5233529901233674,
+    "tier": "A",
+    "total_games": 27641
+  },
+  {
+    "champion": "Fiddlesticks",
+    "wins": 0.5219353928621808,
+    "tier": "A",
+    "total_games": 28356
+  },
+  {
+    "champion": "Swain",
+    "wins": 0.5217502313854403,
+    "tier": "A",
+    "total_games": 31333
+  },
+  {
+    "champion": "Yorick",
+    "wins": 0.5216037368625924,
+    "tier": "A",
+    "total_games": 5138
+  },
+  {
+    "champion": "Galio",
+    "wins": 0.5206275421266705,
+    "tier": "A",
+    "total_games": 24094
+  },
+  {
+    "champion": "KogMaw",
+    "wins": 0.5203312239127508,
+    "tier": "A",
+    "total_games": 29708
+  },
+  {
+    "champion": "MissFortune",
+    "wins": 0.5200007336353466,
+    "tier": "A",
+    "total_games": 54523
+  },
+  {
+    "champion": "Skarner",
+    "wins": 0.5194708680142688,
+    "tier": "B",
+    "total_games": 6728
+  },
+  {
+    "champion": "Neeko",
+    "wins": 0.5186048771009424,
+    "tier": "B",
+    "total_games": 30879
+  },
+  {
+    "champion": "Xerath",
+    "wins": 0.5180322039924824,
+    "tier": "B",
+    "total_games": 39374
+  },
+  {
+    "champion": "Taric",
+    "wins": 0.5168727730035632,
+    "tier": "B",
+    "total_games": 9542
+  },
+  {
+    "champion": "Lux",
+    "wins": 0.5168378673288934,
+    "tier": "B",
+    "total_games": 53154
+  },
+  {
+    "champion": "Diana",
+    "wins": 0.5157920670115792,
+    "tier": "B",
+    "total_games": 20295
+  },
+  {
+    "champion": "Heimerdinger",
+    "wins": 0.5153535432762069,
+    "tier": "B",
+    "total_games": 25499
+  },
+  {
+    "champion": "Yuumi",
+    "wins": 0.5142962326665849,
+    "tier": "B",
+    "total_games": 24447
+  },
+  {
+    "champion": "Veigar",
+    "wins": 0.5141843971631206,
+    "tier": "B",
+    "total_games": 48222
+  },
+  {
+    "champion": "DrMundo",
+    "wins": 0.5138446849140674,
+    "tier": "B",
+    "total_games": 18852
+  },
+  {
+    "champion": "Nautilus",
+    "wins": 0.51317781554148,
+    "tier": "B",
+    "total_games": 32365
+  },
+  {
+    "champion": "Jhin",
+    "wins": 0.5126780376296818,
+    "tier": "B",
+    "total_games": 56870
+  },
+  {
+    "champion": "Blitzcrank",
+    "wins": 0.5103534671219081,
+    "tier": "B",
+    "total_games": 40711
+  },
+  {
+    "champion": "Gangplank",
+    "wins": 0.5102650127735541,
+    "tier": "B",
+    "total_games": 32489
+  },
+  {
+    "champion": "Karma",
+    "wins": 0.5096201650591627,
+    "tier": "B",
+    "total_games": 40228
+  },
+  {
+    "champion": "Ezreal",
+    "wins": 0.5096024699541244,
+    "tier": "B",
+    "total_games": 57329
+  },
+  {
+    "champion": "Illaoi",
+    "wins": 0.508744152572868,
+    "tier": "B",
+    "total_games": 13895
+  },
+  {
+    "champion": "Sion",
+    "wins": 0.5086675887505763,
+    "tier": "B",
+    "total_games": 21690
+  },
+  {
+    "champion": "Orianna",
+    "wins": 0.5074860270481596,
+    "tier": "B",
+    "total_games": 34531
+  },
+  {
+    "champion": "Kayle",
+    "wins": 0.5068542896050839,
+    "tier": "B",
+    "total_games": 33045
+  },
+  {
+    "champion": "Shyvana",
+    "wins": 0.5057926829268292,
+    "tier": "B",
+    "total_games": 19680
+  },
+  {
+    "champion": "Ahri",
+    "wins": 0.5057653436236678,
+    "tier": "B",
+    "total_games": 43536
+  },
+  {
+    "champion": "Singed",
+    "wins": 0.5043900822795295,
+    "tier": "B",
+    "total_games": 18109
+  },
+  {
+    "champion": "TwistedFate",
+    "wins": 0.5033459279828835,
+    "tier": "B",
+    "total_games": 43934
+  },
+  {
+    "champion": "Lissandra",
+    "wins": 0.5032662192393736,
+    "tier": "B",
+    "total_games": 22350
+  },
+  {
+    "champion": "Corki",
+    "wins": 0.5021415871989656,
+    "tier": "B",
+    "total_games": 24748
+  },
+  {
+    "champion": "Jayce",
+    "wins": 0.5013536966331135,
+    "tier": "B",
+    "total_games": 28810
+  },
+  {
+    "champion": "Pantheon",
+    "wins": 0.501130461350443,
+    "tier": "B",
+    "total_games": 32730
+  },
+  {
+    "champion": "Chogath",
+    "wins": 0.5002006581587607,
+    "tier": "B",
+    "total_games": 37377
+  },
+  {
+    "champion": "MonkeyKing",
+    "wins": 0.4994600633029231,
+    "tier": "B",
+    "total_games": 26855
+  },
+  {
+    "champion": "Gnar",
+    "wins": 0.49937005493121,
+    "tier": "B",
+    "total_games": 19843
+  },
+  {
+    "champion": "Urgot",
+    "wins": 0.498656956962932,
+    "tier": "B",
+    "total_games": 16753
+  },
+  {
+    "champion": "Aphelios",
+    "wins": 0.49838715798261923,
+    "tier": "B",
+    "total_games": 26351
+  },
+  {
+    "champion": "Xayah",
+    "wins": 0.4982185419072659,
+    "tier": "B",
+    "total_games": 40697
+  },
+  {
+    "champion": "Soraka",
+    "wins": 0.49810130458749313,
+    "tier": "B",
+    "total_games": 32654
+  },
+  {
+    "champion": "Yone",
+    "wins": 0.49663921234497777,
+    "tier": "B",
+    "total_games": 31689
+  },
+  {
+    "champion": "Braum",
+    "wins": 0.49640682429096494,
+    "tier": "B",
+    "total_games": 18229
+  },
+  {
+    "champion": "Quinn",
+    "wins": 0.4923258559622196,
+    "tier": "B",
+    "total_games": 27951
+  },
+  {
+    "champion": "XinZhao",
+    "wins": 0.4920470262793914,
+    "tier": "B",
+    "total_games": 8676
+  },
+  {
+    "champion": "Thresh",
+    "wins": 0.49173498485118516,
+    "tier": "B",
+    "total_games": 44888
+  },
+  {
+    "champion": "Samira",
+    "wins": 0.4916552587889203,
+    "tier": "B",
+    "total_games": 34333
+  },
+  {
+    "champion": "Riven",
+    "wins": 0.49131958594832503,
+    "tier": "B",
+    "total_games": 24538
+  },
+  {
+    "champion": "Vladimir",
+    "wins": 0.4904121303818702,
+    "tier": "B",
+    "total_games": 30403
+  },
+  {
+    "champion": "Teemo",
+    "wins": 0.48913272208026454,
+    "tier": "C",
+    "total_games": 33265
+  },
+  {
+    "champion": "Twitch",
+    "wins": 0.4884989328906806,
+    "tier": "C",
+    "total_games": 46387
+  },
+  {
+    "champion": "Malphite",
+    "wins": 0.4879716498943686,
+    "tier": "C",
+    "total_games": 44021
+  },
+  {
+    "champion": "Sejuani",
+    "wins": 0.4860885694412242,
+    "tier": "C",
+    "total_games": 8626
+  },
+  {
+    "champion": "Rakan",
+    "wins": 0.4848373008550163,
+    "tier": "C",
+    "total_games": 16257
+  },
+  {
+    "champion": "Vayne",
+    "wins": 0.4846966005337046,
+    "tier": "C",
+    "total_games": 43095
+  },
+  {
+    "champion": "Draven",
+    "wins": 0.48434425380605517,
+    "tier": "C",
+    "total_games": 28967
+  },
+  {
+    "champion": "Yasuo",
+    "wins": 0.4843344979150231,
+    "tier": "C",
+    "total_games": 35492
+  },
+  {
+    "champion": "Kalista",
+    "wins": 0.48368009162053827,
+    "tier": "C",
+    "total_games": 15717
+  },
+  {
+    "champion": "Bard",
+    "wins": 0.48358852888926485,
+    "tier": "C",
+    "total_games": 23642
+  },
+  {
+    "champion": "Lucian",
+    "wins": 0.48310392750395037,
+    "tier": "C",
+    "total_games": 52527
+  },
+  {
+    "champion": "Rumble",
+    "wins": 0.4825890662017791,
+    "tier": "C",
+    "total_games": 22371
+  },
+  {
+    "champion": "Azir",
+    "wins": 0.4820525657071339,
+    "tier": "C",
+    "total_games": 19975
+  },
+  {
+    "champion": "Tristana",
+    "wins": 0.48205005388576216,
+    "tier": "C",
+    "total_games": 41755
+  },
+  {
+    "champion": "RekSai",
+    "wins": 0.4809505106048704,
+    "tier": "C",
+    "total_games": 5092
+  },
+  {
+    "champion": "Warwick",
+    "wins": 0.4805839632429228,
+    "tier": "C",
+    "total_games": 13494
+  },
+  {
+    "champion": "Darius",
+    "wins": 0.48047474506326526,
+    "tier": "C",
+    "total_games": 29321
+  },
+  {
+    "champion": "Kaisa",
+    "wins": 0.48000354507788096,
+    "tier": "C",
+    "total_games": 45133
+  },
+  {
+    "champion": "Anivia",
+    "wins": 0.4796670848505248,
+    "tier": "C",
+    "total_games": 32681
+  },
+  {
+    "champion": "Volibear",
+    "wins": 0.47920757768280003,
+    "tier": "C",
+    "total_games": 17314
+  },
+  {
+    "champion": "Rammus",
+    "wins": 0.4787567084078712,
+    "tier": "C",
+    "total_games": 8944
+  },
+  {
+    "champion": "Rengar",
+    "wins": 0.47846715328467154,
+    "tier": "C",
+    "total_games": 16440
+  },
+  {
+    "champion": "Cassiopeia",
+    "wins": 0.4783907755754745,
+    "tier": "C",
+    "total_games": 23763
+  },
+  {
+    "champion": "LeeSin",
+    "wins": 0.4783776223776224,
+    "tier": "C",
+    "total_games": 35750
+  },
+  {
+    "champion": "Shaco",
+    "wins": 0.4779864033667854,
+    "tier": "C",
+    "total_games": 30890
+  },
+  {
+    "champion": "Jax",
+    "wins": 0.4771440491090053,
+    "tier": "C",
+    "total_games": 16779
+  },
+  {
+    "champion": "Garen",
+    "wins": 0.4768238761974945,
+    "tier": "C",
+    "total_games": 27140
+  },
+  {
+    "champion": "Irelia",
+    "wins": 0.47597780484503993,
+    "tier": "C",
+    "total_games": 29556
+  },
+  {
+    "champion": "Vi",
+    "wins": 0.47527501869059063,
+    "tier": "C",
+    "total_games": 9363
+  },
+  {
+    "champion": "TahmKench",
+    "wins": 0.474952857259982,
+    "tier": "C",
+    "total_games": 12197
+  },
+  {
+    "champion": "JarvanIV",
+    "wins": 0.4739438300580794,
+    "tier": "C",
+    "total_games": 25138
+  },
+  {
+    "champion": "Leblanc",
+    "wins": 0.47392851616896176,
+    "tier": "C",
+    "total_games": 38778
+  },
+  {
+    "champion": "Kassadin",
+    "wins": 0.47383154211447137,
+    "tier": "C",
+    "total_games": 20005
+  },
+  {
+    "champion": "Nocturne",
+    "wins": 0.47347994825355755,
+    "tier": "C",
+    "total_games": 11595
+  },
+  {
+    "champion": "Syndra",
+    "wins": 0.4732995483848726,
+    "tier": "C",
+    "total_games": 29007
+  },
+  {
+    "champion": "Lillia",
+    "wins": 0.4731471707769568,
+    "tier": "C",
+    "total_games": 31263
+  },
+  {
+    "champion": "Tryndamere",
+    "wins": 0.4709753850204028,
+    "tier": "C",
+    "total_games": 15194
+  },
+  {
+    "champion": "Fizz",
+    "wins": 0.47095154065426903,
+    "tier": "C",
+    "total_games": 29468
+  },
+  {
+    "champion": "Hecarim",
+    "wins": 0.4708537629387501,
+    "tier": "C",
+    "total_games": 12849
+  },
+  {
+    "champion": "MasterYi",
+    "wins": 0.4705666053819154,
+    "tier": "C",
+    "total_games": 29915
+  },
+  {
+    "champion": "Kennen",
+    "wins": 0.46975571021533,
+    "tier": "D",
+    "total_games": 21409
+  },
+  {
+    "champion": "Fiora",
+    "wins": 0.4694411563142483,
+    "tier": "D",
+    "total_games": 16051
+  },
+  {
+    "champion": "Renekton",
+    "wins": 0.46917601079421206,
+    "tier": "D",
+    "total_games": 21493
+  },
+  {
+    "champion": "Ryze",
+    "wins": 0.4688389255448888,
+    "tier": "D",
+    "total_games": 31979
+  },
+  {
+    "champion": "Khazix",
+    "wins": 0.46856794265670276,
+    "tier": "D",
+    "total_games": 32785
+  },
+  {
+    "champion": "Nidalee",
+    "wins": 0.4681137189804795,
+    "tier": "D",
+    "total_games": 47591
+  },
+  {
+    "champion": "Gragas",
+    "wins": 0.46740632366089574,
+    "tier": "D",
+    "total_games": 24606
+  },
+  {
+    "champion": "Camille",
+    "wins": 0.4666768689264672,
+    "tier": "D",
+    "total_games": 13069
+  },
+  {
+    "champion": "Mordekaiser",
+    "wins": 0.4658079309414621,
+    "tier": "D",
+    "total_games": 29656
+  },
+  {
+    "champion": "Zilean",
+    "wins": 0.463879128601546,
+    "tier": "D",
+    "total_games": 28460
+  },
+  {
+    "champion": "Qiyana",
+    "wins": 0.46342994663597364,
+    "tier": "D",
+    "total_games": 19114
+  },
+  {
+    "champion": "Taliyah",
+    "wins": 0.4629694384222673,
+    "tier": "D",
+    "total_games": 14299
+  },
+  {
+    "champion": "Sylas",
+    "wins": 0.4615474932487965,
+    "tier": "D",
+    "total_games": 25551
+  },
+  {
+    "champion": "Zed",
+    "wins": 0.4611465882184114,
+    "tier": "D",
+    "total_games": 41811
+  },
+  {
+    "champion": "Aatrox",
+    "wins": 0.46076874792305134,
+    "tier": "D",
+    "total_games": 27083
+  },
+  {
+    "champion": "Talon",
+    "wins": 0.4602682482981735,
+    "tier": "D",
+    "total_games": 14837
+  },
+  {
+    "champion": "Evelynn",
+    "wins": 0.4600976605203702,
+    "tier": "D",
+    "total_games": 13721
+  },
+  {
+    "champion": "Kled",
+    "wins": 0.4598310001261193,
+    "tier": "D",
+    "total_games": 7929
+  },
+  {
+    "champion": "Shen",
+    "wins": 0.45932577020269905,
+    "tier": "D",
+    "total_games": 18599
+  },
+  {
+    "champion": "AurelionSol",
+    "wins": 0.4591311108951307,
+    "tier": "D",
+    "total_games": 10289
+  },
+  {
+    "champion": "Poppy",
+    "wins": 0.4590783544119785,
+    "tier": "D",
+    "total_games": 13758
+  },
+  {
+    "champion": "Elise",
+    "wins": 0.45805662355819643,
+    "tier": "D",
+    "total_games": 11444
+  },
+  {
+    "champion": "Pyke",
+    "wins": 0.45624265537349507,
+    "tier": "D",
+    "total_games": 45101
+  },
+  {
+    "champion": "Olaf",
+    "wins": 0.4558396553338953,
+    "tier": "D",
+    "total_games": 10677
+  },
+  {
+    "champion": "Nunu",
+    "wins": 0.4540511147362697,
+    "tier": "D",
+    "total_games": 16551
+  },
+  {
+    "champion": "Zac",
+    "wins": 0.4534873467948153,
+    "tier": "D",
+    "total_games": 11341
+  },
+  {
+    "champion": "Ekko",
+    "wins": 0.45252225519287836,
+    "tier": "D",
+    "total_games": 30330
+  },
+  {
+    "champion": "Udyr",
+    "wins": 0.4522944308290374,
+    "tier": "D",
+    "total_games": 11833
+  },
+  {
+    "champion": "Kayn",
+    "wins": 0.4487432085497642,
+    "tier": "D",
+    "total_games": 16749
+  },
+  {
+    "champion": "Kindred",
+    "wins": 0.4419045976020012,
+    "tier": "D",
+    "total_games": 23186
+  },
+  {
+    "champion": "Zoe",
+    "wins": 0.4350597609561753,
+    "tier": "D",
+    "total_games": 35140
+  },
+  {
+    "champion": "Akali",
+    "wins": 0.42270538808304453,
+    "tier": "D",
+    "total_games": 32609
+  },
+  {
+    "champion": "Katarina",
+    "wins": 0.41989486915781055,
+    "tier": "D",
+    "total_games": 35004
+  },
+  {
+    "champion": "Viego",
+    "wins": 0.4185458439935741,
+    "tier": "D",
+    "total_games": 33614
+  }
+]

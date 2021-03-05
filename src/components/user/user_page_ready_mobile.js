@@ -31,15 +31,17 @@ const useStyles = makeStyles({
   },
 
   resizeSummonerIcon: {
-    maxWidth: '35%',
     height: 'auto',
-
+    minWidth: '100px',
+    maxWidth: '100px',
     borderRadius: '50%',
+    paddingTop: '5px',
   },
 
   resizeRankBadge: {
     height: 'auto',
-    width: '25%',
+    minWidth: '80px',
+    maxWidth: '80px',
   },
 });
 
@@ -119,31 +121,39 @@ export default function UserPageReadyMobile({ props }) {
           >
             {state.user_data.true_summoner_name}
           </Typography>
-          <img
-            className={classes.resizeSummonerIcon}
-            alt="summoner icon"
-            src={state.icon_path}
-          />{' '}
-          <Container style={{ padding: '0px' }}>
-            <Button
-              variant="contained"
-              color="primary"
-              size="large"
-              className={classes.update}
-              disabled={updateState === UPDATE_STATE.UPDATING}
-              onClick={handleUpdateClick}
-            >
-              {updateState === UPDATE_STATE.UPDATING ? (
-                <CircularProgress color="secondary" />
-              ) : (
-                updateState
-              )}
-            </Button>
-            <Typography variant="body2">
-              Last updated:{' '}
-              {moment.utc(state.user_data.last_updated_timestamp_ms).fromNow()}
-            </Typography>
-          </Container>
+          <div style={{ display: 'flex' }}>
+            <div style={{ flex: '40%' }}>
+              <img
+                className={classes.resizeSummonerIcon}
+                alt="summoner icon"
+                src={state.icon_path}
+              />{' '}
+            </div>
+            <div style={{ flex: '60%' }}>
+              <Container style={{ padding: '10px', paddingTop: '23px' }}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  className={classes.update}
+                  disabled={updateState === UPDATE_STATE.UPDATING}
+                  onClick={handleUpdateClick}
+                >
+                  {updateState === UPDATE_STATE.UPDATING ? (
+                    <CircularProgress color="secondary" />
+                  ) : (
+                    updateState
+                  )}
+                </Button>
+                <Typography variant="body2">
+                  Last updated:{' '}
+                  {moment
+                    .utc(state.user_data.last_updated_timestamp_ms)
+                    .fromNow()}
+                </Typography>
+              </Container>
+            </div>
+          </div>
         </Container>
       </Paper>
 
@@ -159,8 +169,7 @@ export default function UserPageReadyMobile({ props }) {
             placeContent: 'center',
           }}
         >
-          {rank_badge}
-
+          <div style={{ marginRight: '15px' }}>{rank_badge}</div>
           <p style={{ marginBottom: '0px' }}>
             Total ARAMs: {overall.total_games}
             <br></br>
