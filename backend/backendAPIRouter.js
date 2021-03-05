@@ -78,7 +78,7 @@ const asyncLimit = (fn, n) => {
   };
 };
 
-const asyncLimitProcessUser = asyncLimit(processUser, MAX_ASYNC_USERS_QUEUE);
+const asyncLimitProcessUser = processUser; //asyncLimit(processUser, MAX_ASYNC_USERS_QUEUE);
 
 async function getUserData(standardized_summoner_name, region) {
   standardized_summoner_name = standardized_summoner_name.toLowerCase();
