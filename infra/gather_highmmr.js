@@ -84,7 +84,7 @@ async function getRecentLeadersMatchlistForRegion(region) {
         return;
       }
 
-      let unixtimestamp_in_milliseconds = Date.now() - 5 * 1000 * 60 * 60 * 24;
+      let unixtimestamp_in_milliseconds = Date.now() - 10 * 1000 * 60 * 60 * 24;
       let recent_matches = await kayn.Matchlist.by
         .accountID(account_id)
         .region(region)
