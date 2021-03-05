@@ -1,43 +1,25 @@
-//TODO, remove redundancy in backendapirouter
+/* eslint-disable max-len */
+/* eslint-disable camelcase */
+/* eslint-disable require-jsdoc */
 const dotenv = require('dotenv');
 dotenv.config();
-const util = require('util');
 const mongoose = require('mongoose');
 const { Kayn, REGIONS } = require('kayn');
 const kayn = Kayn(process.env.RIOT_API_KEY)();
 const leaderboard_model = require('../models/leaderboard_model.js');
-const high_mmr_playset_model = require('../models/high_mmr_playerset_model.js');
-const WHATISMYMMR_RATELIMIT_RPS = 30;
-const WHATSISMYMMR_BATCHING = 30;
 const BACKOFF_FOR_ERROR_SECONDS = 5;
-const axios = require('axios');
-const rateLimit = require('axios-rate-limit');
-const http = rateLimit(axios.create(), { maxRPS: WHATISMYMMR_RATELIMIT_RPS });
 const cliProgress = require('cli-progress');
 const sleep = require('sleep');
-const schedule = require('node-schedule');
 const high_mmr_playerset_model = require('../models/high_mmr_playerset_model.js');
 
 async function getLeaderboardData(region) {
-  let mongo_docs = await leaderboard_model.find({
+  return await leaderboard_model.find({
     region: region,
   });
-  return mongo_docs;
-}
-
-const REGION_TO_RIOT_PLATFORM_ID = {
-  [REGIONS.NORTH_AMERICA]: 'NA1',
-  [REGIONS.EUROPE]: 'EUN1',
-  [REGIONS.EUROPE_WEST]: 'EUW1',
-};
-
-//https://stackoverflow.com/questions/2631001/test-for-existence-of-nested-javascript-object-key
-function getNested(obj, ...args) {
-  return args.reduce((obj, level) => obj && obj[level], obj);
 }
 
 async function retry_async_function_with_wait(func, args, retry_num = 0) {
-  //retries func with args up to 5 times
+  // retries func with args up to 5 times
   if (retry_num > 5) {
     return 0;
   }
@@ -57,9 +39,9 @@ async function retry_async_function_with_wait(func, args, retry_num = 0) {
 
 async function getRecentLeadersMatchlistForRegion(region) {
   console.log('Starting for region: ', region);
-  let region_leaders = await getLeaderboardData(region);
+  const region_leaders = await getLeaderboardData(region);
   summoners = {};
-  let match_ids = new Set();
+  const match_ids = new Set();
   let prospect_account_ids = new Set();
 
   console.log('Converting current leaderboard into matchlist');
@@ -70,7 +52,7 @@ async function getRecentLeadersMatchlistForRegion(region) {
   progress_bar.start(region_leaders.length, 0);
   await Promise.all(
     region_leaders.map(async (region_leader) => {
-      let account_id = await kayn.Summoner.by
+      const account_id = await kayn.Summoner.by
         .name(region_leader.true_summoner_name)
         .region(region)
         .then((res) => {
@@ -166,11 +148,9 @@ async function getRecentLeadersMatchlistForRegion(region) {
     );
   }
   progress_bar.stop();
-
   console.log(prospectives_complete_statistics.length);
 
   await high_mmr_playerset_model.insertMany(prospectives_complete_statistics);
-
   return match_ids;
 }
 
@@ -181,13 +161,13 @@ async function updateAllRegions() {
 }
 
 function logDate() {
-  let date_ob = new Date();
-  let date = ('0' + date_ob.getDate()).slice(-2);
-  let month = ('0' + (date_ob.getMonth() + 1)).slice(-2);
-  let year = date_ob.getFullYear();
-  let hours = date_ob.getHours();
-  let minutes = date_ob.getMinutes();
-  let seconds = date_ob.getSeconds();
+  const date_ob = new Date();
+  const date = ('0' + date_ob.getDate()).slice(-2);
+  const month = ('0' + (date_ob.getMonth() + 1)).slice(-2);
+  const year = date_ob.getFullYear();
+  const hours = date_ob.getHours();
+  const minutes = date_ob.getMinutes();
+  const seconds = date_ob.getSeconds();
   console.log(
     year +
       '-' +
@@ -202,13 +182,11 @@ function logDate() {
       seconds
   );
 }
-logDate();
-var job = schedule.scheduleJob('0 53 19 * * *', entrypoint); // 7:30AM UTC
-entrypoint();
+
 async function entrypoint() {
   console.log('Started');
   logDate();
-  mongoose.connect(
+  await mongoose.connect(
     process.env.DB_URI,
     { useNewUrlParser: true, useUnifiedTopology: true },
     function (err) {
@@ -225,3 +203,6 @@ async function entrypoint() {
     mongoose.connection.close();
   });
 }
+
+logDate();
+entrypoint().then().catch();

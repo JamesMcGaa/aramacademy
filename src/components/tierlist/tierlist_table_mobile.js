@@ -11,15 +11,55 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Resources from '../resources.js';
-var mobile = require('is-mobile');
 
 var resources = Resources.Resources;
-const COLORED_WINRATE_CUTOFF = 60.0;
+const DARK_GREEN_WINRATE_CUTOFF = 55.0;
+const DARK_GREEN_COLOR = '#00ff00'; //'#fc9d03';
+const GREEN_WINRATE_CUTOFF = 52.5;
+const GREEN_COLOR = '#75ff75';
+const WHITE_WINRATE_CUTOFF = 50.0;
+const WHITE_COLOR = 'white';
+const PINK_WINRATE_CUTOFF = 48.0;
+const PINK_COLOR = '#ff8595';
+const RED_WINRATE_CUTOFF = 45.0;
+const RED_COLOR = '#fc354f';
+
+function winrateColor(winrate) {
+  if (winrate > DARK_GREEN_WINRATE_CUTOFF) {
+    return DARK_GREEN_COLOR;
+  } else if (winrate > GREEN_WINRATE_CUTOFF) {
+    return GREEN_COLOR;
+  } else if (winrate > WHITE_WINRATE_CUTOFF) {
+    return WHITE_COLOR;
+  } else if (winrate > PINK_WINRATE_CUTOFF) {
+    return PINK_COLOR;
+  } else {
+    return RED_COLOR;
+  }
+}
+
+// const TIER_SORT_MAP = {
+//   S: 0,
+//   A: 1,
+//   B: 2,
+//   C: 3,
+//   D: 4,
+// };
+
 function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
+  //Hardcoded for tier rank sorting - kinda monka
+  let a_value = a[orderBy];
+  let b_value = b[orderBy];
+
+  if (orderBy == 'tier') {
+    a_value = a['winrate'];
+    b_value = b['winrate'];
+  }
+
+  if (b_value < a_value) {
     return -1;
   }
-  if (b[orderBy] > a[orderBy]) {
+  if (b_value > a_value) {
     return 1;
   }
   return 0;
@@ -44,16 +84,9 @@ function stableSort(array, comparator) {
 
 const headCells = [
   { id: 'image', numeric: false, disablePadding: false, label: '' },
-  //{ id: 'champion', numeric: false, disablePadding: true, label: 'Champion' },
-
-  {
-    id: 'total_games',
-    numeric: true,
-    disablePadding: false,
-    label: 'ARAMs',
-  },
+  { id: 'champion', numeric: false, disablePadding: true, label: 'Champion' },
+  { id: 'tier', numeric: true, disablePadding: false, label: 'Tier' },
   { id: 'winrate', numeric: true, disablePadding: false, label: 'Winrate' },
-  { id: 'kda', numeric: true, disablePadding: false, label: 'K/D/A' },
 ];
 
 function EnhancedTableHead(props) {
@@ -68,14 +101,15 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            className={classes.mobileCell}
+            className={classes.headCell}
+            align={headCell.numeric ? 'right' : 'left'}
+            padding={headCell.disablePadding ? 'none' : 'default'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
-              hideSortIcon={headCell.id === 'kda'}
             >
               {headCell.label}
               {orderBy === headCell.id ? (
@@ -130,20 +164,15 @@ EnhancedTableToolbar.propTypes = {
 };
 
 const useStyles = makeStyles((theme) => ({
-  root: {},
+  root: {
+    width: '100%',
+  },
   paper: {
+    width: '100%',
     marginBottom: theme.spacing(2),
-    'background-color': 'rgba(66, 66, 66, .8)',
-    padding: '0px',
+    'background-color': 'rgba(66, 66, 66, .85)',
   },
-  mobileCell: {
-    paddingRight: '5px',
-    paddingLeft: '5px',
-    fontSize: '.7rem',
-    paddingTop: '8px',
-    paddingBottom: '8px',
-  },
-  table: {},
+
   visuallyHidden: {
     border: 0,
     clip: 'rect(0 0 0 0)',
@@ -153,61 +182,78 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
     position: 'absolute',
     top: 20,
+    width: 1,
   },
   iconCell: {
+    'min-width': '60px',
+    width: '60px',
+    'max-width': '80px',
+    height: 'auto',
     padding: '12px',
   },
   resizeChampIcon: {
-    minWidth: '34px',
-    maxWidth: '34px',
+    minWidth: '30px',
+    maxWidth: '30px',
     height: 'auto',
     width: '100%',
     borderRadius: '50%',
     padding: '0px',
   },
-  totalAramsCell: {
-    paddingRight: '30px',
+  resizeTierIcon: {
+    minWidth: '25px',
+    maxWidth: '25px',
+    height: 'auto',
+    width: '100%',
+    //borderRadius: '50%',
+    padding: '0px',
+  },
+  mobileCell: {
+    paddingRight: '5px',
     paddingLeft: '5px',
-    fontSize: '.7rem',
+    fontSize: '.8rem',
     paddingTop: '8px',
     paddingBottom: '8px',
+  },
+  nameCell: {
+    paddingRight: '5px',
+    paddingLeft: '5px',
+    fontSize: '.8rem',
+  },
+  headCell: {
+    paddingRight: '10px',
+    paddingLeft: '5px',
+    fontSize: '.8rem',
+  },
+  winrateCell: {
+    paddingRight: '15px',
+    paddingLeft: '5px',
+    fontSize: '.8rem',
   },
 }));
 
 function nice_round(num) {
-  return Math.round(num * 10) / 10;
+  return Math.round(num * 10000) / 10000;
 }
 
-export default function UserTableMobile({ per_champion_data }) {
-  if (mobile()) {
-    document.body.style.backgroundImage = 'none';
-  }
-  console.log('render mobile table');
-  const raw_rows = per_champion_data;
-  const rows = raw_rows.filter(
-    (r) => r.champion !== 'overall' && r.total_games !== 0
-  );
+export default function TierlistTableMobile({ tierlist_data }) {
+  // const rows = raw_rows.filter(
+  //     (r) => r.champion !== 'overall' && r.total_games !== 0
+  // );
+  const rows = tierlist_data;
   rows.forEach((row) => {
-    row.winrate = nice_round((row.wins * 100) / row.total_games);
-    row.average_gold = nice_round(row.gold / row.total_games);
-    row.average_cs = nice_round(row.cs / row.total_games);
-    row.average_kills = nice_round(row.kills / row.total_games);
-    row.average_deaths = nice_round(row.deaths / row.total_games);
-    row.average_assists = nice_round(row.assists / row.total_games);
+    row.winrate = nice_round(row.wins * 100);
   });
 
   const classes = useStyles();
   const [order, setOrder] = React.useState('desc');
-  const [orderBy, setOrderBy] = React.useState('total_games');
+  const [orderBy, setOrderBy] = React.useState('winrate');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(rows.length);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
-    if (property === 'kda') {
-      return;
-    }
+
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
@@ -230,6 +276,8 @@ export default function UserTableMobile({ per_champion_data }) {
     setPage(0);
   };
 
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
   return (
     <Paper classes={{ root: classes.paper }}>
       <EnhancedTableToolbar numSelected={selected.length} />
@@ -260,58 +308,54 @@ export default function UserTableMobile({ per_champion_data }) {
                     tabIndex={-1}
                     key={row.champion}
                   >
-                    <TableCell className={classes.mobileCell}>
+                    <TableCell
+                      //classes={{ root: classes.iconCell }}
+                      className={classes.mobileCell}
+                      align="center"
+                    >
                       <img
                         className={classes.resizeChampIcon}
                         src={resources.champ_icons[row.champion]}
                       />
                     </TableCell>
-                    {/* <TableCell className={classes.mobileCell} >
+                    <TableCell align="left" className={classes.nameCell}>
                       {resources.two_word_champs.has(row.champion)
                         ? resources.two_word_champs.get(row.champion)
                         : row.champion}
-                    </TableCell> */}
-
-                    <TableCell
-                      className={classes.totalAramsCell}
-                      style={{
-                        textAlign: 'center',
-                      }}
-                    >
-                      {row.total_games}
                     </TableCell>
 
                     <TableCell
+                      align="right"
+                      //classes={{ root: classes.iconCell }}
                       className={classes.mobileCell}
-                      style={{
-                        color:
-                          row.winrate > COLORED_WINRATE_CUTOFF
-                            ? '#73ed53'
-                            : 'white',
-                      }}
                     >
-                      {row.winrate}%
+                      <img
+                        className={classes.resizeTierIcon}
+                        src={resources.tier_badges[row.tier.toLowerCase()]}
+                      />
                     </TableCell>
+
                     <TableCell
-                      className={classes.mobileCell}
-                      style={{
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                      }}
+                      align="right"
+                      className={classes.winrateCell}
+                      // width={'45%'}
                     >
-                      <span style={{ color: 'deepskyblue' }}>
-                        {row.average_kills}
-                      </span>
-                      <span>{' / '}</span>
-                      <span style={{ color: 'red' }}>{row.average_deaths}</span>
-                      <span>{' / '}</span>
-                      <span style={{ color: 'yellow' }}>
-                        {row.average_assists}
+                      <span
+                        style={{
+                          color: winrateColor(row.winrate),
+                        }}
+                      >
+                        {row.winrate.toFixed(2)}%
                       </span>
                     </TableCell>
                   </TableRow>
                 );
               })}
+            {emptyRows > 0 && (
+              <TableRow style={{ height: 53 * emptyRows }}>
+                <TableCell colSpan={6} />
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </TableContainer>

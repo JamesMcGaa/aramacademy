@@ -16,6 +16,15 @@ ranks.forEach(function (item, index) {
   rankedBadgeDict[rank] = item['default'];
 });
 
+const tiers = importAll(
+  require.context('../images/tier_badges/', false, /\.(png|jpe?g|svg)$/)
+);
+let tierBadgeDict = new Object();
+tiers.forEach(function (item, index) {
+  const tier = item['default'].split('/')[2].split('.')[0];
+  tierBadgeDict[tier] = item['default'];
+});
+
 const champs = importAll(
   require.context('../images/champ_icons/', false, /\.(png|jpe?g|svg)$/)
 );
@@ -58,6 +67,7 @@ const social_svgs = importAll(
 export default {
   Resources: {
     ranked_badges: rankedBadgeDict,
+    tier_badges: tierBadgeDict,
     champ_icons: champImageDict,
     two_word_champs: two_word_champs,
   },
