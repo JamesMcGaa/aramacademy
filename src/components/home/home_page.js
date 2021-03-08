@@ -236,7 +236,7 @@ export default function Home() {
       <Snackbar
         open={open}
         onClose={handleClose}
-        message="Make feature requests, share bugs, or contribute to open source"
+        message="Meet fellow ARAM players, discuss strategies, and more!"
         action={
           <Container>
             <Button
