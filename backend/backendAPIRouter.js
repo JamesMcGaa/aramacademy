@@ -321,3 +321,205 @@ router.get('/tierlist', async (req, res) => {
   return;
 });
 module.exports = router;
+/*
+ * Returns current tierlist and patch
+ */
+router.get('/patch', async (req, res) => {
+  const current_patch = await getCurrentPatch();
+  const resp = {
+    patch: current_patch,
+  };
+  res.send(resp);
+  return;
+});
+/*
+ * Returns builds/runes/sum spells for this champion
+ */
+
+/*we want to feed the following back to the champion.js client
+ * winrate pickrate
+* primary/secondary rune tree name
+* primary/secondary rune tree name filepath
+* full image filepaths for the entire rune primary/secondary
+* a list of the chosen runes' keys, e.g. Electrocute
+* full 2 sumspell filepaths
+* q filepath
+* w filepath
+* e filepath
+* r filepath
+* starting item filepath
+* first item filepath, etc
+*
+* champ json:
+{
+champion: khazix
+winrate: .521
+pickrate: .074
+summ1: { name: flash, wr: .53}
+summ2: { name: snowball, wr: .62}
+runes_primary: "Domination",
+runes_primary_list: ["Electrocute, TasteOfBlood, EyeballCollection, RavenousHunter"],
+runes_secondary: "Sorcery",
+runes_secondary_list: ["NimbusCloak, GatheringStorm"],
+runes_winrate: .55,
+    skill_order: ["R","Q","W","E"]
+level_skill_order: {"Q", "W", "E", "Q", "Q", "R", "Q", "E", "Q", etc}
+starting_items: ["guardian horn", reju reju reju]
+mythic: Shieldbow
+boots: mercs
+first item: essence reaver
+second item: navori quickblades
+
+}
+
+give champion.js the entire sorcery/resolve two trees worth of json and feed in the names of the 7 runes + 3 adaptive whatever you've chosen
+champion.js displays the rune trees in a flexible manner such that name/icon changes are automatic from riot json
+highlight the 10 choices
+*/
+router.get('/builds/:champion', async (req, res) => {
+  const runes_json = await getRunesJson();
+  const item_json = await getItemJson();
+  const sums_json = await getSummonerSpellsJson();
+  const item_list = [
+    'Essence Reaver',
+    'Boots',
+    'Moonstone Renewer',
+    'Serrated Dirk',
+  ];
+  let item_json_list = [];
+  for (item in item_list) {
+    item_json_list.push(getDesiredItemJson(item_list[item], item_json));
+  }
+  console.log('name', req.params.champion);
+  const champion_json = await getChampionJson(req.params.champion);
+  const patch = await getCurrentPatch();
+  build_response = {
+    winrate: 0.5,
+    pickrate: 0.1,
+    runes_primary: 'Domination',
+    runes_primary_json: getRuneTreeJson('Domination', runes_json),
+    runes_primary_list: [
+      'Electrocute, TasteOfBlood, EyeballCollection, RavenousHunter',
+    ],
+    runes_secondary: 'Sorcery',
+    runes_secondary_list: ['NimbusCloak, GatheringStorm'],
+    runes_secondary_json: getRuneTreeJson('Sorcery', runes_json),
+    skill_order: ['R', 'Q', 'W', 'E'],
+    items: item_list,
+    item_json_list: item_json_list,
+    sums_json: sums_json,
+    summoner_spells: ['SummonerSnowball', 'SummonerFlash'],
+    champion_json: champion_json,
+    patch: patch,
+  };
+  res.send(build_response);
+});
+function getRuneTreeJson(tree_name, runes_json) {
+  for (var i = 0; i < runes_json.length; i++) {
+    var tree = runes_json[i];
+    if (tree.key === tree_name) {
+      return tree;
+    }
+  }
+  return null;
+}
+async function getItemJson() {
+  let item_json = null;
+  const patch = await getCurrentPatch();
+  let formatted_URI =
+    'https://ddragon.leagueoflegends.com/cdn/' +
+    patch +
+    '/data/en_US/item.json';
+  const controller = new AbortController();
+  const timeout = setTimeout(() => {
+    controller.abort();
+  }, REQUEST_TIMEOUT_EXTERNAL_FETCH_MS);
+  try {
+    const response = await fetch(formatted_URI, { signal: controller.signal });
+    item_json = await response.json();
+  } catch (error) {
+  } finally {
+    clearTimeout(timeout);
+  }
+  return item_json;
+}
+
+function getDesiredItemJson(item_name, item_json) {
+  for (var id in item_json.data) {
+    if (item_json.data[id].name === item_name) {
+      return item_json.data[id];
+    }
+  }
+  return null;
+}
+
+async function getRunesJson() {
+  const patch = await getCurrentPatch();
+
+  const runes_path =
+    'https://ddragon.leagueoflegends.com/cdn/' +
+    patch +
+    '/data/en_US/runesReforged.json';
+  let runes_json = null;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => {
+    controller.abort();
+  }, REQUEST_TIMEOUT_EXTERNAL_FETCH_MS);
+  try {
+    const runes_response = await fetch(runes_path, {
+      signal: controller.signal,
+    });
+    runes_json = await runes_response.json();
+  } catch (error) {
+  } finally {
+    clearTimeout(timeout);
+  }
+  return runes_json;
+}
+
+async function getSummonerSpellsJson() {
+  const patch = await getCurrentPatch();
+
+  const path =
+    'https://ddragon.leagueoflegends.com/cdn/' +
+    patch +
+    '/data/en_US/summoner.json';
+  let json = null;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => {
+    controller.abort();
+  }, REQUEST_TIMEOUT_EXTERNAL_FETCH_MS);
+  try {
+    const response = await fetch(path, { signal: controller.signal });
+    json = await response.json();
+  } catch (error) {
+  } finally {
+    clearTimeout(timeout);
+  }
+  return json;
+}
+
+async function getChampionJson(champ_name) {
+  const patch = await getCurrentPatch();
+
+  const path =
+    'https://ddragon.leagueoflegends.com/cdn/' +
+    patch +
+    '/data/en_US/champion/' +
+    champ_name +
+    '.json';
+  console.log(path);
+  let json = null;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => {
+    controller.abort();
+  }, REQUEST_TIMEOUT_EXTERNAL_FETCH_MS);
+  try {
+    const response = await fetch(path, { signal: controller.signal });
+    json = await response.json();
+  } catch (error) {
+  } finally {
+    clearTimeout(timeout);
+  }
+  return json;
+}
