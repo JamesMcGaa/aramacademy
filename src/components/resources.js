@@ -64,6 +64,10 @@ const social_svgs = importAll(
   require.context('../images/social_icons/', false, /\.(png|jpe?g|svg)$/)
 );
 
+const research_images = importAll(
+  require.context('../images/research_images/', false, /\.(png|jpe?g|svg)$/)
+);
+
 export default {
   Resources: {
     ranked_badges: rankedBadgeDict,

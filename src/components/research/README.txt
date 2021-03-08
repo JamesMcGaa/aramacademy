@@ -1,48 +1,40 @@
-# ARAM Academy
+# Introducing ARAM Academy Research 
+---
+As a statistics aggregator, ARAM Academy intrinsically processes a lot of data. ARAM Academy uses part of that per-summoner data to form our user statistics pages. 
+In the future, we plan on expanding to encompass per-champion builds. However, there is some analysis that does not fit into either a per-summoner or a per-champion view. 
+We will present these findings here in blog format. If you have any interesting hypotheses you would like tested, please make a request in our [Discord Server](https://discord.gg/MydvqhqWmM)
 
-![image](/static/Ahri.png)
+&nbsp;
+## This Article: Roles
+---
+Often times discussion about winrates centers around per-champion winrates.
+However winrates are often dependent on the team as a whole. 
+Individually, picking 5 of the highest winrate champions does not necessarily yield the highest winrate `team composition`. 
+The goal of this project was to examine how winrates varied depending on `role`. 
 
-ARAM Academy is an ARAM-exclusive statistics aggregator for League of Legends. We provide leaderboards, rank badge estimates, and champion-level winrates across the entirety of a players ARAM data provided by the Riot API.
+&nbsp;
+## Data
+---
+![image](/static/winrates_by_role.png)
 
-Visit us today at https://aram.academy and join our [Discord](https://discord.gg/MydvqhqWmM)
+All our data was sourced from a large set of exclusively high MMR games. Instances without enough data have been excluded from our results. 
 
-## Hosting
+&nbsp;
+## Conclusions
+---
+This test was inspired in part by our hypothesis that the worst team composition in ARAM is one with too many ADCs and not enough support or frontline to enable them. 
+This was very much confirmed by the data, which presents interesting finding such as:
+- The optimal number of ADCs in a composition is 1 or 2. Winrates drop dramatically for no-ADC comps and ADC-saturated comps
 
-ARAM Academy is hosted on a `t2.medium` AWS instance. Our MongoDB instance is hosted on Mongo DB Atlas.
+- Supports and waveclear are always great to have on a team, their winrates are monotonically increasing. Perhaps this is drive by high-MMR players capitalizing on early leads and early tower damage. 
 
-## Directory Structure
+- AD assassins and burst mages fared poorly in high MMR. 
 
-- `src` - Front end UI. Written in React and styled with Material UI. `app.js` is the main entrypoint and `index.js` does the URL routing. `resources.js` contains some hardcoded champion data (e.g. converting DB names MonkeyKing => Wukong). A note about images: webpack grabs and packages images into the `dist/static` directory. It will automatically pick up any image references you make, but you must `require.context` them (like the `resources.js` file does)
-- `backend` - Our backend is implemented with `express`. backendAPIRouter.js handles API calls to our ARAM data infrastructure (`infra_entrypoint.js`) as well as other GET and POST requests for things like MMR from WhatIsMyMMR, current patch from DDragon. We await on our infra calls, but limit the number of concurrent async requests being processed.
-- `dist` - Images generated from webpack
-- `logs` - Error logs generated from infra
-- `infra` - `infra_entrypoint.js` is the main entrypoint. Calls to Kayn API are sectioned into `kayn_calls.js`. Utility definitions of enums, constants, and data manipulation functions are found in `utils.js`. `leaderboard_update.js` handles updating the leaderboard on a daily basis. It grabs all high elo games from a recent time period and checks MMR from WhatIsMyMMR. `champion_icons.py` loads champion icons from DDragon.
-- `models` - mongoDB table models
+- In general, team compositions with higher role-diversity perform better than compositions with lower diversity.
 
-![image](src/images/aramacademysys.png)
 
-## Overview
 
-When a user enters their summoner_name, a request is directed to the `Users` page and a request is made to `backendAPIRouter`, which calls into `processUser` of `infra_entrypoint`. For new users infra aggregates all games available to the Riot API, otherwise the MongoDB record for that user is returned. Users page then refreshes on load depending on if the summoner name is valid or not. Update button runs very similarly - when update is clicked, infra calculates a 'delta' of all ARAM games since the last_processed_game timestamp of this user. These timestamps are attached to the match record data from the Riot API, which we store in MongoDB.
-
-We implement separate React components for mobile UI which are served using the `isMobile` npm package.
-
-Leaderboard runs separately from our main server, and updates daily overnight.
-
-## Execution Instructions
-
-We welcome open source contributors of all types! Please join our [Discord](https://discord.gg/MydvqhqWmM) community and our team can help with setup.
-
-1. Install [`node.js`](https://nodejs.org/en/download/)
-
-2. Install node dependencies with `npm install`
-3. Install `nodemon` globally with `npm install nodemon -g` in same directory
-4. Whitelist IP in MongoDB Atlas project
-5. Start server with `npm run start`
-6. Create a `.env` file in the root folder with the following definitions. For keys and DB URIs please either make your own or contact us in the ARAM Academy Discord.
-
-```
-RIOT_API_KEY=key
-DEV_MODE=dev
-DB_URI=uri
-```
+&nbsp;
+## Future Work
+---
+We plan on generalizing this work with a machine learning model that predicts the strength of any given ARAM composition. 

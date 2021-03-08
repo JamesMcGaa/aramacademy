@@ -37,6 +37,10 @@ module.exports = {
         test: /\.txt$/,
         use: 'raw-loader',
       },
+      //       {
+      //         test: /\.md$/,
+      //         use: ['markdown-loader']
+      // },
     ],
   },
 };

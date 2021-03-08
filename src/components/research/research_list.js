@@ -5,6 +5,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 const mobile = require('is-mobile');
 const useStyles = makeStyles((theme) => ({
@@ -16,6 +17,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ResearchList() {
   const classes = useStyles();
+  const history = useHistory();
+
   return (
     <Container>
       <Container
@@ -29,20 +32,20 @@ export default function ResearchList() {
           Research
         </Typography>
         <Typography variant="body1" align="left">
-          Through the user of our data aggregation, ARAM Academy is able to
-          derive interesting statistics. We intend to share our major findings
-          with the broader community here in blog format. Have a theory you want
-          tested? Drop us a message in the ARAM Academy Discord.
+          The nature of ARAM Academy allows us to test advanced theories on what
+          makes a team composition successful. We intend to share our major
+          findings with the broader community here in blog format. Have a theory
+          you want tested? Drop us a message in the ARAM Academy Discord.
         </Typography>
         <List className={classes.root}>
           <ListItem button>
-            <ListItemText primary="Winrates by ADCs, Supports" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Drafts" />
+            <ListItemText
+              primary="The Roles and their Winrates"
+              onClick={() => history.push('/research/roles')}
+            />
           </ListItem>
         </List>
-      </Container>{' '}
+      </Container>
     </Container>
   );
 }
