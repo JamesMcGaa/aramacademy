@@ -1,5 +1,7 @@
 # Introducing ARAM Academy Research 
 ---
+![image](/static/banner_1.png)
+
 As a statistics aggregator, ARAM Academy intrinsically processes a lot of data. ARAM Academy uses part of that per-summoner data to form our user statistics pages. 
 In the future, we plan on expanding to encompass per-champion builds. However, there is some analysis that does not fit into either a per-summoner or a per-champion view. 
 We will present these findings here in blog format. If you have any interesting hypotheses you would like tested, please make a request in our [Discord Server](https://discord.gg/MydvqhqWmM)
