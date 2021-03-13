@@ -38,11 +38,8 @@ export default function ResearchList() {
           you want tested? Drop us a message in the ARAM Academy Discord.
         </Typography>
         <List className={classes.root}>
-          <ListItem button>
-            <ListItemText
-              primary="Winrates by Role"
-              onClick={() => history.push('/research/roles')}
-            />
+          <ListItem button onClick={() => history.push('/research/roles')}>
+            <ListItemText primary="Winrates by Role" />
           </ListItem>
         </List>
       </Container>
