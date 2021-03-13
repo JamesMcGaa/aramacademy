@@ -165,7 +165,7 @@ async function getCurrentPatch() {
   const timeout = setTimeout(() => {
     controller.abort();
   }, REQUEST_TIMEOUT_EXTERNAL_FETCH_MS);
-  let patch_json = ['10.22.1'];
+  let patch_json = ['11.5.1'];
   try {
     let patch_url = 'https://ddragon.leagueoflegends.com/api/versions.json';
     let patch_response = await fetch(patch_url, { signal: controller.signal });
