@@ -4,10 +4,10 @@ import { useHistory, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import readme from './README.txt';
+import rolesMarkdown from './rolesMarkdown.txt';
 
 const ResearchNamesToPost = Object.freeze({
-  roles: readme,
+  roles: rolesMarkdown,
 });
 
 const useStyles = makeStyles({

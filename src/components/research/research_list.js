@@ -40,7 +40,7 @@ export default function ResearchList() {
         <List className={classes.root}>
           <ListItem button>
             <ListItemText
-              primary="The Roles and their Winrates"
+              primary="Winrates by Role"
               onClick={() => history.push('/research/roles')}
             />
           </ListItem>
