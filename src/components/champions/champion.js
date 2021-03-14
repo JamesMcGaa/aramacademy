@@ -107,9 +107,25 @@ export default function Champions() {
         <Paper classes={{ root: classes.paperRoot }}>
           Runes items sum spells sample
           <h1>{params.champion}</h1>
+        </Paper>
+      </Container>
+      <Container fixed className={classes.largeContainer}>
+        <Paper classes={{ root: classes.paperRoot }}>
           <RunesTable runes_data={state} />
+        </Paper>
+      </Container>
+      <Container fixed className={classes.largeContainer}>
+        <Paper classes={{ root: classes.paperRoot }}>
           <ItemsTable items_data={state} />
+        </Paper>
+      </Container>
+      <Container fixed className={classes.largeContainer}>
+        <Paper classes={{ root: classes.paperRoot }}>
           <SpellsTable spells_data={state} />
+        </Paper>
+      </Container>
+      <Container fixed className={classes.largeContainer}>
+        <Paper classes={{ root: classes.paperRoot }}>
           <AbilitiesTable data={state} champion_name={params.champion} />
         </Paper>
       </Container>
