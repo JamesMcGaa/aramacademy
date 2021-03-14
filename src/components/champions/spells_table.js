@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -15,22 +16,32 @@ var resources = Resources.Resources;
 const fetch = require('node-fetch');
 
 const useStyles = makeStyles({
-  table: {
-    minWidth: 100,
+  section: {
+    padding: 20,
   },
-  iconCell: {
-    'min-width': '60px',
-    width: '60px',
-    'max-width': '80px',
-    padding: '8px',
-  },
-  resizeChampIcon: {
-    minWidth: '40px',
-    maxWidth: '40px',
-    height: 'auto',
+  header: {
+    position: 'relative',
+    display: 'flex',
+    marginBottom: 20,
     width: '100%',
-    borderRadius: '50%',
-    padding: '0px',
+    fontSize: 14,
+    fontWeight: 700,
+    borderBottom: '1px solid #3f51b5',
+  },
+  table: {
+    display: 'flex',
+  },
+  row: {
+    display: 'flex',
+    marginBottom: 10,
+    justifyContent: 'space-between',
+  },
+  summonerSpellIcon: {
+    minWidth: 40,
+    maxWidth: 40,
+    height: 'auto',
+    borderRadius: 2,
+    padding: 0,
   },
 });
 
@@ -42,11 +53,12 @@ function getFullDDragonPath(patch, spell_name, sums_json) {
       path = sum_json.image.full;
     }
   }
-  console.log(path);
   return (
     'https://ddragon.leagueoflegends.com/cdn/' + patch + '/img/spell/' + path
   );
 }
+
+
 
 export default function SpellsTable({ spells_data }) {
   if (spells_data.loaded === false) {
@@ -56,24 +68,64 @@ export default function SpellsTable({ spells_data }) {
   const classes = useStyles();
   const summoner_spells = spells_data.summoner_spells;
   const sums_json = spells_data.sums_json;
-  let path_list = [];
-  for (var id in summoner_spells) {
-    const name = summoner_spells[id];
-    path_list.push(getFullDDragonPath(spells_data.patch, name, sums_json));
+  const example_summoner_pairs = [
+    {
+      spells: summoner_spells,
+      winrate: 51.1,
+    },
+    {
+      spells: summoner_spells,
+      winrate: 50.5,
+    },
+    {
+      spells: summoner_spells,
+      winrate: 49.8,
+    },
+  ];
+
+  const SpellsTableHeader = () => {
+    return (
+      <div className={classes.header}>
+        Summoner Spells
+      </div>
+    )
+  }
+
+  const SpellsTableBody = () => {
+    const rows = _.map(example_summoner_pairs, summoner_pair => {
+      return SpellsTableRow(summoner_pair);
+    });
+    return (
+      <div>
+        {rows}
+      </div>
+    )
+  }
+
+  const SpellsTableRow = ({ spells, winrate }) => {
+    return (
+      <div className={classes.row}>
+        <div>
+          <img
+            className={classes.summonerSpellIcon}
+            alt="summoner icon"
+            src={getFullDDragonPath(spells_data.patch, spells[0], sums_json)}
+          />{' '}
+          <img
+            className={classes.summonerSpellIcon}
+            alt="summoner icon"
+            src={getFullDDragonPath(spells_data.patch, spells[1], sums_json)}
+          />
+        </div>
+        <div>WR: {winrate}</div>
+      </div>
+    );
   }
 
   return (
-    <Container>
-      <img
-        className={classes.resizeChampIcon}
-        alt="summoner icon"
-        src={path_list[0]}
-      />{' '}
-      <img
-        className={classes.resizeChampIcon}
-        alt="summoner icon"
-        src={path_list[1]}
-      />{' '}
-    </Container>
+    <div className={classes.section}>
+      {SpellsTableHeader()}
+      {SpellsTableBody()}
+    </div>
   );
 }
