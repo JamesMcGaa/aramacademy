@@ -60,7 +60,7 @@ export default function Champions() {
     patch: undefined,
   });
   //We query mongo/static json for items/runes/sumspells, query ddragon for the specific assets we want after this
-
+  console.log(state);
   function getBuilds(champion) {
     fetch('/api/builds/' + encodeURI(champion))
       .then((response) => response.json())
