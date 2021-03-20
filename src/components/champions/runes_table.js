@@ -118,5 +118,6 @@ export default function RunesTable({ runes_data }) {
         src={ult_path}
       />{' '}
       {stack}
-</div>  );
+    </div>
+  );
 }

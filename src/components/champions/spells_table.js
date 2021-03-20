@@ -58,8 +58,6 @@ function getFullDDragonPath(patch, spell_name, sums_json) {
   );
 }
 
-
-
 export default function SpellsTable({ spells_data }) {
   if (spells_data.loaded === false) {
     return null;
@@ -84,23 +82,15 @@ export default function SpellsTable({ spells_data }) {
   ];
 
   const SpellsTableHeader = () => {
-    return (
-      <div className={classes.header}>
-        Summoner Spells
-      </div>
-    )
-  }
+    return <div className={classes.header}>Summoner Spells</div>;
+  };
 
   const SpellsTableBody = () => {
-    const rows = _.map(example_summoner_pairs, summoner_pair => {
+    const rows = _.map(example_summoner_pairs, (summoner_pair) => {
       return SpellsTableRow(summoner_pair);
     });
-    return (
-      <div>
-        {rows}
-      </div>
-    )
-  }
+    return <div>{rows}</div>;
+  };
 
   const SpellsTableRow = ({ spells, winrate }) => {
     return (
@@ -120,7 +110,7 @@ export default function SpellsTable({ spells_data }) {
         <div>WR: {winrate}</div>
       </div>
     );
-  }
+  };
 
   return (
     <div className={classes.section}>
