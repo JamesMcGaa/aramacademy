@@ -18,6 +18,7 @@ const fetch = require('node-fetch');
 const useStyles = makeStyles({
   table: {
     minWidth: 100,
+    height: 300,
   },
   iconCell: {
     'min-width': '60px',
@@ -100,7 +101,7 @@ export default function RunesTable({ runes_data }) {
     }
   }
   return (
-    <Container>
+    <div className={classes.table}>
       <img
         className={classes.resizeChampIcon}
         alt="summoner icon"
@@ -117,6 +118,5 @@ export default function RunesTable({ runes_data }) {
         src={ult_path}
       />{' '}
       {stack}
-    </Container>
-  );
+</div>  );
 }

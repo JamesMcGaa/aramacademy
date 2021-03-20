@@ -38,6 +38,17 @@ const useStyles = makeStyles((theme) => ({
   paperRoot: {
     'background-color': 'rgba(66,66,66,.8)',
   },
+  runesAndSpells: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  runes: {
+    flexGrow: 3,
+    borderRight: '1px solid #555555'
+  },
+  spells: {
+    flexGrow: 1,
+  },
 }));
 
 export default function Champions() {
@@ -90,6 +101,7 @@ export default function Champions() {
     getBuilds(params.champion);
   }
   console.log(state);
+
   return (
     <div>
       <div style={{ height: '100px' }}></div>
@@ -109,19 +121,19 @@ export default function Champions() {
           <h1>{params.champion}</h1>
         </Paper>
       </Container>
-      <Container fixed className={classes.largeContainer}>
-        <Paper classes={{ root: classes.paperRoot }}>
-          <RunesTable runes_data={state} />
-        </Paper>
-      </Container>
+      <Paper classes={{ root: classes.paperRoot }}>
+        <div className={classes.runesAndSpells}>
+          <div className={classes.runes}>
+            <RunesTable runes_data={state} />
+          </div>
+          <div className={classes.spells}>
+            <SpellsTable spells_data={state} />
+          </div>
+        </div>
+      </Paper>
       <Container fixed className={classes.largeContainer}>
         <Paper classes={{ root: classes.paperRoot }}>
           <ItemsTable items_data={state} />
-        </Paper>
-      </Container>
-      <Container fixed className={classes.largeContainer}>
-        <Paper classes={{ root: classes.paperRoot }}>
-          <SpellsTable spells_data={state} />
         </Paper>
       </Container>
       <Container fixed className={classes.largeContainer}>
