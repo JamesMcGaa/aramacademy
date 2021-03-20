@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Resources from '../resources.js';
 import { Button, Container } from '@material-ui/core';
+import KeystoneRow from './keystone_row.js';
 
 var resources = Resources.Resources;
 const fetch = require('node-fetch');
@@ -31,6 +32,13 @@ const useStyles = makeStyles({
     width: '100%',
     borderRadius: '50%',
     padding: '0px',
+  },
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: '4px',
+    textAlign: 'center',
   },
 });
 
@@ -66,10 +74,31 @@ export default function RunesTable({ runes_data }) {
   const runes_primary_json = runes_data.runes_primary_json;
   //const elec_path = "perk-images/Styles/Domination/Electrocute/Electrocute.png"
   //const dd_path = 'https://ddragon.leagueoflegends.com/cdn/img/' + elec_path;
+  console.log(runes_data.runes_primary);
+
+  console.log(runes_primary_json);
+
+  const runes_primary_list = runes_data.runes_primary_list;
+
   const dom_path = getFullDDragonPath('Domination', runes_primary_json);
   const elec_path = getFullDDragonPath('Electrocute', runes_primary_json);
   const ult_path = getFullDDragonPath('UltimateHunter', runes_primary_json);
+  console.log(elec_path);
+  const keystoneRowData = {
+    runes_row: 1,
+  };
 
+  var stack = [];
+  for (var i = 0; i < runes_primary_json.slots.length; i++) {
+    //looping over 4 rows of runes
+    var row = runes_primary_json.slots[i];
+    var selected = runes_primary_list[i];
+    console.log(selected, row);
+    if (i === 0) {
+      var a = <KeystoneRow selected={selected} row_json={row}></KeystoneRow>;
+      stack.push(a);
+    }
+  }
   return (
     <Container>
       <img
@@ -87,6 +116,7 @@ export default function RunesTable({ runes_data }) {
         alt="summoner icon"
         src={ult_path}
       />{' '}
+      {stack}
     </Container>
   );
 }
