@@ -57,7 +57,7 @@ const useStyles = makeStyles({
   runes_primary_header: {
     display: 'flex',
     marginBottom: 5,
-    // marginLeft: 20,
+    marginLeft: 8,
     // marginRight: 20,
     alignItems: 'center',
 
