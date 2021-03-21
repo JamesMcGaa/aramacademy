@@ -16,6 +16,9 @@ var resources = Resources.Resources;
 const fetch = require('node-fetch');
 
 const useStyles = makeStyles({
+  section: {
+    padding: 20,
+  },
   table: {
     minWidth: 100,
     height: 300,
@@ -40,6 +43,78 @@ const useStyles = makeStyles({
   paper: {
     padding: '4px',
     textAlign: 'center',
+  },
+  header: {
+    position: 'center',
+    display: 'flex',
+    marginBottom: 20,
+    width: '100%',
+    fontSize: 14,
+    fontWeight: 700,
+    borderBottom: '1px solid #3f51b5',
+  },
+
+  runes_primary_header: {
+    display: 'flex',
+    marginBottom: 5,
+    // marginLeft: 20,
+    // marginRight: 20,
+    alignItems: 'center',
+
+    width: '100%',
+    fontSize: 16,
+    fontWeight: 700,
+    //borderBottom: '1px solid white',
+  },
+  runes_secondary_header: {
+    display: 'flex',
+    marginBottom: 5,
+    // marginLeft: 20,
+    // marginRight: 20,
+    alignItems: 'center',
+
+    width: '100%',
+    fontSize: 16,
+    fontWeight: 700,
+    marginBottom: 7,
+
+    //borderBottom: '1px solid white',
+  },
+  runes_box: {
+    minWidth: '500px',
+    maxWidth: '500px',
+    marginLeft: '0px',
+  },
+  resizeKeystoneIcon: {
+    minWidth: '40px',
+    maxWidth: '40px',
+    height: 'auto',
+    width: '100%',
+    borderRadius: '50%',
+    padding: '3px',
+    paddingRight: '5px',
+  },
+  resizeStatIcon: {
+    minWidth: '30px',
+    maxWidth: '30px',
+    height: 'auto',
+    width: '100%',
+    borderRadius: '50%',
+    border: '1px solid #3f51b5',
+  },
+  statRow: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    minWidth: '160px',
+    maxWidth: '160px',
+    //marginBottom: '5px',
+    padding: '3px',
+    marginLeft: '13px',
+  },
+  statHeader: {
+    borderTop: '1px solid #8e793e',
+    marginTop: '9px',
+    paddingTop: '9px',
   },
 });
 
@@ -66,58 +141,156 @@ function getFullDDragonPath(rune_name, runes_json) {
   );
 }
 
+function getStatIconPath(stat_name) {
+  //AdaptiveForce, Armor, AttackSpeed, CDRScaling, HealthScaling, MagicRes
+  return (
+    'https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/' +
+    'StatMods' +
+    stat_name +
+    'Icon.png'
+  );
+}
 export default function RunesTable({ runes_data }) {
   if (runes_data.loaded === false) {
     return null;
   }
   const classes = useStyles();
-  console.log(runes_data);
   const runes_primary_json = runes_data.runes_primary_json;
-  //const elec_path = "perk-images/Styles/Domination/Electrocute/Electrocute.png"
-  //const dd_path = 'https://ddragon.leagueoflegends.com/cdn/img/' + elec_path;
-  console.log(runes_data.runes_primary);
-
-  console.log(runes_primary_json);
+  const runes_secondary_json = runes_data.runes_secondary_json;
 
   const runes_primary_list = runes_data.runes_primary_list;
-
-  const dom_path = getFullDDragonPath('Domination', runes_primary_json);
-  const elec_path = getFullDDragonPath('Electrocute', runes_primary_json);
-  const ult_path = getFullDDragonPath('UltimateHunter', runes_primary_json);
-  console.log(elec_path);
-  const keystoneRowData = {
-    runes_row: 1,
+  const runes_secondary_list = runes_data.runes_secondary_list;
+  const selected_stats_indices = runes_data.runes_stats;
+  const primary_tree_name = runes_data.runes_primary;
+  const secondary_tree_name = runes_data.runes_secondary;
+  const primary_path = getFullDDragonPath(
+    primary_tree_name,
+    runes_primary_json
+  );
+  const secondary_path = getFullDDragonPath(
+    secondary_tree_name,
+    runes_secondary_json
+  );
+  const stat_grid = [
+    ['AdaptiveForce', 'AttackSpeed', 'CDRScaling'],
+    ['AdaptiveForce', 'Armor', 'MagicRes'],
+    ['HealthScaling', 'Armor', 'MagicRes'],
+  ];
+  const RunesTableHeader = () => {
+    return <div className={classes.header}>Runes</div>;
   };
 
-  var stack = [];
+  const RunesTableStats = () => {
+    const input = [
+      {
+        stat_row: stat_grid[0],
+        selected_index: selected_stats_indices[0],
+      },
+      {
+        stat_row: stat_grid[1],
+        selected_index: selected_stats_indices[1],
+      },
+      {
+        stat_row: stat_grid[2],
+        selected_index: selected_stats_indices[2],
+      },
+    ];
+    const rows = _.map(input, (row) => {
+      return RunesTableRow(row);
+    });
+    return <div className={classes.statHeader}>{rows}</div>;
+  };
+  const RunesTableRow = ({ stat_row, selected_index }) => {
+    return (
+      <div className={classes.statRow}>
+        <React.Fragment>
+          {stat_row.map(function (stat, index) {
+            var grayed_out = { filter: 'grayscale(1)' };
+            if (index === selected_index) {
+              grayed_out = null;
+            }
+            return (
+              <img
+                className={classes.resizeStatIcon}
+                style={grayed_out}
+                alt="summoner icon"
+                src={getStatIconPath(stat)}
+              />
+            );
+          })}
+        </React.Fragment>
+      </div>
+    );
+  };
+
+  var primary = [];
   for (var i = 0; i < runes_primary_json.slots.length; i++) {
     //looping over 4 rows of runes
     var row = runes_primary_json.slots[i];
     var selected = runes_primary_list[i];
-    console.log(selected, row);
+    var is_keystone = false;
     if (i === 0) {
-      var a = <KeystoneRow selected={selected} row_json={row}></KeystoneRow>;
-      stack.push(a);
+      is_keystone = true;
     }
+
+    var rune_row = (
+      <KeystoneRow
+        is_keystone={is_keystone}
+        is_secondary={false}
+        selected_list={[selected]}
+        row_json={row}
+      ></KeystoneRow>
+    );
+    primary.push(rune_row);
   }
+  var secondary = [];
+  for (var i = 1; i < runes_secondary_json.slots.length; i++) {
+    //looping over 3 rows of runes
+    var row = runes_secondary_json.slots[i];
+    var selected = runes_secondary_list;
+
+    var rune_row = (
+      <KeystoneRow
+        is_keystone={false}
+        is_secondary={true}
+        selected_list={selected}
+        row_json={row}
+      ></KeystoneRow>
+    );
+    secondary.push(rune_row);
+  }
+
   return (
-    <div className={classes.table}>
-      <img
-        className={classes.resizeChampIcon}
-        alt="summoner icon"
-        src={dom_path}
-      />{' '}
-      <img
-        className={classes.resizeChampIcon}
-        alt="summoner icon"
-        src={elec_path}
-      />{' '}
-      <img
-        className={classes.resizeChampIcon}
-        alt="summoner icon"
-        src={ult_path}
-      />{' '}
-      {stack}
+    <div className={classes.section}>
+      {RunesTableHeader()}
+      <Container className={classes.runes_box}>
+        <div style={{ display: 'flex' }}>
+          <div style={{ flex: '50%', marginRight: '45px' }}>
+            <div className={classes.runes_primary_header}>
+              <img
+                className={classes.resizeKeystoneIcon}
+                alt="summoner icon"
+                src={primary_path}
+              />
+              {primary_tree_name}
+            </div>
+
+            {primary}
+          </div>
+          <div style={{ flex: '50%' }}>
+            <div className={classes.runes_secondary_header}>
+              <img
+                className={classes.resizeKeystoneIcon}
+                alt="summoner icon"
+                src={secondary_path}
+              />
+              {secondary_tree_name}
+            </div>
+            {secondary}
+            {RunesTableStats()}
+          </div>
+        </div>
+      </Container>
     </div>
   );
 }

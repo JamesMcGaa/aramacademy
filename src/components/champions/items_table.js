@@ -32,6 +32,18 @@ const useStyles = makeStyles({
     borderRadius: '50%',
     padding: '0px',
   },
+  section: {
+    padding: 20,
+  },
+  header: {
+    position: 'relative',
+    display: 'flex',
+    marginBottom: 20,
+    width: '100%',
+    fontSize: 14,
+    fontWeight: 700,
+    borderBottom: '1px solid #3f51b5',
+  },
 });
 
 function getFullDDragonPath(patch, item_json) {
@@ -55,9 +67,13 @@ export default function ItemsTable({ items_data }) {
     const item_json = item_json_list[id];
     path_list.push(getFullDDragonPath(items_data.patch, item_json));
   }
+  const Header = () => {
+    return <div className={classes.header}>Items</div>;
+  };
 
   return (
-    <Container>
+    <div className={classes.section}>
+      {Header()}
       <img
         className={classes.resizeChampIcon}
         alt="summoner icon"
@@ -78,6 +94,6 @@ export default function ItemsTable({ items_data }) {
         alt="summoner icon"
         src={path_list[3]}
       />{' '}
-    </Container>
+    </div>
   );
 }
