@@ -380,17 +380,42 @@ router.get('/builds/:champion', async (req, res) => {
   const runes_json = await getRunesJson();
   const item_json = await getItemJson();
   const sums_json = await getSummonerSpellsJson();
-  const item_list = [
-    'Essence Reaver',
-    'Boots',
-    'Moonstone Renewer',
-    'Serrated Dirk',
-  ];
-  let item_json_list = [];
-  for (item in item_list) {
-    item_json_list.push(getDesiredItemJson(item_list[item], item_json));
+  const item_build_json = {
+    'Starting Items': [
+      'Guardian\'s Hammer',
+      'Boots',
+      'Refillable Potion',
+    ],
+    'Mythic and Core Items': [
+      'Kraken Slayer',
+      'Runaan\'s Hurricane',
+      'Berserker\'s Greaves',
+    ],
+    'Fourth Item Options': [
+      'Infinity Edge',
+      'Bloodthirster',
+      'The Collector',
+    ],
+    'Fifth Item Options': [
+      'Bloodthirster',
+      'Maw of Malmortius',
+      'The Collector'
+    ],
+    'Sixth Item Options': [
+      'Mercurial Scimitar',
+      'Mortal Reminder',
+      'Lord Dominik\'s Regards',
+    ],
+  };
+  let item_build_json_full = {};
+  for (key in item_build_json) {
+    item_build_json_full[key] = [];
+    for (index in item_build_json[key]) {
+      item_build_json_full[key].push(getDesiredItemJson(item_build_json[key][index], item_json));
+    }
   }
   console.log('name', req.params.champion);
+  console.log('items', item_build_json_full);
   const champion_json = await getChampionJson(req.params.champion);
   const patch = await getCurrentPatch();
   build_response = {
@@ -417,8 +442,8 @@ router.get('/builds/:champion', async (req, res) => {
     runes_secondary_json: getRuneTreeJson('Sorcery', runes_json),
     runes_stats: [0, 1, 2],
     skill_order: ['R', 'Q', 'W', 'E'],
-    items: item_list,
-    item_json_list: item_json_list,
+    items_json: item_build_json,
+    items_json_full: item_build_json_full,
     sums_json: sums_json,
     summoner_spells: ['SummonerSnowball', 'SummonerFlash'],
     champion_json: champion_json,

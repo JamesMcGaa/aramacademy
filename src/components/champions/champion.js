@@ -64,7 +64,7 @@ export default function Champions() {
     runes_secondary_list: null,
     runes_secondary_json: null,
     runes_stats: null,
-    item_json_list: null,
+    items_json: null,
     sums_json: null,
     summoner_spells: null,
     champion_json: null,
@@ -91,7 +91,7 @@ export default function Champions() {
       runes_secondary_list: json.runes_secondary_list,
       runes_secondary_json: json.runes_secondary_json,
       runes_stats: json.runes_stats,
-      item_json_list: json.item_json_list,
+      items_json: json.items_json_full,
       sums_json: json.sums_json,
       summoner_spells: json.summoner_spells,
       champion_json: json.champion_json,
@@ -133,11 +133,9 @@ export default function Champions() {
           </div>
         </div>
       </Paper>
-      <Container fixed className={classes.largeContainer}>
-        <Paper classes={{ root: classes.paperRoot }}>
-          <ItemsTable items_data={state} />
-        </Paper>
-      </Container>
+      <Paper classes={{ root: classes.paperRoot }}>
+        <ItemsTable items_data={state} />
+      </Paper>
       <Container fixed className={classes.largeContainer}>
         <Paper classes={{ root: classes.paperRoot }}>
           <AbilitiesTable data={state} champion_name={params.champion} />
