@@ -31,8 +31,8 @@ const useStyles = makeStyles({
     padding: '0px',
   },
   resizeSecondaryRuneIcon: {
-    minWidth: '40px',
-    maxWidth: '40px',
+    minWidth: '38px',
+    maxWidth: '38px',
     height: 'auto',
     width: '100%',
     borderRadius: '50%',
@@ -62,7 +62,7 @@ const useStyles = makeStyles({
     minWidth: '215px',
     maxWidth: '215px',
     //marginBottom: '12px',
-    padding: '9px',
+    padding: '12px',
   },
   secondaryRow: {
     display: 'flex',
@@ -70,7 +70,7 @@ const useStyles = makeStyles({
     minWidth: '190px',
     maxWidth: '190px',
     //marginBottom: '5px',
-    padding: '3px',
+    padding: '5px',
   },
   unselected: {
     filter: 'grayscale(1)',
