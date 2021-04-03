@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Resources from '../resources.js';
 import { Button, Container } from '@material-ui/core';
+import { ProxyAuthenticationRequired } from 'http-errors';
 
 var resources = Resources.Resources;
 const fetch = require('node-fetch');
@@ -135,7 +136,6 @@ export default function AbilitiesOrder({ data, champion_name }) {
   return (
     <div className={classes.section}>
       {AbilitiesPathHeader()}
-
       <div className={classes.row}>
         {AbilityIcon({
           path: path_list[0],
