@@ -35,6 +35,16 @@ champs.forEach(function (item, index) {
   champImageDict[champName] = item['default'];
 });
 
+const abilities_icons = importAll(
+  require.context('../images/abilities/', false, /\.(png|jpe?g|svg)$/)
+);
+let abilitiesIconsDict = new Object();
+
+abilities_icons.forEach(function (item, index) {
+  const ability = item['default'].split('/')[2].split('.')[0];
+  abilitiesIconsDict[ability] = item['default'];
+});
+
 let two_word_champs = new Map();
 two_word_champs.set('AurelionSol', 'Aurelion Sol');
 two_word_champs.set('Chogath', "Cho'Gath");
@@ -350,6 +360,7 @@ export default {
     tier_badges: tierBadgeDict,
     champ_icons: champImageDict,
     two_word_champs: two_word_champs,
+    abilities_icons: abilitiesIconsDict,
     champ_classes,
   },
 };
