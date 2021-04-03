@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     borderRight: '1px solid #555555',
   },
   abilities_path: {
-    flexGrow: 5,
+    flexGrow: 4,
   },
   runes: {
     flexGrow: 3,

@@ -41,9 +41,8 @@ const useStyles = makeStyles({
   row: {
     display: 'flex',
     marginBottom: 10,
-    justifyContent: 'space-between',
-    marginLeft: 20,
-    marginRight: 20,
+    marginLeft: 10,
+    marginRight: 10,
   },
   iconCell: {
     'min-width': '60px',
@@ -52,17 +51,17 @@ const useStyles = makeStyles({
     padding: '8px',
   },
   resizeAbilityIcon: {
-    minWidth: '45px',
-    maxWidth: '45px',
+    minWidth: '28px',
+    maxWidth: '28px',
     height: 'auto',
     width: '100%',
     padding: '0px',
   },
   overlay: {
     verticalAlign: 'bottom',
-    minWidth: '15px',
-    maxWidth: '15px',
-    marginLeft: '-15px',
+    minWidth: '12px',
+    maxWidth: '12px',
+    marginLeft: '-12px',
   },
   arrow: {
     width: '15px',
@@ -70,6 +69,28 @@ const useStyles = makeStyles({
     marginLeft: '-23px',
     marginRight: '-23px',
     marginTop: '15px',
+  },
+  abilityName: {
+    width: '200px',
+    backgroundColor: 'rgba(36, 37, 130, 0.6)',
+    marginBottom: 0,
+    fontSize: 14,
+    borderBottom: '1px solid #8e793e',
+    textAlign: 'left',
+    padding: '4px',
+  },
+  abilityYes: {
+    width: '28px',
+    padding: '4px',
+    marginLeft: '4px',
+    backgroundColor: '#4056a1',
+  },
+  abilityNo: {
+    width: '28px',
+    padding: '4px',
+    marginLeft: '4px',
+
+    backgroundColor: 'rgba(66,66,66,.8)',
   },
 });
 
@@ -89,6 +110,7 @@ function getFullSpellPath(patch, spell_path) {
     spell_path
   );
 }
+const levels = Array.from({ length: 18 }, (_, i) => i + 1);
 
 export default function AbilitiesOrder({ data, champion_name }) {
   if (data.loaded === false) {
@@ -99,7 +121,6 @@ export default function AbilitiesOrder({ data, champion_name }) {
   };
 
   const AbilityIcon = ({ path, key }) => {
-    console.log(key);
     return (
       <div>
         <img className={classes.resizeAbilityIcon} alt="ability" src={path} />
@@ -112,56 +133,84 @@ export default function AbilitiesOrder({ data, champion_name }) {
     );
   };
 
+  const AbilityName = ({ name }) => {
+    return <Paper className={classes.abilityName}>{name}</Paper>;
+  };
+  const AbilityLevels = ({ skill_level }) => {
+    const boxes = _.map(levels, (level) => {
+      if (skill_level.includes(level)) {
+        return AbilityBoxYes({ level });
+      } else {
+        return AbilityBoxNo();
+      }
+    });
+    return boxes;
+  };
+
+  const AbilityBoxYes = ({ level }) => {
+    console.log('level', level);
+    return <Paper className={classes.abilityYes}>{level}</Paper>;
+  };
+
+  const AbilityBoxNo = () => {
+    return <Paper className={classes.abilityNo}></Paper>;
+  };
+  const Path = ({ json, key }) => {
+    const path = getFullSpellPath(data.patch, json.image.full);
+    const name = json.name;
+    const levels = data.abilities_levels;
+    var skill_level;
+    if (key === 'q') {
+      skill_level = levels.Q;
+    } else if (key === 'w') {
+      skill_level = levels.W;
+    } else if (key === 'e') {
+      skill_level = levels.E;
+    } else {
+      skill_level = levels.R;
+    }
+    return (
+      <div className={classes.row}>
+        {AbilityIcon({ path, key })}
+        {AbilityName({ name })}
+        {AbilityLevels({ skill_level })}
+      </div>
+    );
+  };
+
+  const Passive = () => {
+    return null;
+  };
+
   const classes = useStyles();
   const champion_json = data.champion_json;
-  console.log(resources.abilities_icons);
   const champion_data = champion_json.data[champion_name];
   const passive_path = champion_data.passive.image.full;
   const full_passive = getFullPassivePath(data.patch, passive_path);
   const abilities_order = data.abilities_order;
-  let path_list = [];
-  // for (var i = 0; i < champion_data.spells.length; i++) {
-  //     var spell = champion_data.spells[i];
+  let spell_json_list = [];
+  for (var i = 0; i < champion_data.spells.length; i++) {
+    var spell = champion_data.spells[i];
+    console.log('spell', spell);
+    console.log('name', spell.name);
+    spell_json_list.push(spell);
+  }
+
+  //   for (var i = 0; i < abilities_order.length; i++) {
+  //     var ability = abilities_order[i];
+  //     const spell = champion_data.spells[QWER_MAP[ability]];
   //     const spell_path = spell.image.full;
   //     path_list.push(getFullSpellPath(data.patch, spell_path));
-  // }
-
-  for (var i = 0; i < abilities_order.length; i++) {
-    var ability = abilities_order[i];
-    const spell = champion_data.spells[QWER_MAP[ability]];
-    const spell_path = spell.image.full;
-    path_list.push(getFullSpellPath(data.patch, spell_path));
-  }
+  //   }
 
   return (
     <div className={classes.section}>
       {AbilitiesPathHeader()}
-      <div className={classes.row}>
-        {AbilityIcon({
-          path: path_list[0],
-          key: abilities_order[0].toLowerCase(),
-        })}
-        <img
-          className={classes.arrow}
-          alt="arrow"
-          src={resources.abilities_icons['arrow']}
-        />
-        {AbilityIcon({
-          path: path_list[1],
-          key: abilities_order[1].toLowerCase(),
-        })}
-        <img
-          className={classes.arrow}
-          alt="arrow"
-          src={resources.abilities_icons['arrow']}
-        />
-        {AbilityIcon({
-          path: path_list[2],
-          key: abilities_order[2].toLowerCase(),
-        })}
-      </div>
 
-      <div>WR: 58</div>
+      {Path({ json: spell_json_list[0], key: 'q' })}
+      {Path({ json: spell_json_list[1], key: 'w' })}
+      {Path({ json: spell_json_list[2], key: 'e' })}
+      {Path({ json: spell_json_list[3], key: 'r' })}
     </div>
   );
 }
