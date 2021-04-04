@@ -40,6 +40,7 @@ const useStyles = makeStyles({
   },
   row: {
     display: 'flex',
+    justifyContent: 'center',
     marginBottom: 10,
     marginLeft: 10,
     marginRight: 10,
@@ -51,8 +52,8 @@ const useStyles = makeStyles({
     padding: '8px',
   },
   resizeAbilityIcon: {
-    minWidth: '26px',
-    maxWidth: '26px',
+    minWidth: '28px',
+    maxWidth: '28px',
     height: 'auto',
     width: '100%',
     padding: '0px',
@@ -71,8 +72,8 @@ const useStyles = makeStyles({
     marginTop: '15px',
   },
   abilityName: {
-    width: '200px',
-    backgroundColor: 'rgba(36, 37, 130, 0.6)',
+    width: '185px',
+    //backgroundColor: 'rgba(36, 37, 130, 0.6)',
     marginBottom: 0,
     fontSize: 14,
     borderBottom: '1px solid #8e793e',
@@ -80,13 +81,13 @@ const useStyles = makeStyles({
     padding: '4px',
   },
   abilityYes: {
-    width: '26px',
+    width: '28px',
     padding: '4px',
     marginLeft: '4px',
     backgroundColor: '#4056a1',
   },
   abilityNo: {
-    width: '26px',
+    width: '28px',
     padding: '4px',
     marginLeft: '4px',
 
