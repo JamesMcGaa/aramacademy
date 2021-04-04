@@ -193,6 +193,9 @@ export default function BuildHeader({
     const spell_path = spell.image.full;
     path_list.push(getFullSpellPath(data.patch, spell_path));
   }
+  var stylizedChampName = resources.two_word_champs.has(champion_name)
+    ? resources.two_word_champs.get(champion_name)
+    : champion_name;
   return (
     <div className={classes.row}>
       <div classNAme={classes.image}>
@@ -203,7 +206,7 @@ export default function BuildHeader({
       </div>
 
       <div className={classes.text}>
-        <Typography variant="h3">{champion_name} </Typography>
+        <Typography variant="h3">{stylizedChampName} </Typography>
         {Spells({ passive_path: passive_full_path, spells_paths: path_list })}
       </div>
 
