@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     width: '100%',
     fontSize: 14,
     fontWeight: 700,
-    borderBottom: '1px solid #3f51b5',
+    borderBottom: '2px solid #3f51b5',
   },
   itemWinrate: {
     fontSize: 13,

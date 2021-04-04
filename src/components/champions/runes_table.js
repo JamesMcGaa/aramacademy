@@ -115,28 +115,38 @@ const useStyles = makeStyles({
   },
   runepageActiveRow: {
     display: 'flex',
-    marginBottom: 10,
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#3f51b5',
+    backgroundColor: 'rgba(100, 100, 100, 0.5)',
+    height: 65,
+    borderLeft: '2px solid white',
+    padding: '5px 12px',
+    paddingLeft: '11px',
   },
   runepageRow: {
     display: 'flex',
-    marginBottom: 10,
     justifyContent: 'space-between',
     alignItems: 'center',
+    height: 65,
+    borderLeft: '1px solid #8e793e',
+    padding: '5px 12px',
   },
   runepageIcons: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  runepageIcon: {
-    minWidth: 40,
-    maxWidth: 40,
+  runepageKeystoneIcon: {
+    minWidth: 50,
+    maxWidth: 50,
     height: 'auto',
     borderRadius: '50%',
-    backgroundColor: 'black',
+    padding: 0,
+  },
+  runepageIcon: {
+    minWidth: 25,
+    maxWidth: 25,
+    height: 'auto',
     padding: 0,
   },
 });
@@ -173,6 +183,9 @@ function getStatIconPath(stat_name) {
     'Icon.png'
   );
 }
+
+const MAX_RUNEPAGES = 5;
+
 export default function RunesTable({ runes_data }) {
   if (runes_data.loaded === false) {
     return null;
@@ -246,7 +259,9 @@ export default function RunesTable({ runes_data }) {
   };
   const RunepageTableBody = () => {
     const rows = _.map(runepages, (runepage) => {
-      return RunepageTableRow(runepage);
+      if (runepage.runes_index < MAX_RUNEPAGES) {
+        return RunepageTableRow(runepage);
+      }
     });
     return (
       <div>
@@ -258,13 +273,17 @@ export default function RunesTable({ runes_data }) {
   const RunepageTableRow = (runepage) => {
     const active = runepageIndex == runepage.runes_index;
     return (
-      <div className={active ? classes.runepageActiveRow : classes.runepageRow} onClick={() => setRunepageIndex(runepage.runes_index)}>
+      <div
+        className={active ? classes.runepageActiveRow : classes.runepageRow}
+        onClick={() => setRunepageIndex(runepage.runes_index)}
+      >
         <div className={classes.runepageIcons}>
           <img
-            className={classes.runepageIcon}
+            className={classes.runepageKeystoneIcon}
             alt="summoner icon"
-            src={getFullDDragonPath(runepage.runes_primary, runepage.runes_primary_json)}
+            src={getFullDDragonPath(runepage.runes_primary_list[0], runepage.runes_primary_json)}
           />{' '}
+
           <img
             className={classes.runepageIcon}
             alt="summoner icon"
