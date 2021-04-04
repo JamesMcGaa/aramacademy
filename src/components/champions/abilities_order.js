@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Resources from '../resources.js';
 import { Button, Container } from '@material-ui/core';
+import { Header, Winrate } from './utils.js';
 
 var resources = Resources.Resources;
 const fetch = require('node-fetch');
@@ -23,15 +24,6 @@ const QWER_MAP = {
 const useStyles = makeStyles({
   section: {
     padding: 20,
-  },
-  header: {
-    position: 'relative',
-    display: 'flex',
-    marginBottom: 20,
-    width: '100%',
-    fontSize: 14,
-    fontWeight: 700,
-    borderBottom: '1px solid #3f51b5',
   },
   row: {
     display: 'flex',
@@ -84,9 +76,6 @@ export default function AbilitiesOrder({ data, champion_name }) {
   if (data.loaded === false) {
     return null;
   }
-  const AbilitiesOrderHeader = () => {
-    return <div className={classes.header}>Ability Priority</div>;
-  };
 
   const AbilityIcon = ({ path, key }) => {
     console.log(key);
@@ -120,7 +109,7 @@ export default function AbilitiesOrder({ data, champion_name }) {
 
   return (
     <div className={classes.section}>
-      {AbilitiesOrderHeader()}
+      {Header('Ability Priority')}
       <div className={classes.row}>
         {AbilityIcon({
           path: path_list[0],
@@ -145,8 +134,7 @@ export default function AbilitiesOrder({ data, champion_name }) {
           key: abilities_order[2].toLowerCase(),
         })}
       </div>
-
-      <div>WR: 58</div>
+      {Winrate(58)}
     </div>
   );
 }

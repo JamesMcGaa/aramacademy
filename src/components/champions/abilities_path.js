@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import Resources from '../resources.js';
 import { Button, Container } from '@material-ui/core';
 import { ProxyAuthenticationRequired } from 'http-errors';
+import { Header } from './utils.js';
 
 var resources = Resources.Resources;
 const fetch = require('node-fetch');
@@ -24,15 +25,6 @@ const QWER_MAP = {
 const useStyles = makeStyles({
   section: {
     padding: 20,
-  },
-  header: {
-    position: 'relative',
-    display: 'flex',
-    marginBottom: 20,
-    width: '100%',
-    fontSize: 14,
-    fontWeight: 700,
-    borderBottom: '1px solid #3f51b5',
   },
   table: {
     display: 'flex',
@@ -117,9 +109,6 @@ export default function AbilitiesOrder({ data, champion_name }) {
   if (data.loaded === false) {
     return null;
   }
-  const AbilitiesPathHeader = () => {
-    return <div className={classes.header}>Ability Path</div>;
-  };
 
   const AbilityIcon = ({ path, key }) => {
     return (
@@ -206,8 +195,7 @@ export default function AbilitiesOrder({ data, champion_name }) {
 
   return (
     <div className={classes.section}>
-      {AbilitiesPathHeader()}
-
+      {Header('Ability Path')}
       {Path({ json: spell_json_list[0], key: 'q' })}
       {Path({ json: spell_json_list[1], key: 'w' })}
       {Path({ json: spell_json_list[2], key: 'e' })}
