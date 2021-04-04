@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Resources from '../resources.js';
 import { Button, Container } from '@material-ui/core';
+import { Header, Winrate } from './utils.js';
 
 var resources = Resources.Resources;
 const fetch = require('node-fetch');
@@ -19,15 +20,6 @@ const useStyles = makeStyles({
   section: {
     padding: 20,
   },
-  header: {
-    position: 'relative',
-    display: 'flex',
-    marginBottom: 20,
-    width: '100%',
-    fontSize: 14,
-    fontWeight: 700,
-    borderBottom: '1px solid #3f51b5',
-  },
   table: {
     display: 'flex',
   },
@@ -35,6 +27,7 @@ const useStyles = makeStyles({
     display: 'flex',
     marginBottom: 10,
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   summonerSpellIcon: {
     minWidth: 40,
@@ -107,14 +100,14 @@ export default function SpellsTable({ spells_data }) {
             src={getFullDDragonPath(spells_data.patch, spells[1], sums_json)}
           />
         </div>
-        <div>WR: {winrate}</div>
+        {Winrate(winrate)}
       </div>
     );
   };
 
   return (
     <div className={classes.section}>
-      {SpellsTableHeader()}
+      {Header('Summoner Spells')}
       {SpellsTableBody()}
     </div>
   );

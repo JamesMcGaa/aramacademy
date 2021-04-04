@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import Resources from '../resources.js';
 import { Button, Container } from '@material-ui/core';
 import KeystoneRow from './keystone_row.js';
+import { Header } from './utils.js';
 
 var resources = Resources.Resources;
 const fetch = require('node-fetch');
@@ -43,15 +44,6 @@ const useStyles = makeStyles({
   paper: {
     padding: '4px',
     textAlign: 'center',
-  },
-  header: {
-    position: 'center',
-    display: 'flex',
-    marginBottom: 20,
-    width: '100%',
-    fontSize: 14,
-    fontWeight: 700,
-    borderBottom: '1px solid #3f51b5',
   },
 
   runes_primary_header: {
@@ -176,10 +168,7 @@ export default function RunesTable({ runes_data }) {
     ['AdaptiveForce', 'Armor', 'MagicRes'],
     ['HealthScaling', 'Armor', 'MagicRes'],
   ];
-  const RunesTableHeader = () => {
-    return <div className={classes.header}>Runes</div>;
-  };
-
+  
   const RunesTableStats = () => {
     const input = [
       {
@@ -262,7 +251,7 @@ export default function RunesTable({ runes_data }) {
 
   return (
     <div className={classes.section}>
-      {RunesTableHeader()}
+      {Header('Runes')}
       <Container className={classes.runes_box}>
         <div style={{ display: 'flex' }}>
           <div style={{ flex: '50%', marginRight: '45px' }}>

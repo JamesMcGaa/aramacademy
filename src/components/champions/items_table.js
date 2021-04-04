@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Resources from '../resources.js';
 import { Button, Container } from '@material-ui/core';
+import { Header, Winrate } from './utils.js';
 
 var resources = Resources.Resources;
 const fetch = require('node-fetch');
@@ -30,8 +31,7 @@ const useStyles = makeStyles({
     maxWidth: '40px',
     height: 'auto',
     width: '100%',
-    borderRadius: '50%',
-    padding: '0px',
+    borderRadius: 1,
     margin: 5,
   },
   header: {
@@ -42,6 +42,7 @@ const useStyles = makeStyles({
     fontSize: 14,
     fontWeight: 700,
     borderBottom: '1px solid #3f51b5',
+    justifyContent: 'center',
   },
   items: {
     display: 'flex',
@@ -51,6 +52,10 @@ const useStyles = makeStyles({
     flexGrow: 1,
     padding: 20,
   },
+  borderSection: {
+    width: 0,
+    borderRight: '1px solid #555555',
+  },
   itemBlockContainer: {
     display: 'flex',
     flexDirection: 'column',
@@ -59,6 +64,13 @@ const useStyles = makeStyles({
     display: 'flex',
     marginBottom: 5,
     justifyContent: 'space-between',
+    alignItems: 'center',
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  itemWinrate: {
+    fontSize: 13,
+    fontWeight: 600,
   },
 });
 
@@ -79,10 +91,6 @@ export default function ItemsTable({ items_data }) {
   const items_json = items_data.items_json;
   console.log(items_json);
 
-  const Header = (title) => {
-    return <div className={classes.header}>{title}</div>;
-  };
-
   const SingleChoiceItemsBlock = (category) => {
     let path_list = [];
     for (var index in items_json[category]) {
@@ -100,9 +108,7 @@ export default function ItemsTable({ items_data }) {
       <div className={classes.itemSection}>
         {Header(category)}
         {icons}
-        <div>
-          WR: 50.0
-        </div>
+        {Winrate(50.0)}
       </div>
     );
   }
@@ -120,8 +126,8 @@ export default function ItemsTable({ items_data }) {
             alt="summoner icon"
             src={path}
           />
-          <div>
-            WR: 50.0
+          <div className={classes.itemWinrate}>
+            {Winrate(50.0)}
           </div>
         </div>
       );
@@ -140,12 +146,23 @@ export default function ItemsTable({ items_data }) {
     );
   }
 
+  const BorderBlock = () => {
+    return (
+      <div className={classes.borderSection}>
+      </div>
+    )
+  }
+
   return (
     <div className={classes.items}>
       {SingleChoiceItemsBlock('Starting Items')}
+      {BorderBlock()}
       {SingleChoiceItemsBlock('Mythic and Core Items')}
+      {BorderBlock()}
       {MultiChoiceItemBlock('Fourth Item Options')}
+      {BorderBlock()}
       {MultiChoiceItemBlock('Fifth Item Options')}
+      {BorderBlock()}
       {MultiChoiceItemBlock('Sixth Item Options')}
     </div>
   );
