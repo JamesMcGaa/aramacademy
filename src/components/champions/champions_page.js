@@ -26,6 +26,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
+    minWidth: '1000px',
+    maxWidth: '1000px',
   },
   paperRoot: {
     'background-color': 'rgba(66,66,66,.8)',
@@ -37,24 +39,24 @@ export default function ChampionsPage() {
   const params = useParams();
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={8}>
-        <div
-          className={classes.root}
-          style={{
-            marginTop: '100px',
-            backgroundColor: 'rgba(66, 66, 66, .6)',
-            marginRight: '15px',
-          }}
-        >
-          <ChampionsGrid />
-        </div>
-      </Grid>
+    // <Grid container spacing={3}>
+    //   <Grid item xs={8}>
+    <div
+      className={classes.root}
+      style={{
+        marginTop: '100px',
+        backgroundColor: 'rgba(66, 66, 66, .6)',
+        //marginRight: '15px',
+      }}
+    >
+      <ChampionsGrid />
+    </div>
+    /* </Grid>
       <Grid item xs={4} style={{ marginTop: '100px' }}>
         <Paper classes={{ root: classes.paperRoot }}>
           <RoleTable role_winrate_data={null} />
         </Paper>
       </Grid>
-    </Grid>
+    </Grid> */
   );
 }
