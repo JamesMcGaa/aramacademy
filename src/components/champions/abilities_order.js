@@ -33,22 +33,13 @@ const useStyles = makeStyles({
     fontWeight: 700,
     borderBottom: '1px solid #3f51b5',
   },
-  table: {
-    display: 'flex',
-    minWidth: 100,
-  },
   row: {
     display: 'flex',
+    width: 180,
     marginBottom: 10,
     justifyContent: 'space-between',
     marginLeft: 20,
-    marginRight: 20,
-  },
-  iconCell: {
-    'min-width': '60px',
-    width: '60px',
-    'max-width': '80px',
-    padding: '8px',
+    marginRight: -5,
   },
   resizeAbilityIcon: {
     minWidth: '45px',
@@ -119,11 +110,6 @@ export default function AbilitiesOrder({ data, champion_name }) {
   const full_passive = getFullPassivePath(data.patch, passive_path);
   const abilities_order = data.abilities_order;
   let path_list = [];
-  // for (var i = 0; i < champion_data.spells.length; i++) {
-  //     var spell = champion_data.spells[i];
-  //     const spell_path = spell.image.full;
-  //     path_list.push(getFullSpellPath(data.patch, spell_path));
-  // }
 
   for (var i = 0; i < abilities_order.length; i++) {
     var ability = abilities_order[i];
