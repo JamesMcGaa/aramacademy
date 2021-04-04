@@ -79,8 +79,6 @@ export default function Champions() {
   const classes = useStyles();
   const params = useParams();
   const [state, setState] = useState({
-    winrate: undefined,
-    pickrate: undefined,
     runes: [],
     items_json: null,
     sums_json: null,
@@ -102,9 +100,7 @@ export default function Champions() {
   }
   function handleResponse(json) {
     setState({
-      winrate: json.winrate,
-      pickrate: json.pickrate,
-      runes: json.runes,
+      runes: json.runes_full,
       items_json: json.items_json_full,
       sums_json: json.sums_json,
       summoner_spells: json.summoner_spells,

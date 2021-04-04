@@ -25,7 +25,8 @@ const useStyles = makeStyles({
   },
   row: {
     display: 'flex',
-    marginBottom: 10,
+    marginTop: 20,
+    marginBottom: 20,
     justifyContent: 'space-between',
     alignItems: 'center',
   },
@@ -59,29 +60,14 @@ export default function SpellsTable({ spells_data }) {
   const classes = useStyles();
   const summoner_spells = spells_data.summoner_spells;
   const sums_json = spells_data.sums_json;
-  const example_summoner_pairs = [
-    {
-      spells: summoner_spells,
-      winrate: 51.1,
-    },
-    {
-      spells: summoner_spells,
-      winrate: 50.5,
-    },
-    {
-      spells: summoner_spells,
-      winrate: 49.8,
-    },
-  ];
-
   const SpellsTableBody = () => {
-    const rows = _.map(example_summoner_pairs, (summoner_pair) => {
-      return SpellsTableRow(summoner_pair);
+    const rows = _.map(summoner_spells, (summoners) => {
+      return SpellsTableRow(summoners);
     });
     return <div>{rows}</div>;
   };
 
-  const SpellsTableRow = ({ spells, winrate }) => {
+  const SpellsTableRow = ({ spells, spells_winrate }) => {
     return (
       <div className={classes.row}>
         <div>
@@ -96,7 +82,7 @@ export default function SpellsTable({ spells_data }) {
             src={getFullDDragonPath(spells_data.patch, spells[1], sums_json)}
           />
         </div>
-        {Winrate(winrate)}
+        {Winrate(spells_winrate)}
       </div>
     );
   };

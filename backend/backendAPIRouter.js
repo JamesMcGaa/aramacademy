@@ -377,48 +377,10 @@ champion.js displays the rune trees in a flexible manner such that name/icon cha
 highlight the 10 choices
 */
 router.get('/builds/:champion', async (req, res) => {
-  const runes_json = await getRunesJson();
-  const item_json = await getItemJson();
-  const sums_json = await getSummonerSpellsJson();
-  const item_build_json = {
-    'Starting Items': ["Guardian's Hammer", 'Boots', 'Refillable Potion'],
-    'Mythic and Core Items': [
-      'Kraken Slayer',
-      "Runaan's Hurricane",
-      "Berserker's Greaves",
-    ],
-    'Fourth Item Options': ['Infinity Edge', 'Bloodthirster', 'The Collector'],
-    'Fifth Item Options': [
-      'Bloodthirster',
-      'Maw of Malmortius',
-      'The Collector',
-    ],
-    'Sixth Item Options': [
-      'Mercurial Scimitar',
-      'Mortal Reminder',
-      "Lord Dominik's Regards",
-    ],
-  };
-  let item_build_json_full = {};
-  for (key in item_build_json) {
-    item_build_json_full[key] = [];
-    for (index in item_build_json[key]) {
-      item_build_json_full[key].push(
-        getDesiredItemJson(item_build_json[key][index], item_json)
-      );
-    }
-  }
-  console.log('name', req.params.champion);
-  console.log('items', item_build_json_full);
-  const champion_json = await getChampionJson(req.params.champion);
-  const patch = await getCurrentPatch();
-  build_response = {
-    winrate: 0.5,
-    pickrate: 0.1,
+  const build_json = {
     runes: [
       {
         runes_primary: 'Resolve',
-        runes_primary_json: getRuneTreeJson('Resolve', runes_json),
         runes_primary_list: [
           'GraspOfTheUndying',
           'Demolish',
@@ -427,14 +389,12 @@ router.get('/builds/:champion', async (req, res) => {
         ],
         runes_secondary: 'Sorcery',
         runes_secondary_list: ['NimbusCloak', 'GatheringStorm'],
-        runes_secondary_json: getRuneTreeJson('Sorcery', runes_json),
         runes_stats: [0, 1, 2],
         runes_index: 0,
         runes_winrate: 52.2,
       },
       {
         runes_primary: 'Precision',
-        runes_primary_json: getRuneTreeJson('Precision', runes_json),
         runes_primary_list: [
           'Conqueror',
           'PresenceOfMind',
@@ -443,14 +403,12 @@ router.get('/builds/:champion', async (req, res) => {
         ],
         runes_secondary: 'Domination',
         runes_secondary_list: ['SuddenImpact', 'RavenousHunter'],
-        runes_secondary_json: getRuneTreeJson('Domination', runes_json),
         runes_stats: [0, 0, 2],
         runes_index: 1,
         runes_winrate: 51.1,
       },
       {
         runes_primary: 'Precision',
-        runes_primary_json: getRuneTreeJson('Precision', runes_json),
         runes_primary_list: [
           'LethalTempo',
           'PresenceOfMind',
@@ -459,14 +417,12 @@ router.get('/builds/:champion', async (req, res) => {
         ],
         runes_secondary: 'Domination',
         runes_secondary_list: ['SuddenImpact', 'RavenousHunter'],
-        runes_secondary_json: getRuneTreeJson('Domination', runes_json),
         runes_stats: [0, 0, 2],
         runes_index: 2,
         runes_winrate: 49.1,
       },
       {
         runes_primary: 'Precision',
-        runes_primary_json: getRuneTreeJson('Precision', runes_json),
         runes_primary_list: [
           'PressTheAttack',
           'PresenceOfMind',
@@ -475,14 +431,12 @@ router.get('/builds/:champion', async (req, res) => {
         ],
         runes_secondary: 'Inspiration',
         runes_secondary_list: ['MagicalFootwear', 'BiscuitDelivery'],
-        runes_secondary_json: getRuneTreeJson('Inspiration', runes_json),
         runes_stats: [1, 0, 2],
         runes_index: 3,
         runes_winrate: 48.9,
       },
       {
         runes_primary: 'Inspiration',
-        runes_primary_json: getRuneTreeJson('Inspiration', runes_json),
         runes_primary_list: [
           'GlacialAugment',
           'HextechFlashtraption',
@@ -491,7 +445,6 @@ router.get('/builds/:champion', async (req, res) => {
         ],
         runes_secondary: 'Domination',
         runes_secondary_list: ['SuddenImpact', 'RavenousHunter'],
-        runes_secondary_json: getRuneTreeJson('Domination', runes_json),
         runes_stats: [0, 0, 2],
         runes_index: 4,
         runes_winrate: 48.7,
@@ -504,10 +457,147 @@ router.get('/builds/:champion', async (req, res) => {
       E: [2, 8, 10, 12, 13],
       R: [6, 11, 16],
     },
-    items_json: item_build_json,
+    items_json: {
+      'Starting Items': [
+        {
+          items: ["Guardian's Hammer", 'Boots', 'Refillable Potion'],
+          items_winrate: 51.3,
+        },
+        {
+          items: ["Serrated Dirk", 'Boots'],
+          items_winrate: 50.3,
+        },
+      ],
+      'Mythic and Core Items': [
+        {
+          items: [
+            'Kraken Slayer',
+            "Runaan's Hurricane",
+            "Berserker's Greaves",
+          ],
+          items_winrate: 51.5,
+        },
+        {
+          items: [
+            'Galeforce',
+            "Rapid Firecannon",
+            "Boots of Swiftness",
+          ],
+          items_winrate: 50.5,
+        },
+      ],
+      'Fourth Item Options': [
+        {
+          items: [
+            'Infinity Edge',
+          ],
+          items_winrate: 51.5,
+        },
+        {
+          items: [
+            'Bloodthirster',
+          ],
+          items_winrate: 50.5,
+        },
+        {
+          items: [
+            'The Collector',
+          ],
+          items_winrate: 49.5,
+        },
+      ],
+      'Fifth Item Options': [
+        {
+          items: [
+            'Bloodthirster',
+          ],
+          items_winrate: 51.5,
+        },
+        {
+          items: [
+            'Maw of Malmortius',
+          ],
+          items_winrate: 50.5,
+        },
+        {
+          items: [
+            'The Collector',
+          ],
+          items_winrate: 49.5,
+        },
+      ],
+      'Sixth Item Options': [
+        {
+          items: [
+            'Mercurial Scimitar',
+          ],
+          items_winrate: 51.5,
+        },
+        {
+          items: [
+            'Mortal Reminder',
+          ],
+          items_winrate: 50.5,
+        },
+        {
+          items: [
+            "Lord Dominik's Regards",
+          ],
+          items_winrate: 49.5,
+        },
+      ],
+    },
+    summoner_spells: [
+      {
+        spells: ['SummonerExhaust', 'SummonerFlash'],
+        spells_winrate: 69.1,
+      },
+      {
+        spells: ['SummonerSnowball', 'SummonerFlash'],
+        spells_winrate: 51.1,
+      },
+      {
+        spells: ['SummonerBarrier', 'SummonerFlash'],
+        spells_winrate: 50.1,
+      },
+    ],
+  };
+  const runes_json = await getRunesJson();
+  const item_json = await getItemJson();
+  const sums_json = await getSummonerSpellsJson();
+  const item_build_json = build_json.items_json;
+  let item_build_json_full = {};
+  for (key in item_build_json) {
+    item_build_json_full[key] = [];
+    for (index in item_build_json[key]) {
+      const items = [];
+      for (itemIndex in item_build_json[key][index].items) {
+        items.push(
+          getDesiredItemJson(item_build_json[key][index].items[itemIndex], item_json)
+        );
+      }
+      item_build_json_full[key].push({
+        items: items,
+        items_winrate: item_build_json[key][index].items_winrate,
+      })
+    }
+  }
+  const runes = build_json.runes;
+  let runes_full = [];
+  for (index in runes) {
+    runes_full.push({
+      ...runes[index],
+      runes_primary_json: getRuneTreeJson(runes[index].runes_primary, runes_json),
+      runes_secondary_json: getRuneTreeJson(runes[index].runes_secondary, runes_json),
+    })
+  }
+  const champion_json = await getChampionJson(req.params.champion);
+  const patch = await getCurrentPatch();
+  build_response = {
+    ...build_json,
+    runes_full: runes_full,
     items_json_full: item_build_json_full,
     sums_json: sums_json,
-    summoner_spells: ['SummonerSnowball', 'SummonerFlash'],
     champion_json: champion_json,
     patch: patch,
   };

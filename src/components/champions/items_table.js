@@ -51,6 +51,7 @@ const useStyles = makeStyles({
   itemSection: {
     flexGrow: 1,
     padding: 20,
+    paddingBottom: 10,
   },
   borderSection: {
     width: 0,
@@ -68,10 +69,18 @@ const useStyles = makeStyles({
     marginLeft: 10,
     marginRight: 10,
   },
-  itemWinrate: {
-    fontSize: 13,
-    fontWeight: 600,
+  itemSingleBlock: {
+    flexGrow: 1,
   },
+  itemDivider: {
+    borderTop: '1px solid #8e793e',
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  itemMultiDivider: {
+    borderTop: '1px solid #8e793e',
+    marginBottom: 3
+  }
 });
 
 function getFullDDragonPath(patch, item_json) {
@@ -91,10 +100,10 @@ export default function ItemsTable({ items_data }) {
   const items_json = items_data.items_json;
   console.log(items_json);
 
-  const SingleChoiceItemsBlock = (category) => {
+  const SingleChoiceItemsRow = ({ items, items_winrate }) => {
     let path_list = [];
-    for (var index in items_json[category]) {
-      const item_json = items_json[category][index];
+    for (var index in items) {
+      const item_json = items[index];
       path_list.push(getFullDDragonPath(items_data.patch, item_json));
     }
     const icons = _.map(path_list, path => (
@@ -105,20 +114,29 @@ export default function ItemsTable({ items_data }) {
       />
     ));
     return (
+      <div className={classes.itemSingleBlock}>
+        {icons}
+        {Winrate(items_winrate)}
+      </div>
+    );
+  }
+
+  const SingleChoiceItemsBlock = (category) => {
+    console.log('items', items_json[category]);
+    const itemsRows = _.map(items_json[category], SingleChoiceItemsRow);
+    return (
       <div className={classes.itemSection}>
         {Header(category)}
-        {icons}
-        {Winrate(50.0)}
+        {itemsRows[0]}
+        <div className={classes.itemDivider}/>
+        {itemsRows[1]}
       </div>
     );
   }
   const MultiChoiceItemBlock = (category) => {
-    let path_list = [];
-    for (var index in items_json[category]) {
-      const item_json = items_json[category][index];
-      path_list.push(getFullDDragonPath(items_data.patch, item_json));
-    }
-    const ItemBlock = (path) => {
+    const ItemBlock = ({ items, items_winrate }) => {
+      const item_json = items[0];
+      const path = getFullDDragonPath(items_data.patch, item_json);
       return (
         <div className={classes.itemBlock}>
           <img
@@ -126,16 +144,11 @@ export default function ItemsTable({ items_data }) {
             alt="summoner icon"
             src={path}
           />
-          <div className={classes.itemWinrate}>
-            {Winrate(50.0)}
-          </div>
+          {Winrate(items_winrate)}
         </div>
       );
     }
-    const blocks = _.map(path_list, path => ItemBlock(path));
-    console.log(category);
-    console.log(path_list);
-    console.log(blocks);
+    const blocks = _.map(items_json[category], ItemBlock);
     return (
       <div className={classes.itemSection}>
         {Header(category)}
