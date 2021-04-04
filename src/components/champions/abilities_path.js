@@ -51,8 +51,8 @@ const useStyles = makeStyles({
     padding: '8px',
   },
   resizeAbilityIcon: {
-    minWidth: '28px',
-    maxWidth: '28px',
+    minWidth: '26px',
+    maxWidth: '26px',
     height: 'auto',
     width: '100%',
     padding: '0px',
@@ -80,13 +80,13 @@ const useStyles = makeStyles({
     padding: '4px',
   },
   abilityYes: {
-    width: '28px',
+    width: '26px',
     padding: '4px',
     marginLeft: '4px',
     backgroundColor: '#4056a1',
   },
   abilityNo: {
-    width: '28px',
+    width: '26px',
     padding: '4px',
     marginLeft: '4px',
 
