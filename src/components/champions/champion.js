@@ -30,6 +30,13 @@ function getChampionTierlistData(tierlist_json, champion_name) {
     }
   }
 }
+function getTotalGames(tierlist_json) {
+  let total_games = 0;
+  tierlist_json.forEach((champion) => {
+    total_games += champion.total_games;
+  });
+  return total_games / 10; // 10 champs per game
+}
 
 const useStyles = makeStyles((theme) => ({
   largeContainer: {
@@ -137,6 +144,7 @@ export default function Champions() {
               tierlist_json,
               params.champion
             )}
+            total_games={getTotalGames(tierlist_json)}
           />
         </Paper>
       </Container>

@@ -11,10 +11,35 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Resources from '../resources.js';
 import { Button, Container } from '@material-ui/core';
+import { Header, Winrate } from './utils.js';
 
 var resources = Resources.Resources;
 const fetch = require('node-fetch');
 
+const DARK_GREEN_WINRATE_CUTOFF = 55.0;
+const DARK_GREEN_COLOR = '#00ff00'; //'#fc9d03';
+const GREEN_WINRATE_CUTOFF = 52.5;
+const GREEN_COLOR = '#75ff75';
+const WHITE_WINRATE_CUTOFF = 50.0;
+const WHITE_COLOR = 'white';
+const PINK_WINRATE_CUTOFF = 48.0;
+const PINK_COLOR = '#ff8595';
+const RED_WINRATE_CUTOFF = 45.0;
+const RED_COLOR = '#fc354f';
+
+function winrateColor(winrate) {
+  if (winrate > DARK_GREEN_WINRATE_CUTOFF) {
+    return DARK_GREEN_COLOR;
+  } else if (winrate > GREEN_WINRATE_CUTOFF) {
+    return GREEN_COLOR;
+  } else if (winrate > WHITE_WINRATE_CUTOFF) {
+    return WHITE_COLOR;
+  } else if (winrate > PINK_WINRATE_CUTOFF) {
+    return PINK_COLOR;
+  } else {
+    return RED_COLOR;
+  }
+}
 const useStyles = makeStyles({
   section: {
     padding: 20,
@@ -36,11 +61,29 @@ const useStyles = makeStyles({
     marginBottom: 10,
   },
   image: {
-    flex: '50%',
+    flex: '25%',
   },
   text: {
-    flex: '50%',
+    flex: '43%',
     textAlign: 'left',
+    padding: 15,
+    borderRight: '1px solid #555555',
+  },
+  winrateText: {
+    flex: '11%',
+    textAlign: 'left',
+    padding: 15,
+    borderRight: '1px solid #555555',
+  },
+  pickrateText: {
+    flex: '11%',
+    textAlign: 'left',
+    padding: 15,
+    borderRight: '1px solid #555555',
+  },
+  tierText: {
+    flex: '10%',
+    textAlign: 'center',
     padding: 15,
   },
   resizeChampIcon: {
@@ -49,39 +92,107 @@ const useStyles = makeStyles({
     height: 'auto',
     width: '100%',
     //borderRadius: '50%',
-    padding: '5px',
+    padding: '10px',
   },
   resizeTierIcon: {
-    minWidth: '31px',
-    maxWidth: '31px',
+    minWidth: '70px',
+    maxWidth: '70px',
     height: 'auto',
     width: '100%',
     //borderRadius: '50%',
+    marginTop: 12,
+  },
+  resizeAbilityIcon: {
+    minWidth: '45px',
+    maxWidth: '45px',
+    height: 'auto',
+    width: '100%',
     padding: '0px',
+  },
+  overlay: {
+    verticalAlign: 'bottom',
+    minWidth: '15px',
+    maxWidth: '15px',
+    marginLeft: '-15px',
+  },
+  spellRow: {
+    display: 'flex',
+    marginTop: 20,
+  },
+  spellIcon: {
+    marginRight: 10,
   },
 });
 
-function getFullDDragonPath(patch, spell_name, sums_json) {
-  let path = null;
-  for (var id in sums_json.data) {
-    const sum_json = sums_json.data[id];
-    if (sum_json.id === spell_name) {
-      path = sum_json.image.full;
-    }
-  }
+function getFullPassivePath(patch, spell_path) {
   return (
-    'https://ddragon.leagueoflegends.com/cdn/' + patch + '/img/spell/' + path
+    'https://ddragon.leagueoflegends.com/cdn/' +
+    patch +
+    '/img/passive/' +
+    spell_path
   );
 }
-
-export default function BuildHeader({ data, champion_name, tierlist_data }) {
+function getFullSpellPath(patch, spell_path) {
+  return (
+    'https://ddragon.leagueoflegends.com/cdn/' +
+    patch +
+    '/img/spell/' +
+    spell_path
+  );
+}
+export default function BuildHeader({
+  data,
+  champion_name,
+  tierlist_data,
+  total_games,
+}) {
   if (data.loaded === false) {
     return null;
   }
+
+  const AbilityIcon = ({ path, key }) => {
+    console.log(key);
+    console.log('path', path);
+
+    return (
+      <div className={classes.spellIcon}>
+        <img className={classes.resizeAbilityIcon} alt="ability" src={path} />
+        <img
+          className={classes.overlay}
+          alt="key"
+          src={resources.abilities_icons[key]}
+        />{' '}
+      </div>
+    );
+  };
+
+  const Spells = ({ passive_path, spells_paths }) => {
+    return (
+      <div className={classes.spellRow}>
+        {AbilityIcon({ path: passive_path, key: 'p' })}
+        {AbilityIcon({ path: spells_paths[0], key: 'q' })}
+        {AbilityIcon({ path: spells_paths[1], key: 'w' })}
+        {AbilityIcon({ path: spells_paths[2], key: 'e' })}
+        {AbilityIcon({ path: spells_paths[3], key: 'r' })}
+      </div>
+    );
+  };
+
   const classes = useStyles();
   console.log(tierlist_data);
   const tier = tierlist_data.tier;
   const lowercaseTier = tier.toLowerCase();
+  //const champion_blurb = data.champion_json.data[champion_name].title;
+  const champion_json = data.champion_json;
+  const champion_data = champion_json.data[champion_name];
+  const passive_path = champion_data.passive.image.full;
+  const passive_full_path = getFullPassivePath(data.patch, passive_path);
+  let path_list = [];
+  for (var i = 0; i < champion_data.spells.length; i++) {
+    var spell = champion_data.spells[i];
+    const spell_path = spell.image.full;
+    path_list.push(getFullSpellPath(data.patch, spell_path));
+  }
   return (
     <div className={classes.row}>
       <div classNAme={classes.image}>
@@ -92,19 +203,37 @@ export default function BuildHeader({ data, champion_name, tierlist_data }) {
       </div>
 
       <div className={classes.text}>
-        <Typography variant="h3">{champion_name}</Typography>
-        <Typography variant="body2">
-          generated exclusively from the top 1% of ARAM players
+        <Typography variant="h3">{champion_name} </Typography>
+        {Spells({ passive_path: passive_full_path, spells_paths: path_list })}
+      </div>
+
+      <div className={classes.winrateText}>
+        {Header('Winrate')}
+        <span
+          style={{
+            color: winrateColor(tierlist_data.wins * 100),
+          }}
+        >
+          <Typography variant="h5">
+            {(tierlist_data.wins * 100).toFixed(2)}%
+          </Typography>
+        </span>
+      </div>
+      <div className={classes.pickrateText}>
+        {Header('Pickrate')}
+
+        <Typography variant="h5">
+          {((tierlist_data.total_games * 100) / total_games).toFixed(2)}%
         </Typography>
-        <Typography variant="body1">
-          Tier{' '}
+      </div>
+      <div className={classes.tierText}>
+        {Header('Tier')}
+        <Typography>
           <img
             className={classes.resizeTierIcon}
             src={resources.tier_badges[lowercaseTier]}
           />
         </Typography>
-        <Typography variant="body1">winrate {tierlist_data.wins}</Typography>
-        <Typography variant="body1">pickrate</Typography>
       </div>
     </div>
   );
