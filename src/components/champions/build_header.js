@@ -83,7 +83,7 @@ const useStyles = makeStyles({
   },
   tierText: {
     flex: '10%',
-    textAlign: 'center',
+    textAlign: 'left',
     padding: 15,
   },
   resizeChampIcon: {
@@ -95,12 +95,12 @@ const useStyles = makeStyles({
     padding: '10px',
   },
   resizeTierIcon: {
-    minWidth: '70px',
-    maxWidth: '70px',
+    minWidth: '35px',
+    maxWidth: '35px',
     height: 'auto',
     width: '100%',
     //borderRadius: '50%',
-    marginTop: 12,
+    //marginTop: 12,
   },
   resizeAbilityIcon: {
     minWidth: '45px',
@@ -229,10 +229,12 @@ export default function BuildHeader({
       <div className={classes.tierText}>
         {Header('Tier')}
         <Typography>
-          <img
-            className={classes.resizeTierIcon}
-            src={resources.tier_badges[lowercaseTier]}
-          />
+          <a href="/tierlist">
+            <img
+              className={classes.resizeTierIcon}
+              src={resources.tier_badges[lowercaseTier]}
+            />
+          </a>
         </Typography>
       </div>
     </div>
