@@ -74,10 +74,6 @@ export default function SpellsTable({ spells_data }) {
     },
   ];
 
-  const SpellsTableHeader = () => {
-    return <div className={classes.header}>Summoner Spells</div>;
-  };
-
   const SpellsTableBody = () => {
     const rows = _.map(example_summoner_pairs, (summoner_pair) => {
       return SpellsTableRow(summoner_pair);

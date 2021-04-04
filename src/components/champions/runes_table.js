@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import Resources from '../resources.js';
 import { Button, Container } from '@material-ui/core';
 import KeystoneRow from './keystone_row.js';
-import { Header } from './utils.js';
+import { Header, Winrate } from './utils.js';
 
 var resources = Resources.Resources;
 const fetch = require('node-fetch');
@@ -45,7 +45,15 @@ const useStyles = makeStyles({
     padding: '4px',
     textAlign: 'center',
   },
-
+  runes_all: {
+    display: 'flex',
+  },
+  runes_box: {
+    display: 'flex',
+    minWidth: '550px',
+    maxWidth: '550px',
+    marginLeft: '50px',
+  },
   runes_primary_header: {
     display: 'flex',
     marginBottom: 5,
@@ -71,11 +79,6 @@ const useStyles = makeStyles({
     marginBottom: 7,
 
     //borderBottom: '1px solid white',
-  },
-  runes_box: {
-    minWidth: '500px',
-    maxWidth: '500px',
-    marginLeft: '0px',
   },
   resizeKeystoneIcon: {
     minWidth: '40px',
@@ -104,9 +107,37 @@ const useStyles = makeStyles({
     marginLeft: '13px',
   },
   statHeader: {
+    minWidth: '190px',
+    maxWidth: '190px',
     borderTop: '1px solid #8e793e',
     marginTop: '9px',
     paddingTop: '9px',
+  },
+  runepageActiveRow: {
+    display: 'flex',
+    marginBottom: 10,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#3f51b5',
+  },
+  runepageRow: {
+    display: 'flex',
+    marginBottom: 10,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  runepageIcons: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  runepageIcon: {
+    minWidth: 40,
+    maxWidth: 40,
+    height: 'auto',
+    borderRadius: '50%',
+    backgroundColor: 'black',
+    padding: 0,
   },
 });
 
@@ -147,14 +178,16 @@ export default function RunesTable({ runes_data }) {
     return null;
   }
   const classes = useStyles();
-  const runes_primary_json = runes_data.runes_primary_json;
-  const runes_secondary_json = runes_data.runes_secondary_json;
-
-  const runes_primary_list = runes_data.runes_primary_list;
-  const runes_secondary_list = runes_data.runes_secondary_list;
-  const selected_stats_indices = runes_data.runes_stats;
-  const primary_tree_name = runes_data.runes_primary;
-  const secondary_tree_name = runes_data.runes_secondary;
+  const [runepageIndex, setRunepageIndex] = useState(0);
+  const runepages = runes_data.runes;
+  const runepage = runepages[runepageIndex];
+  const runes_primary_json = runepage.runes_primary_json;
+  const runes_secondary_json = runepage.runes_secondary_json;
+  const runes_primary_list = runepage.runes_primary_list;
+  const runes_secondary_list = runepage.runes_secondary_list;
+  const selected_stats_indices = runepage.runes_stats;
+  const primary_tree_name = runepage.runes_primary;
+  const secondary_tree_name = runepage.runes_secondary;
   const primary_path = getFullDDragonPath(
     primary_tree_name,
     runes_primary_json
@@ -168,7 +201,7 @@ export default function RunesTable({ runes_data }) {
     ['AdaptiveForce', 'Armor', 'MagicRes'],
     ['HealthScaling', 'Armor', 'MagicRes'],
   ];
-  
+
   const RunesTableStats = () => {
     const input = [
       {
@@ -208,6 +241,37 @@ export default function RunesTable({ runes_data }) {
             );
           })}
         </React.Fragment>
+      </div>
+    );
+  };
+  const RunepageTableBody = () => {
+    const rows = _.map(runepages, (runepage) => {
+      return RunepageTableRow(runepage);
+    });
+    return (
+      <div>
+        {rows}
+      </div>
+    );
+  };
+
+  const RunepageTableRow = (runepage) => {
+    const active = runepageIndex == runepage.runes_index;
+    return (
+      <div className={active ? classes.runepageActiveRow : classes.runepageRow} onClick={() => setRunepageIndex(runepage.runes_index)}>
+        <div className={classes.runepageIcons}>
+          <img
+            className={classes.runepageIcon}
+            alt="summoner icon"
+            src={getFullDDragonPath(runepage.runes_primary, runepage.runes_primary_json)}
+          />{' '}
+          <img
+            className={classes.runepageIcon}
+            alt="summoner icon"
+            src={getFullDDragonPath(runepage.runes_secondary, runepage.runes_secondary_json)}
+          />
+        </div>
+        {Winrate(runepage.runes_winrate)}
       </div>
     );
   };
@@ -252,9 +316,9 @@ export default function RunesTable({ runes_data }) {
   return (
     <div className={classes.section}>
       {Header('Runes')}
-      <Container className={classes.runes_box}>
-        <div style={{ display: 'flex' }}>
-          <div style={{ flex: '50%', marginRight: '45px' }}>
+      <div className={classes.runes_all}>
+        <div className={classes.runes_box}>
+          <div style={{ flexGrow: 1, }}>
             <div className={classes.runes_primary_header}>
               <img
                 className={classes.resizeKeystoneIcon}
@@ -266,7 +330,7 @@ export default function RunesTable({ runes_data }) {
 
             {primary}
           </div>
-          <div style={{ flex: '50%' }}>
+          <div style={{ flexGrow: 1, }}>
             <div className={classes.runes_secondary_header}>
               <img
                 className={classes.resizeKeystoneIcon}
@@ -279,7 +343,10 @@ export default function RunesTable({ runes_data }) {
             {RunesTableStats()}
           </div>
         </div>
-      </Container>
+        <div style={{ flexGrow: 1, }}>
+          {RunepageTableBody()}
+        </div>
+      </div>
     </div>
   );
 }
