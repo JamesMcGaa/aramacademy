@@ -15,23 +15,27 @@ import ItemsTable from './items_table.js';
 import SpellsTable from './spells_table.js';
 import AbilitiesOrder from './abilities_order.js';
 import AbilitiesPath from './abilities_path.js';
+import BuildHeader from './build_header.js';
 var resources = Resources.Resources;
 
+import tierlist_json from '../../jsons/tierlist.json';
+
 import { makeStyles } from '@material-ui/core/styles';
+
+function getChampionTierlistData(tierlist_json, champion_name) {
+  for (var i = 0; i < tierlist_json.length; i++) {
+    const data = tierlist_json[i];
+    if (data.champion === champion_name) {
+      return data;
+    }
+  }
+}
 
 const useStyles = makeStyles((theme) => ({
   largeContainer: {
     'min-width': '1200px',
     'max-width': '1200px',
     marginBottom: 10,
-  },
-  resizeChampIcon: {
-    minWidth: '130px',
-    maxWidth: '130px',
-    height: 'auto',
-    width: '100%',
-    //borderRadius: '50%',
-    padding: '5px',
   },
   root: {
     flexGrow: 1,
@@ -126,11 +130,14 @@ export default function Champions() {
       <div style={{ height: '100px' }}></div>
       <Container fixed className={classes.largeContainer}>
         <Paper classes={{ root: classes.paperRoot }}>
-          <img
-            className={classes.resizeChampIcon}
-            src={resources.champ_icons[params.champion]}
+          <BuildHeader
+            data={state}
+            champion_name={params.champion}
+            tierlist_data={getChampionTierlistData(
+              tierlist_json,
+              params.champion
+            )}
           />
-          <h1>{params.champion} high elo build</h1>
         </Paper>
       </Container>
 
