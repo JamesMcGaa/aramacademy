@@ -86,7 +86,10 @@ const useStyles = makeStyles({
     backgroundColor: 'rgba(66,66,66,.8)',
   },
 });
-
+const MAX_ABILITY_NAME_LENGTH = 23;
+function truncateString(text) {
+  return text.substring(0, MAX_ABILITY_NAME_LENGTH) + '...';
+}
 function getFullPassivePath(patch, spell_path) {
   return (
     'https://ddragon.leagueoflegends.com/cdn/' +
@@ -124,7 +127,11 @@ export default function AbilitiesOrder({ data, champion_name }) {
   };
 
   const AbilityName = ({ name }) => {
-    return <Paper className={classes.abilityName}>{name}</Paper>;
+    var abilityName = name;
+    if (abilityName.length > MAX_ABILITY_NAME_LENGTH) {
+      abilityName = truncateString(abilityName);
+    }
+    return <Paper className={classes.abilityName}>{abilityName}</Paper>;
   };
   const AbilityLevels = ({ skill_level }) => {
     const boxes = _.map(levels, (level) => {
