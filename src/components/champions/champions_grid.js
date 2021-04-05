@@ -49,9 +49,9 @@ function getTieredChampions(tierlist_json) {
   }
   return champ_tiers;
 }
-
+const MAX_CHAMP_NAME_LENGTH = 12;
 function truncateChampName(champ) {
-  return champ.substring(0, 12) + '...';
+  return champ.substring(0, MAX_CHAMP_NAME_LENGTH) + '...';
 }
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -147,7 +147,7 @@ const ChampName = ({ champ }) => {
   var champName = resources.two_word_champs.has(champ)
     ? resources.two_word_champs.get(champ)
     : champ;
-  if (champName.length > 12) {
+  if (champName.length > MAX_CHAMP_NAME_LENGTH) {
     champName = truncateChampName(champName);
   }
   return (

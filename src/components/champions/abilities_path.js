@@ -86,7 +86,7 @@ const useStyles = makeStyles({
     backgroundColor: 'rgba(66,66,66,.8)',
   },
 });
-const MAX_ABILITY_NAME_LENGTH = 23;
+const MAX_ABILITY_NAME_LENGTH = 21;
 function truncateString(text) {
   return text.substring(0, MAX_ABILITY_NAME_LENGTH) + '...';
 }
