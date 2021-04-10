@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import Resources from '../resources.js';
 import RecentMatchesTable from './recent_matches_table.js';
 import EnhancedTable from './users_table.js';
+import LiveGameTable from './live_game_table_desktop.js';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 const fetch = require('node-fetch');
@@ -18,6 +19,11 @@ const UPDATE_STATE = {
   UPDATE: 'UPDATE',
   UPDATING: 'UPDATING...',
   UPDATED: 'UPDATED',
+};
+
+const TAB_STATE = {
+  SUMMARY: 'SUMMARY',
+  LIVE_GAME: 'LIVE_GAME',
 };
 
 var resources = Resources.Resources;
@@ -49,6 +55,17 @@ const useStyles = makeStyles({
     height: 'auto',
     padding: '5px',
   },
+  row: {
+    display: 'flex',
+  },
+  column_half: {
+    flex: '50%',
+  },
+  tabButton: {
+    height: 50,
+  },
+  in_live_game: {},
+  no_live_game: {},
 });
 
 export default function UserPageReady({ props }) {
@@ -56,7 +73,8 @@ export default function UserPageReady({ props }) {
   const params = useParams();
   const [state, setState] = useState(props);
   const [updateState, setUpdateState] = useState(UPDATE_STATE.UPDATE);
-
+  const [tab, setTab] = useState(TAB_STATE.SUMMARY);
+  console.log(state.rank);
   // Nested to access params
   function handleUpdateClick() {
     setUpdateState(UPDATE_STATE.UPDATING);
@@ -81,7 +99,16 @@ export default function UserPageReady({ props }) {
       rank: json.rank,
       icon_path: json.icon_path,
       page_state: json.status,
+      in_live_game: json.in_live_game,
     });
+  }
+
+  function handleSummaryClick() {
+    setTab(TAB_STATE.SUMMARY);
+  }
+
+  function handleLiveGameClick() {
+    setTab(TAB_STATE.LIVE_GAME);
   }
 
   const overall = state.user_data.per_champion_data.filter(
@@ -105,6 +132,55 @@ export default function UserPageReady({ props }) {
       losses += 1;
     }
   });
+
+  const LiveGameComponent = ({ summoner_name }) => {
+    console.log('name', summoner_name);
+    console.log('state', state.in_live_game);
+    state.in_live_game;
+
+    return (
+      <div className={classes.row}>
+        <div className={classes.column_half}>
+          <Button
+            variant="text"
+            size="large"
+            onClick={handleSummaryClick}
+            fullWidth={true}
+            className={classes.tabButton}
+          >
+            Summary
+          </Button>
+        </div>
+        <div className={classes.column_half}>
+          <Button
+            variant={state.in_live_game ? 'contained' : 'outlined'}
+            size="large"
+            color="secondary"
+            onClick={handleLiveGameClick}
+            fullWidth={true}
+            className={classes.tabButton}
+          >
+            Live Game
+          </Button>
+        </div>
+      </div>
+    );
+  };
+
+  const MainTable = () => {
+    switch (tab) {
+      case TAB_STATE.SUMMARY:
+        return (
+          <EnhancedTable
+            per_champion_data={state.user_data.per_champion_data}
+          />
+        );
+      case TAB_STATE.LIVE_GAME:
+        return (
+          <LiveGameTable summoner_name={state.user_data.true_summoner_name} />
+        );
+    }
+  };
 
   var now = moment.utc();
   //var last_updated = moment.utc(state.user_data.last_updated_timestamp_ms);
@@ -176,6 +252,7 @@ export default function UserPageReady({ props }) {
                     display: 'flex',
                     alignItems: 'center',
                     textAlign: 'left',
+                    marginBottom: '10px',
                   }}
                 >
                   {rank_badge}
@@ -191,6 +268,9 @@ export default function UserPageReady({ props }) {
                     MMR: {state.mmr}
                   </p>
                 </Container>
+                {LiveGameComponent({
+                  summoner_name: state.user_data.true_summoner_name,
+                })}
               </Paper>
 
               <Paper classes={{ root: classes.paperRoot }}>
@@ -230,11 +310,7 @@ export default function UserPageReady({ props }) {
               </Paper>
             </div>
           </div>
-          <div style={{ flex: '75%' }}>
-            <EnhancedTable
-              per_champion_data={state.user_data.per_champion_data}
-            />
-          </div>
+          <div style={{ flex: '75%' }}>{MainTable()}</div>
         </div>
       </Container>
     </div>

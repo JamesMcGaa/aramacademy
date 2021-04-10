@@ -27,6 +27,7 @@ export default function Users() {
       rank: json.rank,
       icon_path: json.icon_path,
       page_state: json.status,
+      in_live_game: json.in_live_game,
     });
   }
 

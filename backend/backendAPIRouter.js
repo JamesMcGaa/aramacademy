@@ -258,6 +258,7 @@ router.get(
       icon_path: icon_path,
       mmr: mmr,
       rank: rank,
+      in_live_game: true,
     };
     res.send(user_data_response);
     return;
@@ -295,6 +296,7 @@ router.get('/update/:region/:standardized_summoner_name', async (req, res) => {
     icon_path: icon_path,
     mmr: mmr,
     rank: rank,
+    in_live_game: true,
   };
   res.send(user_data_response);
   return;
