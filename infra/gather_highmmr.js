@@ -149,7 +149,7 @@ async function getRecentLeadersMatchlistForRegion(region) {
   }
   progress_bar.stop();
   console.log(prospectives_complete_statistics.length);
-
+  await high_mmr_playerset_model.deleteMany({ region: region });
   await high_mmr_playerset_model.insertMany(prospectives_complete_statistics);
   return match_ids;
 }
