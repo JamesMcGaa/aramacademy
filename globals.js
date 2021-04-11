@@ -11,4 +11,10 @@ const ERRORS = {
 
 const UNAVAILABLE = 'Unavailable';
 
-module.exports = { USER_PAGE_STATES, ERRORS, UNAVAILABLE };
+const LIVE_GAME_STATES = {
+  LOADING: 'loading',
+  NO_MATCH: 'no_match',
+  MATCH: 'match',
+};
+
+module.exports = { USER_PAGE_STATES, ERRORS, UNAVAILABLE, LIVE_GAME_STATES };

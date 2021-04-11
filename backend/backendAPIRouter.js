@@ -323,4 +323,17 @@ router.get('/patch', async (req, res) => {
   return;
 });
 
+/*
+ * Returns live game data
+ */
+router.get('/live_game/:region/:summoner_name', async (req, res) => {
+  const resp = {
+    players: 'pla',
+    status: globals.LIVE_GAME_STATES.MATCH,
+  };
+  console.log('backend');
+
+  res.send(resp);
+  return;
+});
 module.exports = router;

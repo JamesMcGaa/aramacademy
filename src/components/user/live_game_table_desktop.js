@@ -13,6 +13,9 @@ import React from 'react';
 import Resources from '../resources.js';
 import Link from '@material-ui/core/Link';
 import { useParams } from 'react-router-dom';
+import { useState } from 'react';
+
+const globals = require('../../../globals.js');
 
 var resources = Resources.Resources;
 const DARK_GREEN_WINRATE_CUTOFF = 55.0;
@@ -68,6 +71,7 @@ const TEAM_SIDE = {
   BLUE: 'BLUE',
   RED: 'RED',
 };
+
 function descendingComparator(a, b, orderBy) {
   //Hardcoded for tier rank sorting - kinda monka
   let a_value = a[orderBy];
@@ -383,8 +387,40 @@ function TeamTable({ rows, side }) {
     </Paper>
   );
 }
+const LiveGameLoading = ({ summoner_name }) => {
+  return <Paper>Loading</Paper>;
+};
 
 export default function LiveGameTable({ summoner_name }) {
+  const [players, setPlayers] = useState(null);
+  const [pageState, setPageState] = useState(globals.LIVE_GAME_STATES.LOADING);
+  const params = useParams();
+
+  function handleLiveGameResponse(json) {
+    console.log(json);
+    if (json.status === globals.LIVE_GAME_STATES.MATCH) {
+      //render data and table
+      setPlayers(json.players);
+      setPageState(json.status);
+    } else if (json.status === globals.LIVE_GAME_STATES.NO_MATCH) {
+      setPageState(json.status);
+    } else {
+      setPageState(globals.LIVE_GAME_STATES.NO_MATCH);
+    }
+  }
+
+  if (pageState === globals.LIVE_GAME_STATES.LOADING) {
+    fetch('/api/live_game/' + params.region + '/' + encodeURI(summoner_name))
+      .then((response) => response.json())
+      .then((json) => {
+        handleLiveGameResponse(json);
+      });
+    console.log('loading');
+  } else if (pageState === globals.LIVE_GAME_STATES.NO_MATCH) {
+    console.log('nomatch');
+  } else {
+    console.log('match');
+  }
   const a1 = {
     champion: 'Viego',
     summoner_name: 'DeusExAnimo',
