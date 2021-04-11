@@ -293,4 +293,26 @@ let processUser = async (username, region, existing_user_data = null) => {
   }
 };
 
+async function multifetch_mongo_data_for_live_game(
+  standardized_summoner_names_array,
+  region
+) {
+  /**
+   * Takes a list of standardized summoner names and returns a mapping of {true_summoner_name: per_champion_data}
+   * Summoners not appearing in our data will not appear as a key in the returned object
+   */
+  const records = await user_model
+    .find()
+    .where('region')
+    .equals(region)
+    .where('standardized_summoner_name')
+    .in(standardized_summoner_names_array)
+    .exec();
+  const results = {};
+  records.map(
+    (record) => (results[record.true_summoner_name] = record.per_champion_data)
+  );
+  return records;
+}
+
 module.exports = processUser;
