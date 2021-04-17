@@ -66,7 +66,7 @@ const useStyles = makeStyles({
   text: {
     flex: '43%',
     textAlign: 'left',
-    padding: 15,
+    padding: 8,
     borderRight: '1px solid #555555',
   },
   winrateText: {
@@ -103,7 +103,7 @@ const useStyles = makeStyles({
     //marginTop: 12,
   },
   resizeAbilityIcon: {
-    minWidth: '25px',
+    minWidth: '26px',
     maxWidth: '40px',
     height: 'auto',
     width: '100%',
@@ -151,9 +151,6 @@ export default function BuildHeaderMobile({
   }
 
   const AbilityIcon = ({ path, key }) => {
-    console.log(key);
-    console.log('path', path);
-
     return (
       <div className={classes.spellIcon}>
         <img className={classes.resizeAbilityIcon} alt="ability" src={path} />
@@ -207,7 +204,7 @@ export default function BuildHeaderMobile({
         </div>
 
         <div className={classes.text}>
-          <Typography variant="h3">{stylizedChampName} </Typography>
+          <Typography variant="h5">{stylizedChampName} </Typography>
           {Spells({ passive_path: passive_full_path, spells_paths: path_list })}
         </div>
       </div>

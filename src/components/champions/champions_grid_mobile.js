@@ -49,9 +49,9 @@ function getTieredChampions(tierlist_json) {
   }
   return champ_tiers;
 }
-const MAX_CHAMP_NAME_LENGTH = 5;
+const MAX_CHAMP_NAME_LENGTH = 4;
 function truncateChampName(champ) {
-  return champ.substring(0, MAX_CHAMP_NAME_LENGTH) + '...';
+  return champ.substring(0, MAX_CHAMP_NAME_LENGTH) + '..';
 }
 const useStyles = makeStyles((theme) => ({
   root: {
