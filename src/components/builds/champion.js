@@ -7,9 +7,7 @@ import Paper from '@material-ui/core/Paper';
 
 import PropTypes from 'prop-types';
 
-import ChampionsGrid from './champions_grid.js';
 import Resources from '../resources.js';
-import RoleTable from './role_table.js';
 import RunesTable from './runes_table.js';
 import ItemsTable from './items_table.js';
 import SpellsTable from './spells_table.js';

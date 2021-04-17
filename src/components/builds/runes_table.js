@@ -263,11 +263,7 @@ export default function RunesTable({ runes_data }) {
         return RunepageTableRow(runepage);
       }
     });
-    return (
-      <div>
-        {rows}
-      </div>
-    );
+    return <div>{rows}</div>;
   };
 
   const RunepageTableRow = (runepage) => {
@@ -281,13 +277,18 @@ export default function RunesTable({ runes_data }) {
           <img
             className={classes.runepageKeystoneIcon}
             alt="summoner icon"
-            src={getFullDDragonPath(runepage.runes_primary_list[0], runepage.runes_primary_json)}
+            src={getFullDDragonPath(
+              runepage.runes_primary_list[0],
+              runepage.runes_primary_json
+            )}
           />{' '}
-
           <img
             className={classes.runepageIcon}
             alt="summoner icon"
-            src={getFullDDragonPath(runepage.runes_secondary, runepage.runes_secondary_json)}
+            src={getFullDDragonPath(
+              runepage.runes_secondary,
+              runepage.runes_secondary_json
+            )}
           />
         </div>
         {Winrate(runepage.runes_winrate)}
@@ -337,7 +338,7 @@ export default function RunesTable({ runes_data }) {
       {Header('Runes')}
       <div className={classes.runes_all}>
         <div className={classes.runes_box}>
-          <div style={{ flexGrow: 1, }}>
+          <div style={{ flexGrow: 1 }}>
             <div className={classes.runes_primary_header}>
               <img
                 className={classes.resizeKeystoneIcon}
@@ -349,7 +350,7 @@ export default function RunesTable({ runes_data }) {
 
             {primary}
           </div>
-          <div style={{ flexGrow: 1, }}>
+          <div style={{ flexGrow: 1 }}>
             <div className={classes.runes_secondary_header}>
               <img
                 className={classes.resizeKeystoneIcon}
@@ -362,9 +363,7 @@ export default function RunesTable({ runes_data }) {
             {RunesTableStats()}
           </div>
         </div>
-        <div style={{ flexGrow: 1, }}>
-          {RunepageTableBody()}
-        </div>
+        <div style={{ flexGrow: 1 }}>{RunepageTableBody()}</div>
       </div>
     </div>
   );

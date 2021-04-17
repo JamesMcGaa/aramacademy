@@ -79,8 +79,8 @@ const useStyles = makeStyles({
   },
   itemMultiDivider: {
     borderTop: '1px solid #8e793e',
-    marginBottom: 3
-  }
+    marginBottom: 3,
+  },
 });
 
 function getFullDDragonPath(patch, item_json) {
@@ -106,12 +106,8 @@ export default function ItemsTable({ items_data }) {
       const item_json = items[index];
       path_list.push(getFullDDragonPath(items_data.patch, item_json));
     }
-    const icons = _.map(path_list, path => (
-      <img
-        className={classes.resizeChampIcon}
-        alt="summoner icon"
-        src={path}
-      />
+    const icons = _.map(path_list, (path) => (
+      <img className={classes.resizeChampIcon} alt="summoner icon" src={path} />
     ));
     return (
       <div className={classes.itemSingleBlock}>
@@ -119,7 +115,7 @@ export default function ItemsTable({ items_data }) {
         {Winrate(items_winrate)}
       </div>
     );
-  }
+  };
 
   const SingleChoiceItemsBlock = (category) => {
     console.log('items', items_json[category]);
@@ -128,11 +124,11 @@ export default function ItemsTable({ items_data }) {
       <div className={classes.itemSection}>
         {Header(category)}
         {itemsRows[0]}
-        <div className={classes.itemDivider}/>
+        <div className={classes.itemDivider} />
         {itemsRows[1]}
       </div>
     );
-  }
+  };
   const MultiChoiceItemBlock = (category) => {
     const ItemBlock = ({ items, items_winrate }) => {
       const item_json = items[0];
@@ -147,24 +143,19 @@ export default function ItemsTable({ items_data }) {
           {Winrate(items_winrate)}
         </div>
       );
-    }
+    };
     const blocks = _.map(items_json[category], ItemBlock);
     return (
       <div className={classes.itemSection}>
         {Header(category)}
-        <div className={classes.itemBlockContainer}>
-          {blocks}
-        </div>
+        <div className={classes.itemBlockContainer}>{blocks}</div>
       </div>
     );
-  }
+  };
 
   const BorderBlock = () => {
-    return (
-      <div className={classes.borderSection}>
-      </div>
-    )
-  }
+    return <div className={classes.borderSection}></div>;
+  };
 
   return (
     <div className={classes.items}>

@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
   },
   classTab: {
     marginLeft: 19,
-    marginRight: 18,
+    //marginRight: 19,
   },
   overlay: {
     verticalAlign: 'bottom',
@@ -133,7 +133,7 @@ function FormGrid({ list }) {
     <React.Fragment>
       {list.map(function (champ) {
         return (
-          <Grid item xs={1.5}>
+          <Grid key={champ} item xs={1.5}>
             {ChampIcon({ champ })}
             {ChampName({ champ })}
           </Grid>
@@ -178,15 +178,17 @@ function ClassTab({ champ_list }) {
 
   return (
     <div className={classes.classTab}>
-      <Grid container spacing={3}>
-        <Grid container item xs={24} spacing={2}>
-          <FormGrid list={champ_list} />
+      <Grid containerspacing={2}>
+        <Grid item xs={12}>
+          <Grid justify="flex-start" container spacing={2}>
+            <FormGrid list={champ_list} />
+          </Grid>
         </Grid>
       </Grid>
     </div>
   );
 }
-
+//24, 1.5 works
 function TierIcon({ tier }) {
   const classes = useStyles();
   return (
