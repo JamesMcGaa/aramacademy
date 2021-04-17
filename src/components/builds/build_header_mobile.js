@@ -95,8 +95,8 @@ const useStyles = makeStyles({
     padding: '10px',
   },
   resizeTierIcon: {
-    minWidth: '35px',
-    maxWidth: '35px',
+    minWidth: '30px',
+    maxWidth: '30px',
     height: 'auto',
     width: '100%',
     //borderRadius: '50%',
