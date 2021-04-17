@@ -14,6 +14,7 @@ import Resources from '../resources.js';
 import Link from '@material-ui/core/Link';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
+import Typography from '@material-ui/core/Typography';
 
 const globals = require('../../../globals.js');
 
@@ -52,8 +53,7 @@ function winrateColor(winrate) {
   }
 }
 
-function kdaColor(kills, deaths, assists) {
-  const kda = (kills + assists) / deaths;
+function kdaColor(kda) {
   if (kda > DARK_GREEN_KDA_CUTOFF) {
     return DARK_GREEN_COLOR;
   } else if (kda > GREEN_KDA_CUTOFF) {
@@ -68,8 +68,8 @@ function kdaColor(kills, deaths, assists) {
 }
 
 const TEAM_SIDE = {
-  BLUE: 'BLUE',
-  RED: 'RED',
+  BLUE: 100,
+  RED: 200,
 };
 
 function descendingComparator(a, b, orderBy) {
@@ -187,7 +187,7 @@ EnhancedTableHead.propTypes = {
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
-  side: PropTypes.string.isRequired,
+  side: PropTypes.number.isRequired,
 };
 
 const EnhancedTableToolbar = (props) => {
@@ -272,12 +272,19 @@ const RankBadge = (rank) => {
 };
 
 function TeamTable({ rows, side }) {
+  console.log('teamtable rows', rows);
+  console.log('rowslength', rows.length);
   const classes = useStyles();
   const [order, setOrder] = React.useState('desc');
   const [orderBy, setOrderBy] = React.useState('n/a');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(rows.length);
+  //   const order = 'desc';
+  //   const orderBy = 'n/a';
+  //   const selected = [];
+  //   const page = 0;
+  //   const rowsPerPage = rows.length;
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -309,7 +316,20 @@ function TeamTable({ rows, side }) {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, index) => {
                 const isItemSelected = isSelected(row.summoner_name);
-
+                console.log('rowtablebody', row);
+                const total_winrate =
+                  row.total_games !== 0
+                    ? (row.total_wins * 100) / row.total_games
+                    : 'N/A';
+                const champ_winrate =
+                  row.champion_games !== 0
+                    ? (row.champion_wins * 100) / row.champion_games
+                    : 'N/A';
+                const champ_kda =
+                  row.champion_deaths !== 0
+                    ? (row.champion_kills + row.champion_assists) /
+                      row.champion_deaths
+                    : 'N/A';
                 return (
                   <TableRow
                     hover
@@ -345,33 +365,46 @@ function TeamTable({ rows, side }) {
                     </TableCell>
 
                     <TableCell align="right">
-                      <span
-                        style={{
-                          color: winrateColor(row.winrate),
-                        }}
-                      >
-                        {row.winrate.toFixed(2)}%
-                      </span>
+                      {' '}
+                      {typeof total_winrate === 'number' ? (
+                        <span
+                          style={{
+                            color: winrateColor(total_winrate),
+                          }}
+                        >
+                          {total_winrate.toFixed(2)}%
+                        </span>
+                      ) : (
+                        'N/A'
+                      )}
                     </TableCell>
 
                     <TableCell align="right">
-                      <span
-                        style={{
-                          color: winrateColor(row.champion_winrate),
-                        }}
-                      >
-                        {row.champion_winrate.toFixed(2)}%
-                      </span>{' '}
+                      {typeof champ_winrate === 'number' ? (
+                        <span
+                          style={{
+                            color: winrateColor(champ_winrate),
+                          }}
+                        >
+                          {champ_winrate.toFixed(2)}%
+                        </span>
+                      ) : (
+                        'N/A'
+                      )}
                     </TableCell>
                     <TableCell align="right">{row.champion_games}</TableCell>
                     <TableCell align="right">
-                      <span
-                        style={{
-                          color: kdaColor(row.kills, row.deaths, row.assists),
-                        }}
-                      >
-                        {((row.kills + row.assists) / row.deaths).toFixed(2)}:1
-                      </span>
+                      {typeof champ_kda === 'number' ? (
+                        <span
+                          style={{
+                            color: kdaColor(champ_kda),
+                          }}
+                        >
+                          {champ_kda.toFixed(2)}:1
+                        </span>
+                      ) : (
+                        'N/A'
+                      )}
                     </TableCell>
                   </TableRow>
                 );
@@ -388,108 +421,198 @@ function TeamTable({ rows, side }) {
   );
 }
 const LiveGameLoading = ({ summoner_name }) => {
-  return <Paper>Loading</Paper>;
+  return <Paper>Loading {summoner_name}</Paper>;
 };
 
-export default function LiveGameTable({ summoner_name }) {
-  const [players, setPlayers] = useState(null);
-  const [pageState, setPageState] = useState(globals.LIVE_GAME_STATES.LOADING);
-  const params = useParams();
+const LiveGameNoMatch = ({ summoner_name }) => {
+  const classes = useStyles();
 
-  function handleLiveGameResponse(json) {
-    console.log(json);
-    if (json.status === globals.LIVE_GAME_STATES.MATCH) {
-      //render data and table
-      setPlayers(json.players);
-      setPageState(json.status);
-    } else if (json.status === globals.LIVE_GAME_STATES.NO_MATCH) {
-      setPageState(json.status);
+  return (
+    <div>
+      <Paper classes={{ root: classes.paper }}>
+        <Typography variant="h2">
+          Searching {summoner_name} in Live Game API
+        </Typography>
+      </Paper>
+    </div>
+  );
+};
+
+export default function LiveGameTable({ summoner_name, full_live_game_data }) {
+  const params = useParams();
+  console.log('livegamestatus', full_live_game_data);
+  if (full_live_game_data === null) {
+    return LiveGameNoMatch({ summoner_name });
+  }
+  let blueTeam = [];
+  let redTeam = [];
+  for (let i = 0; i < full_live_game_data.length; i++) {
+    const row = full_live_game_data[i];
+    if (row.side === TEAM_SIDE.BLUE) {
+      blueTeam.push(row);
     } else {
-      setPageState(globals.LIVE_GAME_STATES.NO_MATCH);
+      redTeam.push(row);
     }
   }
 
-  if (pageState === globals.LIVE_GAME_STATES.LOADING) {
-    fetch('/api/live_game/' + params.region + '/' + encodeURI(summoner_name))
-      .then((response) => response.json())
-      .then((json) => {
-        handleLiveGameResponse(json);
-      });
-    console.log('loading');
-  } else if (pageState === globals.LIVE_GAME_STATES.NO_MATCH) {
-    console.log('nomatch');
-  } else {
-    console.log('match');
-  }
-  const a1 = {
-    champion: 'Viego',
-    summoner_name: 'DeusExAnimo',
-    mmr: 2500,
-    champion_games: 200,
-    winrate: 50.38,
-    champion_winrate: 47.1,
-    kills: 13.48,
-    deaths: 8.3,
-    rank: 'challenger',
-    assists: 5.2,
-  };
-  const a2 = {
-    champion: 'Khazix',
-    summoner_name: 'Kirito Sensei',
-    mmr: 2500,
-    champion_games: 300,
-    winrate: 34.38,
-    champion_winrate: 56.1,
-    kills: 3.48,
-    deaths: 3.3,
-    rank: 'bronze',
-    assists: 24.2,
-  };
-  const a3 = {
-    champion: 'Lulu',
-    summoner_name: 'expectverylittle',
-    mmr: 2500,
-    champion_games: 400,
-    winrate: 49.38,
-    champion_winrate: 50.1,
-    kills: 3.48,
-    deaths: 38.3,
-    rank: 'diamond',
-    assists: 5.2,
-  };
-  const a4 = {
-    champion: 'Nautilus',
-    summoner_name: 'Gated',
-    mmr: 2500,
-    champion_games: 20,
-    winrate: 51.38,
-    champion_winrate: 39.1,
-    kills: 13.48,
-    deaths: 3.3,
-    rank: 'master',
-    assists: 5.2,
-  };
-  const a5 = {
-    champion: 'Kaisa',
-    summoner_name: 'ianviv',
-    mmr: 2500,
-    champion_games: 10,
-    winrate: 53.38,
-    champion_winrate: 47.1,
-    kills: 3.48,
-    deaths: 3.3,
-    rank: 'silver',
-    assists: 47.2,
-  };
-
-  const rows = [a1, a2, a3, a4, a5];
-  const blueSide = TeamTable({ rows: rows, side: TEAM_SIDE.BLUE });
-  const redSide = TeamTable({ rows: rows, side: TEAM_SIDE.RED });
-
+  const blueSide = TeamTable({ rows: blueTeam, side: TEAM_SIDE.BLUE });
+  const redSide = TeamTable({ rows: redTeam, side: TEAM_SIDE.RED });
   return (
     <div>
       {blueSide}
       {redSide}
     </div>
   );
+  // const [state, setState] = useState({
+  //     page_state: live_game_status,
+  //     full_data: null,
+  // });
+
+  // const [fullData, setFullData] = useState(null);
+  // function handleLiveGameResponse(json) {
+  //     console.log('handlelivegame', json);
+  //     setFullData(json.full_data);
+
+  // }
+  // let return_component;
+  // if(live_game_status === globals.LIVE_GAME_STATES.NO_MATCH){
+  //     return_component = <LiveGameNoMatch summoner_name={summoner_name} />;
+
+  // }
+  // else if(live_game_status === globals.LIVE_GAME_STATES.MATCH && fullData === null){
+  //     fetch('/api/live_game/' + params.region + '/' + encodeURI(summoner_name))
+  //         .then((response) => response.json())
+  //         .then((json) => {
+  //             handleLiveGameResponse(json);
+  //         });
+  //     console.log('loading');
+  //     return_component= <LiveGameLoading summoner_name={summoner_name} />;
+  // }
+
+  // if(state.full_data === null){
+
+  //     if (state.page_state === globals.LIVE_GAME_STATES.MATCH ){
+  //         fetch('/api/live_game/' + params.region + '/' + encodeURI(summoner_name))
+  //             .then((response) => response.json())
+  //             .then((json) => {
+  //                 handleLiveGameResponse(json);
+  //             });
+  //         console.log('loading');
+  //         return <LiveGameLoading summoner_name={summoner_name} />;
+  //     }
+  //     if (state.page_state === globals.LIVE_GAME_STATES.NO_MATCH) {
+  //         return <LiveGameNoMatch summoner_name={summoner_name} />;
+  //     }
+
+  // }
+
+  // let blueTeam = [];
+  // let redTeam = [];
+  // let blueSide;
+  // let redSide;
+  // console.log('fulldata', fullData);
+  // if(fullData !== null){
+  //     for (let i = 0; i < fullData.length; i++) {
+  //         const row = fullData[i];
+  //         if (row.side === TEAM_SIDE.BLUE) {
+  //             blueTeam.push(row);
+  //         }
+  //         else {
+  //             redTeam.push(row);
+  //         }
+  //     }
+
+  // }
+  // console.log('blueteam',blueTeam);
+  // console.log('redteam', blueTeam);
+
+  // blueSide = TeamTable({ rows: blueTeam, side: TEAM_SIDE.BLUE });
+  // redSide = TeamTable({ rows: redTeam, side: TEAM_SIDE.RED });
+
+  const a1 = {
+    champion: 'Viego',
+    summoner_name: 'DeusExAnimo',
+    mmr: 2500,
+    champion_games: 200,
+    total_wins: 130,
+    total_games: 300,
+    champion_wins: 102,
+    champion_kills: 13.48,
+    champion_deaths: 8.3,
+    rank: 'challenger',
+    champion_assists: 5.2,
+  };
+  return TeamTable({ rows: [a1], side: TEAM_SIDE.BLUE });
+
+  //   if(fullData !== null){
+  //       return_component = <div> {blueSide}{redSide}</div>
+
+  //   }
+  //     return (
+  //         return_component
+  //     );
+  //   const a1 = {
+  //     champion: 'Viego',
+  //     summoner_name: 'DeusExAnimo',
+  //     mmr: 2500,
+  //     champion_games: 200,
+  //     winrate: 50.38,
+  //     champion_winrate: 47.1,
+  //     kills: 13.48,
+  //     deaths: 8.3,
+  //     rank: 'challenger',
+  //     assists: 5.2,
+  //   };
+  //   const a2 = {
+  //     champion: 'Khazix',
+  //     summoner_name: 'Kirito Sensei',
+  //     mmr: 2500,
+  //     champion_games: 300,
+  //     winrate: 34.38,
+  //     champion_winrate: 56.1,
+  //     kills: 3.48,
+  //     deaths: 3.3,
+  //     rank: 'bronze',
+  //     assists: 24.2,
+  //   };
+  //   const a3 = {
+  //     champion: 'Lulu',
+  //     summoner_name: 'expectverylittle',
+  //     mmr: 2500,
+  //     champion_games: 400,
+  //     winrate: 49.38,
+  //     champion_winrate: 50.1,
+  //     kills: 3.48,
+  //     deaths: 38.3,
+  //     rank: 'diamond',
+  //     assists: 5.2,
+  //   };
+  //   const a4 = {
+  //     champion: 'Nautilus',
+  //     summoner_name: 'Gated',
+  //     mmr: 2500,
+  //     champion_games: 20,
+  //     winrate: 51.38,
+  //     champion_winrate: 39.1,
+  //     kills: 13.48,
+  //     deaths: 3.3,
+  //     rank: 'master',
+  //     assists: 5.2,
+  //   };
+  //   const a5 = {
+  //     champion: 'Kaisa',
+  //     summoner_name: 'ianviv',
+  //     mmr: 2500,
+  //     champion_games: 10,
+  //     winrate: 53.38,
+  //     champion_winrate: 47.1,
+  //     kills: 3.48,
+  //     deaths: 3.3,
+  //     rank: 'silver',
+  //     assists: 47.2,
+  //   };
+
+  //   const rows = [a1, a2, a3, a4, a5];
+  //   const blueSide = TeamTable({ rows: rows, side: TEAM_SIDE.BLUE });
+  //   const redSide = TeamTable({ rows: rows, side: TEAM_SIDE.RED });
 }

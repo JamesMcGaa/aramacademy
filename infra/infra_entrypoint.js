@@ -293,7 +293,7 @@ let processUser = async (username, region, existing_user_data = null) => {
   }
 };
 
-async function multifetch_mongo_data_for_live_game(
+async function multifetchMongoDataForLiveGame(
   standardized_summoner_names_array,
   region
 ) {
@@ -315,4 +315,22 @@ async function multifetch_mongo_data_for_live_game(
   return records;
 }
 
-module.exports = processUser;
+let getLiveGame = async (username, region) => {
+  console.log('live game infra');
+  let account_args = [username, region];
+  sum_id = await utils.retry_async_function(
+    kayn_calls.get_summoner_id,
+    account_args
+  );
+  try {
+    players = await utils.retry_async_function(kayn_calls.get_live_game, [
+      sum_id,
+    ]);
+  } catch (error) {
+    //no aram live game found
+    return null;
+  }
+  return players;
+};
+
+module.exports = { processUser, getLiveGame, multifetchMongoDataForLiveGame };

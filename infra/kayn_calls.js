@@ -11,6 +11,10 @@ const kayn = Kayn(process.env.RIOT_API_KEY)({
 });
 const utils = require('./utils.js');
 
+async function get_live_game(username, region) {
+  //gets the live game for a given username, region if it exists. otherwise returns null
+}
+
 async function get_champ_dict() {
   //gets a dictionary mapping champ_id -> champ name, e.g. 420 -> taric or whatever taric's number is
   payload = await kayn.DDragon.Champion.listFull();
@@ -31,6 +35,41 @@ async function get_account_id(username, region) {
       return summoner.accountId;
     });
   return account_id;
+}
+
+async function get_live_game(summoner_id) {
+  //gets live game from summoner_id - only aram games. if aram game not available returns null
+  let players = [];
+  const champ_dict = await get_champ_dict();
+  const live_game_data = await kayn.CurrentGame.by
+    .summonerID(summoner_id)
+    .then((data) => {
+      //console.log(data);
+      // if(data.gameMode !== 'ARAM'){
+      //   return null;
+      // }
+      const participants = data.participants;
+      for (let i = 0; i < participants.length; i++) {
+        let player = {};
+        player.teamId = participants[i].teamId;
+        player.champion = champ_dict[participants[i].championId];
+        player.summonerName = participants[i].summonerName;
+        players.push(player);
+      }
+      return players;
+    });
+  return live_game_data;
+}
+
+async function get_summoner_id(username, region) {
+  //gets summoner_id from username
+  const summoner_id = await kayn.Summoner.by
+    .name(username)
+    .region(region)
+    .then((summoner) => {
+      return summoner.id;
+    });
+  return summoner_id;
 }
 
 async function get_true_summoner_name(username, region) {
@@ -243,4 +282,6 @@ module.exports = {
   get_subsection_matchlist,
   get_match_info,
   get_recent_matches,
+  get_summoner_id,
+  get_live_game,
 };

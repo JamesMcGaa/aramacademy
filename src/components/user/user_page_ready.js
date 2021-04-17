@@ -10,6 +10,7 @@ import RecentMatchesTable from './recent_matches_table.js';
 import EnhancedTable from './users_table.js';
 import LiveGameTable from './live_game_table_desktop.js';
 import CircularProgress from '@material-ui/core/CircularProgress';
+const globals = require('../../../globals.js');
 
 const fetch = require('node-fetch');
 const moment = require('moment');
@@ -74,6 +75,7 @@ export default function UserPageReady({ props }) {
   const [state, setState] = useState(props);
   const [updateState, setUpdateState] = useState(UPDATE_STATE.UPDATE);
   const [tab, setTab] = useState(TAB_STATE.SUMMARY);
+  const [fullLiveGameData, setFullLiveGameData] = useState(null);
   console.log(state.rank);
   // Nested to access params
   function handleUpdateClick() {
@@ -99,7 +101,7 @@ export default function UserPageReady({ props }) {
       rank: json.rank,
       icon_path: json.icon_path,
       page_state: json.status,
-      in_live_game: json.in_live_game,
+      live_game_data: json.live_game_data,
     });
   }
 
@@ -109,6 +111,19 @@ export default function UserPageReady({ props }) {
 
   function handleLiveGameClick() {
     setTab(TAB_STATE.LIVE_GAME);
+    if (fullLiveGameData === null) {
+      fetch(
+        '/api/live_game/' +
+          encodeURI(params.region) +
+          '/' +
+          encodeURI(params.summonerName)
+      )
+        .then((response) => response.json())
+        .then((json) => {
+          setFullLiveGameData(json.full_data);
+          console.log('full', fullLiveGameData);
+        });
+    }
   }
 
   const overall = state.user_data.per_champion_data.filter(
@@ -133,10 +148,11 @@ export default function UserPageReady({ props }) {
     }
   });
 
-  const LiveGameComponent = ({ summoner_name }) => {
-    console.log('name', summoner_name);
-    console.log('state', state.in_live_game);
-    state.in_live_game;
+  const LiveGameComponent = () => {
+    let in_live_game = true;
+    if (state.live_game_status === globals.LIVE_GAME_STATES.NO_MATCH) {
+      in_live_game = false;
+    }
 
     return (
       <div className={classes.row}>
@@ -153,7 +169,7 @@ export default function UserPageReady({ props }) {
         </div>
         <div className={classes.column_half}>
           <Button
-            variant={state.in_live_game ? 'contained' : 'outlined'}
+            variant={in_live_game ? 'contained' : 'outlined'}
             size="large"
             color="secondary"
             onClick={handleLiveGameClick}
@@ -177,7 +193,10 @@ export default function UserPageReady({ props }) {
         );
       case TAB_STATE.LIVE_GAME:
         return (
-          <LiveGameTable summoner_name={state.user_data.true_summoner_name} />
+          <LiveGameTable
+            summoner_name={state.user_data.true_summoner_name}
+            full_live_game_data={fullLiveGameData}
+          />
         );
     }
   };
@@ -268,9 +287,7 @@ export default function UserPageReady({ props }) {
                     MMR: {state.mmr}
                   </p>
                 </Container>
-                {LiveGameComponent({
-                  summoner_name: state.user_data.true_summoner_name,
-                })}
+                {LiveGameComponent()}
               </Paper>
 
               <Paper classes={{ root: classes.paperRoot }}>
