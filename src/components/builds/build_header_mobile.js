@@ -103,7 +103,7 @@ const useStyles = makeStyles({
     //marginTop: 12,
   },
   resizeAbilityIcon: {
-    minWidth: '26px',
+    minWidth: '29px',
     maxWidth: '40px',
     height: 'auto',
     width: '100%',
@@ -120,7 +120,7 @@ const useStyles = makeStyles({
     marginTop: 20,
   },
   spellIcon: {
-    marginRight: 10,
+    marginRight: 5,
   },
 });
 
