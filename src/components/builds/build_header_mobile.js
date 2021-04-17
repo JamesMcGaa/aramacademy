@@ -87,8 +87,8 @@ const useStyles = makeStyles({
     padding: 15,
   },
   resizeChampIcon: {
-    minWidth: '160px',
-    maxWidth: '160px',
+    minWidth: '118px',
+    maxWidth: '128px',
     height: 'auto',
     width: '100%',
     //borderRadius: '50%',
@@ -103,8 +103,8 @@ const useStyles = makeStyles({
     //marginTop: 12,
   },
   resizeAbilityIcon: {
-    minWidth: '45px',
-    maxWidth: '45px',
+    minWidth: '25px',
+    maxWidth: '40px',
     height: 'auto',
     width: '100%',
     padding: '0px',
@@ -140,7 +140,7 @@ function getFullSpellPath(patch, spell_path) {
     spell_path
   );
 }
-export default function BuildHeader({
+export default function BuildHeaderMobile({
   data,
   champion_name,
   tierlist_data,
@@ -197,48 +197,51 @@ export default function BuildHeader({
     ? resources.two_word_champs.get(champion_name)
     : champion_name;
   return (
-    <div className={classes.row}>
-      <div>
-        <img
-          className={classes.resizeChampIcon}
-          src={resources.champ_icons[champion_name]}
-        />
-      </div>
+    <div>
+      <div className={classes.row}>
+        <div className={classes.image}>
+          <img
+            className={classes.resizeChampIcon}
+            src={resources.champ_icons[champion_name]}
+          />
+        </div>
 
-      <div className={classes.text}>
-        <Typography variant="h3">{stylizedChampName} </Typography>
-        {Spells({ passive_path: passive_full_path, spells_paths: path_list })}
+        <div className={classes.text}>
+          <Typography variant="h3">{stylizedChampName} </Typography>
+          {Spells({ passive_path: passive_full_path, spells_paths: path_list })}
+        </div>
       </div>
+      <div className={classes.row}>
+        <div className={classes.winrateText}>
+          {Header('Winrate')}
+          <span
+            style={{
+              color: winrateColor(tierlist_data.wins * 100),
+            }}
+          >
+            <Typography variant="h5">
+              {(tierlist_data.wins * 100).toFixed(2)}%
+            </Typography>
+          </span>
+        </div>
+        <div className={classes.pickrateText}>
+          {Header('Pickrate')}
 
-      <div className={classes.winrateText}>
-        {Header('Winrate')}
-        <span
-          style={{
-            color: winrateColor(tierlist_data.wins * 100),
-          }}
-        >
           <Typography variant="h5">
-            {(tierlist_data.wins * 100).toFixed(2)}%
+            {((tierlist_data.total_games * 100) / total_games).toFixed(2)}%
           </Typography>
-        </span>
-      </div>
-      <div className={classes.pickrateText}>
-        {Header('Pickrate')}
-
-        <Typography variant="h5">
-          {((tierlist_data.total_games * 100) / total_games).toFixed(2)}%
-        </Typography>
-      </div>
-      <div className={classes.tierText}>
-        {Header('Tier')}
-        <Typography>
-          <a href="/tierlist">
-            <img
-              className={classes.resizeTierIcon}
-              src={resources.tier_badges[lowercaseTier]}
-            />
-          </a>
-        </Typography>
+        </div>
+        <div className={classes.tierText}>
+          {Header('Tier')}
+          <Typography>
+            <a href="/tierlist">
+              <img
+                className={classes.resizeTierIcon}
+                src={resources.tier_badges[lowercaseTier]}
+              />
+            </a>
+          </Typography>
+        </div>
       </div>
     </div>
   );

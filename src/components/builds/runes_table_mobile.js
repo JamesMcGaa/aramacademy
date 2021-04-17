@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Resources from '../resources.js';
 import { Button, Container } from '@material-ui/core';
-import KeystoneRow from './keystone_row.js';
+import KeystoneRowMobile from './keystone_row_mobile.js';
 import { Header, Winrate } from './utils.js';
 
 var resources = Resources.Resources;
@@ -42,14 +42,14 @@ const useStyles = makeStyles({
   },
   runes_box: {
     display: 'flex',
-    minWidth: '550px',
-    maxWidth: '550px',
-    marginLeft: '50px',
+    //minWidth: '550px',
+    //maxWidth: '550px',
+    //marginLeft: '50px',
   },
   runes_primary_header: {
     display: 'flex',
     marginBottom: 5,
-    marginLeft: 8,
+    marginLeft: 4,
     // marginRight: 20,
     alignItems: 'center',
 
@@ -82,8 +82,8 @@ const useStyles = makeStyles({
     paddingRight: '5px',
   },
   resizeStatIcon: {
-    minWidth: '30px',
-    maxWidth: '30px',
+    minWidth: '20px',
+    maxWidth: '20px',
     height: 'auto',
     width: '100%',
     borderRadius: '50%',
@@ -92,15 +92,16 @@ const useStyles = makeStyles({
   statRow: {
     display: 'flex',
     justifyContent: 'space-between',
-    minWidth: '160px',
-    maxWidth: '160px',
+    //minWidth: '160px',
+    //maxWidth: '160px',
     //marginBottom: '5px',
     padding: '3px',
-    marginLeft: '13px',
+    marginLeft: 14,
+    marginRight: 10,
   },
   statHeader: {
-    minWidth: '190px',
-    maxWidth: '190px',
+    // minWidth: '190px',
+    // maxWidth: '190px',
     borderTop: '1px solid #8e793e',
     marginTop: '9px',
     paddingTop: '9px',
@@ -176,9 +177,9 @@ function getStatIconPath(stat_name) {
   );
 }
 
-const MAX_RUNEPAGES = 5;
+const MAX_RUNEPAGES = 2;
 
-export default function RunesTable({ runes_data }) {
+export default function RunesTableMobile({ runes_data }) {
   if (runes_data.loaded === false) {
     return null;
   }
@@ -299,12 +300,12 @@ export default function RunesTable({ runes_data }) {
     }
 
     var rune_row = (
-      <KeystoneRow
+      <KeystoneRowMobile
         is_keystone={is_keystone}
         is_secondary={false}
         selected_list={[selected]}
         row_json={row}
-      ></KeystoneRow>
+      ></KeystoneRowMobile>
     );
     primary.push(rune_row);
   }
@@ -315,12 +316,12 @@ export default function RunesTable({ runes_data }) {
     var selected = runes_secondary_list;
 
     var rune_row = (
-      <KeystoneRow
+      <KeystoneRowMobile
         is_keystone={false}
         is_secondary={true}
         selected_list={selected}
         row_json={row}
-      ></KeystoneRow>
+      ></KeystoneRowMobile>
     );
     secondary.push(rune_row);
   }
@@ -328,35 +329,33 @@ export default function RunesTable({ runes_data }) {
   return (
     <div className={classes.section}>
       {Header('Runes')}
-      <div className={classes.runes_all}>
-        <div className={classes.runes_box}>
-          <div style={{ flexGrow: 1 }}>
-            <div className={classes.runes_primary_header}>
-              <img
-                className={classes.resizeKeystoneIcon}
-                alt="summoner icon"
-                src={primary_path}
-              />
-              {primary_tree_name}
-            </div>
+      <div className={classes.runes_box}>
+        <div style={{ flex: '57' }}>
+          <div className={classes.runes_primary_header}>
+            <img
+              className={classes.resizeKeystoneIcon}
+              alt="summoner icon"
+              src={primary_path}
+            />
+            {primary_tree_name}
+          </div>
 
-            {primary}
-          </div>
-          <div style={{ flexGrow: 1 }}>
-            <div className={classes.runes_secondary_header}>
-              <img
-                className={classes.resizeKeystoneIcon}
-                alt="summoner icon"
-                src={secondary_path}
-              />
-              {secondary_tree_name}
-            </div>
-            {secondary}
-            {RunesTableStats()}
-          </div>
+          {primary}
         </div>
-        <div style={{ flexGrow: 1 }}>{RunepageTableBody()}</div>
+        <div style={{ flex: '43', marginLeft: 5 }}>
+          <div className={classes.runes_secondary_header}>
+            <img
+              className={classes.resizeKeystoneIcon}
+              alt="summoner icon"
+              src={secondary_path}
+            />
+            {secondary_tree_name}
+          </div>
+          {secondary}
+          {RunesTableStats()}
+        </div>
       </div>
+      <div style={{ flexGrow: 1 }}>{RunepageTableBody()}</div>
     </div>
   );
 }
