@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import Resources from '../resources.js';
 import { Button, Container } from '@material-ui/core';
 import { Header, Winrate } from './utils.js';
+import Tooltip from '@material-ui/core/Tooltip';
 
 var resources = Resources.Resources;
 const fetch = require('node-fetch');
@@ -122,6 +123,9 @@ const useStyles = makeStyles({
   spellIcon: {
     marginRight: 10,
   },
+  tooltip: {
+    backgroundColor: '#f5f5f9',
+  },
 });
 
 function getFullPassivePath(patch, spell_path) {
@@ -140,6 +144,22 @@ function getFullSpellPath(patch, spell_path) {
     spell_path
   );
 }
+
+const AbilityTooltip = withStyles((theme) => ({
+  tooltip: {
+    //backgroundColor: 'rgba(66,66,66,.9)',
+    //color: 'rgba(0, 0, 0, 0.87)',
+    color: theme.palette.common.white,
+    //boxShadow: theme.shadows[1],
+    fontSize: 12,
+    textAlign: 'left',
+    arrow: true,
+  },
+  arrow: {
+    //color: theme.palette.common.white,
+  },
+}))(Tooltip);
+
 export default function BuildHeader({
   data,
   champion_name,
@@ -150,36 +170,62 @@ export default function BuildHeader({
     return null;
   }
 
-  const AbilityIcon = ({ path, key }) => {
+  const AbilityIcon = ({ path, key, tooltip }) => {
     console.log(key);
     console.log('path', path);
 
     return (
-      <div className={classes.spellIcon}>
-        <img className={classes.resizeAbilityIcon} alt="ability" src={path} />
-        <img
-          className={classes.overlay}
-          alt="key"
-          src={resources.abilities_icons[key]}
-        />{' '}
-      </div>
+      <AbilityTooltip arrow title={tooltip}>
+        <div className={classes.spellIcon}>
+          <img className={classes.resizeAbilityIcon} alt="ability" src={path} />
+          <img
+            className={classes.overlay}
+            alt="key"
+            src={resources.abilities_icons[key]}
+          />{' '}
+        </div>
+      </AbilityTooltip>
     );
   };
 
-  const Spells = ({ passive_path, spells_paths }) => {
+  const Spells = ({
+    passive_path,
+    spells_paths,
+    passive_tooltip,
+    tooltip_list,
+  }) => {
     return (
       <div className={classes.spellRow}>
-        {AbilityIcon({ path: passive_path, key: 'p' })}
-        {AbilityIcon({ path: spells_paths[0], key: 'q' })}
-        {AbilityIcon({ path: spells_paths[1], key: 'w' })}
-        {AbilityIcon({ path: spells_paths[2], key: 'e' })}
-        {AbilityIcon({ path: spells_paths[3], key: 'r' })}
+        {AbilityIcon({
+          path: passive_path,
+          key: 'p',
+          tooltip: passive_tooltip,
+        })}
+        {AbilityIcon({
+          path: spells_paths[0],
+          key: 'q',
+          tooltip: tooltip_list[0],
+        })}
+        {AbilityIcon({
+          path: spells_paths[1],
+          key: 'w',
+          tooltip: tooltip_list[1],
+        })}
+        {AbilityIcon({
+          path: spells_paths[2],
+          key: 'e',
+          tooltip: tooltip_list[2],
+        })}
+        {AbilityIcon({
+          path: spells_paths[3],
+          key: 'r',
+          tooltip: tooltip_list[3],
+        })}
       </div>
     );
   };
 
   const classes = useStyles();
-  console.log(tierlist_data);
   const tier = tierlist_data.tier;
   const lowercaseTier = tier.toLowerCase();
   //const champion_blurb = data.champion_json.data[champion_name].title;
@@ -187,10 +233,15 @@ export default function BuildHeader({
   const champion_data = champion_json.data[champion_name];
   const passive_path = champion_data.passive.image.full;
   const passive_full_path = getFullPassivePath(data.patch, passive_path);
+  const passive_tooltip = champion_data.passive.description;
   let path_list = [];
+  let tooltip_list = [];
   for (var i = 0; i < champion_data.spells.length; i++) {
     var spell = champion_data.spells[i];
     const spell_path = spell.image.full;
+    console.log('tooltip', spell.tooltip);
+    console.log('description', spell.description);
+    tooltip_list.push(spell.description);
     path_list.push(getFullSpellPath(data.patch, spell_path));
   }
   var stylizedChampName = resources.two_word_champs.has(champion_name)
@@ -207,7 +258,12 @@ export default function BuildHeader({
 
       <div className={classes.text}>
         <Typography variant="h3">{stylizedChampName} </Typography>
-        {Spells({ passive_path: passive_full_path, spells_paths: path_list })}
+        {Spells({
+          passive_path: passive_full_path,
+          spells_paths: path_list,
+          passive_tooltip: passive_tooltip,
+          tooltip_list: tooltip_list,
+        })}
       </div>
 
       <div className={classes.winrateText}>
