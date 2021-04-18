@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
 
   runes: {
     flexGrow: 3,
-    borderRight: '1px solid #555555',
   },
   spells: {
     flexGrow: 1,

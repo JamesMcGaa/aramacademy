@@ -27,6 +27,10 @@ const PINK_COLOR = '#ff8595';
 const RED_WINRATE_CUTOFF = 45.0;
 const RED_COLOR = '#fc354f';
 
+const MAX_CHAMP_NAME_LENGTH = 11;
+function truncateChampName(champ) {
+  return champ.substring(0, MAX_CHAMP_NAME_LENGTH + 1) + '..';
+}
 function winrateColor(winrate) {
   if (winrate > DARK_GREEN_WINRATE_CUTOFF) {
     return DARK_GREEN_COLOR;
@@ -67,7 +71,6 @@ const useStyles = makeStyles({
     flex: '43%',
     textAlign: 'left',
     padding: 8,
-    borderRight: '1px solid #555555',
   },
   winrateText: {
     flex: '11%',
@@ -193,6 +196,10 @@ export default function BuildHeaderMobile({
   var stylizedChampName = resources.two_word_champs.has(champion_name)
     ? resources.two_word_champs.get(champion_name)
     : champion_name;
+
+  if (stylizedChampName.length > MAX_CHAMP_NAME_LENGTH) {
+    stylizedChampName = truncateChampName(stylizedChampName);
+  }
   return (
     <div>
       <div className={classes.row}>
