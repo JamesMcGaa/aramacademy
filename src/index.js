@@ -9,6 +9,8 @@ import Navigation from './components/navigation.js';
 import Leaderboards from './components/leaderboard/leaderboard_page.js';
 import About from './components/about/about_page.js';
 import Faq from './components/faq/faq_page.js';
+import ChampionsPage from './components/champions/champions_page.js';
+import Champion from './components/builds/champion.js';
 import TierlistPage from './components/tierlist/tierlist_page.js';
 import ResearchList from './components/research/research_list.js';
 import ResearchPost from './components/research/research_post.js';
@@ -46,6 +48,15 @@ function App() {
             </Route>
             <Route path="/leaderboards/:region">
               <Leaderboards />
+            </Route>
+            <Route path="/champions/:champion">
+              <Champion />
+            </Route>
+            <Route path="/champions">
+              <ChampionsPage />
+            </Route>
+            <Route path="/tierlist">
+              <TierlistPage />
             </Route>
             <Route path="/about">
               <About />

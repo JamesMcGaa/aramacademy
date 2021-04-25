@@ -261,10 +261,12 @@ export default function UserTableMobile({ per_champion_data }) {
                     key={row.champion}
                   >
                     <TableCell className={classes.mobileCell}>
-                      <img
-                        className={classes.resizeChampIcon}
-                        src={resources.champ_icons[row.champion]}
-                      />
+                      <a href={'/champions/' + row.champion}>
+                        <img
+                          className={classes.resizeChampIcon}
+                          src={resources.champ_icons[row.champion]}
+                        />
+                      </a>
                     </TableCell>
                     {/* <TableCell className={classes.mobileCell} >
                       {resources.two_word_champs.has(row.champion)

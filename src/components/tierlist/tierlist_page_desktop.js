@@ -70,10 +70,7 @@ export default function TierlistPageDesktop(props) {
         </Paper>
       </Container>
       <Container fixed className={classes.mediumContainer}>
-        <TierlistTableDesktop
-          per_champion_data={props.per_champion_data}
-          total_games={props.total_games}
-        />
+        <TierlistTableDesktop per_champion_data={props.per_champion_data} />
       </Container>
     </div>
   );

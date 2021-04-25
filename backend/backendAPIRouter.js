@@ -14,6 +14,7 @@ const na_distribution = require('../src/images/distributions/na_distribution.jso
 const AbortController = require('abort-controller');
 
 const globals = require('../globals.js');
+const builds_json = require('../src/jsons/champ_data_11_8.json');
 
 const REGION_CODE_TO_DISTRIBUTION_FILE = {
   eune: eune_distribution,
@@ -178,6 +179,15 @@ async function getCurrentPatch() {
 }
 
 /*
+ * this patch gets the current patch prefix, e.g. getCurrentPatch returns 11.3.1, and this returns 11.3, the patch number people want to see\
+ */
+async function getCurrentPatchPrefix() {
+  const patch = await getCurrentPatch();
+  const tokens = patch.split('.');
+  return tokens.slice(0, 2).join('.');
+}
+
+/*
  * Fetches the patch from whatismymmr, if timeout is exceeded it defaults
  */
 async function getMMR(region, summoner_name) {
@@ -320,5 +330,233 @@ router.get('/patch', async (req, res) => {
   res.send(resp);
   return;
 });
-
 module.exports = router;
+/*
+ * Returns builds/runes/sum spells for this champion
+ */
+
+/*we want to feed the following back to the champion.js client
+ * winrate pickrate
+* primary/secondary rune tree name
+* primary/secondary rune tree name filepath
+* full image filepaths for the entire rune primary/secondary
+* a list of the chosen runes' keys, e.g. Electrocute
+* full 2 sumspell filepaths
+* q filepath
+* w filepath
+* e filepath
+* r filepath
+* starting item filepath
+* first item filepath, etc
+*
+* champ json:
+{
+champion: khazix
+winrate: .521
+pickrate: .074
+summ1: { name: flash, wr: .53}
+summ2: { name: snowball, wr: .62}
+runes_primary: "Domination",
+runes_primary_list: ["Electrocute, TasteOfBlood, EyeballCollection, RavenousHunter"],
+runes_secondary: "Sorcery",
+runes_secondary_list: ["NimbusCloak, GatheringStorm"],
+runes_winrate: .55,
+    skill_order: ["R","Q","W","E"]
+level_skill_order: {"Q", "W", "E", "Q", "Q", "R", "Q", "E", "Q", etc}
+starting_items: ["guardian horn", reju reju reju]
+mythic: Shieldbow
+boots: mercs
+first item: essence reaver
+second item: navori quickblades
+
+}
+
+give champion.js the entire sorcery/resolve two trees worth of json and feed in the names of the 7 runes + 3 adaptive whatever you've chosen
+champion.js displays the rune trees in a flexible manner such that name/icon changes are automatic from riot json
+highlight the 10 choices
+*/
+router.get('/builds/:champion', async (req, res) => {
+  let champ = req.params.champion;
+  let two_word_champs = new Map();
+  two_word_champs.set('AurelionSol', 'Aurelion Sol');
+  two_word_champs.set('Chogath', "Cho'Gath");
+  two_word_champs.set('DrMundo', 'Dr. Mundo');
+  two_word_champs.set('JarvanIV', 'Jarvan IV');
+  two_word_champs.set('Kaisa', "Kai'Sa");
+  two_word_champs.set('Khazix', "Kha'Zix");
+  two_word_champs.set('KogMaw', "Kog'Maw");
+  two_word_champs.set('Leblanc', 'LeBlanc');
+  two_word_champs.set('LeeSin', 'Lee Sin');
+  two_word_champs.set('MasterYi', 'Master Yi');
+  two_word_champs.set('MissFortune', 'Miss Fortune');
+  two_word_champs.set('MonkeyKing', 'Wukong');
+  two_word_champs.set('Nunu', 'Nunu & Willump');
+  two_word_champs.set('RekSai', "Rek'Sai");
+  two_word_champs.set('TahmKench', 'Tahm Kench');
+  two_word_champs.set('TwistedFate', 'Twisted Fate');
+  two_word_champs.set('Velkoz', "Vel'Koz");
+  two_word_champs.set('XinZhao', 'Xin Zhao');
+  if (two_word_champs.has(champ)) {
+    champ = two_word_champs.get(champ);
+  }
+  const build_json = builds_json[champ];
+  const runes_json = await getRunesJson();
+  const item_json = await getItemJson();
+  const sums_json = await getSummonerSpellsJson();
+  const item_build_json = build_json.items_json;
+  let item_build_json_full = {};
+  for (key in item_build_json) {
+    item_build_json_full[key] = [];
+    for (index in item_build_json[key]) {
+      const items = [];
+      for (itemIndex in item_build_json[key][index].items) {
+        items.push(
+          getDesiredItemJson(
+            item_build_json[key][index].items[itemIndex],
+            item_json
+          )
+        );
+      }
+      item_build_json_full[key].push({
+        items: items,
+        items_winrate: item_build_json[key][index].items_winrate,
+      });
+    }
+  }
+  const runes = build_json.runes;
+  let runes_full = [];
+  for (index in runes) {
+    runes_full.push({
+      ...runes[index],
+      runes_primary_json: getRuneTreeJson(
+        runes[index].runes_primary,
+        runes_json
+      ),
+      runes_secondary_json: getRuneTreeJson(
+        runes[index].runes_secondary,
+        runes_json
+      ),
+    });
+  }
+  const champion_json = await getChampionJson(req.params.champion);
+  const patch = await getCurrentPatch();
+  build_response = {
+    ...build_json,
+    runes_full: runes_full,
+    items_json_full: item_build_json_full,
+    sums_json: sums_json,
+    champion_json: champion_json,
+    patch: patch,
+  };
+  res.send(build_response);
+});
+
+function getRuneTreeJson(tree_name, runes_json) {
+  for (var i = 0; i < runes_json.length; i++) {
+    var tree = runes_json[i];
+    if (tree.key === tree_name) {
+      return tree;
+    }
+  }
+  return null;
+}
+async function getItemJson() {
+  let item_json = null;
+  const patch = await getCurrentPatch();
+  let formatted_URI =
+    'https://ddragon.leagueoflegends.com/cdn/' +
+    patch +
+    '/data/en_US/item.json';
+  const controller = new AbortController();
+  const timeout = setTimeout(() => {
+    controller.abort();
+  }, REQUEST_TIMEOUT_EXTERNAL_FETCH_MS);
+  try {
+    const response = await fetch(formatted_URI, { signal: controller.signal });
+    item_json = await response.json();
+  } catch (error) {
+  } finally {
+    clearTimeout(timeout);
+  }
+  return item_json;
+}
+
+function getDesiredItemJson(item_name, item_json) {
+  for (var id in item_json.data) {
+    if (item_json.data[id].name === item_name) {
+      return item_json.data[id];
+    }
+  }
+  return null;
+}
+
+async function getRunesJson() {
+  const patch = await getCurrentPatch();
+
+  const runes_path =
+    'https://ddragon.leagueoflegends.com/cdn/' +
+    patch +
+    '/data/en_US/runesReforged.json';
+  let runes_json = null;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => {
+    controller.abort();
+  }, REQUEST_TIMEOUT_EXTERNAL_FETCH_MS);
+  try {
+    const runes_response = await fetch(runes_path, {
+      signal: controller.signal,
+    });
+    runes_json = await runes_response.json();
+  } catch (error) {
+  } finally {
+    clearTimeout(timeout);
+  }
+  return runes_json;
+}
+
+async function getSummonerSpellsJson() {
+  const patch = await getCurrentPatch();
+
+  const path =
+    'https://ddragon.leagueoflegends.com/cdn/' +
+    patch +
+    '/data/en_US/summoner.json';
+  let json = null;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => {
+    controller.abort();
+  }, REQUEST_TIMEOUT_EXTERNAL_FETCH_MS);
+  try {
+    const response = await fetch(path, { signal: controller.signal });
+    json = await response.json();
+  } catch (error) {
+  } finally {
+    clearTimeout(timeout);
+  }
+  return json;
+}
+
+async function getChampionJson(champ_name) {
+  const patch = await getCurrentPatch();
+
+  const path =
+    'https://ddragon.leagueoflegends.com/cdn/' +
+    patch +
+    '/data/en_US/champion/' +
+    champ_name +
+    '.json';
+  console.log(path);
+  let json = null;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => {
+    controller.abort();
+  }, REQUEST_TIMEOUT_EXTERNAL_FETCH_MS);
+  try {
+    const response = await fetch(path, { signal: controller.signal });
+    json = await response.json();
+  } catch (error) {
+  } finally {
+    clearTimeout(timeout);
+  }
+  return json;
+}

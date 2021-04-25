@@ -35,6 +35,16 @@ champs.forEach(function (item, index) {
   champImageDict[champName] = item['default'];
 });
 
+const abilities_icons = importAll(
+  require.context('../images/abilities/', false, /\.(png|jpe?g|svg)$/)
+);
+let abilitiesIconsDict = new Object();
+
+abilities_icons.forEach(function (item, index) {
+  const ability = item['default'].split('/')[2].split('.')[0];
+  abilitiesIconsDict[ability] = item['default'];
+});
+
 let two_word_champs = new Map();
 two_word_champs.set('AurelionSol', 'Aurelion Sol');
 two_word_champs.set('Chogath', "Cho'Gath");
@@ -53,12 +63,17 @@ two_word_champs.set('MasterYi', 'Master Yi');
 two_word_champs.set('MissFortune', 'Miss Fortune');
 two_word_champs.set('MonkeyKing', 'Wukong');
 two_word_champs.set('Nunu', 'Nunu & Willump');
-two_word_champs.set('Reksai', "Rek'Sai");
+two_word_champs.set('RekSai', "Rek'Sai");
 two_word_champs.set('TahmKench', 'Tahm Kench');
 
 two_word_champs.set('TwistedFate', 'Twisted Fate');
-two_word_champs.set('Velkoz', "Vel'koz");
+two_word_champs.set('Velkoz', "Vel'Koz");
 two_word_champs.set('XinZhao', 'Xin Zhao');
+
+let reversed_two_word_champs = new Map();
+for (let [key, value] of two_word_champs) {
+  reversed_two_word_champs.set(value, key);
+}
 
 const social_svgs = importAll(
   require.context('../images/social_icons/', false, /\.(png|jpe?g|svg)$/)
@@ -74,5 +89,7 @@ export default {
     tier_badges: tierBadgeDict,
     champ_icons: champImageDict,
     two_word_champs: two_word_champs,
+    reversed_two_word_champs: reversed_two_word_champs,
+    abilities_icons: abilitiesIconsDict,
   },
 };

@@ -186,6 +186,8 @@ export default function EnhancedTable({ per_champion_data }) {
   const rows = raw_rows.filter(
     (r) => r.champion !== 'overall' && r.total_games !== 0
   );
+  console.log(rows);
+
   rows.forEach((row) => {
     row.winrate = nice_round((row.wins * 100) / row.total_games);
     row.average_gold = nice_round(row.gold / row.total_games);
@@ -266,10 +268,12 @@ export default function EnhancedTable({ per_champion_data }) {
                       classes={{ root: classes.iconCell }}
                       align="center"
                     >
-                      <img
-                        className={classes.resizeChampIcon}
-                        src={resources.champ_icons[row.champion]}
-                      />
+                      <a href={'/champions/' + row.champion}>
+                        <img
+                          className={classes.resizeChampIcon}
+                          src={resources.champ_icons[row.champion]}
+                        />
+                      </a>
                     </TableCell>
                     <TableCell align="left" style={{ paddingLeft: '0px' }}>
                       {resources.two_word_champs.has(row.champion)
