@@ -1,5 +1,4 @@
 import React from 'react';
-import tierlist_json from '../../jsons/tierlist.json';
 import TierlistPageDesktop from './tierlist_page_desktop.js';
 import TierlistPageMobile from './tierlist_page_mobile.js';
 import full_champ_json from '../../jsons/champ_data_11_8.json';

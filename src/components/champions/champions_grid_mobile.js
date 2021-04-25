@@ -16,7 +16,7 @@ import Typography from '@material-ui/core/Typography';
 
 import Resources from '../resources.js';
 var resources = Resources.Resources;
-import tierlist_json from '../../jsons/tierlist.json';
+import full_champ_data from '../../jsons/champ_data_11_8.json';
 
 import {
   FormGroup,
@@ -27,25 +27,19 @@ import {
   Container,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-function getChampionTierlistData(tierlist_json, champion_name) {
-  for (var i = 0; i < tierlist_json.length; i++) {
-    const data = tierlist_json[i];
-    if (data.champion === champion_name) {
-      return data;
-    }
-  }
-}
-
-function getTieredChampions(tierlist_json) {
+function getChampTierData(full_champ_data) {
   var champ_tiers = new Object();
   champ_tiers['S'] = [];
   champ_tiers['A'] = [];
   champ_tiers['B'] = [];
   champ_tiers['C'] = [];
   champ_tiers['D'] = [];
-  for (var i = 0; i < tierlist_json.length; i++) {
-    const data = tierlist_json[i];
-    champ_tiers[data.tier].push(data.champion);
+  for (var i = 0; i < Object.values(full_champ_data).length; i++) {
+    const json_entry = Object.values(full_champ_data)[i];
+    const champ_name = resources.reversed_two_word_champs.has(
+      json_entry.champion
+    );
+    champ_tiers[json_entry.tier].push(champ_name);
   }
   return champ_tiers;
 }
@@ -191,7 +185,7 @@ export default function ChampionGridMobile() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const tieredChamps = getTieredChampions(tierlist_json);
+  const tieredChamps = getChampTierData(full_champ_data);
   return (
     <TabContext value={value}>
       <AppBar position="relative" className={classes.appBar}>
