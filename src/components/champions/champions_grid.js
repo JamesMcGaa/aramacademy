@@ -35,13 +35,18 @@ function getChampTierData(full_champ_data) {
   champ_tiers['B'] = [];
   champ_tiers['C'] = [];
   champ_tiers['D'] = [];
+  champ_tiers['all'] = [];
   for (var i = 0; i < Object.values(full_champ_data).length; i++) {
     const json_entry = Object.values(full_champ_data)[i];
     const champ_name = resources.reversed_two_word_champs.has(
       json_entry.champion
-    );
+    )
+      ? resources.reversed_two_word_champs.get(json_entry.champion)
+      : json_entry.champion;
     champ_tiers[json_entry.tier].push(champ_name);
+    champ_tiers['all'].push(champ_name);
   }
+  console.log(champ_tiers);
   return champ_tiers;
 }
 
@@ -221,7 +226,7 @@ export default function ChampionGrid() {
         </TabList>
       </AppBar>
       <TabPanel value="1">
-        <ClassTab champ_list={Object.keys(resources.champ_icons)} />{' '}
+        <ClassTab champ_list={tieredChamps['all']} />{' '}
       </TabPanel>
       <TabPanel value="2">
         <ClassTab champ_list={tieredChamps['S']} />
