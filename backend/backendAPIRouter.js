@@ -14,6 +14,7 @@ const na_distribution = require('../src/images/distributions/na_distribution.jso
 const AbortController = require('abort-controller');
 
 const globals = require('../globals.js');
+const builds_json = require('../src/jsons/champ_data_11_8.json');
 
 const REGION_CODE_TO_DISTRIBUTION_FILE = {
   eune: eune_distribution,
@@ -377,191 +378,225 @@ champion.js displays the rune trees in a flexible manner such that name/icon cha
 highlight the 10 choices
 */
 router.get('/builds/:champion', async (req, res) => {
-  const build_json = {
-    runes: [
-      {
-        runes_primary: 'Resolve',
-        runes_primary_list: [
-          'GraspOfTheUndying',
-          'Demolish',
-          'BonePlating',
-          'Overgrowth',
-        ],
-        runes_secondary: 'Sorcery',
-        runes_secondary_list: ['NimbusCloak', 'GatheringStorm'],
-        runes_stats: [0, 1, 2],
-        runes_index: 0,
-        runes_winrate: 52.2,
-      },
-      {
-        runes_primary: 'Precision',
-        runes_primary_list: [
-          'Conqueror',
-          'PresenceOfMind',
-          'LegendTenacity',
-          'LastStand',
-        ],
-        runes_secondary: 'Domination',
-        runes_secondary_list: ['SuddenImpact', 'RavenousHunter'],
-        runes_stats: [0, 0, 2],
-        runes_index: 1,
-        runes_winrate: 51.1,
-      },
-      {
-        runes_primary: 'Precision',
-        runes_primary_list: [
-          'LethalTempo',
-          'PresenceOfMind',
-          'LegendTenacity',
-          'LastStand',
-        ],
-        runes_secondary: 'Domination',
-        runes_secondary_list: ['SuddenImpact', 'RavenousHunter'],
-        runes_stats: [0, 0, 2],
-        runes_index: 2,
-        runes_winrate: 49.1,
-      },
-      {
-        runes_primary: 'Precision',
-        runes_primary_list: [
-          'PressTheAttack',
-          'PresenceOfMind',
-          'LegendTenacity',
-          'LastStand',
-        ],
-        runes_secondary: 'Inspiration',
-        runes_secondary_list: ['MagicalFootwear', 'BiscuitDelivery'],
-        runes_stats: [1, 0, 2],
-        runes_index: 3,
-        runes_winrate: 48.9,
-      },
-      {
-        runes_primary: 'Inspiration',
-        runes_primary_list: [
-          'GlacialAugment',
-          'HextechFlashtraption',
-          'FuturesMarket',
-          'ApproachVelocity',
-        ],
-        runes_secondary: 'Domination',
-        runes_secondary_list: ['SuddenImpact', 'RavenousHunter'],
-        runes_stats: [0, 0, 2],
-        runes_index: 4,
-        runes_winrate: 48.7,
-      },
-    ],
-    abilities_order: ['Q', 'E', 'W'],
-    abilities_levels: {
-      Q: [1, 4, 5, 7, 9],
-      W: [3, 14, 15, 17, 18],
-      E: [2, 8, 10, 12, 13],
-      R: [6, 11, 16],
-    },
-    items_json: {
-      'Starting Items': [
-        {
-          items: ["Guardian's Hammer", 'Boots', 'Refillable Potion'],
-          items_winrate: 51.3,
-        },
-        {
-          items: ["Serrated Dirk", 'Boots'],
-          items_winrate: 50.3,
-        },
-      ],
-      'Mythic and Core Items': [
-        {
-          items: [
-            'Kraken Slayer',
-            "Runaan's Hurricane",
-            "Berserker's Greaves",
-          ],
-          items_winrate: 51.5,
-        },
-        {
-          items: [
-            'Galeforce',
-            "Rapid Firecannon",
-            "Boots of Swiftness",
-          ],
-          items_winrate: 50.5,
-        },
-      ],
-      'Fourth Item Options': [
-        {
-          items: [
-            'Infinity Edge',
-          ],
-          items_winrate: 51.5,
-        },
-        {
-          items: [
-            'Bloodthirster',
-          ],
-          items_winrate: 50.5,
-        },
-        {
-          items: [
-            'The Collector',
-          ],
-          items_winrate: 49.5,
-        },
-      ],
-      'Fifth Item Options': [
-        {
-          items: [
-            'Bloodthirster',
-          ],
-          items_winrate: 51.5,
-        },
-        {
-          items: [
-            'Maw of Malmortius',
-          ],
-          items_winrate: 50.5,
-        },
-        {
-          items: [
-            'The Collector',
-          ],
-          items_winrate: 49.5,
-        },
-      ],
-      'Sixth Item Options': [
-        {
-          items: [
-            'Mercurial Scimitar',
-          ],
-          items_winrate: 51.5,
-        },
-        {
-          items: [
-            'Mortal Reminder',
-          ],
-          items_winrate: 50.5,
-        },
-        {
-          items: [
-            "Lord Dominik's Regards",
-          ],
-          items_winrate: 49.5,
-        },
-      ],
-    },
-    summoner_spells: [
-      {
-        spells: ['SummonerExhaust', 'SummonerFlash'],
-        spells_winrate: 69.1,
-      },
-      {
-        spells: ['SummonerSnowball', 'SummonerFlash'],
-        spells_winrate: 51.1,
-      },
-      {
-        spells: ['SummonerBarrier', 'SummonerFlash'],
-        spells_winrate: 50.1,
-      },
-    ],
-  };
+  let champ = req.params.champion;
+  //console.log('full builds', builds_json);
+  //console.log(champ, builds_json[champ]);
+  // const build_json = {
+  //   runes: [
+  //     {
+  //       runes_primary: 'Resolve',
+  //       runes_primary_list: [
+  //         'GraspOfTheUndying',
+  //         'Demolish',
+  //         'BonePlating',
+  //         'Overgrowth',
+  //       ],
+  //       runes_secondary: 'Sorcery',
+  //       runes_secondary_list: ['NimbusCloak', 'GatheringStorm'],
+  //       runes_stats: [0, 1, 2],
+  //       runes_index: 0,
+  //       runes_winrate: 52.2,
+  //     },
+  //     {
+  //       runes_primary: 'Precision',
+  //       runes_primary_list: [
+  //         'Conqueror',
+  //         'PresenceOfMind',
+  //         'LegendTenacity',
+  //         'LastStand',
+  //       ],
+  //       runes_secondary: 'Domination',
+  //       runes_secondary_list: ['SuddenImpact', 'RavenousHunter'],
+  //       runes_stats: [0, 0, 2],
+  //       runes_index: 1,
+  //       runes_winrate: 51.1,
+  //     },
+  //     {
+  //       runes_primary: 'Precision',
+  //       runes_primary_list: [
+  //         'LethalTempo',
+  //         'PresenceOfMind',
+  //         'LegendTenacity',
+  //         'LastStand',
+  //       ],
+  //       runes_secondary: 'Domination',
+  //       runes_secondary_list: ['SuddenImpact', 'RavenousHunter'],
+  //       runes_stats: [0, 0, 2],
+  //       runes_index: 2,
+  //       runes_winrate: 49.1,
+  //     },
+  //     {
+  //       runes_primary: 'Precision',
+  //       runes_primary_list: [
+  //         'PressTheAttack',
+  //         'PresenceOfMind',
+  //         'LegendTenacity',
+  //         'LastStand',
+  //       ],
+  //       runes_secondary: 'Inspiration',
+  //       runes_secondary_list: ['MagicalFootwear', 'BiscuitDelivery'],
+  //       runes_stats: [1, 0, 2],
+  //       runes_index: 3,
+  //       runes_winrate: 48.9,
+  //     },
+  //     {
+  //       runes_primary: 'Inspiration',
+  //       runes_primary_list: [
+  //         'GlacialAugment',
+  //         'HextechFlashtraption',
+  //         'FuturesMarket',
+  //         'ApproachVelocity',
+  //       ],
+  //       runes_secondary: 'Domination',
+  //       runes_secondary_list: ['SuddenImpact', 'RavenousHunter'],
+  //       runes_stats: [0, 0, 2],
+  //       runes_index: 4,
+  //       runes_winrate: 48.7,
+  //     },
+  //   ],
+  //   abilities_order: ['Q', 'E', 'W'],
+  //   abilities_levels: {
+  //     Q: [1, 4, 5, 7, 9],
+  //     W: [3, 14, 15, 17, 18],
+  //     E: [2, 8, 10, 12, 13],
+  //     R: [6, 11, 16],
+  //   },
+  //   items_json: {
+  //     'Starting Items': [
+  //       {
+  //         items: ["Guardian's Hammer", 'Boots', 'Refillable Potion'],
+  //         items_winrate: 51.3,
+  //       },
+  //       {
+  //         items: ["Serrated Dirk", 'Boots'],
+  //         items_winrate: 50.3,
+  //       },
+  //     ],
+  //     'Mythic and Core Items': [
+  //       {
+  //         items: [
+  //           'Kraken Slayer',
+  //           "Runaan's Hurricane",
+  //           "Berserker's Greaves",
+  //         ],
+  //         items_winrate: 51.5,
+  //       },
+  //       {
+  //         items: [
+  //           'Galeforce',
+  //           "Rapid Firecannon",
+  //           "Boots of Swiftness",
+  //         ],
+  //         items_winrate: 50.5,
+  //       },
+  //     ],
+  //     'Fourth Item Options': [
+  //       {
+  //         items: [
+  //           'Infinity Edge',
+  //         ],
+  //         items_winrate: 51.5,
+  //       },
+  //       {
+  //         items: [
+  //           'Bloodthirster',
+  //         ],
+  //         items_winrate: 50.5,
+  //       },
+  //       {
+  //         items: [
+  //           'The Collector',
+  //         ],
+  //         items_winrate: 49.5,
+  //       },
+  //     ],
+  //     'Fifth Item Options': [
+  //       {
+  //         items: [
+  //           'Bloodthirster',
+  //         ],
+  //         items_winrate: 51.5,
+  //       },
+  //       {
+  //         items: [
+  //           'Maw of Malmortius',
+  //         ],
+  //         items_winrate: 50.5,
+  //       },
+  //       {
+  //         items: [
+  //           'The Collector',
+  //         ],
+  //         items_winrate: 49.5,
+  //       },
+  //     ],
+  //     'Sixth Item Options': [
+  //       {
+  //         items: [
+  //           'Mercurial Scimitar',
+  //         ],
+  //         items_winrate: 51.5,
+  //       },
+  //       {
+  //         items: [
+  //           'Mortal Reminder',
+  //         ],
+  //         items_winrate: 50.5,
+  //       },
+  //       {
+  //         items: [
+  //           "Lord Dominik's Regards",
+  //         ],
+  //         items_winrate: 49.5,
+  //       },
+  //     ],
+  //   },
+  //   summoner_spells: [
+  //     {
+  //       spells: ['SummonerExhaust', 'SummonerFlash'],
+  //       spells_winrate: 69.1,
+  //     },
+  //     {
+  //       spells: ['SummonerSnowball', 'SummonerFlash'],
+  //       spells_winrate: 51.1,
+  //     },
+  //     {
+  //       spells: ['SummonerBarrier', 'SummonerFlash'],
+  //       spells_winrate: 50.1,
+  //     },
+  //   ],
+  // };
+  let two_word_champs = new Map();
+  two_word_champs.set('AurelionSol', 'Aurelion Sol');
+  two_word_champs.set('Chogath', "Cho'Gath");
+
+  two_word_champs.set('DrMundo', 'Dr. Mundo');
+  two_word_champs.set('JarvanIV', 'Jarvan IV');
+  two_word_champs.set('Kaisa', "Kai'Sa");
+
+  two_word_champs.set('Khazix', "Kha'Zix");
+
+  two_word_champs.set('KogMaw', "Kog'Maw");
+  two_word_champs.set('Leblanc', 'LeBlanc');
+
+  two_word_champs.set('LeeSin', 'Lee Sin');
+  two_word_champs.set('MasterYi', 'Master Yi');
+  two_word_champs.set('MissFortune', 'Miss Fortune');
+  two_word_champs.set('MonkeyKing', 'Wukong');
+  two_word_champs.set('Nunu', 'Nunu & Willump');
+  two_word_champs.set('RekSai', "Rek'Sai");
+  two_word_champs.set('TahmKench', 'Tahm Kench');
+
+  two_word_champs.set('TwistedFate', 'Twisted Fate');
+  two_word_champs.set('Velkoz', "Vel'Koz");
+  two_word_champs.set('XinZhao', 'Xin Zhao');
+  if (two_word_champs.has(champ)) {
+    console.log('found champ', champ);
+    champ = two_word_champs.get(champ);
+  }
+  const build_json = builds_json[champ];
+  console.log(champ);
+  console.log(build_json);
   const runes_json = await getRunesJson();
   const item_json = await getItemJson();
   const sums_json = await getSummonerSpellsJson();
@@ -573,13 +608,16 @@ router.get('/builds/:champion', async (req, res) => {
       const items = [];
       for (itemIndex in item_build_json[key][index].items) {
         items.push(
-          getDesiredItemJson(item_build_json[key][index].items[itemIndex], item_json)
+          getDesiredItemJson(
+            item_build_json[key][index].items[itemIndex],
+            item_json
+          )
         );
       }
       item_build_json_full[key].push({
         items: items,
         items_winrate: item_build_json[key][index].items_winrate,
-      })
+      });
     }
   }
   const runes = build_json.runes;
@@ -587,9 +625,15 @@ router.get('/builds/:champion', async (req, res) => {
   for (index in runes) {
     runes_full.push({
       ...runes[index],
-      runes_primary_json: getRuneTreeJson(runes[index].runes_primary, runes_json),
-      runes_secondary_json: getRuneTreeJson(runes[index].runes_secondary, runes_json),
-    })
+      runes_primary_json: getRuneTreeJson(
+        runes[index].runes_primary,
+        runes_json
+      ),
+      runes_secondary_json: getRuneTreeJson(
+        runes[index].runes_secondary,
+        runes_json
+      ),
+    });
   }
   const champion_json = await getChampionJson(req.params.champion);
   const patch = await getCurrentPatch();
@@ -603,6 +647,7 @@ router.get('/builds/:champion', async (req, res) => {
   };
   res.send(build_response);
 });
+
 function getRuneTreeJson(tree_name, runes_json) {
   for (var i = 0; i < runes_json.length; i++) {
     var tree = runes_json[i];

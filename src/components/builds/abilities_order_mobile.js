@@ -134,7 +134,6 @@ export default function AbilitiesOrderMobile({ data, champion_name }) {
           key: abilities_order[2].toLowerCase(),
         })}
       </div>
-      {Winrate(58)}
     </div>
   );
 }

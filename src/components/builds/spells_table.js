@@ -43,7 +43,7 @@ function getFullDDragonPath(patch, spell_name, sums_json) {
   let path = null;
   for (var id in sums_json.data) {
     const sum_json = sums_json.data[id];
-    if (sum_json.id === spell_name) {
+    if (sum_json.name === spell_name) {
       path = sum_json.image.full;
     }
   }

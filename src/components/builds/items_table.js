@@ -84,6 +84,9 @@ const useStyles = makeStyles({
 });
 
 function getFullDDragonPath(patch, item_json) {
+  if (item_json === null) {
+    return null;
+  }
   return (
     'https://ddragon.leagueoflegends.com/cdn/' +
     patch +

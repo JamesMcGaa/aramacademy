@@ -94,7 +94,15 @@ export default function KeystoneRow({
     var is_selected = false;
     for (var id in selected_list) {
       var selected_rune = selected_list[id];
-      if (selected_rune === rune.key) {
+      const standardized_key = rune.key
+        .replaceAll(':', '')
+        .replaceAll(' ', '')
+        .toLowerCase();
+      const standardized_name = selected_rune
+        .replaceAll(':', '')
+        .replaceAll(' ', '')
+        .toLowerCase();
+      if (standardized_key === standardized_name) {
         is_selected = true;
       }
     }

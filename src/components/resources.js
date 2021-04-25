@@ -63,11 +63,11 @@ two_word_champs.set('MasterYi', 'Master Yi');
 two_word_champs.set('MissFortune', 'Miss Fortune');
 two_word_champs.set('MonkeyKing', 'Wukong');
 two_word_champs.set('Nunu', 'Nunu & Willump');
-two_word_champs.set('Reksai', "Rek'Sai");
+two_word_champs.set('RekSai', "Rek'Sai");
 two_word_champs.set('TahmKench', 'Tahm Kench');
 
 two_word_champs.set('TwistedFate', 'Twisted Fate');
-two_word_champs.set('Velkoz', "Vel'koz");
+two_word_champs.set('Velkoz', "Vel'Koz");
 two_word_champs.set('XinZhao', 'Xin Zhao');
 
 var champ_classes = new Object();

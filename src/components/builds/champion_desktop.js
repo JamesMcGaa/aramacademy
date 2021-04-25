@@ -53,24 +53,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ChampionsDesktop({
-  data,
-  champion_name,
-  tierlist_data,
-  total_games,
-}) {
+export default function ChampionsDesktop({ data, champion_name }) {
   const classes = useStyles();
   return (
     <div>
       <div style={{ height: '100px' }}></div>
       <Container fixed className={classes.largeContainer}>
         <Paper classes={{ root: classes.paperRoot }}>
-          <BuildHeader
-            data={data}
-            champion_name={champion_name}
-            tierlist_data={tierlist_data}
-            total_games={total_games}
-          />
+          <BuildHeader data={data} champion_name={champion_name} />
         </Paper>
       </Container>
 

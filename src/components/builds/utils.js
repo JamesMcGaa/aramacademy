@@ -36,6 +36,8 @@ export const Header = (title) => {
 export const Winrate = (winrate) => {
   const classes = useStyles();
   return (
-    <div className={classes.itemWinrate}>{winrate.toFixed(1) + '% WR'}</div>
+    <div className={classes.itemWinrate}>
+      {(winrate * 100).toFixed(1) + '% WR'}
+    </div>
   );
 };

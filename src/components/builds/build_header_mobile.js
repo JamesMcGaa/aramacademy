@@ -143,12 +143,7 @@ function getFullSpellPath(patch, spell_path) {
     spell_path
   );
 }
-export default function BuildHeaderMobile({
-  data,
-  champion_name,
-  tierlist_data,
-  total_games,
-}) {
+export default function BuildHeaderMobile({ data, champion_name }) {
   if (data.loaded === false) {
     return null;
   }
@@ -179,8 +174,7 @@ export default function BuildHeaderMobile({
   };
 
   const classes = useStyles();
-  console.log(tierlist_data);
-  const tier = tierlist_data.tier;
+  const tier = data.tier;
   const lowercaseTier = tier.toLowerCase();
   //const champion_blurb = data.champion_json.data[champion_name].title;
   const champion_json = data.champion_json;
@@ -220,11 +214,11 @@ export default function BuildHeaderMobile({
           {Header('Winrate')}
           <span
             style={{
-              color: winrateColor(tierlist_data.wins * 100),
+              color: winrateColor(data.winrate * 100),
             }}
           >
             <Typography variant="h5">
-              {(tierlist_data.wins * 100).toFixed(2)}%
+              {(data.winrate * 100).toFixed(2)}%
             </Typography>
           </span>
         </div>
@@ -232,7 +226,7 @@ export default function BuildHeaderMobile({
           {Header('Pickrate')}
 
           <Typography variant="h5">
-            {((tierlist_data.total_games * 100) / total_games).toFixed(2)}%
+            {(data.pickrate * 100).toFixed(2)}%
           </Typography>
         </div>
         <div className={classes.tierText}>

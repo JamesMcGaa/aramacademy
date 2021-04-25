@@ -152,7 +152,18 @@ function getRuneIconPath(rune_name, runes_json) {
     var row = runes_json.slots[i];
     for (var j = 0; j < row.runes.length; j++) {
       var rune = row.runes[j];
-      if (rune.key === rune_name) {
+      const standardized_key = rune.key
+        .replaceAll(':', '')
+        .replaceAll(' ', '')
+        .toLowerCase();
+      const standardized_name = rune_name
+        .replaceAll(':', '')
+        .replaceAll(' ', '')
+        .toLowerCase();
+      console.log('k', standardized_key);
+      console.log('name', standardized_name);
+      console.log(rune);
+      if (standardized_key === standardized_name) {
         return rune.icon;
       }
     }
@@ -191,7 +202,7 @@ export default function RunesTableMobile({ runes_data }) {
   const runes_secondary_json = runepage.runes_secondary_json;
   const runes_primary_list = runepage.runes_primary_list;
   const runes_secondary_list = runepage.runes_secondary_list;
-  const selected_stats_indices = runepage.runes_stats;
+  const selected_stats_names = runepage.runes_stats;
   const primary_tree_name = runepage.runes_primary;
   const secondary_tree_name = runepage.runes_secondary;
   const primary_path = getFullDDragonPath(
@@ -207,20 +218,24 @@ export default function RunesTableMobile({ runes_data }) {
     ['AdaptiveForce', 'Armor', 'MagicRes'],
     ['HealthScaling', 'Armor', 'MagicRes'],
   ];
-
+  const STAT_INDEX_MAP = {
+    0: { Adaptive: 0, AttackSpeed: 1, CDRScaling: 2 },
+    1: { Adaptive: 0, Armor: 1, MagicRes: 2 },
+    2: { HealthScaling: 0, Armor: 1, MagicRes: 2 },
+  };
   const RunesTableStats = () => {
     const input = [
       {
         stat_row: stat_grid[0],
-        selected_index: selected_stats_indices[0],
+        selected_index: STAT_INDEX_MAP[0][selected_stats_names[0]],
       },
       {
         stat_row: stat_grid[1],
-        selected_index: selected_stats_indices[1],
+        selected_index: STAT_INDEX_MAP[1][selected_stats_names[1]],
       },
       {
         stat_row: stat_grid[2],
-        selected_index: selected_stats_indices[2],
+        selected_index: STAT_INDEX_MAP[2][selected_stats_names[2]],
       },
     ];
     const rows = _.map(input, (row) => {
