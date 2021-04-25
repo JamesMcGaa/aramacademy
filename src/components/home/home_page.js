@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useHistory } from 'react-router-dom';
-import { Container } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 import {
   FormGroup,
   FormHelperText,
   Select,
   FilledInput,
   MenuItem,
+  Container,
+  Snackbar,
   Button,
+  IconButton,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useCookies } from 'react-cookie';
 var mobile = require('is-mobile');
+import Background from '../../images/index_background_compressed.jpg';
 
 const UPPERCASE_REGIONS_FOR_SELECTOR = [
   'NA',
@@ -86,9 +90,20 @@ export default function Home() {
   const [error, setError] = useState(false);
   const [focused, setFocused] = useState(false);
   const [cookies, setCookie] = useCookies(['recentlySearched']);
+  const [open, setOpen] = useState(!mobile());
 
   const COOKIE_EXPIRATION_IN_DAYS = 365;
   const SECONDS_TO_DAYS = 24 * 60 * 60;
+
+  if (mobile()) {
+    document.body.style.backgroundImage = `url(${Background})`;
+    document.body.style.backgroundPosition = `top`;
+    document.body.style.backgroundSize = `cover`;
+  }
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   function handleSearchCookie(search) {
     let searched_array;
@@ -126,12 +141,13 @@ export default function Home() {
 
   return (
     <Container>
-      <header className="masthead" style={{ marginBottom: '40vh' }}>
-        <div className="inner"></div>
-      </header>
+      <header
+        className="masthead"
+        style={mobile() ? { marginBottom: '30vh' } : { marginBottom: '40vh' }}
+      ></header>
       <main role="main" className="inner cover">
         <h1 className="cover-heading">Welcome to the Howling Abyss</h1>
-        <p className="lead">
+        <p className="lead" style={mobile() ? { fontSize: '16px' } : {}}>
           ARAM Academy helps you analyze your performance, identify winning
           strategies, and climb the ARAM ladder.
         </p>
@@ -201,17 +217,45 @@ export default function Home() {
                 }}
                 key={searchTerm}
                 classes={{ root: classes.previousSearches }}
+                style={mobile() ? { textAlign: 'center' } : {}}
               >
                 {searchTerm}
               </FormHelperText>
             ))}
 
         {error && (
-          <FormHelperText error={true} classes={{ root: classes.error }}>
+          <FormHelperText
+            error={true}
+            classes={{ root: classes.error }}
+            style={mobile() ? { textAlign: 'center' } : {}}
+          >
             Summoner name is required!
           </FormHelperText>
         )}
       </main>
+      <Snackbar
+        open={open}
+        onClose={handleClose}
+        message="Meet fellow ARAM players, discuss strategies, and more!"
+        action={
+          <Container>
+            <Button
+              color="primary"
+              size="medium"
+              href="https://discord.gg/MydvqhqWmM"
+            >
+              Join the ARAM Academy Discord
+            </Button>
+            <IconButton
+              aria-label="close"
+              color="inherit"
+              onClick={handleClose}
+            >
+              <CloseIcon />
+            </IconButton>
+          </Container>
+        }
+      />
     </Container>
   );
 }

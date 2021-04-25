@@ -4,37 +4,74 @@ import AboutPageDesktop from './about_page_desktop.js';
 import AboutPageMobile from './about_page_mobile';
 
 const mobile = require('is-mobile');
+import PaletteIcon from '@material-ui/icons/Palette';
+import KeyboardIcon from '@material-ui/icons/Keyboard';
+import ShowChartIcon from '@material-ui/icons/ShowChart';
 
 export default function About() {
   const ladData = [
-    {
-      img: '/static/MonkeyKing_about_cropped.png',
-      link: '/users/na/DeusExAnimo/',
-      bio:
-        "I'm DeusExAnimo. On the Rift I play support but on ARAM I play mostly ADC. My favorite ARAM champion is the reworked Wukong. Somehow my total Shen winrate is 21.7%",
-      name: 'DeusExAnimo',
-    },
-    {
-      img: '/static/Zed_about_cropped.png',
-      link: '/users/na/Kirito%20Sensei/',
-      bio:
-        "I'm Kirito Sensei. I'm a big fan of engage tanks and assassins. I love starting the fight with a flashy engage or one shot, but if you give me a ranged ADC, I'll consistently run it down.",
-      name: 'Kirito Sensei',
-    },
-    {
-      img: '/static/Draven_about_cropped.png',
-      link: '/users/na/Dsetreg/',
-      bio:
-        "I'm Dsetreg. Since I could walk, I've dreamed of growing up to be like Tyler1. Unfortunately my bench press is low and I am a bottom feeder in silver, so now I'm a stinky minecraft player.",
-      name: 'Dsetreg',
-    },
-    {
-      img: '/static/Vayne_about_cropped.png',
-      link: '/users/na/crushsquid/',
-      bio:
-        "I'm Crushsquid. There aren't any squid champions in League yet, but I'd main one if it were out there. Until that day, I'm a Vayne main. I am also a frequent OSU and chess player.",
-      name: 'Crushsquid',
-    },
+    [
+      {
+        img: '/static/MonkeyKing_about_cropped.png',
+        link: '/users/na/DeusExAnimo/',
+        bio:
+          'DeusExAnimo is a fullstack engineer. He also manages the AWS hosting and MongoDB clusters.',
+        name: 'DeusExAnimo',
+        icon: <KeyboardIcon />,
+      },
+      {
+        img: '/static/Zed_about_cropped.png',
+        link: '/users/na/Kirito%20Sensei/',
+        bio:
+          'Kirito Sensei is a fullstack engineer. He helped create the frontend components and backend Riot calls.',
+        name: 'Kirito Sensei',
+        icon: <KeyboardIcon />,
+      },
+      {
+        img: '/static/Draven_about_cropped.png',
+        link: '/users/na/Dsetreg/',
+        bio:
+          'Dsetreg is a fullstack engineer. He helped design our technology stack, configuration, and system flow.',
+        name: 'Dsetreg',
+        icon: <KeyboardIcon />,
+      },
+      {
+        img: '/static/Vayne_about_cropped.png',
+        link: '/users/na/crushsquid/',
+        bio:
+          'Crushsquid is an infra engineer. He developed the initial prototype that eventually became ARAM Academy.',
+        name: 'crushsquid',
+        icon: <KeyboardIcon />,
+      },
+    ],
+    [
+      {
+        img: '/static/Samira_about_cropped.png',
+        link: '/users/na/Gated/',
+        bio:
+          "Gated is ARAM Academy's product manager. He is also the coach for Penn State D1 League. Find him on",
+        name: 'Gated',
+        twitch: 'https://www.twitch.tv/gatedlol',
+        icon: <ShowChartIcon />,
+      },
+      {
+        img: '/static/Heimerdinger_about_cropped.png',
+        link: '/users/na/cake%20id/',
+        bio:
+          'cake id is our marketing manager, and creates many of the memes and advertisements used by ARAM Academy. ',
+        name: 'cake id',
+        icon: <PaletteIcon />,
+      },
+      {
+        img: '/static/Jinx_about_cropped.png',
+        link: '/users/na/ionviv/',
+        bio:
+          'Ionviv is our graphic design lead. She produces the art and assets for ARAM Academy. Find her on',
+        name: 'ionviv',
+        twitch: 'https://www.twitch.tv/ianviv',
+        icon: <PaletteIcon />,
+      },
+    ],
   ];
   if (mobile()) {
     return <AboutPageMobile data={ladData} />;

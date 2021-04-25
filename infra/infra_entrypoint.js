@@ -268,7 +268,6 @@ let processUser = async (username, region, existing_user_data = null) => {
       standardized_summoner_name: db_entry.standardized_summoner_name,
       region: db_entry.region,
     };
-    await user_model.countDocuments(filter);
     let doc = await user_model.findOneAndUpdate(filter, db_entry, {
       new: true,
       upsert: true,
@@ -285,7 +284,6 @@ let processUser = async (username, region, existing_user_data = null) => {
       standardized_summoner_name: updated_db_entry.standardized_summoner_name,
       region: updated_db_entry.region,
     };
-    await user_model.countDocuments(filter);
     let doc = await user_model.findOneAndUpdate(filter, updated_db_entry, {
       new: true,
       upsert: true,

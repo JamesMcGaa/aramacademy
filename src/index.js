@@ -12,6 +12,8 @@ import Faq from './components/faq/faq_page.js';
 import ChampionsPage from './components/champions/champions_page.js';
 import Champion from './components/builds/champion.js';
 import TierlistPage from './components/tierlist/tierlist_page.js';
+import ResearchList from './components/research/research_list.js';
+import ResearchPost from './components/research/research_post.js';
 import { Container } from '@material-ui/core';
 import './stylesheets/style.css';
 import { CookiesProvider } from 'react-cookie';
@@ -19,9 +21,6 @@ import { CookiesProvider } from 'react-cookie';
 const theme = createMuiTheme({
   palette: {
     type: 'dark',
-    background: {
-      default: '#fff',
-    },
   },
   typography: {
     useNextVariants: true,
@@ -64,6 +63,15 @@ function App() {
             </Route>
             <Route path="/FAQ">
               <Faq />
+            </Route>
+            <Route path="/tierlist">
+              <TierlistPage />
+            </Route>
+            <Route path="/research/:article">
+              <ResearchPost />
+            </Route>
+            <Route path="/research">
+              <ResearchList />
             </Route>
             <Route path="/">
               <Home />

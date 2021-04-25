@@ -23,14 +23,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TierlistPageDesktop({ props }) {
+export default function TierlistPageDesktop(props) {
   const classes = useStyles();
   const params = useParams();
 
   const [state, setState] = useState({
     patch: undefined,
   });
-  const per_champion_data = props;
 
   function handleTierlistDataResponse(json) {
     setState({
@@ -38,7 +37,7 @@ export default function TierlistPageDesktop({ props }) {
     });
   }
   if (state.patch === undefined) {
-    fetch('/api/tierlist')
+    fetch('/api/patch')
       .then((response) => response.json())
       .then((json) => {
         handleTierlistDataResponse(json);
@@ -55,7 +54,8 @@ export default function TierlistPageDesktop({ props }) {
         >
           <Typography variant="h4" style={{ fontWeight: 'bold' }}>
             {' '}
-            ARAM Tier List Patch {state.patch}
+            ARAM Tier List{' '}
+            {state.patch !== undefined ? 'Patch ' + state.patch : null}
           </Typography>
           {/* <Typography variant="h4" align="left" style={{ marginBottom: '4px' }}>
           ARAM Tier List Patch {state.patch}
@@ -65,13 +65,12 @@ export default function TierlistPageDesktop({ props }) {
             align="center"
             style={{ marginTop: '20px' }}
           >
-            We generate our tier list from top 1% MMR games across the
-            leaderboards of NA, EUW, and EUNE
+            Generated exclusively from the top 1% of ARAM players.
           </Typography>
         </Paper>
       </Container>
       <Container fixed className={classes.mediumContainer}>
-        <TierlistTableDesktop tierlist_data={per_champion_data} />
+        <TierlistTableDesktop per_champion_data={props.per_champion_data} />
       </Container>
     </div>
   );

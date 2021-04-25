@@ -268,10 +268,12 @@ export default function EnhancedTable({ per_champion_data }) {
                       classes={{ root: classes.iconCell }}
                       align="center"
                     >
-                      <img
-                        className={classes.resizeChampIcon}
-                        src={resources.champ_icons[row.champion]}
-                      />
+                      <a href={'/champions/' + row.champion}>
+                        <img
+                          className={classes.resizeChampIcon}
+                          src={resources.champ_icons[row.champion]}
+                        />
+                      </a>
                     </TableCell>
                     <TableCell align="left" style={{ paddingLeft: '0px' }}>
                       {resources.two_word_champs.has(row.champion)

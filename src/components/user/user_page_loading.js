@@ -1,5 +1,5 @@
 import React from 'react';
-import nunu_gif from '../../images/nunu_dancing.gif';
+import nunu_gif from '../../images/nunu_dancing_compressed.gif';
 
 export default function UserPageLoading({ summonerName }) {
   return (
@@ -11,7 +11,8 @@ export default function UserPageLoading({ summonerName }) {
       <h4>
         {' '}
         We are aggregating data for {summonerName}.
-        <br /> This process may take up to a few minutes.
+        <br /> This page will update automatically.
+        <br /> Otherwise feel free to close this page and come back later.
       </h4>
     </div>
   );

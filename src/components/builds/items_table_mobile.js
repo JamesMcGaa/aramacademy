@@ -80,6 +80,9 @@ const useStyles = makeStyles({
 });
 
 function getFullDDragonPath(patch, item_json) {
+  if (item_json === null) {
+    return null;
+  }
   return (
     'https://ddragon.leagueoflegends.com/cdn/' +
     patch +
@@ -103,7 +106,7 @@ export default function ItemsTableMobile({ items_data }) {
       path_list.push(getFullDDragonPath(items_data.patch, item_json));
     }
     const icons = _.map(path_list, (path) => (
-      <img className={classes.resizeItemIcon} alt="summoner icon" src={path} />
+      <img className={classes.resizeItemIcon} alt="no item" src={path} />
     ));
     return (
       <div className={classes.itemSingleBlock}>

@@ -55,16 +55,20 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Luden's Tempest", "Rabadon's Deathcap", "Void Staff"],
-          "items_winrate": 0.6064139941690962
+          "items": [
+            "Luden's Tempest",
+            "Sorcerer's Shoes",
+            "Rabadon's Deathcap"
+          ],
+          "items_winrate": 0.5963203463203464
         },
         {
           "items": [
+            "Sorcerer's Shoes",
             "Luden's Tempest",
-            "Rabadon's Deathcap",
-            "Zhonya's Hourglass"
+            "Rabadon's Deathcap"
           ],
-          "items_winrate": 0.6026058631921825
+          "items_winrate": 0.5737179487179487
         }
       ],
       "Fourth Item Options": [
@@ -167,12 +171,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Goredrinker", "Spirit Visage", "Sterak's Gage"],
-          "items_winrate": 0.5520833333333334
+          "items": ["Goredrinker", "Mercury's Treads", "Sterak's Gage"],
+          "items_winrate": 0.5388235294117647
         },
         {
-          "items": ["Goredrinker", "Sterak's Gage", null],
-          "items_winrate": 0.5433070866141733
+          "items": ["Goredrinker", "Plated Steelcaps", "Death's Dance"],
+          "items_winrate": 0.5194805194805194
         }
       ],
       "Fourth Item Options": [
@@ -205,11 +209,11 @@
       ],
       "Sixth Item Options": [
         {
-          "items": ["Chempunk Chainsword"],
+          "items": ["Death's Dance"],
           "items_winrate": 0.75
         },
         {
-          "items": ["Death's Dance"],
+          "items": ["Chempunk Chainsword"],
           "items_winrate": 0.75
         },
         {
@@ -275,12 +279,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Sunfire Aegis", "Thornmail", "Warmog's Armor"],
-          "items_winrate": 0.5730337078651685
+          "items": ["Sunfire Aegis", "Mercury's Treads", "Abyssal Mask"],
+          "items_winrate": 0.5879120879120879
         },
         {
-          "items": ["Sunfire Aegis", "Thornmail", null],
-          "items_winrate": 0.5616161616161616
+          "items": ["Sunfire Aegis", "Plated Steelcaps", "Thornmail"],
+          "items_winrate": 0.5852272727272727
         }
       ],
       "Fourth Item Options": [
@@ -321,7 +325,7 @@
           "items_winrate": 0.6
         },
         {
-          "items": ["Void Staff"],
+          "items": ["Frostfire Gauntlet"],
           "items_winrate": 0.6
         }
       ]
@@ -397,16 +401,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Luden's Tempest", "Lich Bane", null],
-          "items_winrate": 0.5743944636678201
+          "items": ["Luden's Tempest", "Sorcerer's Shoes", "Lich Bane"],
+          "items_winrate": 0.5286532951289399
         },
         {
-          "items": [
-            "Everfrost",
-            "Ionian Boots of Lucidity",
-            "Rapid Firecannon"
-          ],
-          "items_winrate": 0.5267558528428093
+          "items": ["Everfrost", "Rapid Firecannon", "Lich Bane"],
+          "items_winrate": 0.5232067510548524
         }
       ],
       "Fourth Item Options": [
@@ -509,12 +509,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Eclipse", "Sterak's Gage", "Blade of The Ruined King"],
-          "items_winrate": 0.5925925925925926
+          "items": ["Goredrinker", "Mercury's Treads", "Sterak's Gage"],
+          "items_winrate": 0.6496815286624203
         },
         {
-          "items": ["Eclipse", "Sterak's Gage", "Death's Dance"],
-          "items_winrate": 0.5666666666666667
+          "items": ["Eclipse", "Mercury's Treads", "Wit's End"],
+          "items_winrate": 0.5969387755102041
         }
       ],
       "Fourth Item Options": [
@@ -627,12 +627,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Stridebreaker", "Titanic Hydra", "Sterak's Gage"],
-          "items_winrate": 0.5544412607449857
+          "items": ["Titanic Hydra", "Mercury's Treads", "Stridebreaker"],
+          "items_winrate": 0.582089552238806
         },
         {
-          "items": ["Stridebreaker", "Ravenous Hydra", "Sterak's Gage"],
-          "items_winrate": 0.5421052631578948
+          "items": ["Goredrinker", "Mercury's Treads", "Ravenous Hydra"],
+          "items_winrate": 0.5818965517241379
         }
       ],
       "Fourth Item Options": [
@@ -749,16 +749,20 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Luden's Tempest", "Rabadon's Deathcap", "Void Staff"],
-          "items_winrate": 0.5342565597667639
+          "items": [
+            "Luden's Tempest",
+            "Rabadon's Deathcap",
+            "Sorcerer's Shoes"
+          ],
+          "items_winrate": 0.5748792270531401
         },
         {
           "items": [
             "Luden's Tempest",
-            "Zhonya's Hourglass",
+            "Sorcerer's Shoes",
             "Rabadon's Deathcap"
           ],
-          "items_winrate": 0.511844331641286
+          "items_winrate": 0.5119535519125683
         }
       ],
       "Fourth Item Options": [
@@ -875,12 +879,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Hextech Rocketbelt", "Cosmic Drive", "Rabadon's Deathcap"],
-          "items_winrate": 0.6692708333333334
+          "items": [
+            "Night Harvester",
+            "Sorcerer's Shoes",
+            "Rabadon's Deathcap"
+          ],
+          "items_winrate": 0.5960729312762973
         },
         {
           "items": ["Night Harvester", "Cosmic Drive", "Rabadon's Deathcap"],
-          "items_winrate": 0.5896358543417367
+          "items_winrate": 0.5614617940199336
         }
       ],
       "Fourth Item Options": [
@@ -997,20 +1005,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": [
-            "Liandry's Anguish",
-            "Demonic Embrace",
-            "Zhonya's Hourglass"
-          ],
-          "items_winrate": 0.6070175438596491
+          "items": ["Liandry's Anguish", "Sorcerer's Shoes", "Demonic Embrace"],
+          "items_winrate": 0.5902061855670103
         },
         {
           "items": [
-            "Night Harvester",
-            "Zhonya's Hourglass",
-            "Rabadon's Deathcap"
+            "Hextech Rocketbelt",
+            "Sorcerer's Shoes",
+            "Zhonya's Hourglass"
           ],
-          "items_winrate": 0.551056338028169
+          "items_winrate": 0.5467775467775468
         }
       ],
       "Fourth Item Options": [
@@ -1127,12 +1131,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Nashor's Tooth", "Riftmaker", "Lich Bane"],
-          "items_winrate": 0.5730569948186528
+          "items": ["Nashor's Tooth", "Riftmaker", "Berserker's Greaves"],
+          "items_winrate": 0.5890909090909091
         },
         {
-          "items": ["Riftmaker", "Nashor's Tooth", "Guinsoo's Rageblade"],
-          "items_winrate": 0.5607985480943739
+          "items": ["Riftmaker", "Nashor's Tooth", "Berserker's Greaves"],
+          "items_winrate": 0.5602605863192183
         }
       ],
       "Fourth Item Options": [
@@ -1238,13 +1242,17 @@
           "items": [
             "Duskblade of Draktharr",
             "The Collector",
-            "Essence Reaver"
+            "Berserker's Greaves"
           ],
-          "items_winrate": 0.5341716785128485
+          "items_winrate": 0.5367483296213809
         },
         {
-          "items": ["Duskblade of Draktharr", "The Collector", "Edge of Night"],
-          "items_winrate": 0.5170556552962298
+          "items": [
+            "Berserker's Greaves",
+            "Duskblade of Draktharr",
+            "The Collector"
+          ],
+          "items_winrate": 0.5025873221216042
         }
       ],
       "Fourth Item Options": [
@@ -1361,12 +1369,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Sunfire Aegis", "Thornmail", null],
-          "items_winrate": 0.5861486486486487
+          "items": ["Sunfire Aegis", "Mercury's Treads", "Spirit Visage"],
+          "items_winrate": 0.5547445255474452
         },
         {
-          "items": ["Sunfire Aegis", "Spirit Visage", null],
-          "items_winrate": 0.5821428571428572
+          "items": ["Mercury's Treads", "Sunfire Aegis", "Thornmail"],
+          "items_winrate": 0.5542763157894737
         }
       ],
       "Fourth Item Options": [
@@ -1470,16 +1478,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": [
-            "Luden's Tempest",
-            "Archangel's Staff",
-            "Rabadon's Deathcap"
-          ],
-          "items_winrate": 0.5727002967359051
+          "items": ["Luden's Tempest", "Archangel's Staff", "Sorcerer's Shoes"],
+          "items_winrate": 0.5570342205323194
         },
         {
-          "items": ["Luden's Tempest", "Archangel's Staff", "Cosmic Drive"],
-          "items_winrate": 0.5149501661129569
+          "items": ["Luden's Tempest", "Sorcerer's Shoes", "Archangel's Staff"],
+          "items_winrate": 0.49276274386406543
         }
       ],
       "Fourth Item Options": [
@@ -1588,12 +1592,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Frostfire Gauntlet", "Thornmail", null],
-          "items_winrate": 0.66875
+          "items": [
+            "Frostfire Gauntlet",
+            "Mercury's Treads",
+            "Force of Nature"
+          ],
+          "items_winrate": 0.6410256410256411
         },
         {
-          "items": ["Frostfire Gauntlet", "Thornmail", "Warmog's Armor"],
-          "items_winrate": 0.5769881556683587
+          "items": ["Frostfire Gauntlet", "Plated Steelcaps", "Thornmail"],
+          "items_winrate": 0.6391752577319587
         }
       ],
       "Fourth Item Options": [
@@ -1701,20 +1709,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": [
-            "Manamune",
-            "Duskblade of Draktharr",
-            "Ionian Boots of Lucidity"
-          ],
-          "items_winrate": 0.5589459084604715
+          "items": ["Manamune", "Duskblade of Draktharr", null],
+          "items_winrate": 0.5688405797101449
         },
         {
-          "items": [
-            "Duskblade of Draktharr",
-            "Manamune",
-            "Ionian Boots of Lucidity"
-          ],
-          "items_winrate": 0.5547128927410617
+          "items": ["Duskblade of Draktharr", "Manamune", null],
+          "items_winrate": 0.5618631732168851
         }
       ],
       "Fourth Item Options": [
@@ -1835,20 +1835,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": [
-            "Moonstone Renewer",
-            "Redemption",
-            "Ionian Boots of Lucidity"
-          ],
-          "items_winrate": 0.5349162011173184
+          "items": ["Moonstone Renewer", null, null],
+          "items_winrate": 0.6184615384615385
         },
         {
           "items": [
             "Moonstone Renewer",
-            "Ionian Boots of Lucidity",
+            "Staff of Flowing Water",
             "Ardent Censer"
           ],
-          "items_winrate": 0.5344180225281602
+          "items_winrate": 0.5755258126195029
         }
       ],
       "Fourth Item Options": [
@@ -1965,16 +1961,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Liandry's Anguish", "Nashor's Tooth", "Demonic Embrace"],
-          "items_winrate": 0.591304347826087
+          "items": ["Liandry's Anguish", "Demonic Embrace", "Sorcerer's Shoes"],
+          "items_winrate": 0.5425867507886435
         },
         {
-          "items": [
-            "Liandry's Anguish",
-            "Demonic Embrace",
-            "Rabadon's Deathcap"
-          ],
-          "items_winrate": 0.5841503267973857
+          "items": ["Sorcerer's Shoes", "Liandry's Anguish", "Demonic Embrace"],
+          "items_winrate": 0.5397775876817793
         }
       ],
       "Fourth Item Options": [
@@ -2077,12 +2069,20 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Kraken Slayer", "Phantom Dancer", "Infinity Edge"],
-          "items_winrate": 0.5273892773892774
+          "items": [
+            "Immortal Shieldbow",
+            "Berserker's Greaves",
+            "The Collector"
+          ],
+          "items_winrate": 0.5087719298245614
         },
         {
-          "items": ["Immortal Shieldbow", "Rapid Firecannon", "Infinity Edge"],
-          "items_winrate": 0.5138632162661737
+          "items": [
+            "Immortal Shieldbow",
+            "Berserker's Greaves",
+            "Phantom Dancer"
+          ],
+          "items_winrate": 0.49898580121703856
         }
       ],
       "Fourth Item Options": [
@@ -2199,12 +2199,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Sunfire Aegis", "Thornmail", "Spirit Visage"],
-          "items_winrate": 0.5666666666666667
+          "items": ["Sunfire Aegis", "Mercury's Treads", "Titanic Hydra"],
+          "items_winrate": 0.5945945945945946
         },
         {
-          "items": ["Divine Sunderer", "Spirit Visage", "Thornmail"],
-          "items_winrate": 0.5238095238095238
+          "items": ["Sunfire Aegis", "Plated Steelcaps", "Thornmail"],
+          "items_winrate": 0.5563380281690141
         }
       ],
       "Fourth Item Options": [
@@ -2321,12 +2321,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Sunfire Aegis", "Spirit Visage", null],
-          "items_winrate": 0.47280334728033474
+          "items": ["Sunfire Aegis", "Mercury's Treads", "Spirit Visage"],
+          "items_winrate": 0.4920212765957447
         },
         {
-          "items": ["Night Harvester", "Rabadon's Deathcap", null],
-          "items_winrate": 0.4406779661016949
+          "items": ["Mercury's Treads", "Sunfire Aegis", "Spirit Visage"],
+          "items_winrate": 0.4666666666666667
         }
       ],
       "Fourth Item Options": [
@@ -2443,12 +2443,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Liandry's Anguish", "Demonic Embrace", null],
-          "items_winrate": 0.635593220338983
+          "items": ["Eclipse", "The Collector", "Berserker's Greaves"],
+          "items_winrate": 0.5950520833333334
         },
         {
-          "items": ["Eclipse", "The Collector", "Edge of Night"],
-          "items_winrate": 0.5641915336571826
+          "items": ["Liandry's Anguish", "Sorcerer's Shoes", "Demonic Embrace"],
+          "items_winrate": 0.5172622652937614
         }
       ],
       "Fourth Item Options": [
@@ -2569,12 +2569,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Imperial Mandate", "Manamune", "Ionian Boots of Lucidity"],
-          "items_winrate": 0.6650893796004206
+          "items": ["Imperial Mandate", "Manamune", null],
+          "items_winrate": 0.7186843946815955
         },
         {
-          "items": ["Imperial Mandate", "Ionian Boots of Lucidity", "Manamune"],
-          "items_winrate": 0.598849252013809
+          "items": ["Manamune", "Imperial Mandate", "Ravenous Hydra"],
+          "items_winrate": 0.6215384615384615
         }
       ],
       "Fourth Item Options": [
@@ -2677,12 +2677,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Kraken Slayer", "Navori Quickblades", "Phantom Dancer"],
-          "items_winrate": 0.5161290322580645
+          "items": ["Kraken Slayer", "Berserker's Greaves", "Phantom Dancer"],
+          "items_winrate": 0.5189873417721519
         },
         {
-          "items": ["Galeforce", "Navori Quickblades", "Infinity Edge"],
-          "items_winrate": 0.49834983498349833
+          "items": ["Galeforce", "Berserker's Greaves", "Phantom Dancer"],
+          "items_winrate": 0.5144508670520231
         }
       ],
       "Fourth Item Options": [
@@ -2785,12 +2785,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Trinity Force", "Sterak's Gage", "Death's Dance"],
-          "items_winrate": 0.5807692307692308
+          "items": [
+            "Trinity Force",
+            "Plated Steelcaps",
+            "Blade of The Ruined King"
+          ],
+          "items_winrate": 0.5122615803814714
         },
         {
-          "items": ["Trinity Force", "Sterak's Gage", "Wit's End"],
-          "items_winrate": 0.5454545454545454
+          "items": ["Trinity Force", "Plated Steelcaps", "Sterak's Gage"],
+          "items_winrate": 0.5108359133126935
         }
       ],
       "Fourth Item Options": [
@@ -2907,12 +2911,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Liandry's Anguish", "Demonic Embrace", null],
-          "items_winrate": 0.6316652994257588
+          "items": ["Liandry's Anguish", "Demonic Embrace", "Sorcerer's Shoes"],
+          "items_winrate": 0.5765957446808511
         },
         {
-          "items": ["Liandry's Anguish", null, null],
-          "items_winrate": 0.6248331108144193
+          "items": ["Liandry's Anguish", "Sorcerer's Shoes", "Demonic Embrace"],
+          "items_winrate": 0.5400568181818182
         }
       ],
       "Fourth Item Options": [
@@ -3029,12 +3033,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Luden's Tempest", "Rabadon's Deathcap", null],
-          "items_winrate": 0.5653333333333334
+          "items": [
+            "Luden's Tempest",
+            "Sorcerer's Shoes",
+            "Rabadon's Deathcap"
+          ],
+          "items_winrate": 0.49834983498349833
         },
         {
-          "items": ["Luden's Tempest", "Rabadon's Deathcap", "Void Staff"],
-          "items_winrate": 0.5151515151515151
+          "items": ["Luden's Tempest", "Sorcerer's Shoes", "Archangel's Staff"],
+          "items_winrate": 0.4835164835164835
         }
       ],
       "Fourth Item Options": [
@@ -3137,16 +3145,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": [
-            "Liandry's Anguish",
-            "Demonic Embrace",
-            "Rylai's Crystal Scepter"
-          ],
-          "items_winrate": 0.5605095541401274
+          "items": ["Liandry's Anguish", "Mercury's Treads", "Demonic Embrace"],
+          "items_winrate": 0.5655172413793104
         },
         {
-          "items": ["Riftmaker", "Demonic Embrace", "Rylai's Crystal Scepter"],
-          "items_winrate": 0.5473684210526316
+          "items": ["Riftmaker", "Mercury's Treads", "Demonic Embrace"],
+          "items_winrate": 0.55
         }
       ],
       "Fourth Item Options": [
@@ -3263,12 +3267,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Night Harvester", "Rabadon's Deathcap", "Void Staff"],
-          "items_winrate": 0.6415094339622641
+          "items": ["Night Harvester", "Lich Bane", "Sorcerer's Shoes"],
+          "items_winrate": 0.5546558704453441
         },
         {
-          "items": ["Night Harvester", "Rabadon's Deathcap", "Lich Bane"],
-          "items_winrate": 0.576
+          "items": [
+            "Night Harvester",
+            "Sorcerer's Shoes",
+            "Rabadon's Deathcap"
+          ],
+          "items_winrate": 0.539651837524178
         }
       ],
       "Fourth Item Options": [
@@ -3385,12 +3393,20 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Kraken Slayer", "Runaan's Hurricane", "Infinity Edge"],
-          "items_winrate": 0.5399843709299297
+          "items": [
+            "Kraken Slayer",
+            "Runaan's Hurricane",
+            "Berserker's Greaves"
+          ],
+          "items_winrate": 0.5577731092436975
         },
         {
-          "items": ["Kraken Slayer", "Runaan's Hurricane", "Bloodthirster"],
-          "items_winrate": 0.5339901477832513
+          "items": [
+            "Immortal Shieldbow",
+            "Berserker's Greaves",
+            "Runaan's Hurricane"
+          ],
+          "items_winrate": 0.5136842105263157
         }
       ],
       "Fourth Item Options": [
@@ -3507,16 +3523,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": [
-            "Liandry's Anguish",
-            "Demonic Embrace",
-            "Zhonya's Hourglass"
-          ],
-          "items_winrate": 0.573170731707317
+          "items": ["Liandry's Anguish", "Demonic Embrace", "Sorcerer's Shoes"],
+          "items_winrate": 0.5788235294117647
         },
         {
-          "items": ["Liandry's Anguish", "Demonic Embrace", null],
-          "items_winrate": 0.553030303030303
+          "items": [
+            "Liandry's Anguish",
+            "Sorcerer's Shoes",
+            "Rabadon's Deathcap"
+          ],
+          "items_winrate": 0.5553772070626003
         }
       ],
       "Fourth Item Options": [
@@ -3619,16 +3635,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": [
-            "Frostfire Gauntlet",
-            "Warmog's Armor",
-            "Gargoyle Stoneplate"
-          ],
-          "items_winrate": 0.6252676659528907
+          "items": ["Frostfire Gauntlet", "Mercury's Treads", "Warmog's Armor"],
+          "items_winrate": 0.6005774783445621
         },
         {
-          "items": ["Frostfire Gauntlet", "Warmog's Armor", null],
-          "items_winrate": 0.625
+          "items": ["Frostfire Gauntlet", "Plated Steelcaps", "Warmog's Armor"],
+          "items_winrate": 0.5914396887159533
         }
       ],
       "Fourth Item Options": [
@@ -3745,12 +3757,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Sunfire Aegis", "Thornmail", "Warmog's Armor"],
-          "items_winrate": 0.6261682242990654
+          "items": ["Plated Steelcaps", "Sunfire Aegis", "Thornmail"],
+          "items_winrate": 0.6111111111111112
         },
         {
-          "items": ["Sunfire Aegis", "Thornmail", "Randuin's Omen"],
-          "items_winrate": 0.6150234741784038
+          "items": ["Sunfire Aegis", "Plated Steelcaps", "Thornmail"],
+          "items_winrate": 0.6014669926650367
         }
       ],
       "Fourth Item Options": [
@@ -3853,12 +3865,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Turbo Chemtank", "Thornmail", "Warmog's Armor"],
-          "items_winrate": 0.5740072202166066
+          "items": ["Sunfire Aegis", "Mercury's Treads", "Thornmail"],
+          "items_winrate": 0.5020576131687243
         },
         {
-          "items": ["Turbo Chemtank", "Thornmail", "Dead Man's Plate"],
-          "items_winrate": 0.5114709851551957
+          "items": ["Turbo Chemtank", "Mercury's Treads", "Dead Man's Plate"],
+          "items_winrate": 0.49063670411985016
         }
       ],
       "Fourth Item Options": [
@@ -3994,12 +4006,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Liandry's Anguish", "Archangel's Staff", "Morellonomicon"],
-          "items_winrate": 0.5016611295681063
+          "items": ["Liandry's Anguish", "Sorcerer's Shoes", null],
+          "items_winrate": 0.5347222222222222
         },
         {
-          "items": ["Liandry's Anguish", null, null],
-          "items_winrate": 0.5
+          "items": ["Luden's Tempest", "Sorcerer's Shoes", "Archangel's Staff"],
+          "items_winrate": 0.5078534031413613
         }
       ],
       "Fourth Item Options": [
@@ -4116,16 +4128,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": [
-            "Liandry's Anguish",
-            "Ionian Boots of Lucidity",
-            "Cosmic Drive"
-          ],
-          "items_winrate": 0.5388471177944862
+          "items": ["Liandry's Anguish", "Demonic Embrace", "Sorcerer's Shoes"],
+          "items_winrate": 0.5622775800711743
         },
         {
-          "items": ["Liandry's Anguish", "Demonic Embrace", null],
-          "items_winrate": 0.5328083989501312
+          "items": [
+            "Luden's Tempest",
+            "Sorcerer's Shoes",
+            "Rabadon's Deathcap"
+          ],
+          "items_winrate": 0.5241116751269036
         }
       ],
       "Fourth Item Options": [
@@ -4228,12 +4240,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Sunfire Aegis", "Spirit Visage", "Force of Nature"],
-          "items_winrate": 0.6605166051660517
+          "items": ["Frostfire Gauntlet", "Mercury's Treads", "Spirit Visage"],
+          "items_winrate": 0.6409090909090909
         },
         {
-          "items": ["Frostfire Gauntlet", "Spirit Visage", null],
-          "items_winrate": 0.658273381294964
+          "items": ["Mercury's Treads", "Frostfire Gauntlet", "Spirit Visage"],
+          "items_winrate": 0.6179775280898876
         }
       ],
       "Fourth Item Options": [
@@ -4274,7 +4286,7 @@
           "items_winrate": 0.625
         },
         {
-          "items": ["Dead Man's Plate"],
+          "items": ["Thornmail"],
           "items_winrate": 0.5882352941176471
         }
       ]
@@ -4356,18 +4368,18 @@
         {
           "items": [
             "Moonstone Renewer",
-            "Staff of Flowing Water",
-            "Ionian Boots of Lucidity"
+            "Archangel's Staff",
+            "Staff of Flowing Water"
           ],
-          "items_winrate": 0.6430834213305174
+          "items_winrate": 0.662839248434238
         },
         {
           "items": [
             "Moonstone Renewer",
-            "Archangel's Staff",
-            "Ionian Boots of Lucidity"
+            "Staff of Flowing Water",
+            "Ardent Censer"
           ],
-          "items_winrate": 0.5982142857142857
+          "items_winrate": 0.6288808664259928
         }
       ],
       "Fourth Item Options": [
@@ -4479,16 +4491,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": [
-            "Luden's Tempest",
-            "Archangel's Staff",
-            "Rabadon's Deathcap"
-          ],
-          "items_winrate": 0.5862068965517241
+          "items": ["Everfrost", "Archangel's Staff", "Sorcerer's Shoes"],
+          "items_winrate": 0.5598086124401914
         },
         {
-          "items": ["Everfrost", "Archangel's Staff", "Rabadon's Deathcap"],
-          "items_winrate": 0.5627906976744186
+          "items": ["Luden's Tempest", "Sorcerer's Shoes", "Archangel's Staff"],
+          "items_winrate": 0.5331529093369418
         }
       ],
       "Fourth Item Options": [
@@ -4598,18 +4606,14 @@
         {
           "items": [
             "Blade of The Ruined King",
-            "Immortal Shieldbow",
-            "Wit's End"
+            "Plated Steelcaps",
+            "Trinity Force"
           ],
-          "items_winrate": 0.525974025974026
+          "items_winrate": 0.5210355987055016
         },
         {
-          "items": [
-            "Trinity Force",
-            "Blade of The Ruined King",
-            "Death's Dance"
-          ],
-          "items_winrate": 0.5189873417721519
+          "items": ["Trinity Force", "Mercury's Treads", "Sterak's Gage"],
+          "items_winrate": 0.4925373134328358
         }
       ],
       "Fourth Item Options": [
@@ -4730,20 +4734,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": [
-            "Moonstone Renewer",
-            "Ardent Censer",
-            "Ionian Boots of Lucidity"
-          ],
-          "items_winrate": 0.615071283095723
+          "items": ["Moonstone Renewer", "Ardent Censer", null],
+          "items_winrate": 0.6220472440944882
         },
         {
-          "items": [
-            "Moonstone Renewer",
-            "Staff of Flowing Water",
-            "Ionian Boots of Lucidity"
-          ],
-          "items_winrate": 0.605830164765526
+          "items": ["Moonstone Renewer", "Staff of Flowing Water", null],
+          "items_winrate": 0.5870646766169154
         }
       ],
       "Fourth Item Options": [
@@ -4852,20 +4848,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": [
-            "Essence Reaver",
-            "Duskblade of Draktharr",
-            "The Collector"
-          ],
-          "items_winrate": 0.6017191977077364
+          "items": ["Essence Reaver", "Duskblade of Draktharr", null],
+          "items_winrate": 0.5485074626865671
         },
         {
           "items": [
             "Essence Reaver",
             "Duskblade of Draktharr",
-            "Ionian Boots of Lucidity"
+            "The Collector"
           ],
-          "items_winrate": 0.5617103984450923
+          "items_winrate": 0.5240492170022372
         }
       ],
       "Fourth Item Options": [
@@ -4986,12 +4978,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Manamune", "Essence Reaver", "Immortal Shieldbow"],
-          "items_winrate": 0.5876685934489403
+          "items": ["Divine Sunderer", "Manamune", "Sorcerer's Shoes"],
+          "items_winrate": 0.6218181818181818
         },
         {
-          "items": ["Divine Sunderer", "Manamune", "Rapid Firecannon"],
-          "items_winrate": 0.5809682804674458
+          "items": ["Essence Reaver", "Manamune", "Sorcerer's Shoes"],
+          "items_winrate": 0.5995500562429696
         }
       ],
       "Fourth Item Options": [
@@ -5114,18 +5106,18 @@
         {
           "items": [
             "Moonstone Renewer",
-            "Ionian Boots of Lucidity",
-            "Chemtech Putrifier"
+            "Ardent Censer",
+            "Staff of Flowing Water"
           ],
-          "items_winrate": 0.5793528505392912
+          "items_winrate": 0.5725806451612904
         },
         {
           "items": [
             "Moonstone Renewer",
             "Staff of Flowing Water",
-            "Ionian Boots of Lucidity"
+            "Ardent Censer"
           ],
-          "items_winrate": 0.5590327169274538
+          "items_winrate": 0.5682015638575152
         }
       ],
       "Fourth Item Options": [
@@ -5244,14 +5236,14 @@
         {
           "items": [
             "Locket of the Iron Solari",
-            "Zeke's Convergence",
+            "Mercury's Treads",
             "Knight's Vow"
           ],
-          "items_winrate": 0.5688073394495413
+          "items_winrate": 0.5514705882352942
         },
         {
-          "items": ["Locket of the Iron Solari", "Zeke's Convergence", null],
-          "items_winrate": 0.5490196078431373
+          "items": ["Sunfire Aegis", "Mercury's Treads", "Spirit Visage"],
+          "items_winrate": 0.541095890410959
         }
       ],
       "Fourth Item Options": [
@@ -5368,12 +5360,20 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Luden's Tempest", "Rabadon's Deathcap", null],
-          "items_winrate": 0.5745895788722342
+          "items": [
+            "Luden's Tempest",
+            "Rabadon's Deathcap",
+            "Sorcerer's Shoes"
+          ],
+          "items_winrate": 0.6006711409395973
         },
         {
-          "items": ["Luden's Tempest", null, null],
-          "items_winrate": 0.5350223546944859
+          "items": [
+            "Luden's Tempest",
+            "Sorcerer's Shoes",
+            "Rabadon's Deathcap"
+          ],
+          "items_winrate": 0.5348773841961852
         }
       ],
       "Fourth Item Options": [
@@ -5481,12 +5481,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Divine Sunderer", "Spirit Visage", null],
-          "items_winrate": 0.6473429951690821
+          "items": ["Mercury's Treads", "Divine Sunderer", "Spirit Visage"],
+          "items_winrate": 0.6287425149700598
         },
         {
-          "items": ["Frostfire Gauntlet", "Spirit Visage", null],
-          "items_winrate": 0.6181818181818182
+          "items": ["Frostfire Gauntlet", "Mercury's Treads", "Spirit Visage"],
+          "items_winrate": 0.6264367816091954
         }
       ],
       "Fourth Item Options": [
@@ -5603,12 +5603,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Liandry's Anguish", null, null],
-          "items_winrate": 0.5852090032154341
+          "items": ["Liandry's Anguish", "Sorcerer's Shoes", "Demonic Embrace"],
+          "items_winrate": 0.5947368421052631
         },
         {
-          "items": ["Liandry's Anguish", "Demonic Embrace", null],
-          "items_winrate": 0.5689277899343544
+          "items": [
+            "Liandry's Anguish",
+            "Sorcerer's Shoes",
+            "Zhonya's Hourglass"
+          ],
+          "items_winrate": 0.5557136083451872
         }
       ],
       "Fourth Item Options": [
@@ -5739,12 +5743,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Kraken Slayer", "Rapid Firecannon", "Infinity Edge"],
-          "items_winrate": 0.5326223337515684
+          "items": ["Kraken Slayer", "Rapid Firecannon", "Berserker's Greaves"],
+          "items_winrate": 0.5714285714285714
         },
         {
-          "items": ["Galeforce", "Stormrazor", "Rapid Firecannon"],
-          "items_winrate": 0.5293333333333333
+          "items": ["Kraken Slayer", "Berserker's Greaves", "Stormrazor"],
+          "items_winrate": 0.5634095634095634
         }
       ],
       "Fourth Item Options": [
@@ -5847,12 +5851,8 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Sunfire Aegis", "Thornmail", null],
-          "items_winrate": 0.5866336633663366
-        },
-        {
-          "items": ["Everfrost", "Ionian Boots of Lucidity", "Cosmic Drive"],
-          "items_winrate": 0.4849445324881141
+          "items": ["Sunfire Aegis", "Mercury's Treads", "Thornmail"],
+          "items_winrate": 0.5483359746434231
         }
       ],
       "Fourth Item Options": [
@@ -5969,12 +5969,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Night Harvester", "Cosmic Drive", "Rabadon's Deathcap"],
-          "items_winrate": 0.5178365937859609
+          "items": ["Sorcerer's Shoes", "Night Harvester", "Cosmic Drive"],
+          "items_winrate": 0.5391498881431768
         },
         {
-          "items": ["Night Harvester", "Cosmic Drive", null],
-          "items_winrate": 0.5129604365620737
+          "items": [
+            "Night Harvester",
+            "Sorcerer's Shoes",
+            "Zhonya's Hourglass"
+          ],
+          "items_winrate": 0.5166204986149584
         }
       ],
       "Fourth Item Options": [
@@ -6110,12 +6114,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Riftmaker", "Nashor's Tooth", "Lich Bane"],
-          "items_winrate": 0.5836653386454184
+          "items": ["Nashor's Tooth", "Sorcerer's Shoes", "Riftmaker"],
+          "items_winrate": 0.562753036437247
         },
         {
-          "items": ["Riftmaker", "Nashor's Tooth", "Rabadon's Deathcap"],
-          "items_winrate": 0.5741626794258373
+          "items": [
+            "Night Harvester",
+            "Sorcerer's Shoes",
+            "Rabadon's Deathcap"
+          ],
+          "items_winrate": 0.5558139534883721
         }
       ],
       "Fourth Item Options": [
@@ -6233,11 +6241,11 @@
       "Mythic and Core Items": [
         {
           "items": ["Duskblade of Draktharr", "The Collector", "Edge of Night"],
-          "items_winrate": 0.5085865257595773
+          "items_winrate": 0.5424354243542435
         },
         {
-          "items": ["Stridebreaker", "Sterak's Gage", null],
-          "items_winrate": 0.4870848708487085
+          "items": ["Stridebreaker", "Mercury's Treads", "Sterak's Gage"],
+          "items_winrate": 0.5342163355408388
         }
       ],
       "Fourth Item Options": [
@@ -6368,12 +6376,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Sunfire Aegis", "Spirit Visage", null],
-          "items_winrate": 0.6
+          "items": ["Liandry's Anguish", "Mercury's Treads", "Demonic Embrace"],
+          "items_winrate": 0.5751633986928104
         },
         {
-          "items": ["Liandry's Anguish", "Demonic Embrace", null],
-          "items_winrate": 0.596
+          "items": ["Sunfire Aegis", "Mercury's Treads", "Spirit Visage"],
+          "items_winrate": 0.5647743813682679
         }
       ],
       "Fourth Item Options": [
@@ -6476,12 +6484,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Goredrinker", "Sterak's Gage", "Ravenous Hydra"],
-          "items_winrate": 0.5251798561151079
+          "items": ["Goredrinker", "Mercury's Treads", "Sterak's Gage"],
+          "items_winrate": 0.5116572148708255
         },
         {
-          "items": ["Goredrinker", "Sterak's Gage", "Spirit Visage"],
-          "items_winrate": 0.5130434782608696
+          "items": ["Goredrinker", "Mercury's Treads", "Ravenous Hydra"],
+          "items_winrate": 0.49122807017543857
         }
       ],
       "Fourth Item Options": [
@@ -6598,12 +6606,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Goredrinker", "Sterak's Gage", null],
-          "items_winrate": 0.5531370038412292
+          "items": ["Mercury's Treads", "Goredrinker", "Sterak's Gage"],
+          "items_winrate": 0.5333333333333333
         },
         {
-          "items": ["Goredrinker", "Sterak's Gage", "Spirit Visage"],
-          "items_winrate": 0.5355987055016181
+          "items": ["Goredrinker", "Plated Steelcaps", "Sterak's Gage"],
+          "items_winrate": 0.51994301994302
         }
       ],
       "Fourth Item Options": [
@@ -6706,12 +6714,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Night Harvester", "Lich Bane", "Zhonya's Hourglass"],
-          "items_winrate": 0.48863636363636365
+          "items": ["Luden's Tempest", "Sorcerer's Shoes", "Morellonomicon"],
+          "items_winrate": 0.5045045045045045
         },
         {
-          "items": ["Night Harvester", "Lich Bane", null],
-          "items_winrate": 0.48427672955974843
+          "items": [
+            "Luden's Tempest",
+            "Sorcerer's Shoes",
+            "Zhonya's Hourglass"
+          ],
+          "items_winrate": 0.5023923444976076
         }
       ],
       "Fourth Item Options": [
@@ -6752,7 +6764,7 @@
           "items_winrate": 0.6
         },
         {
-          "items": ["Banshee's Veil"],
+          "items": ["Void Staff"],
           "items_winrate": 0.5384615384615384
         }
       ]
@@ -6828,16 +6840,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Luden's Tempest", "Rabadon's Deathcap", null],
-          "items_winrate": 0.5652951699463328
+          "items": ["Luden's Tempest", "Sorcerer's Shoes", null],
+          "items_winrate": 0.5721649484536082
         },
         {
           "items": [
             "Luden's Tempest",
-            "Rabadon's Deathcap",
-            "Zhonya's Hourglass"
+            "Sorcerer's Shoes",
+            "Rabadon's Deathcap"
           ],
-          "items_winrate": 0.5568627450980392
+          "items_winrate": 0.5485789821546596
         }
       ],
       "Fourth Item Options": [
@@ -6954,12 +6966,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Goredrinker", "Sterak's Gage", "Ravenous Hydra"],
-          "items_winrate": 0.5733496332518337
+          "items": ["Goredrinker", "Mercury's Treads", "Sterak's Gage"],
+          "items_winrate": 0.5620328849028401
         },
         {
-          "items": ["Goredrinker", "Sterak's Gage", "Death's Dance"],
-          "items_winrate": 0.5658198614318707
+          "items": ["Goredrinker", "Plated Steelcaps", "Sterak's Gage"],
+          "items_winrate": 0.561282932416953
         }
       ],
       "Fourth Item Options": [
@@ -7072,12 +7084,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Liandry's Anguish", "Demonic Embrace", null],
-          "items_winrate": 0.5844311377245509
+          "items": ["Liandry's Anguish", "Sorcerer's Shoes", null],
+          "items_winrate": 0.5955734406438632
         },
         {
-          "items": ["Liandry's Anguish", null, null],
-          "items_winrate": 0.5496774193548387
+          "items": ["Liandry's Anguish", "Demonic Embrace", "Sorcerer's Shoes"],
+          "items_winrate": 0.5655644241733181
         }
       ],
       "Fourth Item Options": [
@@ -7180,12 +7192,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Goredrinker", "Sterak's Gage", "Death's Dance"],
-          "items_winrate": 0.5542725173210161
+          "items": ["Goredrinker", "Mercury's Treads", "Sterak's Gage"],
+          "items_winrate": 0.5458089668615984
         },
         {
-          "items": ["Goredrinker", "Sterak's Gage", null],
-          "items_winrate": 0.5478841870824054
+          "items": ["Goredrinker", "Mercury's Treads", "Ravenous Hydra"],
+          "items_winrate": 0.5302491103202847
         }
       ],
       "Fourth Item Options": [
@@ -7284,12 +7296,20 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Immortal Shieldbow", "Phantom Dancer", "Infinity Edge"],
-          "items_winrate": 0.54875
+          "items": [
+            "Immortal Shieldbow",
+            "Berserker's Greaves",
+            "Phantom Dancer"
+          ],
+          "items_winrate": 0.5143299767621998
         },
         {
-          "items": ["Immortal Shieldbow", "Phantom Dancer", "Bloodthirster"],
-          "items_winrate": 0.5412186379928315
+          "items": [
+            "Kraken Slayer",
+            "Berserker's Greaves",
+            "Guinsoo's Rageblade"
+          ],
+          "items_winrate": 0.5007496251874063
         }
       ],
       "Fourth Item Options": [
@@ -7392,16 +7412,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": [
-            "Night Harvester",
-            "Zhonya's Hourglass",
-            "Rabadon's Deathcap"
-          ],
-          "items_winrate": 0.5673469387755102
+          "items": ["Night Harvester", "Sorcerer's Shoes", "Demonic Embrace"],
+          "items_winrate": 0.5168884339815762
         },
         {
-          "items": ["Night Harvester", "Demonic Embrace", null],
-          "items_winrate": 0.5637065637065637
+          "items": [
+            "Night Harvester",
+            "Sorcerer's Shoes",
+            "Rabadon's Deathcap"
+          ],
+          "items_winrate": 0.5018587360594795
         }
       ],
       "Fourth Item Options": [
@@ -7630,12 +7650,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Turbo Chemtank", "Force of Nature", "Warmog's Armor"],
-          "items_winrate": 0.6285714285714286
+          "items": ["Turbo Chemtank", "Mercury's Treads", "Force of Nature"],
+          "items_winrate": 0.532967032967033
         },
         {
-          "items": ["Turbo Chemtank", "Dead Man's Plate", "Warmog's Armor"],
-          "items_winrate": 0.5789473684210527
+          "items": ["Turbo Chemtank", "Mercury's Treads", "Dead Man's Plate"],
+          "items_winrate": 0.5325077399380805
         }
       ],
       "Fourth Item Options": [
@@ -7738,12 +7758,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Liandry's Anguish", null, null],
-          "items_winrate": 0.596100278551532
+          "items": ["Liandry's Anguish", "Sorcerer's Shoes", null],
+          "items_winrate": 0.6260162601626016
         },
         {
-          "items": ["Liandry's Anguish", "Demonic Embrace", null],
-          "items_winrate": 0.5567164179104478
+          "items": [
+            "Liandry's Anguish",
+            "Sorcerer's Shoes",
+            "Rylai's Crystal Scepter"
+          ],
+          "items_winrate": 0.5687830687830688
         }
       ],
       "Fourth Item Options": [
@@ -7846,12 +7870,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Divine Sunderer", "Spirit Visage", "Frozen Heart"],
-          "items_winrate": 0.6455026455026455
+          "items": ["Divine Sunderer", "Mercury's Treads", "Frozen Heart"],
+          "items_winrate": 0.6153846153846154
         },
         {
-          "items": ["Divine Sunderer", "Spirit Visage", "Force of Nature"],
-          "items_winrate": 0.6412371134020619
+          "items": ["Divine Sunderer", "Mercury's Treads", "Spirit Visage"],
+          "items_winrate": 0.5748129675810474
         }
       ],
       "Fourth Item Options": [
@@ -7974,12 +7998,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Luden's Tempest", "Rabadon's Deathcap", null],
-          "items_winrate": 0.5898989898989899
+          "items": ["Luden's Tempest", "Sorcerer's Shoes", null],
+          "items_winrate": 0.5831873905429071
         },
         {
-          "items": ["Luden's Tempest", null, null],
-          "items_winrate": 0.5759493670886076
+          "items": [
+            "Luden's Tempest",
+            "Rabadon's Deathcap",
+            "Sorcerer's Shoes"
+          ],
+          "items_winrate": 0.5371621621621622
         }
       ],
       "Fourth Item Options": [
@@ -8082,12 +8110,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Turbo Chemtank", "Force of Nature", "Dead Man's Plate"],
-          "items_winrate": 0.594059405940594
+          "items": ["Turbo Chemtank", "Mercury's Treads", "Force of Nature"],
+          "items_winrate": 0.5789473684210527
         },
         {
-          "items": ["Turbo Chemtank", "Dead Man's Plate", "Thornmail"],
-          "items_winrate": 0.4878048780487805
+          "items": ["Turbo Chemtank", "Mercury's Treads", "Dead Man's Plate"],
+          "items_winrate": 0.47770700636942676
         }
       ],
       "Fourth Item Options": [
@@ -8209,12 +8237,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Sunfire Aegis", "Thornmail", "Warmog's Armor"],
-          "items_winrate": 0.5180180180180181
+          "items": ["Frostfire Gauntlet", "Plated Steelcaps", "Thornmail"],
+          "items_winrate": 0.5190476190476191
         },
         {
-          "items": ["Frostfire Gauntlet", "Thornmail", "Warmog's Armor"],
-          "items_winrate": 0.47904191616766467
+          "items": [
+            "Frostfire Gauntlet",
+            "Mercury's Treads",
+            "Force of Nature"
+          ],
+          "items_winrate": 0.5029940119760479
         }
       ],
       "Fourth Item Options": [
@@ -8317,12 +8349,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Night Harvester", "Lich Bane", "Rabadon's Deathcap"],
-          "items_winrate": 0.5444444444444444
+          "items": ["Night Harvester", "Sorcerer's Shoes", "Cosmic Drive"],
+          "items_winrate": 0.5092250922509225
         },
         {
-          "items": ["Night Harvester", "Lich Bane", null],
-          "items_winrate": 0.5
+          "items": [
+            "Night Harvester",
+            "Sorcerer's Shoes",
+            "Rabadon's Deathcap"
+          ],
+          "items_winrate": 0.5010940919037199
         }
       ],
       "Fourth Item Options": [
@@ -8439,12 +8475,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Goredrinker", "Sterak's Gage", null],
-          "items_winrate": 0.5359477124183006
+          "items": ["Eclipse", "Plated Steelcaps", "The Collector"],
+          "items_winrate": 0.5275035260930888
         },
         {
-          "items": ["Eclipse", "Sterak's Gage", "Death's Dance"],
-          "items_winrate": 0.5289855072463768
+          "items": ["Eclipse", "Plated Steelcaps", "Sterak's Gage"],
+          "items_winrate": 0.5271317829457365
         }
       ],
       "Fourth Item Options": [
@@ -8547,12 +8583,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Divine Sunderer", "Manamune", "Ionian Boots of Lucidity"],
-          "items_winrate": 0.5719139297848245
+          "items": ["Divine Sunderer", "Manamune", null],
+          "items_winrate": 0.5775127768313458
         },
         {
-          "items": ["Essence Reaver", "Manamune", "Ionian Boots of Lucidity"],
-          "items_winrate": 0.5416316232127838
+          "items": ["Essence Reaver", "Manamune", null],
+          "items_winrate": 0.5508607198748043
         }
       ],
       "Fourth Item Options": [
@@ -8655,12 +8691,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Riftmaker", "Rylai's Crystal Scepter", "Demonic Embrace"],
-          "items_winrate": 0.5506172839506173
+          "items": ["Riftmaker", "Mercury's Treads", "Demonic Embrace"],
+          "items_winrate": 0.49884419787332407
         },
         {
-          "items": ["Riftmaker", "Rylai's Crystal Scepter", "Spirit Visage"],
-          "items_winrate": 0.5223463687150838
+          "items": ["Riftmaker", "Plated Steelcaps", "Demonic Embrace"],
+          "items_winrate": 0.49268841394825647
         }
       ],
       "Fourth Item Options": [
@@ -8763,12 +8799,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Divine Sunderer", "Sterak's Gage", null],
-          "items_winrate": 0.6354916067146283
+          "items": ["Trinity Force", "Mercury's Treads", "Sterak's Gage"],
+          "items_winrate": 0.6047904191616766
         },
         {
-          "items": ["Trinity Force", "Sterak's Gage", null],
-          "items_winrate": 0.589041095890411
+          "items": ["Divine Sunderer", "Mercury's Treads", "Spirit Visage"],
+          "items_winrate": 0.5766666666666667
         }
       ],
       "Fourth Item Options": [
@@ -8901,14 +8937,14 @@
         {
           "items": [
             "Night Harvester",
-            "Zhonya's Hourglass",
+            "Sorcerer's Shoes",
             "Rabadon's Deathcap"
           ],
-          "items_winrate": 0.4743362831858407
+          "items_winrate": 0.42493638676844786
         },
         {
-          "items": ["Riftmaker", "Lich Bane", "Zhonya's Hourglass"],
-          "items_winrate": 0.41647597254004576
+          "items": ["Riftmaker", "Sorcerer's Shoes", "Lich Bane"],
+          "items_winrate": 0.4208955223880597
         }
       ],
       "Fourth Item Options": [
@@ -9013,14 +9049,18 @@
         {
           "items": [
             "Night Harvester",
-            "Zhonya's Hourglass",
+            "Sorcerer's Shoes",
             "Rabadon's Deathcap"
           ],
-          "items_winrate": 0.5196687370600414
+          "items_winrate": 0.5813953488372093
         },
         {
-          "items": ["Hextech Rocketbelt", "Zhonya's Hourglass", "Cosmic Drive"],
-          "items_winrate": 0.4961734693877551
+          "items": [
+            "Night Harvester",
+            "Sorcerer's Shoes",
+            "Zhonya's Hourglass"
+          ],
+          "items_winrate": 0.5181194906953966
         }
       ],
       "Fourth Item Options": [
@@ -9129,12 +9169,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Stridebreaker", "Dead Man's Plate", "Sterak's Gage"],
-          "items_winrate": 0.5446153846153846
+          "items": ["Stridebreaker", "Plated Steelcaps", "Sterak's Gage"],
+          "items_winrate": 0.5233050847457628
         },
         {
-          "items": ["Stridebreaker", "Sterak's Gage", "Dead Man's Plate"],
-          "items_winrate": 0.5341880341880342
+          "items": ["Stridebreaker", "Mercury's Treads", "Sterak's Gage"],
+          "items_winrate": 0.5221153846153846
         }
       ],
       "Fourth Item Options": [
@@ -9251,12 +9291,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Sunfire Aegis", "Abyssal Mask", null],
-          "items_winrate": 0.5901234567901235
+          "items": ["Plated Steelcaps", "Sunfire Aegis", "Thornmail"],
+          "items_winrate": 0.5670103092783505
         },
         {
-          "items": ["Sunfire Aegis", "Thornmail", "Warmog's Armor"],
-          "items_winrate": 0.5596755504055619
+          "items": ["Sunfire Aegis", "Mercury's Treads", "Force of Nature"],
+          "items_winrate": 0.5608591885441527
         }
       ],
       "Fourth Item Options": [
@@ -9373,12 +9413,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Liandry's Anguish", "Demonic Embrace", null],
-          "items_winrate": 0.5995334370139969
+          "items": ["Liandry's Anguish", "Demonic Embrace", "Sorcerer's Shoes"],
+          "items_winrate": 0.591897233201581
         },
         {
-          "items": ["Liandry's Anguish", "Rylai's Crystal Scepter", null],
-          "items_winrate": 0.5861027190332326
+          "items": ["Liandry's Anguish", "Sorcerer's Shoes", null],
+          "items_winrate": 0.583916083916084
         }
       ],
       "Fourth Item Options": [
@@ -9500,15 +9540,11 @@
             "The Collector",
             "Youmuu's Ghostblade"
           ],
-          "items_winrate": 0.5378486055776892
+          "items_winrate": 0.5095890410958904
         },
         {
-          "items": [
-            "Duskblade of Draktharr",
-            "The Collector",
-            "Ionian Boots of Lucidity"
-          ],
-          "items_winrate": 0.5060728744939271
+          "items": ["Duskblade of Draktharr", "The Collector", "Edge of Night"],
+          "items_winrate": 0.49056603773584906
         }
       ],
       "Fourth Item Options": [
@@ -9612,12 +9648,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Goredrinker", "Ravenous Hydra", "Sterak's Gage"],
-          "items_winrate": 0.562753036437247
+          "items": ["Goredrinker", "Plated Steelcaps", "Death's Dance"],
+          "items_winrate": 0.5747126436781609
         },
         {
-          "items": ["Goredrinker", "Ionian Boots of Lucidity", "Black Cleaver"],
-          "items_winrate": 0.5387755102040817
+          "items": ["Goredrinker", "Ravenous Hydra", "Sterak's Gage"],
+          "items_winrate": 0.5386996904024768
         }
       ],
       "Fourth Item Options": [
@@ -9755,16 +9791,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Liandry's Anguish", "Archangel's Staff", null],
-          "items_winrate": 0.6463104325699746
+          "items": ["Liandry's Anguish", "Sorcerer's Shoes", "Demonic Embrace"],
+          "items_winrate": 0.5772870662460567
         },
         {
           "items": [
             "Liandry's Anguish",
-            "Demonic Embrace",
-            "Archangel's Staff"
+            "Archangel's Staff",
+            "Sorcerer's Shoes"
           ],
-          "items_winrate": 0.6073446327683616
+          "items_winrate": 0.5683836589698046
         }
       ],
       "Fourth Item Options": [
@@ -9872,12 +9908,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Frostfire Gauntlet", "Thornmail", "Warmog's Armor"],
-          "items_winrate": 0.5502958579881657
+          "items": ["Frostfire Gauntlet", "Mercury's Treads", "Titanic Hydra"],
+          "items_winrate": 0.630057803468208
         },
         {
-          "items": ["Sunfire Aegis", "Thornmail", "Warmog's Armor"],
-          "items_winrate": 0.5384615384615384
+          "items": ["Sunfire Aegis", "Mercury's Treads", "Spirit Visage"],
+          "items_winrate": 0.5119453924914675
         }
       ],
       "Fourth Item Options": [
@@ -9990,12 +10026,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Luden's Tempest", null, null],
-          "items_winrate": 0.6583969465648855
+          "items": ["Luden's Tempest", "Sorcerer's Shoes", null],
+          "items_winrate": 0.6596638655462185
         },
         {
-          "items": ["Luden's Tempest", "Rabadon's Deathcap", null],
-          "items_winrate": 0.5906163753449862
+          "items": ["Luden's Tempest", "Sorcerer's Shoes", "Archangel's Staff"],
+          "items_winrate": 0.5340314136125655
         }
       ],
       "Fourth Item Options": [
@@ -10112,12 +10148,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Luden's Tempest", null, null],
-          "items_winrate": 0.6968325791855203
+          "items": ["Luden's Tempest", "Sorcerer's Shoes", null],
+          "items_winrate": 0.727906976744186
         },
         {
-          "items": ["Luden's Tempest", "Rabadon's Deathcap", null],
-          "items_winrate": 0.6208
+          "items": [
+            "Luden's Tempest",
+            "Rabadon's Deathcap",
+            "Sorcerer's Shoes"
+          ],
+          "items_winrate": 0.6014150943396226
         }
       ],
       "Fourth Item Options": [
@@ -10220,12 +10260,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Night Harvester", "Rabadon's Deathcap", "Cosmic Drive"],
-          "items_winrate": 0.579250720461095
+          "items": ["Night Harvester", "Cosmic Drive", "Sorcerer's Shoes"],
+          "items_winrate": 0.5617977528089888
         },
         {
-          "items": ["Night Harvester", "Rabadon's Deathcap", null],
-          "items_winrate": 0.5459770114942529
+          "items": [
+            "Sorcerer's Shoes",
+            "Night Harvester",
+            "Rabadon's Deathcap"
+          ],
+          "items_winrate": 0.5588235294117647
         }
       ],
       "Fourth Item Options": [
@@ -10342,12 +10386,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Luden's Tempest", "Rabadon's Deathcap", null],
-          "items_winrate": 0.5817555938037866
+          "items": ["Luden's Tempest", "Sorcerer's Shoes", "Cosmic Drive"],
+          "items_winrate": 0.5387149917627677
         },
         {
-          "items": ["Luden's Tempest", null, null],
-          "items_winrate": 0.5746753246753247
+          "items": [
+            "Luden's Tempest",
+            "Sorcerer's Shoes",
+            "Rabadon's Deathcap"
+          ],
+          "items_winrate": 0.5230566534914362
         }
       ],
       "Fourth Item Options": [
@@ -10450,12 +10498,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Immortal Shieldbow", "The Collector", "Infinity Edge"],
-          "items_winrate": 0.5905200789993417
+          "items": [
+            "Immortal Shieldbow",
+            "The Collector",
+            "Berserker's Greaves"
+          ],
+          "items_winrate": 0.6330798479087453
         },
         {
-          "items": ["Immortal Shieldbow", "Bloodthirster", "The Collector"],
-          "items_winrate": 0.5836820083682008
+          "items": ["Immortal Shieldbow", "The Collector", "Mercury's Treads"],
+          "items_winrate": 0.6130346232179226
         }
       ],
       "Fourth Item Options": [
@@ -10572,12 +10624,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Hextech Rocketbelt", "Lich Bane", "Zhonya's Hourglass"],
-          "items_winrate": 0.518348623853211
+          "items": [
+            "Night Harvester",
+            "Sorcerer's Shoes",
+            "Zhonya's Hourglass"
+          ],
+          "items_winrate": 0.5
         },
         {
-          "items": ["Night Harvester", "Lich Bane", "Rabadon's Deathcap"],
-          "items_winrate": 0.5111821086261981
+          "items": ["Night Harvester", "Lich Bane", "Sorcerer's Shoes"],
+          "items_winrate": 0.49353049907578556
         }
       ],
       "Fourth Item Options": [
@@ -10680,12 +10736,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Frostfire Gauntlet", "Spirit Visage", "Thornmail"],
-          "items_winrate": 0.49625935162094764
+          "items": ["Frostfire Gauntlet", "Mercury's Treads", "Spirit Visage"],
+          "items_winrate": 0.5555555555555556
         },
         {
-          "items": ["Frostfire Gauntlet", "Spirit Visage", null],
-          "items_winrate": 0.4851063829787234
+          "items": ["Mercury's Treads", "Frostfire Gauntlet", "Spirit Visage"],
+          "items_winrate": 0.5226586102719033
         }
       ],
       "Fourth Item Options": [
@@ -10807,15 +10863,15 @@
             "Essence Reaver",
             "The Collector"
           ],
-          "items_winrate": 0.55
+          "items_winrate": 0.5185185185185185
         },
         {
           "items": [
             "Duskblade of Draktharr",
             "The Collector",
-            "Youmuu's Ghostblade"
+            "Essence Reaver"
           ],
-          "items_winrate": 0.5274261603375527
+          "items_winrate": 0.5084337349397591
         }
       ],
       "Fourth Item Options": [
@@ -10919,11 +10975,11 @@
       "Mythic and Core Items": [
         {
           "items": ["Duskblade of Draktharr", "Manamune", null],
-          "items_winrate": 0.6290076335877862
+          "items_winrate": 0.6999154691462384
         },
         {
-          "items": ["Duskblade of Draktharr", "Manamune", "Serylda's Grudge"],
-          "items_winrate": 0.6111111111111112
+          "items": ["Duskblade of Draktharr", "Manamune", "Mercury's Treads"],
+          "items_winrate": 0.5648414985590778
         }
       ],
       "Fourth Item Options": [
@@ -11040,12 +11096,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Sunfire Aegis", "Thornmail", "Randuin's Omen"],
-          "items_winrate": 0.5882352941176471
+          "items": ["Frostfire Gauntlet", "Plated Steelcaps", "Thornmail"],
+          "items_winrate": 0.5971428571428572
         },
         {
-          "items": ["Sunfire Aegis", "Thornmail", "Warmog's Armor"],
-          "items_winrate": 0.5746691871455577
+          "items": ["Mercury's Treads", "Sunfire Aegis", "Abyssal Mask"],
+          "items_winrate": 0.5478424015009381
         }
       ],
       "Fourth Item Options": [
@@ -11148,12 +11204,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Luden's Tempest", "Lich Bane", "Rabadon's Deathcap"],
-          "items_winrate": 0.5760626398210291
+          "items": ["Luden's Tempest", "Lich Bane", "Sorcerer's Shoes"],
+          "items_winrate": 0.6151515151515151
         },
         {
-          "items": ["Luden's Tempest", "Lich Bane", null],
-          "items_winrate": 0.5678449258836944
+          "items": [
+            "Luden's Tempest",
+            "Sorcerer's Shoes",
+            "Zhonya's Hourglass"
+          ],
+          "items_winrate": 0.5485074626865671
         }
       ],
       "Fourth Item Options": [
@@ -11275,12 +11335,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Frostfire Gauntlet", "Warmog's Armor", null],
-          "items_winrate": 0.6470588235294118
+          "items": ["Frostfire Gauntlet", "Mercury's Treads", "Warmog's Armor"],
+          "items_winrate": 0.574468085106383
         },
         {
-          "items": ["Frostfire Gauntlet", "Warmog's Armor", "Thornmail"],
-          "items_winrate": 0.5827338129496403
+          "items": ["Mercury's Treads", "Sunfire Aegis", "Warmog's Armor"],
+          "items_winrate": 0.5645161290322581
         }
       ],
       "Fourth Item Options": [
@@ -11383,12 +11443,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Goredrinker", "Ravenous Hydra", "Death's Dance"],
-          "items_winrate": 0.5876777251184834
+          "items": ["Goredrinker", "Mercury's Treads", "Ravenous Hydra"],
+          "items_winrate": 0.5294797687861271
         },
         {
-          "items": ["Goredrinker", "Ravenous Hydra", "Sterak's Gage"],
-          "items_winrate": 0.5772994129158513
+          "items": ["Goredrinker", "Plated Steelcaps", "Ravenous Hydra"],
+          "items_winrate": 0.5162241887905604
         }
       ],
       "Fourth Item Options": [
@@ -11510,12 +11570,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Liandry's Anguish", null, null],
-          "items_winrate": 0.6597633136094675
+          "items": ["Luden's Tempest", "Sorcerer's Shoes", "Morellonomicon"],
+          "items_winrate": 0.5701492537313433
         },
         {
-          "items": ["Luden's Tempest", null, null],
-          "items_winrate": 0.646551724137931
+          "items": [
+            "Liandry's Anguish",
+            "Sorcerer's Shoes",
+            "Rabadon's Deathcap"
+          ],
+          "items_winrate": 0.5609756097560976
         }
       ],
       "Fourth Item Options": [
@@ -11621,17 +11685,13 @@
           "items": [
             "Moonstone Renewer",
             "Ardent Censer",
-            "Ionian Boots of Lucidity"
+            "Staff of Flowing Water"
           ],
-          "items_winrate": 0.5834292289988493
+          "items_winrate": 0.5678873239436619
         },
         {
-          "items": [
-            "Moonstone Renewer",
-            "Staff of Flowing Water",
-            "Ionian Boots of Lucidity"
-          ],
-          "items_winrate": 0.550063371356147
+          "items": ["Moonstone Renewer", "Ardent Censer", "Chemtech Putrifier"],
+          "items_winrate": 0.554945054945055
         }
       ],
       "Fourth Item Options": [
@@ -11739,12 +11799,20 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Immortal Shieldbow", "Essence Reaver", "Infinity Edge"],
-          "items_winrate": 0.5555555555555556
+          "items": [
+            "Immortal Shieldbow",
+            "The Collector",
+            "Berserker's Greaves"
+          ],
+          "items_winrate": 0.5752427184466019
         },
         {
-          "items": ["Immortal Shieldbow", "Bloodthirster", "Infinity Edge"],
-          "items_winrate": 0.5285481239804242
+          "items": [
+            "Duskblade of Draktharr",
+            "Berserker's Greaves",
+            "The Collector"
+          ],
+          "items_winrate": 0.5341463414634147
         }
       ],
       "Fourth Item Options": [
@@ -11847,12 +11915,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Turbo Chemtank", "Dead Man's Plate", "Sterak's Gage"],
-          "items_winrate": 0.49333333333333335
+          "items": ["Turbo Chemtank", "Mercury's Treads", "Force of Nature"],
+          "items_winrate": 0.515527950310559
         },
         {
-          "items": ["Turbo Chemtank", "Dead Man's Plate", "Force of Nature"],
-          "items_winrate": 0.48997772828507796
+          "items": ["Turbo Chemtank", "Plated Steelcaps", "Dead Man's Plate"],
+          "items_winrate": 0.4900990099009901
         }
       ],
       "Fourth Item Options": [
@@ -11955,16 +12023,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Duskblade of Draktharr", "Manamune", "The Collector"],
-          "items_winrate": 0.56158940397351
+          "items": ["Duskblade of Draktharr", "Manamune", "Mercury's Treads"],
+          "items_winrate": 0.5583333333333333
         },
         {
           "items": [
-            "Manamune",
-            "Ionian Boots of Lucidity",
-            "Duskblade of Draktharr"
+            "Duskblade of Draktharr",
+            "The Collector",
+            "Mercury's Treads"
           ],
-          "items_winrate": 0.5299145299145299
+          "items_winrate": 0.52
         }
       ],
       "Fourth Item Options": [
@@ -12067,12 +12135,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Stridebreaker", "Spirit Visage", "Sterak's Gage"],
-          "items_winrate": 0.5573033707865168
+          "items": ["Goredrinker", "Mercury's Treads", "Sterak's Gage"],
+          "items_winrate": 0.5456674473067916
         },
         {
-          "items": ["Stridebreaker", "Sterak's Gage", "Spirit Visage"],
-          "items_winrate": 0.5540380047505938
+          "items": ["Stridebreaker", "Plated Steelcaps", "Sterak's Gage"],
+          "items_winrate": 0.5303030303030303
         }
       ],
       "Fourth Item Options": [
@@ -12175,12 +12243,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Eclipse", "Manamune", "Ionian Boots of Lucidity"],
-          "items_winrate": 0.5657894736842105
+          "items": ["Eclipse", "Manamune", null],
+          "items_winrate": 0.6085790884718498
         },
         {
-          "items": ["Manamune", "Eclipse", "Ionian Boots of Lucidity"],
-          "items_winrate": 0.5413533834586466
+          "items": ["Duskblade of Draktharr", "Manamune", null],
+          "items_winrate": 0.5752427184466019
         }
       ],
       "Fourth Item Options": [
@@ -12286,17 +12354,13 @@
           "items": [
             "Luden's Tempest",
             "Zhonya's Hourglass",
-            "Rabadon's Deathcap"
+            "Sorcerer's Shoes"
           ],
-          "items_winrate": 0.5841346153846154
+          "items_winrate": 0.59375
         },
         {
-          "items": [
-            "Liandry's Anguish",
-            "Zhonya's Hourglass",
-            "Demonic Embrace"
-          ],
-          "items_winrate": 0.5223642172523961
+          "items": ["Liandry's Anguish", "Sorcerer's Shoes", "Demonic Embrace"],
+          "items_winrate": 0.5478036175710594
         }
       ],
       "Fourth Item Options": [
@@ -12413,12 +12477,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Night Harvester", "Lich Bane", null],
-          "items_winrate": 0.5957446808510638
+          "items": ["Sorcerer's Shoes", "Night Harvester", "Lich Bane"],
+          "items_winrate": 0.5714285714285714
         },
         {
-          "items": ["Night Harvester", "Zhonya's Hourglass", null],
-          "items_winrate": 0.571619812583668
+          "items": [
+            "Night Harvester",
+            "Sorcerer's Shoes",
+            "Rabadon's Deathcap"
+          ],
+          "items_winrate": 0.5698005698005698
         }
       ],
       "Fourth Item Options": [
@@ -12535,12 +12603,20 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Immortal Shieldbow", "The Collector", "Bloodthirster"],
-          "items_winrate": 0.5844155844155844
+          "items": [
+            "Immortal Shieldbow",
+            "Berserker's Greaves",
+            "The Collector"
+          ],
+          "items_winrate": 0.519203413940256
         },
         {
-          "items": ["Kraken Slayer", "The Collector", "Infinity Edge"],
-          "items_winrate": 0.5460122699386503
+          "items": [
+            "Kraken Slayer",
+            "Berserker's Greaves",
+            "Blade of The Ruined King"
+          ],
+          "items_winrate": 0.4927007299270073
         }
       ],
       "Fourth Item Options": [
@@ -12643,12 +12719,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Luden's Tempest", "Rabadon's Deathcap", null],
-          "items_winrate": 0.6194174757281553
+          "items": ["Luden's Tempest", "Sorcerer's Shoes", "Cosmic Drive"],
+          "items_winrate": 0.5782747603833865
         },
         {
-          "items": ["Luden's Tempest", null, null],
-          "items_winrate": 0.5483870967741935
+          "items": ["Luden's Tempest", "Sorcerer's Shoes", null],
+          "items_winrate": 0.5781710914454278
         }
       ],
       "Fourth Item Options": [
@@ -12766,15 +12842,19 @@
       "Mythic and Core Items": [
         {
           "items": [
+            "Sorcerer's Shoes",
             "Liandry's Anguish",
-            "Rylai's Crystal Scepter",
-            "Demonic Embrace"
+            "Rylai's Crystal Scepter"
           ],
-          "items_winrate": 0.5575447570332481
+          "items_winrate": 0.5289256198347108
         },
         {
-          "items": ["Everfrost", "Rylai's Crystal Scepter", "Cosmic Drive"],
-          "items_winrate": 0.5401459854014599
+          "items": [
+            "Liandry's Anguish",
+            "Sorcerer's Shoes",
+            "Rylai's Crystal Scepter"
+          ],
+          "items_winrate": 0.5138121546961326
         }
       ],
       "Fourth Item Options": [
@@ -12877,12 +12957,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Goredrinker", "Sterak's Gage", "Death's Dance"],
-          "items_winrate": 0.602996254681648
+          "items": ["Goredrinker", "Plated Steelcaps", "Sterak's Gage"],
+          "items_winrate": 0.5958904109589042
         },
         {
-          "items": ["Goredrinker", "Sterak's Gage", "Spirit Visage"],
-          "items_winrate": 0.5705705705705706
+          "items": ["Goredrinker", "Mercury's Treads", "Sterak's Gage"],
+          "items_winrate": 0.5697674418604651
         }
       ],
       "Fourth Item Options": [
@@ -12995,12 +13075,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Luden's Tempest", "Rabadon's Deathcap", null],
-          "items_winrate": 0.5341098169717138
+          "items": ["Luden's Tempest", "Sorcerer's Shoes", null],
+          "items_winrate": 0.5129224652087475
         },
         {
-          "items": ["Luden's Tempest", "Rabadon's Deathcap", "Void Staff"],
-          "items_winrate": 0.4799154334038055
+          "items": ["Luden's Tempest", "Horizon Focus", "Sorcerer's Shoes"],
+          "items_winrate": 0.49748237663645517
         }
       ],
       "Fourth Item Options": [
@@ -13117,12 +13197,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Liandry's Anguish", "Demonic Embrace", null],
-          "items_winrate": 0.6423584173778123
+          "items": ["Liandry's Anguish", "Sorcerer's Shoes", null],
+          "items_winrate": 0.6327160493827161
         },
         {
-          "items": ["Liandry's Anguish", null, null],
-          "items_winrate": 0.6108870967741935
+          "items": [
+            "Liandry's Anguish",
+            "Sorcerer's Shoes",
+            "Rylai's Crystal Scepter"
+          ],
+          "items_winrate": 0.5559736594543744
         }
       ],
       "Fourth Item Options": [
@@ -13239,12 +13323,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Luden's Tempest", "Horizon Focus", null],
-          "items_winrate": 0.5453125
+          "items": ["Kraken Slayer", "The Collector", "Berserker's Greaves"],
+          "items_winrate": 0.5433212996389891
         },
         {
-          "items": ["Kraken Slayer", "The Collector", "Phantom Dancer"],
-          "items_winrate": 0.5168408826945412
+          "items": ["Kraken Slayer", "Berserker's Greaves", "Phantom Dancer"],
+          "items_winrate": 0.5102420856610801
         }
       ],
       "Fourth Item Options": [
@@ -13350,17 +13434,13 @@
           "items": [
             "Moonstone Renewer",
             "Staff of Flowing Water",
-            "Ionian Boots of Lucidity"
+            "Ardent Censer"
           ],
-          "items_winrate": 0.5797101449275363
+          "items_winrate": 0.5753317720530835
         },
         {
-          "items": [
-            "Moonstone Renewer",
-            "Ionian Boots of Lucidity",
-            "Staff of Flowing Water"
-          ],
-          "items_winrate": 0.5624823695345557
+          "items": ["Moonstone Renewer", "Staff of Flowing Water", null],
+          "items_winrate": 0.5700636942675159
         }
       ],
       "Fourth Item Options": [
@@ -13491,12 +13571,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Stridebreaker", "Sterak's Gage", "Spirit Visage"],
-          "items_winrate": 0.5833333333333334
+          "items": ["Stridebreaker", "Plated Steelcaps", "Sterak's Gage"],
+          "items_winrate": 0.5191532258064516
         },
         {
-          "items": ["Stridebreaker", "Sterak's Gage", "Black Cleaver"],
-          "items_winrate": 0.5335689045936396
+          "items": ["Stridebreaker", "Mercury's Treads", "Sterak's Gage"],
+          "items_winrate": 0.5116822429906542
         }
       ],
       "Fourth Item Options": [
@@ -13595,12 +13675,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Frostfire Gauntlet", "Spirit Visage", "Warmog's Armor"],
-          "items_winrate": 0.5755813953488372
+          "items": ["Frostfire Gauntlet", "Mercury's Treads", "Spirit Visage"],
+          "items_winrate": 0.5663716814159292
         },
         {
-          "items": ["Sunfire Aegis", "Thornmail", "Warmog's Armor"],
-          "items_winrate": 0.5362318840579711
+          "items": ["Mercury's Treads", "Frostfire Gauntlet", "Spirit Visage"],
+          "items_winrate": 0.5153374233128835
         }
       ],
       "Fourth Item Options": [
@@ -13717,12 +13797,20 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Immortal Shieldbow", "Bloodthirster", "Infinity Edge"],
-          "items_winrate": 0.5641569459172853
+          "items": [
+            "Berserker's Greaves",
+            "Immortal Shieldbow",
+            "Bloodthirster"
+          ],
+          "items_winrate": 0.5314009661835749
         },
         {
-          "items": ["Immortal Shieldbow", "Infinity Edge", "Wit's End"],
-          "items_winrate": 0.5618448637316562
+          "items": [
+            "Berserker's Greaves",
+            "Immortal Shieldbow",
+            "Infinity Edge"
+          ],
+          "items_winrate": 0.5313706563706564
         }
       ],
       "Fourth Item Options": [
@@ -13839,12 +13927,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Liandry's Anguish", null, null],
-          "items_winrate": 0.6728016359918201
+          "items": ["Liandry's Anguish", "Demonic Embrace", "Sorcerer's Shoes"],
+          "items_winrate": 0.5841750841750841
         },
         {
-          "items": ["Liandry's Anguish", "Demonic Embrace", null],
-          "items_winrate": 0.6494252873563219
+          "items": [
+            "Liandry's Anguish",
+            "Sorcerer's Shoes",
+            "Rabadon's Deathcap"
+          ],
+          "items_winrate": 0.5716145833333334
         }
       ],
       "Fourth Item Options": [
@@ -13947,16 +14039,20 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Luden's Tempest", "Rabadon's Deathcap", null],
-          "items_winrate": 0.6301369863013698
+          "items": [
+            "Luden's Tempest",
+            "Sorcerer's Shoes",
+            "Rabadon's Deathcap"
+          ],
+          "items_winrate": 0.5278450363196125
         },
         {
           "items": [
+            "Sorcerer's Shoes",
             "Luden's Tempest",
-            "Rabadon's Deathcap",
-            "Zhonya's Hourglass"
+            "Rabadon's Deathcap"
           ],
-          "items_winrate": 0.5126050420168067
+          "items_winrate": 0.5
         }
       ],
       "Fourth Item Options": [
@@ -14059,12 +14155,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Trinity Force", "Sterak's Gage", "Ravenous Hydra"],
-          "items_winrate": 0.6382428940568475
+          "items": ["Divine Sunderer", "Mercury's Treads", "Ravenous Hydra"],
+          "items_winrate": 0.6303030303030303
         },
         {
-          "items": ["Trinity Force", "Titanic Hydra", "Sterak's Gage"],
-          "items_winrate": 0.6305084745762712
+          "items": ["Trinity Force", "Plated Steelcaps", "Sterak's Gage"],
+          "items_winrate": 0.6
         }
       ],
       "Fourth Item Options": [
@@ -14183,18 +14279,18 @@
         {
           "items": [
             "Locket of the Iron Solari",
-            "Knight's Vow",
-            "Zeke's Convergence"
+            "Plated Steelcaps",
+            "Knight's Vow"
           ],
-          "items_winrate": 0.59765625
+          "items_winrate": 0.6067415730337079
         },
         {
           "items": [
             "Locket of the Iron Solari",
-            "Knight's Vow",
-            "Warmog's Armor"
+            "Plated Steelcaps",
+            "Thornmail"
           ],
-          "items_winrate": 0.5833333333333334
+          "items_winrate": 0.6062176165803109
         }
       ],
       "Fourth Item Options": [
@@ -14227,11 +14323,11 @@
       ],
       "Sixth Item Options": [
         {
-          "items": ["Randuin's Omen"],
+          "items": ["Abyssal Mask"],
           "items_winrate": 0.6666666666666666
         },
         {
-          "items": ["Abyssal Mask"],
+          "items": ["Randuin's Omen"],
           "items_winrate": 0.6666666666666666
         },
         {
@@ -14297,12 +14393,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Galeforce", "The Collector", "Infinity Edge"],
-          "items_winrate": 0.5638998682476943
+          "items": ["Galeforce", "The Collector", "Boots of Swiftness"],
+          "items_winrate": 0.558879694462126
         },
         {
-          "items": ["Galeforce", "The Collector", "Boots of Swiftness"],
-          "items_winrate": 0.5592476489028213
+          "items": ["Boots of Swiftness", "Galeforce", "The Collector"],
+          "items_winrate": 0.5144927536231884
         }
       ],
       "Fourth Item Options": [
@@ -14410,16 +14506,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": [
-            "Kraken Slayer",
-            "Runaan's Hurricane",
-            "Blade of The Ruined King"
-          ],
-          "items_winrate": 0.5520231213872833
+          "items": ["Kraken Slayer", "Berserker's Greaves", "The Collector"],
+          "items_winrate": 0.5250596658711217
         },
         {
-          "items": ["Kraken Slayer", "Stormrazor", "Rapid Firecannon"],
-          "items_winrate": 0.5412087912087912
+          "items": [
+            "Berserker's Greaves",
+            "Kraken Slayer",
+            "Runaan's Hurricane"
+          ],
+          "items_winrate": 0.5215231788079471
         }
       ],
       "Fourth Item Options": [
@@ -14540,12 +14636,20 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Kraken Slayer", "Runaan's Hurricane", "Infinity Edge"],
-          "items_winrate": 0.5804569761789014
+          "items": [
+            "Kraken Slayer",
+            "Runaan's Hurricane",
+            "Berserker's Greaves"
+          ],
+          "items_winrate": 0.6265690376569037
         },
         {
-          "items": ["Kraken Slayer", "Runaan's Hurricane", null],
-          "items_winrate": 0.5732673267326732
+          "items": [
+            "Kraken Slayer",
+            "Berserker's Greaves",
+            "Runaan's Hurricane"
+          ],
+          "items_winrate": 0.5577963600590261
         }
       ],
       "Fourth Item Options": [
@@ -14648,12 +14752,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Frostfire Gauntlet", "Spirit Visage", null],
-          "items_winrate": 0.5754189944134078
+          "items": ["Mercury's Treads", "Frostfire Gauntlet", "Spirit Visage"],
+          "items_winrate": 0.6060606060606061
         },
         {
-          "items": ["Frostfire Gauntlet", null, null],
-          "items_winrate": 0.5714285714285714
+          "items": ["Frostfire Gauntlet", "Plated Steelcaps", "Thornmail"],
+          "items_winrate": 0.550561797752809
         }
       ],
       "Fourth Item Options": [
@@ -14757,19 +14861,19 @@
       "Mythic and Core Items": [
         {
           "items": [
-            "Immortal Shieldbow",
             "Blade of The Ruined King",
-            "The Collector"
+            "Mercury's Treads",
+            "Kraken Slayer"
           ],
-          "items_winrate": 0.5907473309608541
+          "items_winrate": 0.5525727069351231
         },
         {
           "items": [
-            "Blade of The Ruined King",
-            "Kraken Slayer",
-            "Sterak's Gage"
+            "Immortal Shieldbow",
+            "Plated Steelcaps",
+            "Blade of The Ruined King"
           ],
-          "items_winrate": 0.5844660194174758
+          "items_winrate": 0.5390625
         }
       ],
       "Fourth Item Options": [
@@ -14890,12 +14994,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Kraken Slayer", "Guinsoo's Rageblade", null],
-          "items_winrate": 0.5722772277227722
+          "items": [
+            "Kraken Slayer",
+            "Guinsoo's Rageblade",
+            "Berserker's Greaves"
+          ],
+          "items_winrate": 0.6007677543186181
         },
         {
-          "items": ["Kraken Slayer", "Manamune", "Boots of Swiftness"],
-          "items_winrate": 0.5669456066945606
+          "items": ["Kraken Slayer", "Manamune", "Berserker's Greaves"],
+          "items_winrate": 0.5824
         }
       ],
       "Fourth Item Options": [
@@ -15002,12 +15110,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Immortal Shieldbow", "Essence Reaver", "Infinity Edge"],
-          "items_winrate": 0.5357142857142857
+          "items": ["Kraken Slayer", "Essence Reaver", "Berserker's Greaves"],
+          "items_winrate": 0.5429553264604811
         },
         {
-          "items": ["Immortal Shieldbow", "Essence Reaver", null],
-          "items_winrate": 0.5324427480916031
+          "items": [
+            "Immortal Shieldbow",
+            "Berserker's Greaves",
+            "Essence Reaver"
+          ],
+          "items_winrate": 0.5257890685142417
         }
       ],
       "Fourth Item Options": [
@@ -15115,16 +15227,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": [
-            "Duskblade of Draktharr",
-            "The Collector",
-            "Ionian Boots of Lucidity"
-          ],
-          "items_winrate": 0.515527950310559
+          "items": ["Eclipse", "The Collector", "Edge of Night"],
+          "items_winrate": 0.4885654885654886
         },
         {
-          "items": ["Eclipse", "Ionian Boots of Lucidity", "The Collector"],
-          "items_winrate": 0.48508098891730606
+          "items": ["Eclipse", "Mercury's Treads", "The Collector"],
+          "items_winrate": 0.4827586206896552
         }
       ],
       "Fourth Item Options": [
@@ -15223,12 +15331,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Goredrinker", "Titanic Hydra", null],
-          "items_winrate": 0.6355140186915887
+          "items": ["Goredrinker", "Mercury's Treads", "Titanic Hydra"],
+          "items_winrate": 0.6185567010309279
         },
         {
-          "items": ["Goredrinker", "Titanic Hydra", "Sterak's Gage"],
-          "items_winrate": 0.6321243523316062
+          "items": ["Goredrinker", "Mercury's Treads", "Ravenous Hydra"],
+          "items_winrate": 0.6138613861386139
         }
       ],
       "Fourth Item Options": [
@@ -15331,12 +15439,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Hextech Rocketbelt", "Lich Bane", "Rabadon's Deathcap"],
-          "items_winrate": 0.4949201741654572
+          "items": ["Sorcerer's Shoes", "Night Harvester", "Lich Bane"],
+          "items_winrate": 0.49078341013824883
         },
         {
-          "items": ["Hextech Rocketbelt", "Lich Bane", "Zhonya's Hourglass"],
-          "items_winrate": 0.49132676980778245
+          "items": ["Hextech Rocketbelt", "Sorcerer's Shoes", "Lich Bane"],
+          "items_winrate": 0.48937784522003036
         }
       ],
       "Fourth Item Options": [
@@ -15453,16 +15561,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": [
-            "Duskblade of Draktharr",
-            "Ionian Boots of Lucidity",
-            "Manamune"
-          ],
-          "items_winrate": 0.5437158469945356
+          "items": ["Duskblade of Draktharr", "Manamune", "The Collector"],
+          "items_winrate": 0.51
         },
         {
-          "items": ["Duskblade of Draktharr", "The Collector", "Edge of Night"],
-          "items_winrate": 0.49727767695099817
+          "items": [
+            "Duskblade of Draktharr",
+            "The Collector",
+            "Serylda's Grudge"
+          ],
+          "items_winrate": 0.5050847457627119
         }
       ],
       "Fourth Item Options": [
@@ -15565,12 +15673,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Goredrinker", "Sterak's Gage", "Death's Dance"],
-          "items_winrate": 0.5485436893203883
+          "items": ["Trinity Force", "Plated Steelcaps", "Sterak's Gage"],
+          "items_winrate": 0.6190476190476191
         },
         {
-          "items": ["Goredrinker", "Sterak's Gage", null],
-          "items_winrate": 0.5416666666666666
+          "items": ["Goredrinker", "Mercury's Treads", "Sterak's Gage"],
+          "items_winrate": 0.5425531914893617
         }
       ],
       "Fourth Item Options": [
@@ -15673,12 +15781,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Stridebreaker", "Sterak's Gage", "Death's Dance"],
-          "items_winrate": 0.5282258064516129
+          "items": ["Goredrinker", "Plated Steelcaps", "Death's Dance"],
+          "items_winrate": 0.5195195195195195
         },
         {
-          "items": ["Goredrinker", "Spirit Visage", "Sterak's Gage"],
-          "items_winrate": 0.5169491525423728
+          "items": ["Goredrinker", "Plated Steelcaps", "Sterak's Gage"],
+          "items_winrate": 0.5127081507449606
         }
       ],
       "Fourth Item Options": [
@@ -15796,19 +15904,15 @@
       "Mythic and Core Items": [
         {
           "items": [
-            "Moonstone Renewer",
-            "Ardent Censer",
-            "Ionian Boots of Lucidity"
+            "Imperial Mandate",
+            "Staff of Flowing Water",
+            "Ardent Censer"
           ],
-          "items_winrate": 0.602996254681648
+          "items_winrate": 0.6573705179282868
         },
         {
-          "items": [
-            "Imperial Mandate",
-            "Ionian Boots of Lucidity",
-            "Staff of Flowing Water"
-          ],
-          "items_winrate": 0.5955734406438632
+          "items": ["Moonstone Renewer", "Staff of Flowing Water", null],
+          "items_winrate": 0.6258205689277899
         }
       ],
       "Fourth Item Options": [
@@ -15906,12 +16010,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Luden's Tempest", "Nashor's Tooth", "Zhonya's Hourglass"],
-          "items_winrate": 0.522273425499232
+          "items": ["Luden's Tempest", "Nashor's Tooth", "Sorcerer's Shoes"],
+          "items_winrate": 0.5478927203065134
         },
         {
-          "items": ["Luden's Tempest", "Nashor's Tooth", "Rabadon's Deathcap"],
-          "items_winrate": 0.5201465201465202
+          "items": ["Luden's Tempest", "Sorcerer's Shoes", "Nashor's Tooth"],
+          "items_winrate": 0.5150346954510409
         }
       ],
       "Fourth Item Options": [
@@ -16019,7 +16123,7 @@
             "Ardent Censer",
             "Staff of Flowing Water"
           ],
-          "items_winrate": 0.5303030303030303
+          "items_winrate": 0.5275665399239544
         },
         {
           "items": [
@@ -16027,7 +16131,7 @@
             "Staff of Flowing Water",
             "Mikael's Blessing"
           ],
-          "items_winrate": 0.5221445221445221
+          "items_winrate": 0.521551724137931
         }
       ],
       "Fourth Item Options": [
@@ -16135,12 +16239,16 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Immortal Shieldbow", "Bloodthirster", "Infinity Edge"],
-          "items_winrate": 0.5840188014101058
+          "items": [
+            "Immortal Shieldbow",
+            "The Collector",
+            "Berserker's Greaves"
+          ],
+          "items_winrate": 0.5965116279069768
         },
         {
-          "items": ["Immortal Shieldbow", "The Collector", "Infinity Edge"],
-          "items_winrate": 0.5825596816976127
+          "items": ["Immortal Shieldbow", "The Collector", "Mercury's Treads"],
+          "items_winrate": 0.5922580645161291
         }
       ],
       "Fourth Item Options": [
@@ -16259,14 +16367,18 @@
         {
           "items": [
             "Locket of the Iron Solari",
-            "Zeke's Convergence",
+            "Mercury's Treads",
             "Knight's Vow"
           ],
-          "items_winrate": 0.5478927203065134
+          "items_winrate": 0.5374149659863946
         },
         {
-          "items": ["Locket of the Iron Solari", "Thornmail", null],
-          "items_winrate": 0.4834710743801653
+          "items": [
+            "Locket of the Iron Solari",
+            "Plated Steelcaps",
+            "Thornmail"
+          ],
+          "items_winrate": 0.5302245250431779
         }
       ],
       "Fourth Item Options": [
@@ -16369,12 +16481,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Goredrinker", "Sterak's Gage", null],
-          "items_winrate": 0.5714285714285714
+          "items": ["Divine Sunderer", "Plated Steelcaps", "Sterak's Gage"],
+          "items_winrate": 0.5827338129496403
         },
         {
-          "items": ["Divine Sunderer", "Sterak's Gage", "Spirit Visage"],
-          "items_winrate": 0.5704545454545454
+          "items": ["Goredrinker", "Plated Steelcaps", "Sterak's Gage"],
+          "items_winrate": 0.5535420098846787
         }
       ],
       "Fourth Item Options": [
@@ -16477,12 +16589,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Prowler's Claw", "The Collector", "Edge of Night"],
-          "items_winrate": 0.5185185185185185
+          "items": ["Prowler's Claw", "Mercury's Treads", "Sterak's Gage"],
+          "items_winrate": 0.5256410256410257
         },
         {
-          "items": ["Prowler's Claw", "Edge of Night", "Sterak's Gage"],
-          "items_winrate": 0.4897959183673469
+          "items": ["Eclipse", "Mercury's Treads", "Sterak's Gage"],
+          "items_winrate": 0.52
         }
       ],
       "Fourth Item Options": [
@@ -16588,17 +16700,13 @@
           "items": [
             "Moonstone Renewer",
             "Staff of Flowing Water",
-            "Ionian Boots of Lucidity"
+            "Ardent Censer"
           ],
-          "items_winrate": 0.585081585081585
+          "items_winrate": 0.5525059665871122
         },
         {
-          "items": [
-            "Moonstone Renewer",
-            "Ardent Censer",
-            "Ionian Boots of Lucidity"
-          ],
-          "items_winrate": 0.5755395683453237
+          "items": ["Moonstone Renewer", "Staff of Flowing Water", null],
+          "items_winrate": 0.5498721227621484
         }
       ],
       "Fourth Item Options": [
@@ -16704,17 +16812,17 @@
           "items": [
             "Immortal Shieldbow",
             "Runaan's Hurricane",
-            "Bloodthirster"
+            "Berserker's Greaves"
           ],
-          "items_winrate": 0.5416666666666666
+          "items_winrate": 0.5590909090909091
         },
         {
           "items": [
+            "Berserker's Greaves",
             "Immortal Shieldbow",
-            "Blade of The Ruined King",
-            "Runaan's Hurricane"
+            "Blade of The Ruined King"
           ],
-          "items_winrate": 0.5336322869955157
+          "items_winrate": 0.4981684981684982
         }
       ],
       "Fourth Item Options": [
@@ -16817,12 +16925,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Night Harvester", "Lich Bane", null],
-          "items_winrate": 0.5431034482758621
+          "items": ["Sorcerer's Shoes", "Night Harvester", "Lich Bane"],
+          "items_winrate": 0.5141700404858299
         },
         {
-          "items": ["Night Harvester", "Rapid Firecannon", "Lich Bane"],
-          "items_winrate": 0.5277280858676208
+          "items": ["Night Harvester", "Lich Bane", "Sorcerer's Shoes"],
+          "items_winrate": 0.5122615803814714
         }
       ],
       "Fourth Item Options": [
@@ -16926,19 +17034,19 @@
       "Mythic and Core Items": [
         {
           "items": [
-            "Shurelya's Battlesong",
-            "Zeke's Convergence",
-            "Knight's Vow"
+            "Locket of the Iron Solari",
+            "Mercury's Treads",
+            "Zeke's Convergence"
           ],
-          "items_winrate": 0.5419354838709678
+          "items_winrate": 0.5432098765432098
         },
         {
           "items": [
             "Shurelya's Battlesong",
-            "Ionian Boots of Lucidity",
+            "Mercury's Treads",
             "Staff of Flowing Water"
           ],
-          "items_winrate": 0.5321637426900585
+          "items_winrate": 0.5042735042735043
         }
       ],
       "Fourth Item Options": [
@@ -17045,12 +17153,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Immortal Shieldbow", "The Collector", "Infinity Edge"],
-          "items_winrate": 0.5355329949238579
+          "items": ["Galeforce", "Essence Reaver", "Berserker's Greaves"],
+          "items_winrate": 0.5671981776765376
         },
         {
-          "items": ["Immortal Shieldbow", "The Collector", "Bloodthirster"],
-          "items_winrate": 0.5303983228511531
+          "items": ["Kraken Slayer", "Berserker's Greaves", "The Collector"],
+          "items_winrate": 0.5186104218362283
         }
       ],
       "Fourth Item Options": [
@@ -17168,19 +17276,19 @@
       "Mythic and Core Items": [
         {
           "items": [
-            "Frostfire Gauntlet",
-            "Abyssal Mask",
-            "%i:ornnIcon% Rimeforged Grasp"
+            "Plated Steelcaps",
+            "Sunfire Aegis",
+            "%i:ornnIcon% Forgefire Crest"
           ],
-          "items_winrate": 0.6055045871559633
+          "items_winrate": 0.5462184873949579
         },
         {
           "items": [
             "Frostfire Gauntlet",
-            "Warmog's Armor",
+            "Mercury's Treads",
             "%i:ornnIcon% Rimeforged Grasp"
           ],
-          "items_winrate": 0.6052060737527115
+          "items_winrate": 0.5395348837209303
         }
       ],
       "Fourth Item Options": [
@@ -17283,12 +17391,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Night Harvester", "Lich Bane", "Zhonya's Hourglass"],
-          "items_winrate": 0.4934640522875817
+          "items": ["Night Harvester", "Sorcerer's Shoes", "Lich Bane"],
+          "items_winrate": 0.5152284263959391
         },
         {
-          "items": ["Everfrost", "Cosmic Drive", "Zhonya's Hourglass"],
-          "items_winrate": 0.4653284671532847
+          "items": ["Everfrost", "Sorcerer's Shoes", "Lich Bane"],
+          "items_winrate": 0.48205128205128206
         }
       ],
       "Fourth Item Options": [
@@ -17407,14 +17515,18 @@
         {
           "items": [
             "Luden's Tempest",
-            "Rabadon's Deathcap",
-            "Zhonya's Hourglass"
+            "Sorcerer's Shoes",
+            "Rabadon's Deathcap"
           ],
-          "items_winrate": 0.5873015873015873
+          "items_winrate": 0.5851393188854489
         },
         {
-          "items": ["Luden's Tempest", null, null],
-          "items_winrate": 0.573943661971831
+          "items": [
+            "Night Harvester",
+            "Sorcerer's Shoes",
+            "Zhonya's Hourglass"
+          ],
+          "items_winrate": 0.5337552742616034
         }
       ],
       "Fourth Item Options": [
@@ -17518,16 +17630,20 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Kraken Slayer", null, null],
-          "items_winrate": 0.5646551724137931
-        },
-        {
           "items": [
             "Immortal Shieldbow",
             "Runaan's Hurricane",
-            "Infinity Edge"
+            "Berserker's Greaves"
           ],
-          "items_winrate": 0.5581395348837209
+          "items_winrate": 0.5906040268456376
+        },
+        {
+          "items": [
+            "Kraken Slayer",
+            "Runaan's Hurricane",
+            "Berserker's Greaves"
+          ],
+          "items_winrate": 0.5840220385674931
         }
       ],
       "Fourth Item Options": [
@@ -17630,12 +17746,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Sunfire Aegis", "Thornmail", "Warmog's Armor"],
-          "items_winrate": 0.6060606060606061
+          "items": ["Plated Steelcaps", "Sunfire Aegis", "Thornmail"],
+          "items_winrate": 0.5777777777777777
         },
         {
-          "items": ["Sunfire Aegis", "Force of Nature", null],
-          "items_winrate": 0.5843373493975904
+          "items": ["Mercury's Treads", "Sunfire Aegis", "Force of Nature"],
+          "items_winrate": 0.5775862068965517
         }
       ],
       "Fourth Item Options": [
@@ -17754,10 +17870,10 @@
         {
           "items": [
             "Duskblade of Draktharr",
-            "Ionian Boots of Lucidity",
-            "Edge of Night"
+            "Edge of Night",
+            "Youmuu's Ghostblade"
           ],
-          "items_winrate": 0.48934280639431615
+          "items_winrate": 0.4980744544287548
         },
         {
           "items": [
@@ -17765,7 +17881,7 @@
             "Youmuu's Ghostblade",
             "Edge of Night"
           ],
-          "items_winrate": 0.489159891598916
+          "items_winrate": 0.4964769647696477
         }
       ],
       "Fourth Item Options": [
@@ -17882,12 +17998,20 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Immortal Shieldbow", "Infinity Edge", "Wit's End"],
-          "items_winrate": 0.6049723756906077
+          "items": [
+            "Berserker's Greaves",
+            "Immortal Shieldbow",
+            "Infinity Edge"
+          ],
+          "items_winrate": 0.5268225584594223
         },
         {
-          "items": ["Immortal Shieldbow", "Bloodthirster", "Infinity Edge"],
-          "items_winrate": 0.5613409415121255
+          "items": [
+            "Berserker's Greaves",
+            "Immortal Shieldbow",
+            "Bloodthirster"
+          ],
+          "items_winrate": 0.5223081499107673
         }
       ],
       "Fourth Item Options": [
@@ -17990,12 +18114,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Goredrinker", "Sterak's Gage", "Spirit Visage"],
-          "items_winrate": 0.597911227154047
+          "items": ["Goredrinker", "Plated Steelcaps", "Sterak's Gage"],
+          "items_winrate": 0.5672645739910314
         },
         {
-          "items": ["Goredrinker", "Sterak's Gage", null],
-          "items_winrate": 0.5785123966942148
+          "items": ["Goredrinker", "Mercury's Treads", "Sterak's Gage"],
+          "items_winrate": 0.5631768953068592
         }
       ],
       "Fourth Item Options": [
@@ -18098,16 +18222,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": [
-            "Liandry's Anguish",
-            "Zhonya's Hourglass",
-            "Demonic Embrace"
-          ],
-          "items_winrate": 0.5072992700729927
+          "items": ["Liandry's Anguish", "Demonic Embrace", "Cosmic Drive"],
+          "items_winrate": 0.5109489051094891
         },
         {
-          "items": ["Liandry's Anguish", "Demonic Embrace", null],
-          "items_winrate": 0.506645817044566
+          "items": ["Liandry's Anguish", "Sorcerer's Shoes", "Cosmic Drive"],
+          "items_winrate": 0.5083056478405316
         }
       ],
       "Fourth Item Options": [
@@ -18210,12 +18330,12 @@
       ],
       "Mythic and Core Items": [
         {
-          "items": ["Riftmaker", "Nashor's Tooth", "Lich Bane"],
-          "items_winrate": 0.4410480349344978
+          "items": ["Riftmaker", "Nashor's Tooth", "Mercury's Treads"],
+          "items_winrate": 0.5028901734104047
         },
         {
-          "items": ["Riftmaker", "Nashor's Tooth", "Cosmic Drive"],
-          "items_winrate": 0.43013100436681223
+          "items": ["Riftmaker", "Nashor's Tooth", "Lich Bane"],
+          "items_winrate": 0.4105691056910569
         }
       ],
       "Fourth Item Options": [

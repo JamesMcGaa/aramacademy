@@ -235,14 +235,11 @@ function nice_round(num) {
   return Math.round(num * 10000) / 10000;
 }
 
-export default function TierlistTableMobile({ tierlist_data }) {
+export default function TierlistTableMobile({ per_champion_data }) {
   // const rows = raw_rows.filter(
   //     (r) => r.champion !== 'overall' && r.total_games !== 0
   // );
-  const rows = tierlist_data;
-  rows.forEach((row) => {
-    row.winrate = nice_round(row.wins * 100);
-  });
+  const rows = per_champion_data;
 
   const classes = useStyles();
   const [order, setOrder] = React.useState('desc');
@@ -313,10 +310,12 @@ export default function TierlistTableMobile({ tierlist_data }) {
                       className={classes.mobileCell}
                       align="center"
                     >
-                      <img
-                        className={classes.resizeChampIcon}
-                        src={resources.champ_icons[row.champion]}
-                      />
+                      <a href={'/champions/' + row.champion}>
+                        <img
+                          className={classes.resizeChampIcon}
+                          src={resources.champ_icons[row.champion]}
+                        />
+                      </a>
                     </TableCell>
                     <TableCell align="left" className={classes.nameCell}>
                       {resources.two_word_champs.has(row.champion)
@@ -342,10 +341,10 @@ export default function TierlistTableMobile({ tierlist_data }) {
                     >
                       <span
                         style={{
-                          color: winrateColor(row.winrate),
+                          color: winrateColor(row.winrate * 100),
                         }}
                       >
-                        {row.winrate.toFixed(2)}
+                        {(row.winrate * 100).toFixed(2)}%
                       </span>
                     </TableCell>
                   </TableRow>

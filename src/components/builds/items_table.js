@@ -110,7 +110,7 @@ export default function ItemsTable({ items_data }) {
       path_list.push(getFullDDragonPath(items_data.patch, item_json));
     }
     const icons = _.map(path_list, (path) => (
-      <img className={classes.resizeChampIcon} alt="summoner icon" src={path} />
+      <img className={classes.resizeChampIcon} alt="no item" src={path} />
     ));
     return (
       <div className={classes.itemSingleBlock}>

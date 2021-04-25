@@ -14,38 +14,37 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({});
 
 export default function AuthorTab({ lad }) {
-  const classes = useStyles();
-
   return (
     <Link href={lad.link} style={{ textDecoration: 'none' }}>
-      <Card className={classes.root} classes={{ root: classes.card }}>
-        <CardActionArea classes={{ root: classes.card }}>
+      <Card>
+        <CardActionArea>
           <CardMedia
             component="img"
             alt="Favorite Champion"
             height="200px"
             image={lad.img}
             title="Favorite Champion"
-            classes={{ root: classes.img }}
           />
           <CardContent>
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="h2"
-              align="left"
-              classes={{ root: classes.title }}
-            >
+            <Typography gutterBottom variant="h5" component="h2" align="left">
               {lad.name}
             </Typography>
             <Typography
-              classes={{ root: classes.content }}
               variant="caption"
               color="textSecondary"
               component="p"
               align="left"
             >
               {lad.bio}
+              {lad.hasOwnProperty('twitch') ? (
+                <div>
+                  {' '}
+                  <a href={lad.twitch} target="_blank">
+                    {' '}
+                    Twitch
+                  </a>{' '}
+                </div>
+              ) : null}
             </Typography>
           </CardContent>
         </CardActionArea>

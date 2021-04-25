@@ -16,7 +16,7 @@ module.exports = {
     publicPath: '/',
     filename: '[name].js',
   },
-  plugins: [htmlPlugin],
+  plugins: [htmlPlugin, new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
   module: {
     rules: [
       {
@@ -29,10 +29,18 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|svg|jpg|gif|txt)$/,
+        test: /\.(png|svg|jpg|gif)$/,
         loader: 'file-loader',
         options: { name: 'static/[name].[ext]' },
       },
+      {
+        test: /\.txt$/,
+        use: 'raw-loader',
+      },
+      //       {
+      //         test: /\.md$/,
+      //         use: ['markdown-loader']
+      // },
     ],
   },
 };

@@ -92,7 +92,7 @@ const headCells = [
     id: 'total_games',
     numeric: true,
     disablePadding: false,
-    label: 'Total Games',
+    label: 'Pick Rate',
   },
 ];
 
@@ -221,16 +221,12 @@ function nice_round(num) {
   return Math.round(num * 10000) / 10000;
 }
 
-export default function TierlistTableDesktop({ tierlist_data }) {
-  const raw_rows = tierlist_data;
+export default function TierlistTableDesktop({ per_champion_data }) {
+  const raw_rows = per_champion_data;
   // const rows = raw_rows.filter(
   //     (r) => r.champion !== 'overall' && r.total_games !== 0
   // );
   const rows = raw_rows;
-  rows.forEach((row) => {
-    row.winrate = nice_round(row.wins * 100);
-  });
-
   const classes = useStyles();
   const [order, setOrder] = React.useState('desc');
   const [orderBy, setOrderBy] = React.useState('winrate');
@@ -299,10 +295,12 @@ export default function TierlistTableDesktop({ tierlist_data }) {
                       classes={{ root: classes.iconCell }}
                       align="center"
                     >
-                      <img
-                        className={classes.resizeChampIcon}
-                        src={resources.champ_icons[row.champion]}
-                      />
+                      <a href={'/champions/' + row.champion}>
+                        <img
+                          className={classes.resizeChampIcon}
+                          src={resources.champ_icons[row.champion]}
+                        />
+                      </a>
                     </TableCell>
                     <TableCell align="left" style={{ paddingLeft: '0px' }}>
                       {resources.two_word_champs.has(row.champion)
@@ -323,14 +321,16 @@ export default function TierlistTableDesktop({ tierlist_data }) {
                     <TableCell align="right">
                       <span
                         style={{
-                          color: winrateColor(row.winrate),
+                          color: winrateColor(row.winrate * 100),
                         }}
                       >
-                        {row.winrate.toFixed(2)}
+                        {(row.winrate * 100).toFixed(2)}%
                       </span>
                     </TableCell>
 
-                    <TableCell align="right">{row.total_games}</TableCell>
+                    <TableCell align="right">
+                      {(row.pickrate * 100).toFixed(2) + '%'}
+                    </TableCell>
                   </TableRow>
                 );
               })}

@@ -1,17 +1,30 @@
 body {
+  min-height: 100%;
   font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
-  background-image: url('../images/index_background.png');
+  background-image: url('../images/index_background_compressed.jpg');
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-position: top;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+html {
+  min-height: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    background-image: none;
+    background: linear-gradient(black, transparent); /* the standard */
+  }
 }
 
 .bg-primary {
@@ -20,5 +33,5 @@ body {
 
 /* For webpack purposes only */
 .preview {
-  background-image: url('../images/preview.png');
+  background-image: url('../images/og_preview.png');
 }
