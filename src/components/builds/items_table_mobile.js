@@ -103,7 +103,9 @@ export default function ItemsTableMobile({ items_data }) {
     let path_list = [];
     for (var index in items) {
       const item_json = items[index];
-      path_list.push(getFullDDragonPath(items_data.patch, item_json));
+      if (item_json != null) {
+        path_list.push(getFullDDragonPath(items_data.patch, item_json));
+      }
     }
     const icons = _.map(path_list, (path) => (
       <img className={classes.resizeItemIcon} alt="no item" src={path} />

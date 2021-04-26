@@ -170,16 +170,14 @@ export default function BuildHeader({ data, champion_name }) {
     console.log('path', path);
 
     return (
-      <AbilityTooltip arrow title={tooltip}>
-        <div className={classes.spellIcon}>
-          <img className={classes.resizeAbilityIcon} alt="ability" src={path} />
-          <img
-            className={classes.overlay}
-            alt="key"
-            src={resources.abilities_icons[key]}
-          />{' '}
-        </div>
-      </AbilityTooltip>
+      <div className={classes.spellIcon}>
+        <img className={classes.resizeAbilityIcon} alt="ability" src={path} />
+        <img
+          className={classes.overlay}
+          alt="key"
+          src={resources.abilities_icons[key]}
+        />{' '}
+      </div>
     );
   };
 
