@@ -15996,7 +15996,12 @@
       }
     ],
     "abilities_order": ["Q", "W", "E"],
-    "abilities_levels": {},
+    "abilities_levels": {
+      "Q": [2, 4, 5, 7, 9],
+      "W": [1, 8, 10, 12, 13],
+      "E": [3, 14, 15, 17, 18],
+      "R": [6, 11, 16]
+    },
     "items_json": {
       "Starting Items": [
         {
