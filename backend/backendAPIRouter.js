@@ -225,17 +225,20 @@ async function getMMR(region, summoner_name) {
  * Main method that matching a (region, standardized_summoner_name), otherwise it places them on our queue
  */
 router.get(
-  '/winrate_data/:region/:standardized_summoner_name',
+  '/winrate_data/:region/:unsanitized_summoner_name',
   async (req, res) => {
+    const standardized_summoner_name = sanitizeSummonerName(
+      req.params.unsanitized_summoner_name
+    );
     let [matching_user_data, patch, mmr] = await Promise.all([
-      getUserData(req.params.standardized_summoner_name, req.params.region),
+      getUserData(standardized_summoner_name, req.params.region),
       getCurrentPatch(),
-      getMMR(req.params.region, req.params.standardized_summoner_name),
+      getMMR(req.params.region, standardized_summoner_name),
     ]);
     let user_data = null;
     if (matching_user_data.length === 0) {
       user_data = await issueUpdate(
-        req.params.standardized_summoner_name,
+        standardized_summoner_name,
         req.params.region
       );
     } else {
@@ -277,15 +280,18 @@ router.get(
 /*
  * Places a given (region, standardized_summoner_name) on the update queue
  */
-router.get('/update/:region/:standardized_summoner_name', async (req, res) => {
+router.get('/update/:region/:unsanitized_summoner_name', async (req, res) => {
+  const standardized_summoner_name = sanitizeSummonerName(
+    req.params.unsanitized_summoner_name
+  );
   let [matching_user_data, patch, mmr] = await Promise.all([
-    getUserData(req.params.standardized_summoner_name, req.params.region),
+    getUserData(standardized_summoner_name, req.params.region),
     getCurrentPatch(),
-    getMMR(req.params.region, req.params.standardized_summoner_name),
+    getMMR(req.params.region, standardized_summoner_name),
   ]);
 
   user_data = await issueUpdate(
-    req.params.standardized_summoner_name,
+    standardized_summoner_name,
     req.params.region,
     matching_user_data[0]
   );
@@ -309,6 +315,17 @@ router.get('/update/:region/:standardized_summoner_name', async (req, res) => {
   res.send(user_data_response);
   return;
 });
+
+function sanitizeSummonerName(unsanitized_summoner_name) {
+  const lower_summoner_name = unsanitized_summoner_name.toLowerCase();
+  let standardized_summoner_name = lower_summoner_name.replace(/\s/g, '');
+  standardized_summoner_name = standardized_summoner_name.replace(
+    /[.,\/#!$%\^&\*;:{}=\-_`~()]/g,
+    ''
+  );
+  console.log('standardized', standardized_summoner_name);
+  return standardized_summoner_name;
+}
 
 /*
  * Returns the current leaderboard for a (region)
