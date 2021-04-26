@@ -87,7 +87,7 @@ const useStyles = makeStyles({
     height: 'auto',
     width: '100%',
     borderRadius: '50%',
-    border: '1px solid #3f51b5',
+    border: '3px solid #3f51b5',
   },
   statRow: {
     display: 'flex',
