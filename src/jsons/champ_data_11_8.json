@@ -877,12 +877,12 @@
     "items_json": {
       "Starting Items": [
         {
-          "items": ["Refillable Potion", "Hextech Alternator"],
-          "items_winrate": 0.5165016501650165
+          "items": ["Amplifying Tome", "Guardian's Orb"],
+          "items_winrate": 0.5616438356164384
         },
         {
-          "items": ["Boots", "Refillable Potion", "Guardian's Orb"],
-          "items_winrate": 0.49455337690631807
+          "items": ["Refillable Potion", "Hextech Alternator"],
+          "items_winrate": 0.5165016501650165
         }
       ],
       "Mythic and Core Items": [
@@ -1009,20 +1009,6 @@
         "runes_stats": ["CDRScaling", "Adaptive", "HealthScaling"],
         "runes_index": 2,
         "runes_winrate": 0.5201267828843106
-      },
-      {
-        "runes_primary": "Sorcery",
-        "runes_primary_list": [
-          "Arcane Comet",
-          "Nullifying Orb",
-          "Transcendence",
-          "Gathering Storm"
-        ],
-        "runes_secondary": "Domination",
-        "runes_secondary_list": ["Eyeball Collection", "Relentless Hunter"],
-        "runes_stats": ["Adaptive", "Adaptive", "HealthScaling"],
-        "runes_index": 3,
-        "runes_winrate": 0.43870967741935485
       }
     ],
     "abilities_order": ["Q", "E", "W"],
@@ -1157,12 +1143,12 @@
     "items_json": {
       "Starting Items": [
         {
-          "items": ["Boots", "Refillable Potion", "Guardian's Orb"],
-          "items_winrate": 0.5356037151702786
+          "items": ["Refillable Potion", "Hextech Alternator"],
+          "items_winrate": 0.5363984674329502
         },
         {
-          "items": ["Boots", "Health Potion", "Hextech Alternator"],
-          "items_winrate": 0.5326524295883628
+          "items": ["Boots", "Refillable Potion", "Guardian's Orb"],
+          "items_winrate": 0.5356037151702786
         }
       ],
       "Mythic and Core Items": [
@@ -1321,12 +1307,12 @@
     "items_json": {
       "Starting Items": [
         {
-          "items": ["Boots", "Recurve Bow", "Health Potion", "Health Potion"],
-          "items_winrate": 0.5189620758483033
+          "items": ["Boots", "Refillable Potion", "Guardian's Hammer"],
+          "items_winrate": 0.5314685314685315
         },
         {
-          "items": ["Health Potion", "Health Potion", "Noonquiver"],
-          "items_winrate": 0.4935031847133758
+          "items": ["Boots", "Recurve Bow", "Health Potion", "Health Potion"],
+          "items_winrate": 0.5189620758483033
         }
       ],
       "Mythic and Core Items": [
@@ -2212,15 +2198,21 @@
       "Starting Items": [
         {
           "items": [
+            "Boots",
+            "Health Potion",
+            "Health Potion",
+            "Health Potion",
+            "Bandleglass Mirror"
+          ],
+          "items_winrate": 0.5340501792114696
+        },
+        {
+          "items": [
             "Health Potion",
             "Tear of the Goddess",
             "Bandleglass Mirror"
           ],
           "items_winrate": 0.5159609120521172
-        },
-        {
-          "items": ["Ruby Crystal", "Health Potion", "Bandleglass Mirror"],
-          "items_winrate": 0.5093501636278635
         }
       ],
       "Mythic and Core Items": [
@@ -3165,16 +3157,16 @@
     "items_json": {
       "Starting Items": [
         {
+          "items": ["Tear of the Goddess", "Bandleglass Mirror"],
+          "items_winrate": 0.6305147058823529
+        },
+        {
           "items": [
             "Health Potion",
             "Tear of the Goddess",
             "Bandleglass Mirror"
           ],
           "items_winrate": 0.6066196418882257
-        },
-        {
-          "items": ["Health Potion", "Tear of the Goddess", "Guardian's Blade"],
-          "items_winrate": 0.6030534351145038
         }
       ],
       "Mythic and Core Items": [
@@ -3307,20 +3299,6 @@
         "runes_stats": ["AttackSpeed", "Adaptive", "Armor"],
         "runes_index": 3,
         "runes_winrate": 0.44970414201183434
-      },
-      {
-        "runes_primary": "Sorcery",
-        "runes_primary_list": [
-          "Arcane Comet",
-          "Nullifying Orb",
-          "Transcendence",
-          "Gathering Storm"
-        ],
-        "runes_secondary": "Domination",
-        "runes_secondary_list": ["Eyeball Collection", "Relentless Hunter"],
-        "runes_stats": ["Adaptive", "Adaptive", "HealthScaling"],
-        "runes_index": 4,
-        "runes_winrate": 0.125
       }
     ],
     "abilities_order": ["Q", "E", "W"],
@@ -3719,12 +3697,18 @@
     "items_json": {
       "Starting Items": [
         {
-          "items": ["Health Potion", "Tear of the Goddess", "Guardian's Orb"],
-          "items_winrate": 0.48328557784145176
+          "items": ["Tear of the Goddess", "Guardian's Orb"],
+          "items_winrate": 0.5236363636363637
         },
         {
-          "items": ["Health Potion", "Health Potion", "Lost Chapter"],
-          "items_winrate": 0.4755253249119398
+          "items": [
+            "Amplifying Tome",
+            "Amplifying Tome",
+            "Health Potion",
+            "Health Potion",
+            "Tear of the Goddess"
+          ],
+          "items_winrate": 0.498220640569395
         }
       ],
       "Mythic and Core Items": [
@@ -4013,8 +3997,8 @@
           "items_winrate": 0.5263157894736842
         },
         {
-          "items": ["Health Potion", "Health Potion", "Lost Chapter"],
-          "items_winrate": 0.4785276073619632
+          "items": ["Amplifying Tome", "Guardian's Orb"],
+          "items_winrate": 0.5078125
         }
       ],
       "Mythic and Core Items": [
@@ -4561,8 +4545,8 @@
           "items_winrate": 0.5906432748538012
         },
         {
-          "items": ["Boots", "Refillable Potion", "Guardian's Horn"],
-          "items_winrate": 0.5660592255125285
+          "items": ["Boots", "Rejuvenation Bead", "Guardian's Horn"],
+          "items_winrate": 0.5662650602409639
         }
       ],
       "Mythic and Core Items": [
@@ -4821,6 +4805,10 @@
     "items_json": {
       "Starting Items": [
         {
+          "items": ["Tear of the Goddess", "Guardian's Orb"],
+          "items_winrate": 0.5172413793103449
+        },
+        {
           "items": [
             "Sapphire Crystal",
             "Amplifying Tome",
@@ -4828,10 +4816,6 @@
             "Tear of the Goddess"
           ],
           "items_winrate": 0.4899713467048711
-        },
-        {
-          "items": ["Lost Chapter"],
-          "items_winrate": 0.4855371900826446
         }
       ],
       "Mythic and Core Items": [
@@ -5086,20 +5070,6 @@
         "runes_stats": ["AttackSpeed", "Adaptive", "Armor"],
         "runes_index": 2,
         "runes_winrate": 0.75
-      },
-      {
-        "runes_primary": "Sorcery",
-        "runes_primary_list": [
-          "Arcane Comet",
-          "Nullifying Orb",
-          "Transcendence",
-          "Gathering Storm"
-        ],
-        "runes_secondary": "Domination",
-        "runes_secondary_list": ["Eyeball Collection", "Relentless Hunter"],
-        "runes_stats": ["Adaptive", "Adaptive", "HealthScaling"],
-        "runes_index": 3,
-        "runes_winrate": 0.47368421052631576
       }
     ],
     "abilities_order": ["Q", "E", "W"],
@@ -5112,12 +5082,12 @@
     "items_json": {
       "Starting Items": [
         {
-          "items": ["Ruby Crystal", "Guardian's Horn"],
-          "items_winrate": 0.616504854368932
+          "items": ["Rejuvenation Bead", "Refillable Potion", "Bami's Cinder"],
+          "items_winrate": 0.6482412060301508
         },
         {
-          "items": ["Boots", "Rejuvenation Bead", "Guardian's Horn"],
-          "items_winrate": 0.6142322097378277
+          "items": ["Ruby Crystal", "Guardian's Horn"],
+          "items_winrate": 0.616504854368932
         }
       ],
       "Mythic and Core Items": [
@@ -5812,18 +5782,12 @@
     "items_json": {
       "Starting Items": [
         {
-          "items": [
-            "Boots",
-            "Long Sword",
-            "Long Sword",
-            "Health Potion",
-            "Sheen"
-          ],
-          "items_winrate": 0.5611510791366906
+          "items": ["Boots", "Long Sword", "Sheen"],
+          "items_winrate": 0.5728155339805825
         },
         {
-          "items": ["Boots", "Sheen", "Tear of the Goddess"],
-          "items_winrate": 0.548936170212766
+          "items": ["Long Sword", "Refillable Potion", "Sheen"],
+          "items_winrate": 0.5521885521885522
         }
       ],
       "Mythic and Core Items": [
@@ -6130,16 +6094,16 @@
     "items_json": {
       "Starting Items": [
         {
+          "items": ["Ruby Crystal", "Bandleglass Mirror"],
+          "items_winrate": 0.5820512820512821
+        },
+        {
           "items": [
             "Health Potion",
             "Tear of the Goddess",
             "Bandleglass Mirror"
           ],
           "items_winrate": 0.5550373134328358
-        },
-        {
-          "items": ["Health Potion", "Tear of the Goddess", "Guardian's Orb"],
-          "items_winrate": 0.5498938428874734
         }
       ],
       "Mythic and Core Items": [
@@ -6713,12 +6677,12 @@
     "items_json": {
       "Starting Items": [
         {
-          "items": ["Lost Chapter"],
-          "items_winrate": 0.5535714285714286
+          "items": ["Amplifying Tome", "Guardian's Orb"],
+          "items_winrate": 0.5627376425855514
         },
         {
-          "items": ["Health Potion", "Health Potion", "Lost Chapter"],
-          "items_winrate": 0.5406486640948707
+          "items": ["Lost Chapter"],
+          "items_winrate": 0.5535714285714286
         }
       ],
       "Mythic and Core Items": [
@@ -7277,20 +7241,6 @@
         "runes_stats": ["Adaptive", "Adaptive", "Armor"],
         "runes_index": 2,
         "runes_winrate": 0.520373831775701
-      },
-      {
-        "runes_primary": "Sorcery",
-        "runes_primary_list": [
-          "Arcane Comet",
-          "Nullifying Orb",
-          "Transcendence",
-          "Gathering Storm"
-        ],
-        "runes_secondary": "Domination",
-        "runes_secondary_list": ["Eyeball Collection", "Relentless Hunter"],
-        "runes_stats": ["Adaptive", "Adaptive", "HealthScaling"],
-        "runes_index": 3,
-        "runes_winrate": 0.4457831325301205
       }
     ],
     "abilities_order": ["Q", "E", "W"],
@@ -7303,6 +7253,10 @@
     "items_json": {
       "Starting Items": [
         {
+          "items": ["Leeching Leer"],
+          "items_winrate": 0.5502645502645502
+        },
+        {
           "items": [
             "Blasting Wand",
             "Amplifying Tome",
@@ -7310,10 +7264,6 @@
             "Health Potion"
           ],
           "items_winrate": 0.5354691075514875
-        },
-        {
-          "items": ["Refillable Potion", "Hextech Alternator"],
-          "items_winrate": 0.5202863961813843
         }
       ],
       "Mythic and Core Items": [
@@ -7480,8 +7430,8 @@
           "items_winrate": 0.5771144278606966
         },
         {
-          "items": [],
-          "items_winrate": 0.49767441860465117
+          "items": ["Boots", "Refillable Potion", "Guardian's Hammer"],
+          "items_winrate": 0.514792899408284
         }
       ],
       "Mythic and Core Items": [
@@ -7732,20 +7682,6 @@
         "runes_stats": ["AttackSpeed", "Adaptive", "Armor"],
         "runes_index": 1,
         "runes_winrate": 0.3953488372093023
-      },
-      {
-        "runes_primary": "Sorcery",
-        "runes_primary_list": [
-          "Arcane Comet",
-          "Nullifying Orb",
-          "Transcendence",
-          "Gathering Storm"
-        ],
-        "runes_secondary": "Domination",
-        "runes_secondary_list": ["Eyeball Collection", "Relentless Hunter"],
-        "runes_stats": ["Adaptive", "Adaptive", "HealthScaling"],
-        "runes_index": 2,
-        "runes_winrate": 0.2
       }
     ],
     "abilities_order": ["Q", "E", "W"],
@@ -8032,12 +7968,12 @@
     "items_json": {
       "Starting Items": [
         {
-          "items": ["Lost Chapter"],
-          "items_winrate": 0.5087719298245614
+          "items": ["Boots", "Hextech Alternator"],
+          "items_winrate": 0.5555555555555556
         },
         {
-          "items": ["Amplifying Tome", "Guardian's Orb"],
-          "items_winrate": 0.49572649572649574
+          "items": ["Lost Chapter"],
+          "items_winrate": 0.5087719298245614
         }
       ],
       "Mythic and Core Items": [
@@ -8758,12 +8694,12 @@
     "items_json": {
       "Starting Items": [
         {
-          "items": ["Boots", "Refillable Potion", "Guardian's Hammer"],
-          "items_winrate": 0.5203145478374837
+          "items": ["Dagger", "Refillable Potion", "Guardian's Hammer"],
+          "items_winrate": 0.5768261964735516
         },
         {
-          "items": ["Noonquiver"],
-          "items_winrate": 0.4957587181903864
+          "items": ["Boots", "Refillable Potion", "Guardian's Hammer"],
+          "items_winrate": 0.5203145478374837
         }
       ],
       "Mythic and Core Items": [
@@ -8861,21 +8797,7 @@
         "runes_secondary_list": ["Triumph", "Coup de Grace"],
         "runes_stats": ["CDRScaling", "Adaptive", "Armor"],
         "runes_index": 0,
-        "runes_winrate": 0.5103591160220995
-      },
-      {
-        "runes_primary": "Precision",
-        "runes_primary_list": [
-          "Conqueror",
-          "Triumph",
-          "Legend: Tenacity",
-          "Last Stand"
-        ],
-        "runes_secondary": "Domination",
-        "runes_secondary_list": ["Taste of Blood", "Ravenous Hunter"],
-        "runes_stats": ["Adaptive", "Adaptive", "Armor"],
-        "runes_index": 1,
-        "runes_winrate": 0.5
+        "runes_winrate": 0.5092529129540782
       },
       {
         "runes_primary": "Sorcery",
@@ -8888,8 +8810,22 @@
         "runes_secondary": "Domination",
         "runes_secondary_list": ["Taste of Blood", "Ravenous Hunter"],
         "runes_stats": ["Adaptive", "Adaptive", "Armor"],
+        "runes_index": 1,
+        "runes_winrate": 0.47697974217311234
+      },
+      {
+        "runes_primary": "Precision",
+        "runes_primary_list": [
+          "Conqueror",
+          "Triumph",
+          "Legend: Tenacity",
+          "Last Stand"
+        ],
+        "runes_secondary": "Domination",
+        "runes_secondary_list": ["Taste of Blood", "Ravenous Hunter"],
+        "runes_stats": ["Adaptive", "Adaptive", "Armor"],
         "runes_index": 2,
-        "runes_winrate": 0.4918032786885246
+        "runes_winrate": 0.4626865671641791
       }
     ],
     "abilities_order": ["Q", "W", "E"],
@@ -9542,12 +9478,12 @@
     "items_json": {
       "Starting Items": [
         {
-          "items": ["Boots", "Refillable Potion", "Guardian's Horn"],
-          "items_winrate": 0.5842105263157895
+          "items": ["Boots", "Long Sword", "Health Potion", "Sheen"],
+          "items_winrate": 0.6016260162601627
         },
         {
-          "items": ["Boots", "Ruby Crystal", "Sheen"],
-          "items_winrate": 0.562206572769953
+          "items": ["Boots", "Refillable Potion", "Guardian's Horn"],
+          "items_winrate": 0.5842105263157895
         }
       ],
       "Mythic and Core Items": [
@@ -10115,20 +10051,6 @@
         "runes_winrate": 0.4951644100580271
       },
       {
-        "runes_primary": "Sorcery",
-        "runes_primary_list": [
-          "Phase Rush",
-          "Manaflow Band",
-          "Transcendence",
-          "Scorch"
-        ],
-        "runes_secondary": "Precision",
-        "runes_secondary_list": ["Presence of Mind", "Coup de Grace"],
-        "runes_stats": ["Adaptive", "Adaptive", "Armor"],
-        "runes_index": 3,
-        "runes_winrate": 0.4927536231884058
-      },
-      {
         "runes_primary": "Domination",
         "runes_primary_list": [
           "Electrocute",
@@ -10138,6 +10060,20 @@
         ],
         "runes_secondary": "Sorcery",
         "runes_secondary_list": ["Transcendence", "Gathering Storm"],
+        "runes_stats": ["Adaptive", "Adaptive", "Armor"],
+        "runes_index": 3,
+        "runes_winrate": 0.4927536231884058
+      },
+      {
+        "runes_primary": "Sorcery",
+        "runes_primary_list": [
+          "Phase Rush",
+          "Manaflow Band",
+          "Transcendence",
+          "Scorch"
+        ],
+        "runes_secondary": "Precision",
+        "runes_secondary_list": ["Presence of Mind", "Coup de Grace"],
         "runes_stats": ["Adaptive", "Adaptive", "Armor"],
         "runes_index": 4,
         "runes_winrate": 0.4927536231884058
@@ -10303,12 +10239,12 @@
     "items_json": {
       "Starting Items": [
         {
-          "items": ["Boots", "Ironspike Whip"],
-          "items_winrate": 0.5224438902743143
+          "items": ["Boots", "Refillable Potion", "Guardian's Horn"],
+          "items_winrate": 0.5338345864661654
         },
         {
-          "items": ["Health Potion", "Tear of the Goddess", "Guardian's Blade"],
-          "items_winrate": 0.5136986301369864
+          "items": ["Boots", "Ironspike Whip"],
+          "items_winrate": 0.5224438902743143
         }
       ],
       "Mythic and Core Items": [
@@ -10517,20 +10453,6 @@
         "runes_stats": ["Adaptive", "Adaptive", "Armor"],
         "runes_index": 0,
         "runes_winrate": 0.4755293787687561
-      },
-      {
-        "runes_primary": "Sorcery",
-        "runes_primary_list": [
-          "Arcane Comet",
-          "Nullifying Orb",
-          "Transcendence",
-          "Gathering Storm"
-        ],
-        "runes_secondary": "Domination",
-        "runes_secondary_list": ["Eyeball Collection", "Relentless Hunter"],
-        "runes_stats": ["Adaptive", "Adaptive", "HealthScaling"],
-        "runes_index": 1,
-        "runes_winrate": 0.40707964601769914
       }
     ],
     "abilities_order": ["Q", "W", "E"],
@@ -10823,20 +10745,6 @@
         "runes_stats": ["Adaptive", "Adaptive", "MagicRes"],
         "runes_index": 3,
         "runes_winrate": 0.3727045075125209
-      },
-      {
-        "runes_primary": "Sorcery",
-        "runes_primary_list": [
-          "Arcane Comet",
-          "Nullifying Orb",
-          "Transcendence",
-          "Gathering Storm"
-        ],
-        "runes_secondary": "Domination",
-        "runes_secondary_list": ["Eyeball Collection", "Relentless Hunter"],
-        "runes_stats": ["Adaptive", "Adaptive", "HealthScaling"],
-        "runes_index": 4,
-        "runes_winrate": 0.35
       }
     ],
     "abilities_order": ["Q", "W", "E"],
@@ -10949,20 +10857,6 @@
       {
         "runes_primary": "Sorcery",
         "runes_primary_list": [
-          "Arcane Comet",
-          "Nullifying Orb",
-          "Transcendence",
-          "Gathering Storm"
-        ],
-        "runes_secondary": "Domination",
-        "runes_secondary_list": ["Eyeball Collection", "Relentless Hunter"],
-        "runes_stats": ["Adaptive", "Adaptive", "HealthScaling"],
-        "runes_index": 1,
-        "runes_winrate": 0.5058823529411764
-      },
-      {
-        "runes_primary": "Sorcery",
-        "runes_primary_list": [
           "Summon Aery",
           "Nimbus Cloak",
           "Transcendence",
@@ -10971,7 +10865,7 @@
         "runes_secondary": "Domination",
         "runes_secondary_list": ["Taste of Blood", "Ravenous Hunter"],
         "runes_stats": ["AttackSpeed", "Adaptive", "Armor"],
-        "runes_index": 2,
+        "runes_index": 1,
         "runes_winrate": 0.5
       },
       {
@@ -10985,7 +10879,7 @@
         "runes_secondary": "Precision",
         "runes_secondary_list": ["Triumph", "Coup de Grace"],
         "runes_stats": ["Adaptive", "Adaptive", "HealthScaling"],
-        "runes_index": 3,
+        "runes_index": 2,
         "runes_winrate": 0.4862068965517241
       },
       {
@@ -10999,8 +10893,22 @@
         "runes_secondary": "Domination",
         "runes_secondary_list": ["Taste of Blood", "Ravenous Hunter"],
         "runes_stats": ["Adaptive", "Adaptive", "Armor"],
-        "runes_index": 4,
+        "runes_index": 3,
         "runes_winrate": 0.46511627906976744
+      },
+      {
+        "runes_primary": "Precision",
+        "runes_primary_list": [
+          "Conqueror",
+          "Triumph",
+          "Legend: Alacrity",
+          "Coup de Grace"
+        ],
+        "runes_secondary": "Domination",
+        "runes_secondary_list": ["Taste of Blood", "Ravenous Hunter"],
+        "runes_stats": ["AttackSpeed", "Adaptive", "Armor"],
+        "runes_index": 4,
+        "runes_winrate": 0.373134328358209
       }
     ],
     "abilities_order": ["Q", "W", "E"],
@@ -11097,20 +11005,6 @@
     "tier": "D",
     "runes": [
       {
-        "runes_primary": "Sorcery",
-        "runes_primary_list": [
-          "Arcane Comet",
-          "Nullifying Orb",
-          "Transcendence",
-          "Gathering Storm"
-        ],
-        "runes_secondary": "Domination",
-        "runes_secondary_list": ["Eyeball Collection", "Relentless Hunter"],
-        "runes_stats": ["Adaptive", "Adaptive", "HealthScaling"],
-        "runes_index": 0,
-        "runes_winrate": 0.5
-      },
-      {
         "runes_primary": "Precision",
         "runes_primary_list": [
           "Conqueror",
@@ -11121,7 +11015,7 @@
         "runes_secondary": "Domination",
         "runes_secondary_list": ["Ravenous Hunter", "Taste of Blood"],
         "runes_stats": ["AttackSpeed", "Adaptive", "Armor"],
-        "runes_index": 1,
+        "runes_index": 0,
         "runes_winrate": 0.4573170731707317
       },
       {
@@ -11135,7 +11029,7 @@
         "runes_secondary": "Precision",
         "runes_secondary_list": ["Triumph", "Coup de Grace"],
         "runes_stats": ["Adaptive", "Adaptive", "Armor"],
-        "runes_index": 2,
+        "runes_index": 1,
         "runes_winrate": 0.3333333333333333
       }
     ],
@@ -11671,17 +11565,12 @@
     "items_json": {
       "Starting Items": [
         {
-          "items": ["Boots", "Refillable Potion", "Guardian's Blade"],
-          "items_winrate": 0.526595744680851
+          "items": ["Boots", "Refillable Potion", "Guardian's Horn"],
+          "items_winrate": 0.5348837209302325
         },
         {
-          "items": [
-            "Long Sword",
-            "Health Potion",
-            "Health Potion",
-            "Guardian's Blade"
-          ],
-          "items_winrate": 0.5081967213114754
+          "items": ["Boots", "Refillable Potion", "Guardian's Blade"],
+          "items_winrate": 0.526595744680851
         }
       ],
       "Mythic and Core Items": [
@@ -11808,16 +11697,16 @@
         "runes_winrate": 0.47058823529411764
       },
       {
-        "runes_primary": "Sorcery",
+        "runes_primary": "Precision",
         "runes_primary_list": [
-          "Phase Rush",
-          "Nullifying Orb",
-          "Transcendence",
-          "Gathering Storm"
+          "Press the Attack",
+          "Triumph",
+          "Legend: Alacrity",
+          "Coup de Grace"
         ],
-        "runes_secondary": "Precision",
-        "runes_secondary_list": ["Presence of Mind", "Coup de Grace"],
-        "runes_stats": ["Adaptive", "Adaptive", "MagicRes"],
+        "runes_secondary": "Domination",
+        "runes_secondary_list": ["Taste of Blood", "Ravenous Hunter"],
+        "runes_stats": ["AttackSpeed", "Adaptive", "Armor"],
         "runes_index": 4,
         "runes_winrate": 0.3333333333333333
       }
@@ -12316,20 +12205,6 @@
     "tier": "B",
     "runes": [
       {
-        "runes_primary": "Sorcery",
-        "runes_primary_list": [
-          "Arcane Comet",
-          "Nullifying Orb",
-          "Transcendence",
-          "Gathering Storm"
-        ],
-        "runes_secondary": "Domination",
-        "runes_secondary_list": ["Eyeball Collection", "Relentless Hunter"],
-        "runes_stats": ["Adaptive", "Adaptive", "HealthScaling"],
-        "runes_index": 0,
-        "runes_winrate": 0.543859649122807
-      },
-      {
         "runes_primary": "Domination",
         "runes_primary_list": [
           "Dark Harvest",
@@ -12340,7 +12215,7 @@
         "runes_secondary": "Precision",
         "runes_secondary_list": ["Triumph", "Coup de Grace"],
         "runes_stats": ["CDRScaling", "Adaptive", "MagicRes"],
-        "runes_index": 1,
+        "runes_index": 0,
         "runes_winrate": 0.5305810397553516
       },
       {
@@ -12354,7 +12229,7 @@
         "runes_secondary": "Domination",
         "runes_secondary_list": ["Taste of Blood", "Ravenous Hunter"],
         "runes_stats": ["AttackSpeed", "Adaptive", "Armor"],
-        "runes_index": 2,
+        "runes_index": 1,
         "runes_winrate": 0.5217391304347826
       }
     ],
@@ -12802,12 +12677,12 @@
     "items_json": {
       "Starting Items": [
         {
-          "items": ["Boots", "Health Potion", "Hextech Alternator"],
-          "items_winrate": 0.4787888103289271
+          "items": ["Amplifying Tome", "Guardian's Orb"],
+          "items_winrate": 0.5402298850574713
         },
         {
-          "items": ["Boots", "Refillable Potion", "Guardian's Orb"],
-          "items_winrate": 0.4598337950138504
+          "items": ["Boots", "Health Potion", "Hextech Alternator"],
+          "items_winrate": 0.4787888103289271
         }
       ],
       "Mythic and Core Items": [
@@ -13260,8 +13135,8 @@
           "items_winrate": 0.578696925329429
         },
         {
-          "items": ["Tear of the Goddess", "Guardian's Blade"],
-          "items_winrate": 0.5759233926128591
+          "items": ["Refillable Potion", "Serrated Dirk"],
+          "items_winrate": 0.5784114052953157
         }
       ],
       "Mythic and Core Items": [
@@ -13801,12 +13676,12 @@
     "items_json": {
       "Starting Items": [
         {
-          "items": ["Boots", "Refillable Potion", "Guardian's Hammer"],
-          "items_winrate": 0.5446153846153846
+          "items": ["Boots", "Refillable Potion", "Guardian's Horn"],
+          "items_winrate": 0.5777777777777777
         },
         {
-          "items": ["Boots", "Phage"],
-          "items_winrate": 0.5331010452961672
+          "items": ["Boots", "Refillable Potion", "Guardian's Hammer"],
+          "items_winrate": 0.5446153846153846
         }
       ],
       "Mythic and Core Items": [
@@ -14809,12 +14684,16 @@
     "items_json": {
       "Starting Items": [
         {
-          "items": ["Tear of the Goddess", "Guardian's Blade"],
-          "items_winrate": 0.5688976377952756
+          "items": [
+            "Health Potion",
+            "Tear of the Goddess",
+            "Guardian's Hammer"
+          ],
+          "items_winrate": 0.5877192982456141
         },
         {
-          "items": ["Health Potion", "Tear of the Goddess", "Guardian's Blade"],
-          "items_winrate": 0.5519823788546255
+          "items": ["Tear of the Goddess", "Guardian's Blade"],
+          "items_winrate": 0.5688976377952756
         }
       ],
       "Mythic and Core Items": [
@@ -15245,8 +15124,13 @@
           "items_winrate": 0.536554354736173
         },
         {
-          "items": ["Noonquiver"],
-          "items_winrate": 0.48936170212765956
+          "items": [
+            "Long Sword",
+            "Health Potion",
+            "Health Potion",
+            "Guardian's Hammer"
+          ],
+          "items_winrate": 0.49795918367346936
         }
       ],
       "Mythic and Core Items": [
@@ -16473,8 +16357,8 @@
           "items_winrate": 0.5200876552227903
         },
         {
-          "items": ["Boots", "Hearthbound Axe"],
-          "items_winrate": 0.47522708505367467
+          "items": ["Boots", "Phage"],
+          "items_winrate": 0.4880382775119617
         }
       ],
       "Mythic and Core Items": [
@@ -16545,20 +16429,6 @@
     "tier": "D",
     "runes": [
       {
-        "runes_primary": "Sorcery",
-        "runes_primary_list": [
-          "Arcane Comet",
-          "Nullifying Orb",
-          "Transcendence",
-          "Gathering Storm"
-        ],
-        "runes_secondary": "Domination",
-        "runes_secondary_list": ["Eyeball Collection", "Relentless Hunter"],
-        "runes_stats": ["Adaptive", "Adaptive", "HealthScaling"],
-        "runes_index": 0,
-        "runes_winrate": 0.5454545454545454
-      },
-      {
         "runes_primary": "Resolve",
         "runes_primary_list": [
           "Aftershock",
@@ -16569,7 +16439,7 @@
         "runes_secondary": "Precision",
         "runes_secondary_list": ["Legend: Tenacity", "Triumph"],
         "runes_stats": ["CDRScaling", "Armor", "MagicRes"],
-        "runes_index": 1,
+        "runes_index": 0,
         "runes_winrate": 0.4794679005205321
       },
       {
@@ -16583,7 +16453,7 @@
         "runes_secondary": "Precision",
         "runes_secondary_list": ["Triumph", "Coup de Grace"],
         "runes_stats": ["Adaptive", "Adaptive", "Armor"],
-        "runes_index": 2,
+        "runes_index": 1,
         "runes_winrate": 0.37777777777777777
       }
     ],
@@ -16999,12 +16869,12 @@
     "items_json": {
       "Starting Items": [
         {
-          "items": ["Health Potion", "Health Potion", "Lost Chapter"],
-          "items_winrate": 0.4755973563802745
+          "items": ["Boots", "Refillable Potion", "Guardian's Orb"],
+          "items_winrate": 0.48672566371681414
         },
         {
-          "items": ["Health Potion", "Tear of the Goddess", "Guardian's Orb"],
-          "items_winrate": 0.46153846153846156
+          "items": ["Health Potion", "Health Potion", "Lost Chapter"],
+          "items_winrate": 0.4755973563802745
         }
       ],
       "Mythic and Core Items": [
@@ -17904,12 +17774,12 @@
     "items_json": {
       "Starting Items": [
         {
-          "items": ["Ruby Crystal", "Health Potion", "Guardian's Horn"],
-          "items_winrate": 0.5475113122171946
+          "items": ["Ruby Crystal", "Guardian's Horn"],
+          "items_winrate": 0.5816326530612245
         },
         {
-          "items": ["Boots", "Refillable Potion", "Guardian's Horn"],
-          "items_winrate": 0.5358391608391608
+          "items": ["Ruby Crystal", "Health Potion", "Guardian's Horn"],
+          "items_winrate": 0.5475113122171946
         }
       ],
       "Mythic and Core Items": [
@@ -18753,12 +18623,12 @@
     "items_json": {
       "Starting Items": [
         {
-          "items": ["Boots", "Refillable Potion", "Guardian's Orb"],
-          "items_winrate": 0.4939516129032258
+          "items": ["Amplifying Tome", "Guardian's Orb"],
+          "items_winrate": 0.505338078291815
         },
         {
-          "items": ["Refillable Potion", "Hextech Alternator"],
-          "items_winrate": 0.4913112164296998
+          "items": ["Boots", "Refillable Potion", "Guardian's Orb"],
+          "items_winrate": 0.4939516129032258
         }
       ],
       "Mythic and Core Items": [
@@ -19141,20 +19011,6 @@
         "runes_stats": ["Adaptive", "Adaptive", "MagicRes"],
         "runes_index": 1,
         "runes_winrate": 0.4897579143389199
-      },
-      {
-        "runes_primary": "Sorcery",
-        "runes_primary_list": [
-          "Arcane Comet",
-          "Nullifying Orb",
-          "Transcendence",
-          "Gathering Storm"
-        ],
-        "runes_secondary": "Domination",
-        "runes_secondary_list": ["Eyeball Collection", "Relentless Hunter"],
-        "runes_stats": ["Adaptive", "Adaptive", "HealthScaling"],
-        "runes_index": 2,
-        "runes_winrate": 0.2857142857142857
       }
     ],
     "abilities_order": ["Q", "E", "W"],
@@ -19299,8 +19155,8 @@
           "items_winrate": 0.5726552179656539
         },
         {
-          "items": ["Boots", "Refillable Potion", "Bandleglass Mirror"],
-          "items_winrate": 0.5573440643863179
+          "items": ["Tear of the Goddess", "Bandleglass Mirror"],
+          "items_winrate": 0.5659574468085107
         }
       ],
       "Mythic and Core Items": [
@@ -20142,20 +19998,6 @@
         "runes_stats": ["CDRScaling", "Adaptive", "Armor"],
         "runes_index": 3,
         "runes_winrate": 0.3880597014925373
-      },
-      {
-        "runes_primary": "Sorcery",
-        "runes_primary_list": [
-          "Arcane Comet",
-          "Nullifying Orb",
-          "Transcendence",
-          "Gathering Storm"
-        ],
-        "runes_secondary": "Domination",
-        "runes_secondary_list": ["Eyeball Collection", "Relentless Hunter"],
-        "runes_stats": ["Adaptive", "Adaptive", "HealthScaling"],
-        "runes_index": 4,
-        "runes_winrate": 0.0
       }
     ],
     "abilities_order": ["Q", "E", "W"],
@@ -20458,8 +20300,8 @@
           "items_winrate": 0.547808764940239
         },
         {
-          "items": ["Health Potion", "Health Potion", "Noonquiver"],
-          "items_winrate": 0.4809495896834701
+          "items": ["Refillable Potion", "Berserker's Greaves"],
+          "items_winrate": 0.4966442953020134
         }
       ],
       "Mythic and Core Items": [
