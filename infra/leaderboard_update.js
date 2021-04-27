@@ -7,11 +7,13 @@ const mongoose = require('mongoose');
 const { Kayn, REGIONS } = require('kayn');
 const kayn = Kayn(process.env.RIOT_API_KEY)();
 const leaderboard_model = require('../models/leaderboard_model.js');
-const WHATISMYMMR_RATELIMIT_RPS = 30;
+const WHATISMYMMR_RATELIMIT_RPS = 1;
 const BACKOFF_FOR_ERROR_SECONDS = 5;
 const axios = require('axios');
 const rateLimit = require('axios-rate-limit');
-const http = rateLimit(axios.create(), { maxRPS: WHATISMYMMR_RATELIMIT_RPS });
+const axios_limited = rateLimit(axios.create(), {
+  maxRPS: WHATISMYMMR_RATELIMIT_RPS,
+});
 const cliProgress = require('cli-progress');
 const sleep = require('sleep');
 const schedule = require('node-schedule');
@@ -149,9 +151,10 @@ async function getRecentLeadersMatchlistForRegion(region) {
                 region +
                 '.whatismymmr.com/api/v1/summoner?name=' +
                 encodeURI(res.name),
+              { headers: { 'User-Agent': 'ARAM-ACADEMY-LEADERBOARD-UPDATE' } },
             ];
             const mmr_res = await retry_async_function_with_wait(
-              http.get,
+              axios_limited.get,
               args
             );
             mmr = getNested(mmr_res, 'data', 'ARAM', 'avg');
