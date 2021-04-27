@@ -87,7 +87,7 @@ const useStyles = makeStyles({
     height: '30px',
     width: '100%',
     borderRadius: '50%',
-    border: '3px solid #3f51b5',
+    border: '2px solid #8e793e',
   },
   statRow: {
     display: 'flex',
@@ -252,7 +252,7 @@ export default function RunesTable({ runes_data }) {
       <div className={classes.statRow}>
         <React.Fragment>
           {stat_row.map(function (stat, index) {
-            var grayed_out = { filter: 'grayscale(1)' };
+            var grayed_out = { filter: 'grayscale(1)', opacity: '0.5' };
             if (index === selected_index) {
               grayed_out = null;
             }

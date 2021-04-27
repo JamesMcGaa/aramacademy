@@ -127,9 +127,13 @@ export default function KeystoneRow({
           var path = tup[0];
           var selected = tup[1];
 
-          var grayed_out = { filter: 'grayscale(1)' };
+          var grayed_out = { filter: 'grayscale(1)', opacity: '0.5' };
           if (selected) {
-            grayed_out = null;
+            if (!is_keystone) {
+              grayed_out = { border: '2px solid #8e793e' };
+            } else {
+              grayed_out = null;
+            }
           }
 
           return (
