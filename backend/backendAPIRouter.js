@@ -203,7 +203,10 @@ async function getMMR(region, summoner_name) {
     controller.abort();
   }, REQUEST_TIMEOUT_EXTERNAL_FETCH_MS);
   try {
-    mmr_response = await fetch(formatted_URI, { signal: controller.signal });
+    mmr_response = await fetch(formatted_URI, {
+      signal: controller.signal,
+      headers: { 'User-Agent': 'ARAM-ACADEMY-USER-PAGE' },
+    });
     mmr_json = await mmr_response.json();
   } catch (error) {
   } finally {
@@ -353,7 +356,7 @@ module.exports = router;
  */
 
 /*we want to feed the following back to the champion.js client
- * winrate pickrate
+* winrate pickrate
 * primary/secondary rune tree name
 * primary/secondary rune tree name filepath
 * full image filepaths for the entire rune primary/secondary
@@ -378,16 +381,16 @@ runes_primary_list: ["Electrocute, TasteOfBlood, EyeballCollection, RavenousHunt
 runes_secondary: "Sorcery",
 runes_secondary_list: ["NimbusCloak, GatheringStorm"],
 runes_winrate: .55,
-    skill_order: ["R","Q","W","E"]
+   skill_order: ["R","Q","W","E"]
 level_skill_order: {"Q", "W", "E", "Q", "Q", "R", "Q", "E", "Q", etc}
 starting_items: ["guardian horn", reju reju reju]
 mythic: Shieldbow
 boots: mercs
 first item: essence reaver
 second item: navori quickblades
-
+ 
 }
-
+ 
 give champion.js the entire sorcery/resolve two trees worth of json and feed in the names of the 7 runes + 3 adaptive whatever you've chosen
 champion.js displays the rune trees in a flexible manner such that name/icon changes are automatic from riot json
 highlight the 10 choices
