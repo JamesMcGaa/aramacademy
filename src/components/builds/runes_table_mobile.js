@@ -75,7 +75,7 @@ const useStyles = makeStyles({
   resizeKeystoneIcon: {
     minWidth: '40px',
     maxWidth: '40px',
-    height: 'auto',
+    height: '40px',
     width: '100%',
     borderRadius: '50%',
     padding: '3px',
@@ -84,7 +84,7 @@ const useStyles = makeStyles({
   resizeStatIcon: {
     minWidth: '20px',
     maxWidth: '20px',
-    height: 'auto',
+    height: '20px',
     width: '100%',
     borderRadius: '50%',
     border: '2px solid #3f51b5',
@@ -132,14 +132,14 @@ const useStyles = makeStyles({
   runepageKeystoneIcon: {
     minWidth: 50,
     maxWidth: 50,
-    height: 'auto',
+    height: 50,
     borderRadius: '50%',
     padding: 0,
   },
   runepageIcon: {
     minWidth: 25,
     maxWidth: 25,
-    height: 'auto',
+    height: 25,
     padding: 0,
   },
 });

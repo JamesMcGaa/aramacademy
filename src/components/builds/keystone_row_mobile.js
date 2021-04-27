@@ -19,7 +19,8 @@ const useStyles = makeStyles({
   resizeRuneIcon: {
     minWidth: '29px',
     maxWidth: '33px',
-    height: 'auto',
+    minHeight: '29px',
+    maxHeight: '33px',
     width: '100%',
     borderRadius: '50%',
     padding: '0px',
@@ -27,7 +28,8 @@ const useStyles = makeStyles({
   resizeSecondaryRuneIcon: {
     minWidth: '25px',
     maxWidth: '28px',
-    height: 'auto',
+    minHeight: '25px',
+    maxHeight: '28px',
     width: '100%',
     borderRadius: '50%',
     padding: '0px',
@@ -35,7 +37,8 @@ const useStyles = makeStyles({
   resizeKeystoneIcon: {
     minWidth: '35px',
     maxWidth: '43px',
-    height: 'auto',
+    minHeight: '35px',
+    maxHeight: '43px',
     width: '100%',
     borderRadius: '50%',
     padding: '0px',
