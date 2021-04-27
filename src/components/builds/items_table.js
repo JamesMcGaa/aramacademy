@@ -123,8 +123,15 @@ export default function ItemsTable({ items_data }) {
   };
 
   const SingleChoiceItemsBlock = (category) => {
-    console.log('items', items_json[category]);
     const itemsRows = _.map(items_json[category], SingleChoiceItemsRow);
+    if (itemsRows.length == 1) {
+      return (
+        <div className={classes.itemSection}>
+          {Header(category)}
+          {itemsRows[0]}
+        </div>
+      );
+    }
     return (
       <div className={classes.itemSection}>
         {Header(category)}
@@ -134,6 +141,7 @@ export default function ItemsTable({ items_data }) {
       </div>
     );
   };
+
   const MultiChoiceItemBlock = (category) => {
     const ItemBlock = ({ items, items_winrate }) => {
       const item_json = items[0];

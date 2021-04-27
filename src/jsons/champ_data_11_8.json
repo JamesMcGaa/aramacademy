@@ -11291,10 +11291,6 @@
         {
           "items": ["Lost Chapter"],
           "items_winrate": 0.5541586073500967
-        },
-        {
-          "items": [],
-          "items_winrate": 0.5441176470588235
         }
       ],
       "Mythic and Core Items": [
@@ -13415,10 +13411,6 @@
         {
           "items": ["Health Potion", "Health Potion", "Lost Chapter"],
           "items_winrate": 0.531800215594682
-        },
-        {
-          "items": [],
-          "items_winrate": 0.49823321554770317
         }
       ],
       "Mythic and Core Items": [
@@ -13552,10 +13544,6 @@
     },
     "items_json": {
       "Starting Items": [
-        {
-          "items": [],
-          "items_winrate": 0.5714285714285714
-        },
         {
           "items": [
             "Rejuvenation Bead",
