@@ -11,6 +11,7 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Resources from '../resources.js';
+import Link from '@material-ui/core/Link';
 
 var resources = Resources.Resources;
 const DARK_GREEN_WINRATE_CUTOFF = 55.0;
@@ -302,9 +303,14 @@ export default function TierlistTableDesktop({ per_champion_data }) {
                       </a>
                     </TableCell>
                     <TableCell align="left" style={{ paddingLeft: '0px' }}>
-                      {resources.two_word_champs.has(row.champion)
-                        ? resources.two_word_champs.get(row.champion)
-                        : row.champion}
+                      <Link
+                        href={'/champions/' + row.champion}
+                        style={{ color: 'inherit', textDecoration: 'none' }}
+                      >
+                        {resources.two_word_champs.has(row.champion)
+                          ? resources.two_word_champs.get(row.champion)
+                          : row.champion}
+                      </Link>
                     </TableCell>
 
                     <TableCell
