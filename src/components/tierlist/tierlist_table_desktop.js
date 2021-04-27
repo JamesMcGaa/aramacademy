@@ -89,7 +89,7 @@ const headCells = [
   { id: 'tier', numeric: true, disablePadding: false, label: 'Tier' },
   { id: 'winrate', numeric: true, disablePadding: false, label: 'Winrate' },
   {
-    id: 'total_games',
+    id: 'pickrate',
     numeric: true,
     disablePadding: false,
     label: 'Pick Rate',
@@ -236,7 +236,6 @@ export default function TierlistTableDesktop({ per_champion_data }) {
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
-
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
