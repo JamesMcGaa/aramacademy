@@ -21,7 +21,7 @@ export default class Navigation extends React.Component {
                 EUNE
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href="/champions">Champions</Nav.Link>
+            <Nav.Link href="/champions">Builds</Nav.Link>
             <Nav.Link href="/tierlist">Tier List</Nav.Link>
             <Nav.Link href="/research">Research</Nav.Link>
           </Nav>

@@ -27,39 +27,18 @@ export default function TierlistPageDesktop(props) {
   const classes = useStyles();
   const params = useParams();
 
-  const [state, setState] = useState({
-    patch: undefined,
-  });
-
-  function handleTierlistDataResponse(json) {
-    setState({
-      patch: json.patch,
-    });
-  }
-  if (state.patch === undefined) {
-    fetch('/api/patch')
-      .then((response) => response.json())
-      .then((json) => {
-        handleTierlistDataResponse(json);
-      });
-  }
   return (
     <div>
       <div style={{ height: '100px' }}></div>
-
       <Container fixed className={classes.mediumContainer}>
         <Paper
           style={{ marginBottom: '15px', padding: '30px' }}
           classes={{ root: classes.paperRoot }}
         >
           <Typography variant="h4" style={{ fontWeight: 'bold' }}>
-            {' '}
-            ARAM Tier List{' '}
-            {state.patch !== undefined ? 'Patch ' + state.patch : null}
+            ARAM Academy Tier List
           </Typography>
-          {/* <Typography variant="h4" align="left" style={{ marginBottom: '4px' }}>
-          ARAM Tier List Patch {state.patch}
-        </Typography> */}
+
           <Typography
             variant="body1"
             align="center"
