@@ -579,20 +579,6 @@
     "tier": "A",
     "runes": [
       {
-        "runes_primary": "Domination",
-        "runes_primary_list": [
-          "Dark Harvest",
-          "Sudden Impact",
-          "Eyeball Collection",
-          "Ravenous Hunter"
-        ],
-        "runes_secondary": "Precision",
-        "runes_secondary_list": ["Triumph", "Coup de Grace"],
-        "runes_stats": ["AttackSpeed", "Adaptive", "Armor"],
-        "runes_index": 0,
-        "runes_winrate": 0.7142857142857143
-      },
-      {
         "runes_primary": "Precision",
         "runes_primary_list": [
           "Conqueror",
@@ -5029,20 +5015,6 @@
     "pickrate": 0.04618135962398257,
     "tier": "S",
     "runes": [
-      {
-        "runes_primary": "Domination",
-        "runes_primary_list": [
-          "Dark Harvest",
-          "Taste of Blood",
-          "Eyeball Collection",
-          "Ravenous Hunter"
-        ],
-        "runes_secondary": "Precision",
-        "runes_secondary_list": ["Triumph", "Coup de Grace"],
-        "runes_stats": ["Adaptive", "Adaptive", "Armor"],
-        "runes_index": 0,
-        "runes_winrate": 0.8181818181818182
-      },
       {
         "runes_primary": "Resolve",
         "runes_primary_list": [
@@ -9871,20 +9843,6 @@
     "pickrate": 0.030035538232259545,
     "tier": "D",
     "runes": [
-      {
-        "runes_primary": "Domination",
-        "runes_primary_list": [
-          "Dark Harvest",
-          "Cheap Shot",
-          "Eyeball Collection",
-          "Relentless Hunter"
-        ],
-        "runes_secondary": "Sorcery",
-        "runes_secondary_list": ["Celerity", "Scorch"],
-        "runes_stats": ["Adaptive", "Adaptive", "Armor"],
-        "runes_index": 0,
-        "runes_winrate": 0.5714285714285714
-      },
       {
         "runes_primary": "Resolve",
         "runes_primary_list": [
@@ -16951,20 +16909,6 @@
       {
         "runes_primary": "Precision",
         "runes_primary_list": [
-          "Fleet Footwork",
-          "Presence of Mind",
-          "Legend: Bloodline",
-          "Coup de Grace"
-        ],
-        "runes_secondary": "Domination",
-        "runes_secondary_list": ["Eyeball Collection", "Taste of Blood"],
-        "runes_stats": ["Adaptive", "Adaptive", "MagicRes"],
-        "runes_index": 0,
-        "runes_winrate": 1.0
-      },
-      {
-        "runes_primary": "Precision",
-        "runes_primary_list": [
           "Press the Attack",
           "Triumph",
           "Legend: Tenacity",
@@ -18973,20 +18917,6 @@
     "tier": "D",
     "runes": [
       {
-        "runes_primary": "Domination",
-        "runes_primary_list": [
-          "Dark Harvest",
-          "Taste of Blood",
-          "Eyeball Collection",
-          "Ravenous Hunter"
-        ],
-        "runes_secondary": "Precision",
-        "runes_secondary_list": ["Triumph", "Coup de Grace"],
-        "runes_stats": ["Adaptive", "Adaptive", "Armor"],
-        "runes_index": 0,
-        "runes_winrate": 0.5
-      },
-      {
         "runes_primary": "Precision",
         "runes_primary_list": [
           "Conqueror",
@@ -19931,20 +19861,6 @@
     "pickrate": 0.010904505330734839,
     "tier": "C",
     "runes": [
-      {
-        "runes_primary": "Domination",
-        "runes_primary_list": [
-          "Electrocute",
-          "Sudden Impact",
-          "Eyeball Collection",
-          "Ultimate Hunter"
-        ],
-        "runes_secondary": "Precision",
-        "runes_secondary_list": ["Triumph", "Coup de Grace"],
-        "runes_stats": ["AttackSpeed", "Adaptive", "Armor"],
-        "runes_index": 0,
-        "runes_winrate": 1.0
-      },
       {
         "runes_primary": "Precision",
         "runes_primary_list": [
