@@ -589,7 +589,7 @@
         "runes_secondary": "Domination",
         "runes_secondary_list": ["Sudden Impact", "Ravenous Hunter"],
         "runes_stats": ["AttackSpeed", "Adaptive", "HealthScaling"],
-        "runes_index": 1,
+        "runes_index": 0,
         "runes_winrate": 0.5519125683060109
       },
       {
@@ -603,7 +603,7 @@
         "runes_secondary": "Precision",
         "runes_secondary_list": ["Coup de Grace", "Legend: Alacrity"],
         "runes_stats": ["AttackSpeed", "Adaptive", "HealthScaling"],
-        "runes_index": 2,
+        "runes_index": 1,
         "runes_winrate": 0.5264505119453925
       },
       {
@@ -617,7 +617,7 @@
         "runes_secondary": "Domination",
         "runes_secondary_list": ["Sudden Impact", "Ravenous Hunter"],
         "runes_stats": ["AttackSpeed", "Adaptive", "Armor"],
-        "runes_index": 3,
+        "runes_index": 2,
         "runes_winrate": 0.375
       }
     ],
@@ -5026,7 +5026,7 @@
         "runes_secondary": "Inspiration",
         "runes_secondary_list": ["Magical Footwear", "Approach Velocity"],
         "runes_stats": ["AttackSpeed", "MagicRes", "HealthScaling"],
-        "runes_index": 1,
+        "runes_index": 0,
         "runes_winrate": 0.782608695652174
       },
       {
@@ -5040,7 +5040,7 @@
         "runes_secondary": "Resolve",
         "runes_secondary_list": ["Conditioning", "Revitalize"],
         "runes_stats": ["AttackSpeed", "Adaptive", "Armor"],
-        "runes_index": 2,
+        "runes_index": 1,
         "runes_winrate": 0.75
       }
     ],
@@ -9854,7 +9854,7 @@
         "runes_secondary": "Precision",
         "runes_secondary_list": ["Triumph", "Legend: Tenacity"],
         "runes_stats": ["CDRScaling", "Armor", "HealthScaling"],
-        "runes_index": 1,
+        "runes_index": 0,
         "runes_winrate": 0.5204081632653061
       },
       {
@@ -9868,7 +9868,7 @@
         "runes_secondary": "Precision",
         "runes_secondary_list": ["Triumph", "Legend: Tenacity"],
         "runes_stats": ["Adaptive", "Armor", "Armor"],
-        "runes_index": 2,
+        "runes_index": 1,
         "runes_winrate": 0.47596153846153844
       }
     ],
@@ -16917,7 +16917,7 @@
         "runes_secondary": "Domination",
         "runes_secondary_list": ["Sudden Impact", "Ravenous Hunter"],
         "runes_stats": ["AttackSpeed", "Adaptive", "Armor"],
-        "runes_index": 1,
+        "runes_index": 0,
         "runes_winrate": 0.6666666666666666
       },
       {
@@ -16931,7 +16931,7 @@
         "runes_secondary": "Precision",
         "runes_secondary_list": ["Triumph", "Coup de Grace"],
         "runes_stats": ["AttackSpeed", "Adaptive", "HealthScaling"],
-        "runes_index": 2,
+        "runes_index": 1,
         "runes_winrate": 0.515625
       },
       {
@@ -18927,7 +18927,7 @@
         "runes_secondary": "Resolve",
         "runes_secondary_list": ["Second Wind", "Revitalize"],
         "runes_stats": ["Adaptive", "Adaptive", "MagicRes"],
-        "runes_index": 1,
+        "runes_index": 0,
         "runes_winrate": 0.4897579143389199
       }
     ],
@@ -19872,7 +19872,7 @@
         "runes_secondary": "Sorcery",
         "runes_secondary_list": ["Nimbus Cloak", "Scorch"],
         "runes_stats": ["AttackSpeed", "Adaptive", "MagicRes"],
-        "runes_index": 1,
+        "runes_index": 0,
         "runes_winrate": 0.5185185185185185
       },
       {
@@ -19886,7 +19886,7 @@
         "runes_secondary": "Precision",
         "runes_secondary_list": ["Triumph", "Coup de Grace"],
         "runes_stats": ["Adaptive", "Adaptive", "HealthScaling"],
-        "runes_index": 2,
+        "runes_index": 1,
         "runes_winrate": 0.48546511627906974
       },
       {
@@ -19900,7 +19900,7 @@
         "runes_secondary": "Precision",
         "runes_secondary_list": ["Triumph", "Coup de Grace"],
         "runes_stats": ["CDRScaling", "Adaptive", "Armor"],
-        "runes_index": 3,
+        "runes_index": 2,
         "runes_winrate": 0.3880597014925373
       }
     ],
