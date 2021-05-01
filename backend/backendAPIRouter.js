@@ -190,14 +190,14 @@ async function getCurrentPatchPrefix() {
 /*
  * Fetches the patch from whatismymmr, if timeout is exceeded it defaults
  */
-async function getMMR(region, summoner_name) {
+async function getMMR(region, unsanitized_summoner_name) {
   let mmr_response = null;
   let mmr_json = null;
   let formatted_URI =
     'https://' +
     region +
     '.whatismymmr.com/api/v1/summoner?name=' +
-    encodeURI(summoner_name);
+    encodeURI(unsanitized_summoner_name);
   const controller = new AbortController();
   const timeout = setTimeout(() => {
     controller.abort();
@@ -236,7 +236,7 @@ router.get(
     let [matching_user_data, patch, mmr] = await Promise.all([
       getUserData(standardized_summoner_name, req.params.region),
       getCurrentPatch(),
-      getMMR(req.params.region, standardized_summoner_name),
+      getMMR(req.params.region, req.params.unsanitized_summoner_name), // Fetch whatismymmr using unsanitized name
     ]);
     let user_data = null;
     if (matching_user_data.length === 0) {
@@ -290,7 +290,7 @@ router.get('/update/:region/:unsanitized_summoner_name', async (req, res) => {
   let [matching_user_data, patch, mmr] = await Promise.all([
     getUserData(standardized_summoner_name, req.params.region),
     getCurrentPatch(),
-    getMMR(req.params.region, standardized_summoner_name),
+    getMMR(req.params.region, req.params.unsanitized_summoner_name), // Fetch whatismymmr using unsanitized name
   ]);
 
   user_data = await issueUpdate(
