@@ -84,6 +84,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     'background-color': 'rgba(66,66,66,.9)',
+    zIndex: 0,
   },
   champName: {
     marginTop: 3,
