@@ -8,19 +8,11 @@ const fetch = require('node-fetch');
 const user_model = require('../models/user_model.js');
 const leaderboard_model = require('../models/leaderboard_model.js');
 
-const eune_distribution = require('../src/images/distributions/eune_distribution.json');
-const euw_distribution = require('../src/images/distributions/euw_distribution.json');
-const na_distribution = require('../src/images/distributions/na_distribution.json');
 const AbortController = require('abort-controller');
 
 const globals = require('../globals.js');
 const builds_json = require('../src/jsons/champ_data_11_8.json');
-
-const REGION_CODE_TO_DISTRIBUTION_FILE = {
-  eune: eune_distribution,
-  euw: euw_distribution,
-  na: na_distribution,
-};
+const mmr_distribution = require('../src/jsons/mmr_distribution.json');
 
 const RANKS = {
   CHALLENGER: 'challenger',
@@ -115,31 +107,27 @@ async function getCurrentPatchPrefix() {
   return tokens.slice(0, 2).join('.');
 }
 
-function getRankEstimate(region, mmr) {
+function getRankEstimate(mmr) {
   if (mmr === globals.UNAVAILABLE) {
     return RANKS.UNRANKED;
   }
-  lowercase_region = region.toLowerCase();
-
-  if (!(lowercase_region in REGION_CODE_TO_DISTRIBUTION_FILE)) {
-    return RANKS.UNRANKED;
-  }
-  let distribution = REGION_CODE_TO_DISTRIBUTION_FILE[lowercase_region];
 
   lower_mmr_count = 0;
-  for (const bucket in distribution.dist) {
+  total = 0;
+  for (const bucket in mmr_distribution) {
     if (bucket < mmr) {
-      lower_mmr_count += distribution.dist[bucket];
+      lower_mmr_count += mmr_distribution[bucket];
     }
+    total += mmr_distribution[bucket];
   }
-  percentile = lower_mmr_count / distribution.total;
+  percentile = lower_mmr_count / total;
 
   let rank;
-  if (percentile > 0.999) {
+  if (percentile > 0.9995) {
     rank = RANKS.CHALLENGER;
-  } else if (percentile > 0.997) {
+  } else if (percentile > 0.9984) {
     rank = RANKS.GRANDMASTER;
-  } else if (percentile > 0.994) {
+  } else if (percentile > 0.996) {
     rank = RANKS.MASTER;
   } else if (percentile > 0.99) {
     rank = RANKS.DIAMOND;
@@ -259,7 +247,7 @@ router.get(
       return;
     }
 
-    let rank = getRankEstimate(req.params.region, mmr);
+    let rank = getRankEstimate(mmr);
     const icon_id = user_data.icon_id;
     const icon_path =
       'https://ddragon.leagueoflegends.com/cdn/' +
@@ -299,7 +287,7 @@ router.get('/update/:region/:unsanitized_summoner_name', async (req, res) => {
     matching_user_data[0]
   );
 
-  let rank = getRankEstimate(req.params.region, mmr);
+  let rank = getRankEstimate(mmr);
   const icon_id = user_data.icon_id;
   const icon_path =
     'https://ddragon.leagueoflegends.com/cdn/' +
