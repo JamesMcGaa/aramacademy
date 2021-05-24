@@ -1,4 +1,4 @@
-![image](/static/banner_2.png)
+![image](/static/banner_2_small.jpg)
 
 
 &nbsp;
@@ -11,7 +11,7 @@ What steps can you take to raise your chances to win a game of ARAM? In this art
 ---
 Rerolling can drastically increase your team's chance to win by increasing the available 'good' champions, such as those you have mastered, or those that [we recommend](https://aram.academy/tierlist) because of their individually high win rates. 
 
-We wanted to quantify how valuable each reroll is, and how many times we should reroll as a team. Each reroll adds many new possible team compositions, possibly increasing the chances of our team having a better team composition available. We needed to know how good the different team compositions were. Our dataset doesn’t have enough games to directly calculate the win rate for every team composition.
+We wanted to quantify how valuable each reroll is, and understand how many times we should reroll as a team. Each reroll adds many new possible team compositions, possibly increasing the chances of our team having a better team composition available. We needed to know how good the different team compositions were. Our dataset doesn’t have enough games to directly calculate the win rate for every team composition.
 
 Instead of a direct calculation, we can approximate win rates with deep learning. We trained a neural net to predict win rate given a team composition. 
 
@@ -71,3 +71,6 @@ Possible champion pools were drawn from all champions for each number of rerolls
 #### Analysis
 
 The maximum win rates for each simulated champion pool were binned and plotted as a histogram. The marginal increase in expected win rate per reroll was calculated using the Wasserstein distance between successive binned maximum win rates per reroll.
+#### Credits
+
+This analysis was done by Lachlan Suter. If you would like to perform research of your own come join the [ARAM Academy Discord](https://discord.com/invite/MydvqhqWmM)!
