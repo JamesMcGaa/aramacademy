@@ -1,13 +1,16 @@
 import React from 'react';
-const mobile = require('is-mobile');
 import { useHistory, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import rolesMarkdown from './rolesMarkdown.txt';
+import rerollsMarkdown from './rerollsMarkdown.txt';
+
+const mobile = require('is-mobile');
 
 const ResearchNamesToPost = Object.freeze({
   roles: rolesMarkdown,
+  rerolls: rerollsMarkdown,
 });
 
 const useStyles = makeStyles({
@@ -20,8 +23,8 @@ const useStyles = makeStyles({
 });
 
 const renderers = {
-  //This custom renderer changes how images are rendered
-  //we use it to constrain the max width of an image to its container
+  // This custom renderer changes how images are rendered
+  // we use it to constrain the max width of an image to its container
   thematicBreak: () => <hr style={{ backgroundColor: 'white' }} />,
   image: ({ alt, src, title }) => (
     <div style={{ maxWidth: '100%', textAlign: 'center' }}>

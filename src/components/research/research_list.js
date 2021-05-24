@@ -8,6 +8,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 const mobile = require('is-mobile');
+
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
@@ -40,6 +41,9 @@ export default function ResearchList() {
         <List className={classes.root}>
           <ListItem button onClick={() => history.push('/research/roles')}>
             <ListItemText primary="Winrates by Role" />
+          </ListItem>
+          <ListItem button onClick={() => history.push('/research/rerolls')}>
+            <ListItemText primary="Rerolls" />
           </ListItem>
         </List>
       </Container>
