@@ -39,9 +39,9 @@ Some highlights:
 Additionally, more rerolls increases the chances of your team playing a high win rate composition that fits your team’s playstyle. In summary, value the first few rerolls highly, and value rerolls past the first few less. 
 
 Keeping in mind that your team of 5 can sustainably reroll around 5 times almost every game, [depending on the champions each of your teammates owns](https://leagueoflegends.fandom.com/wiki/ARAM#Reroll), we provide these final remarks: 
-Aim for roughly 4-5 rerolls per game, depending on champions you initially roll
-Save rerolls when your team has already rerolled many times
-Use your rerolls when your team hasn’t rerolled many times
+- Aim for roughly 4-5 rerolls per game, depending on champions you initially roll
+- Save rerolls when your team has already rerolled many times
+- Use your rerolls when your team hasn’t rerolled many times
 
 GL, and HF!
 
