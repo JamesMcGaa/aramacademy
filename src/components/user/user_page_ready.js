@@ -195,7 +195,7 @@ export default function UserPageReady({ props }) {
         return (
           <LiveGameTable
             summoner_name={state.user_data.true_summoner_name}
-            full_live_game_data={fullLiveGameData}
+            live_game_status={state.live_game_status}
           />
         );
     }

@@ -13,7 +13,7 @@ import React from 'react';
 import Resources from '../resources.js';
 import Link from '@material-ui/core/Link';
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 
 const globals = require('../../../globals.js');
@@ -275,16 +275,16 @@ function TeamTable({ rows, side }) {
   console.log('teamtable rows', rows);
   console.log('rowslength', rows.length);
   const classes = useStyles();
-  const [order, setOrder] = React.useState('desc');
-  const [orderBy, setOrderBy] = React.useState('n/a');
-  const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(rows.length);
-  //   const order = 'desc';
-  //   const orderBy = 'n/a';
-  //   const selected = [];
-  //   const page = 0;
-  //   const rowsPerPage = rows.length;
+  // const [order, setOrder] = React.useState('desc');
+  // const [orderBy, setOrderBy] = React.useState('n/a');
+  // const [selected, setSelected] = React.useState([]);
+  // const [page, setPage] = React.useState(0);
+  // const [rowsPerPage, setRowsPerPage] = React.useState(rows.length);
+    const order = 'desc';
+    const orderBy = 'n/a';
+    const selected = [];
+    const page = 0;
+    const rowsPerPage = rows.length;
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -421,7 +421,15 @@ function TeamTable({ rows, side }) {
   );
 }
 const LiveGameLoading = ({ summoner_name }) => {
-  return <Paper>Loading {summoner_name}</Paper>;
+  const classes = useStyles();
+
+  return <div>
+    <Paper classes={{ root: classes.paper }}>
+      <Typography variant="h2">
+        Searching {summoner_name} in Live Game API
+        </Typography>
+    </Paper>
+  </div>
 };
 
 const LiveGameNoMatch = ({ summoner_name }) => {
@@ -431,19 +439,29 @@ const LiveGameNoMatch = ({ summoner_name }) => {
     <div>
       <Paper classes={{ root: classes.paper }}>
         <Typography variant="h2">
-          Searching {summoner_name} in Live Game API
+          {summoner_name} is not in a live game.
         </Typography>
       </Paper>
     </div>
   );
 };
 
-export default function LiveGameTable({ summoner_name, full_live_game_data }) {
-  const params = useParams();
-  console.log('livegamestatus', full_live_game_data);
-  if (full_live_game_data === null) {
-    return LiveGameNoMatch({ summoner_name });
-  }
+const LiveGameMatch = ({full_live_game_data}) => {
+  // const a1 = {
+  //   champion: 'Viego',
+  //   summoner_name: 'DeusExAnimo',
+  //   mmr: 2500,
+  //   champion_games: 200,
+  //   total_wins: 130,
+  //   total_games: 300,
+  //   champion_wins: 102,
+  //   champion_kills: 13.48,
+  //   champion_deaths: 8.3,
+  //   rank: 'challenger',
+  //   champion_assists: 5.2,
+  // };
+  // return TeamTable({ rows: [a1], side: TEAM_SIDE.BLUE });
+  
   let blueTeam = [];
   let redTeam = [];
   for (let i = 0; i < full_live_game_data.length; i++) {
@@ -463,6 +481,43 @@ export default function LiveGameTable({ summoner_name, full_live_game_data }) {
       {redSide}
     </div>
   );
+}
+
+export default function LiveGameTable({ summoner_name, live_game_status }) {
+
+  function handleDataFetch(live_game_data) {
+    if(fullLiveGameData === null){
+      setFullLiveGameData(live_game_data);
+    }
+    console.log('full', fullLiveGameData);
+
+  }
+  const params = useParams();
+  const [fullLiveGameData, setFullLiveGameData] = useState(null);
+
+  useEffect(() => {
+      fetch(
+        '/api/live_game/' +
+        encodeURI(params.region) +
+        '/' +
+        encodeURI(params.summonerName)
+      )
+        .then((response) => response.json())
+        .then((json) => {
+          handleDataFetch(json.full_data);
+        });
+  });
+  console.log('livegamestatus', live_game_status);
+
+  if (live_game_status === globals.LIVE_GAME_STATES.NO_MATCH){
+    return LiveGameNoMatch({ summoner_name });
+  }
+  if (live_game_status === globals.LIVE_GAME_STATES.MATCH && fullLiveGameData === null) {
+    return LiveGameLoading({ summoner_name });
+  }
+
+  return LiveGameMatch({ full_live_game_data: fullLiveGameData});
+
   // const [state, setState] = useState({
   //     page_state: live_game_status,
   //     full_data: null,
