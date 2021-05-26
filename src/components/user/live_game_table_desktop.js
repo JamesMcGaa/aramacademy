@@ -280,11 +280,11 @@ function TeamTable({ rows, side }) {
   // const [selected, setSelected] = React.useState([]);
   // const [page, setPage] = React.useState(0);
   // const [rowsPerPage, setRowsPerPage] = React.useState(rows.length);
-    const order = 'desc';
-    const orderBy = 'n/a';
-    const selected = [];
-    const page = 0;
-    const rowsPerPage = rows.length;
+  const order = 'desc';
+  const orderBy = 'n/a';
+  const selected = [];
+  const page = 0;
+  const rowsPerPage = rows.length;
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -423,13 +423,15 @@ function TeamTable({ rows, side }) {
 const LiveGameLoading = ({ summoner_name }) => {
   const classes = useStyles();
 
-  return <div>
-    <Paper classes={{ root: classes.paper }}>
-      <Typography variant="h2">
-        Searching {summoner_name} in Live Game API
+  return (
+    <div>
+      <Paper classes={{ root: classes.paper }}>
+        <Typography variant="h2">
+          Searching {summoner_name} in Live Game API
         </Typography>
-    </Paper>
-  </div>
+      </Paper>
+    </div>
+  );
 };
 
 const LiveGameNoMatch = ({ summoner_name }) => {
@@ -446,7 +448,7 @@ const LiveGameNoMatch = ({ summoner_name }) => {
   );
 };
 
-const LiveGameMatch = ({full_live_game_data}) => {
+const LiveGameMatch = ({ full_live_game_data }) => {
   // const a1 = {
   //   champion: 'Viego',
   //   summoner_name: 'DeusExAnimo',
@@ -461,7 +463,7 @@ const LiveGameMatch = ({full_live_game_data}) => {
   //   champion_assists: 5.2,
   // };
   // return TeamTable({ rows: [a1], side: TEAM_SIDE.BLUE });
-  
+
   let blueTeam = [];
   let redTeam = [];
   for (let i = 0; i < full_live_game_data.length; i++) {
@@ -481,42 +483,43 @@ const LiveGameMatch = ({full_live_game_data}) => {
       {redSide}
     </div>
   );
-}
+};
 
 export default function LiveGameTable({ summoner_name, live_game_status }) {
-
   function handleDataFetch(live_game_data) {
-    if(fullLiveGameData === null){
+    if (fullLiveGameData === null) {
       setFullLiveGameData(live_game_data);
     }
     console.log('full', fullLiveGameData);
-
   }
   const params = useParams();
   const [fullLiveGameData, setFullLiveGameData] = useState(null);
 
   useEffect(() => {
-      fetch(
-        '/api/live_game/' +
+    fetch(
+      '/api/live_game/' +
         encodeURI(params.region) +
         '/' +
         encodeURI(params.summonerName)
-      )
-        .then((response) => response.json())
-        .then((json) => {
-          handleDataFetch(json.full_data);
-        });
+    )
+      .then((response) => response.json())
+      .then((json) => {
+        handleDataFetch(json.full_data);
+      });
   });
   console.log('livegamestatus', live_game_status);
 
-  if (live_game_status === globals.LIVE_GAME_STATES.NO_MATCH){
+  if (live_game_status === globals.LIVE_GAME_STATES.NO_MATCH) {
     return LiveGameNoMatch({ summoner_name });
   }
-  if (live_game_status === globals.LIVE_GAME_STATES.MATCH && fullLiveGameData === null) {
+  if (
+    live_game_status === globals.LIVE_GAME_STATES.MATCH &&
+    fullLiveGameData === null
+  ) {
     return LiveGameLoading({ summoner_name });
   }
 
-  return LiveGameMatch({ full_live_game_data: fullLiveGameData});
+  return LiveGameMatch({ full_live_game_data: fullLiveGameData });
 
   // const [state, setState] = useState({
   //     page_state: live_game_status,
