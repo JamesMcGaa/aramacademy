@@ -230,6 +230,11 @@ const useStyles = makeStyles((theme) => ({
     height: 'auto',
     padding: '12px',
   },
+  rankCell: {
+    width: '130px',
+    paddingLeft: '5px',
+    paddingRight: '5px',
+  },
   resizeChampIcon: {
     minWidth: '40px',
     maxWidth: '40px',
@@ -271,7 +276,8 @@ const LiveGameLoading = ({ summoner_name }) => {
       </h3>
       <Typography variant="h5">
         Searching {summoner_name} in Live Game API
-        <br /> This may take a while due to our slow Riot API key
+        <br /> This queries 10 users. It may take a while due to our slow API
+        key
       </Typography>
     </div>
   );
@@ -386,7 +392,10 @@ const LiveGameMatch = ({ full_live_game_data }) => {
                         </Link>
                       </TableCell>
 
-                      <TableCell align="right">
+                      <TableCell
+                        align="right"
+                        classes={{ root: classes.rankCell }}
+                      >
                         {RankBadge({ rank: row.rank })}
                         {row.mmr}
                       </TableCell>
