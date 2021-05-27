@@ -318,10 +318,14 @@ async function multifetchMongoDataForLiveGame(
 let getLiveGame = async (username, region) => {
   console.log('live game infra');
   let account_args = [username, region];
-  sum_id = await utils.retry_async_function(
-    kayn_calls.get_summoner_id,
-    account_args
-  );
+  try {
+    sum_id = await utils.retry_async_function(
+      kayn_calls.get_summoner_id,
+      account_args
+    );
+  } catch (error) {
+    return null;
+  }
   try {
     players = await utils.retry_async_function(kayn_calls.get_live_game, [
       sum_id,
