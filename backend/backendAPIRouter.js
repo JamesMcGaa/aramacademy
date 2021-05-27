@@ -117,7 +117,6 @@ function getRankEstimate(mmr) {
   total = 0;
   for (const bucket in mmr_distribution) {
     if (bucket < mmr) {
-      console.log('bucket', bucket, 'is less than', mmr);
       lower_mmr_count += mmr_distribution[bucket];
     }
     total += mmr_distribution[bucket];
