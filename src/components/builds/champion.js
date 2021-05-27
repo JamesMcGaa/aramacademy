@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { useHistory } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { Button, Container } from '@material-ui/core';
 import ChampionDesktop from './champion_desktop.js';
 import ChampionMobile from './champion_mobile.js';
+
 const mobile = require('is-mobile');
 
 // function getChampionTierlistData(tierlist_json, champion_name) {
@@ -23,7 +24,7 @@ const mobile = require('is-mobile');
 //   return total_games / 10; // 10 champs per game
 // }
 
-export default function Champions() {
+function Champions() {
   const params = useParams();
   const [state, setState] = useState({
     runes: [],
@@ -36,10 +37,10 @@ export default function Champions() {
     loaded: false,
     patch: undefined,
   });
-  //We query mongo/static json for items/runes/sumspells, query ddragon for the specific assets we want after this
+  // We query mongo/static json for items/runes/sumspells, query ddragon for the specific assets we want after this
 
   function getBuilds(champion) {
-    fetch('/api/builds/' + encodeURI(champion))
+    fetch(`/api/builds/${encodeURI(champion)}`)
       .then((response) => response.json())
       .then((json) => {
         handleResponse(json);
@@ -69,7 +70,27 @@ export default function Champions() {
 
   if (mobile()) {
     return <ChampionMobile data={state} champion_name={params.champion} />;
-  } else {
-    return <ChampionDesktop data={state} champion_name={params.champion} />;
   }
+  return <ChampionDesktop data={state} champion_name={params.champion} />;
+}
+
+export default function WrappedChampions() {
+  const params = useParams();
+  console.log('wrapped champ');
+  return (
+    <div>
+      {Champions()}
+      <Helmet>
+        <title>
+          {params.champion}
+          {' '}
+          ARAM Build - ARAM Academy
+        </title>
+        <meta
+          name="description"
+          content="ARAM Academy maintains the ultimate champion builds and guides for ARAM, sourced exclusivly from the top 1% of ARAM players."
+        />
+      </Helmet>
+    </div>
+  );
 }

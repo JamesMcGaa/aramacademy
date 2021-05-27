@@ -1,0 +1,76 @@
+![image](/static/banner_2_small.jpg)
+
+
+&nbsp;
+## This Article: Rerolls
+---
+What steps can you take to raise your chances to win a game of ARAM? In this article, we'll discuss rerolls, one of the most powerful tools in an ARAM-fanatic's toolbox. By the end of this article, we hope to communicate the value of rerolls and approximate how many rerolls your team should use per game.
+
+&nbsp;
+## What's a reroll worth?
+---
+Rerolling can drastically increase your team's chance to win by increasing the available 'good' champions, such as those you have mastered, or those that [we recommend](https://aram.academy/tierlist) because of their individually high win rates. 
+
+We wanted to quantify how valuable each reroll is, and understand how many times we should reroll as a team. Each reroll adds many new possible team compositions, possibly increasing the chances of our team having a better team composition available. We needed to know how good the different team compositions were. Our dataset doesn’t have enough games to directly calculate the win rate for every team composition.
+
+Instead of a direct calculation, we can approximate win rates with deep learning. We trained a neural net to predict win rate given a team composition. 
+
+We’ve plotted the win rates for played compositions in our dataset, as well as every possible composition from all combinations of champions:
+
+![image](/static/rerolls_1.png)
+![image](/static/rerolls_2.png)
+Observe the win rates where the played compositions distribution overshoot and undershoot the possible compositions distribution. Teams often play compositions with a slightly higher than average chance to win in the 50%-60% range. Teams also avoid playing lower win rate compositions in the 35%-45% range. Notably, teams do not play as many very strong compositions as possible, in the over 60% range. 
+
+Let’s continue our reroll research with a (huge) assumption that your team would pick the best predicted composition available every champ select.
+
+We simulated many champion selects, each with some number of rerolls. We’ve plotted the highest win rate possible for each simulated champ select…
+
+![image](/static/rerolls_3.png)
+… and the medians of the distributions…
+![image](/static/rerolls_4.png)
+
+… and the expected value of each successive reroll
+![image](/static/rerolls_5.png)
+Some highlights: 
+- Rerolls greatly increase the highest potential win rate
+- Each successive reroll has diminishing marginal benefit
+- The first few rerolls have a huge impact on improving your team composition
+
+Additionally, more rerolls increases the chances of your team playing a high win rate composition that fits your team’s playstyle. In summary, value the first few rerolls highly, and value rerolls past the first few less. 
+
+Keeping in mind that your team of 5 can sustainably reroll around 5 times almost every game, [depending on the champions each of your teammates owns](https://leagueoflegends.fandom.com/wiki/ARAM#Reroll), we provide these final remarks: 
+- Aim for roughly 4-5 rerolls per game, depending on champions you initially roll
+- Save rerolls when your team has already rerolled many times
+- Use your rerolls when your team hasn’t rerolled many times
+
+GL, and HF!
+
+&nbsp;
+## Future Work
+---
+We'd like to provide you lovely readers with easy access to the predicted win rates, allowing your team to consistently pick the best predicted team composition in a champ select. We are also investigating further quantitative research, such as predicting the best mythic item for your champion in-game.
+
+&nbsp;
+## Technical Details
+---
+
+#### Data
+
+The data was sourced from a large set of high MMR games. All games were played on patch 11.8 in the NA, EUW, and EUNE servers. Each game provided two data points - a losing and winning team composition and their outcome. The features were 1-D vectors representing a one-hot encoding of one team’s team composition. The targets were one-hot encodings of the game outcome (loss or win). 
+
+#### Model
+
+The model was built in pytorch. The architecture consisted of a head, then 10 dense blocks, and finally an output layer. The dense blocks were fully connected layers, with PReLU activation functions, 128 hidden units, and pytorch’s default weight initialization. The output layer was fully connected, with a logistic activation function and one output.
+
+The model was trained until validation loss plateaued. The training loss was the binary cross entropy function, and the model was optimized using RMSprop. During training, the dense blocks used batch normalization and dropout.
+
+#### Simulation
+
+Possible champion pools were drawn from all champions for each number of rerolls. The model predicted the win rate for each possible combination of 5 champions from the simulated champion pools. The maximum win rate compositions were then rerun through the same model with high dropout in dense blocks many times. The median of the output of the reruns for a given team composition were taken as the maximum win rate before performing analysis. 
+
+#### Analysis
+
+The maximum win rates for each simulated champion pool were binned and plotted as a histogram. The marginal increase in expected win rate per reroll was calculated using the Wasserstein distance between successive binned maximum win rates per reroll.
+#### Credits
+
+This analysis was done by Lachlan Suter. If you would like to perform research of your own come join the [ARAM Academy Discord](https://discord.com/invite/MydvqhqWmM)!

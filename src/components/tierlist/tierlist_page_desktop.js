@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { useHistory } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
-import TierlistTableDesktop from './tierlist_table_desktop.js';
+import { useHistory, useParams } from 'react-router-dom';
+
 import Typography from '@material-ui/core/Typography';
 
 import Paper from '@material-ui/core/Paper';
 import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import TierlistTableDesktop from './tierlist_table_desktop.js';
 
 const useStyles = makeStyles((theme) => ({
   largeContainer: {
@@ -24,12 +24,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function TierlistPageDesktop(props) {
+  console.log('TierlistPageDesktop');
   const classes = useStyles();
   const params = useParams();
 
   return (
     <div>
-      <div style={{ height: '100px' }}></div>
+      <div style={{ height: '100px' }} />
       <Container fixed className={classes.mediumContainer}>
         <Paper
           style={{ marginBottom: '15px', padding: '30px' }}

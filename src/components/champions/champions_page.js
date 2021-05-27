@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { useHistory } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
-
+import { Helmet } from 'react-helmet';
 import Paper from '@material-ui/core/Paper';
 
 import Grid from '@material-ui/core/Grid';
 
+import { Container } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import ChampionsGrid from './champions_grid.js';
 import ChampionsGridMobile from './champions_grid_mobile.js';
 import Resources from '../resources.js';
 
-var resources = Resources.Resources;
+const resources = Resources.Resources;
 
-import { Container } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 const mobile = require('is-mobile');
 
 const useStyles = makeStyles((theme) => ({
@@ -39,10 +38,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ChampionsPage() {
+function ChampionsPage() {
   const classes = useStyles();
   const params = useParams();
-  //we put some CSS here for BG color - this is bad design, but i couldn't fix this quickly so its still here
+  // we put some CSS here for BG color - this is bad design, but i couldn't fix this quickly so its still here
   if (mobile()) {
     return (
       <div
@@ -55,17 +54,34 @@ export default function ChampionsPage() {
         <ChampionsGridMobile />
       </div>
     );
-  } else {
-    return (
-      <div
-        className={classes.root}
-        style={{
-          marginTop: '100px',
-          backgroundColor: 'rgba(66, 66, 66, .6)',
-        }}
-      >
-        <ChampionsGrid />
-      </div>
-    );
   }
+  return (
+    <div
+      className={classes.root}
+      style={{
+        marginTop: '100px',
+        backgroundColor: 'rgba(66, 66, 66, .6)',
+      }}
+    >
+      <ChampionsGrid />
+    </div>
+  );
+}
+
+export default function WrappedChampionsPage() {
+  return (
+    <div>
+      {ChampionsPage()}
+      <Helmet>
+        <title>
+          ARAM Builds - ARAM Academy
+        </title>
+        <meta
+          name="description"
+          content="ARAM Academy maintains the optimal ARAM builds and guides, sourced exclusivly from the top 1% of ARAM players.
+          Find the best ARAM builds, tierlists, leaderboards, and stats today."
+        />
+      </Helmet>
+    </div>
+  );
 }
