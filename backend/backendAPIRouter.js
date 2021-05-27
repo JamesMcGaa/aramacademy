@@ -30,7 +30,7 @@ const RANKS = {
 const REQUEST_TIMEOUT_EXTERNAL_FETCH_MS = 15000;
 const MAX_ASYNC_USERS_QUEUE = 20;
 
-let processUser = require('../infra/infra_entrypoint.js');
+let infra = require('../infra/infra_entrypoint.js');
 
 //https://dev.to/ycmjason/limit-concurrent-asynchronous-calls-5bae
 const asyncLimit = (fn, n) => {
@@ -71,10 +71,11 @@ const asyncLimit = (fn, n) => {
   };
 };
 
-const asyncLimitProcessUser = processUser; //asyncLimit(processUser, MAX_ASYNC_USERS_QUEUE);
+const asyncLimitProcessUser = infra.processUser; //asyncLimit(processUser, MAX_ASYNC_USERS_QUEUE);
 
 async function getUserData(standardized_summoner_name, region) {
   standardized_summoner_name = standardized_summoner_name.toLowerCase();
+  console.log('getuserdata sumname', standardized_summoner_name);
   let user_data = await user_model.find({
     standardized_summoner_name: standardized_summoner_name,
     region: region,
@@ -116,6 +117,7 @@ function getRankEstimate(mmr) {
   total = 0;
   for (const bucket in mmr_distribution) {
     if (bucket < mmr) {
+      console.log('bucket', bucket, 'is less than', mmr);
       lower_mmr_count += mmr_distribution[bucket];
     }
     total += mmr_distribution[bucket];
@@ -221,10 +223,11 @@ router.get(
     const standardized_summoner_name = sanitizeSummonerName(
       req.params.unsanitized_summoner_name
     );
-    let [matching_user_data, patch, mmr] = await Promise.all([
+    let [matching_user_data, patch, mmr, live_game_status] = await Promise.all([
       getUserData(standardized_summoner_name, req.params.region),
       getCurrentPatch(),
       getMMR(req.params.region, req.params.unsanitized_summoner_name), // Fetch whatismymmr using unsanitized name
+      getLiveGameStatus(standardized_summoner_name, req.params.region),
     ]);
     let user_data = null;
     if (matching_user_data.length === 0) {
@@ -262,6 +265,7 @@ router.get(
       icon_path: icon_path,
       mmr: mmr,
       rank: rank,
+      live_game_status: live_game_status,
     };
     res.send(user_data_response);
     return;
@@ -302,6 +306,7 @@ router.get('/update/:region/:unsanitized_summoner_name', async (req, res) => {
     icon_path: icon_path,
     mmr: mmr,
     rank: rank,
+    in_live_game: true,
   };
   res.send(user_data_response);
   return;
@@ -338,6 +343,139 @@ router.get('/patch', async (req, res) => {
   res.send(resp);
   return;
 });
+
+async function getLiveGameStatus(summoner_name, region) {
+  const player_list = await infra.getLiveGame(summoner_name, region);
+  if (player_list === null) {
+    //not in aram game or not found
+    return globals.LIVE_GAME_STATES.NO_MATCH;
+  }
+  return globals.LIVE_GAME_STATES.MATCH;
+}
+async function getLiveGameBasicData(summoner_name, region) {
+  return await infra.getLiveGame(summoner_name, region);
+}
+
+/*
+ * Returns the full live game data for a summoner name and region
+ */
+router.get(
+  '/live_game/:region/:unsanitized_summoner_name',
+  async (req, res) => {
+    const sanitized_summoner_name = sanitizeSummonerName(
+      req.params.unsanitized_summoner_name
+    );
+    const full_data = await getLiveGameFullData(
+      sanitized_summoner_name,
+      req.params.region
+    );
+    let live_game_status = globals.LIVE_GAME_STATES.MATCH;
+    let resp;
+    if (full_data === globals.LIVE_GAME_STATES.NO_MATCH) {
+      resp = {
+        live_game_status: globals.LIVE_GAME_STATES.NO_MATCH,
+        full_data: null,
+      };
+    } else {
+      resp = {
+        live_game_status: live_game_status,
+        full_data: full_data,
+      };
+    }
+    res.send(resp);
+    return;
+  }
+);
+
+async function getLiveGameFullData(summoner_name, region) {
+  //this function is run when you click on live game button
+  //it is run separately because it has to do up to 9 fetches on player, so we
+  // dont want to run all 9 to load this particular players user page
+  const player_list = await getLiveGameBasicData(summoner_name, region);
+  if (player_list === null) {
+    //not in aram game
+    return globals.LIVE_GAME_STATES.NO_MATCH;
+  }
+  let name_array = [];
+  for (let i = 0; i < player_list.length; i++) {
+    const standardized_summoner_name = sanitizeSummonerName(
+      player_list[i].summonerName
+    );
+    matching_user_data = await getUserData(standardized_summoner_name, region);
+    if (matching_user_data.length === 0) {
+      console.log('issuing update on new user', standardized_summoner_name);
+      const user_data = await issueUpdate(standardized_summoner_name, region);
+    }
+    name_array.push(standardized_summoner_name);
+  }
+
+  const mongo_per_champ_data = await infra.multifetchMongoDataForLiveGame(
+    name_array,
+    region
+  );
+
+  let final_player_data_list = [];
+  for (let i = 0; i < player_list.length; i++) {
+    const true_summoner_name = player_list[i].summonerName;
+    const desired_champ = player_list[i].champion;
+    const team_id = player_list[i].teamId;
+    let found_matching_player = false;
+    live_game_row_data = {};
+    for (let j = 0; j < mongo_per_champ_data.length; j++) {
+      //check for correct summoner name
+      if (true_summoner_name === mongo_per_champ_data[j].true_summoner_name) {
+        found_matching_player = true;
+        per_champ_data = mongo_per_champ_data[j].per_champion_data;
+        live_game_row_data.champion = desired_champ;
+        live_game_row_data.summoner_name = true_summoner_name;
+        const mmr = await getMMR(region, true_summoner_name);
+        const rank = getRankEstimate(mmr);
+
+        live_game_row_data.mmr = mmr;
+        live_game_row_data.rank = rank;
+        live_game_row_data.side = team_id;
+        //looking for the right champ and overall
+        for (let k = 0; k < per_champ_data.length; k++) {
+          if (per_champ_data[k].champion === desired_champ) {
+            live_game_row_data.champion_games = per_champ_data[k].total_games;
+            live_game_row_data.champion_wins = per_champ_data[k].wins;
+            live_game_row_data.champion_kills = per_champ_data[k].kills;
+            live_game_row_data.champion_deaths = per_champ_data[k].deaths;
+            live_game_row_data.champion_assists = per_champ_data[k].assists;
+          }
+          if (per_champ_data[k].champion === 'overall') {
+            live_game_row_data.total_wins = per_champ_data[k].wins;
+            live_game_row_data.total_games = per_champ_data[k].total_games;
+          }
+        }
+        final_player_data_list.push(live_game_row_data);
+      }
+    }
+    //no matching player found in mongo - this means this player has no aram games
+    if (!found_matching_player) {
+      live_game_row_data.champion = desired_champ;
+      live_game_row_data.summoner_name = true_summoner_name;
+      live_game_row_data.champion_games = 0;
+      live_game_row_data.champion_wins = 0;
+      live_game_row_data.champion_kills = 0;
+      live_game_row_data.champion_deaths = 0;
+      live_game_row_data.champion_assists = 0;
+      live_game_row_data.total_wins = 0;
+      live_game_row_data.total_games = 0;
+      const mmr = await getMMR(region, true_summoner_name);
+      const rank = getRankEstimate(mmr);
+      if (mmr === globals.UNAVAILABLE) {
+        live_game_row_data.mmr = 'N/A';
+      } else {
+        live_game_row_data.mmr = mmr;
+      }
+      live_game_row_data.rank = rank;
+      final_player_data_list.push(live_game_row_data);
+    }
+  }
+
+  return final_player_data_list;
+}
 module.exports = router;
 /*
  * Returns builds/runes/sum spells for this champion
