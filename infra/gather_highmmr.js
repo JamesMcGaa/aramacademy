@@ -39,7 +39,6 @@ async function getRecentLeadersMatchlistForRegion(region, beginTimeMs) {
         .name(region_leader.true_summoner_name)
         .region(region)
         .then((res) => {
-          console.log(res);
           high_mmr_player_info_map[res.accountId] = {
             true_summoner_name: res.name,
             accountId: res.accountId,
