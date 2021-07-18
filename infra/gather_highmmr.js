@@ -105,9 +105,9 @@ async function getRecentLeadersMatchlistForRegion(region, beginTimeMs) {
   );
   progress_bar.stop();
   console.log(
-    high_mmr_player_info_map.length,
-    high_mmr_player_info_map[0],
-    high_mmr_player_info_map[1]
+    Object.size(high_mmr_player_info_map),
+    randomProperty(high_mmr_player_info_map),
+    randomProperty(high_mmr_player_info_map)
   );
   // await high_mmr_playerset_model.deleteMany({ region });
   // await high_mmr_playerset_model.insertMany(prospectives_complete_statistics);
@@ -129,6 +129,12 @@ function logDate() {
   const minutes = date_ob.getMinutes();
   const seconds = date_ob.getSeconds();
   console.log(`${year}-${month}-${date} ${hours}:${minutes}:${seconds}`);
+}
+
+// https://stackoverflow.com/questions/2532218/pick-random-property-from-a-javascript-object
+function randomProperty(obj) {
+  const keys = Object.keys(obj);
+  return obj[keys[(keys.length * Math.random()) << 0]];
 }
 
 async function entrypoint() {
