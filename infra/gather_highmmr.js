@@ -21,11 +21,11 @@ async function getLeaderboardData(region) {
   });
 }
 
-async function getRecentLeadersMatchlistForRegion(region) {
+async function getRecentLeadersMatchlistForRegion(region, beginTimeMs) {
   console.log('Starting for region: ', region);
   const region_leaders = await getLeaderboardData(region);
   const match_ids = new Set();
-  let prospect_account_ids = new Set();
+  const high_mmr_player_info_map = {};
 
   console.log('Converting current leaderboard into matchlist');
   let progress_bar = new cliProgress.SingleBar(
@@ -39,7 +39,12 @@ async function getRecentLeadersMatchlistForRegion(region) {
         .name(region_leader.true_summoner_name)
         .region(region)
         .then((res) => {
-          prospect_account_ids.add(res.accountId);
+          console.log(res);
+          high_mmr_player_info_map[res.accountId] = {
+            true_summoner_name: res.name,
+            accountId: res.accountId,
+            region,
+          };
           return res.accountId;
         })
         .catch(() => {});
@@ -48,14 +53,12 @@ async function getRecentLeadersMatchlistForRegion(region) {
         progress_bar.increment();
         return;
       }
-      const unixtimestamp_in_milliseconds =
-        Date.now() - MILLISECONDS_IN_10_DAYS;
       const recent_matches = await kayn.Matchlist.by
         .accountID(account_id)
         .region(region)
         .query({
           queue: [450],
-          beginTime: unixtimestamp_in_milliseconds,
+          beginTime: beginTimeMs,
         })
         .then((res) => res)
         .catch(() => {});
@@ -88,9 +91,13 @@ async function getRecentLeadersMatchlistForRegion(region) {
         .region(region)
         .then((res) => {
           res.participantIdentities.forEach((participant_identity) => {
-            prospect_account_ids.add(
+            high_mmr_player_info_map[
               participant_identity.player.currentAccountId
-            );
+            ] = {
+              true_summoner_name: participant_identity.player.summonerName,
+              accountId: participant_identity.player.currentAccountId,
+              region,
+            };
           });
         })
         .catch(() => {});
@@ -98,45 +105,20 @@ async function getRecentLeadersMatchlistForRegion(region) {
     })
   );
   progress_bar.stop();
-
-  console.log('Fetching other player statistics');
-  progress_bar = new cliProgress.SingleBar(
-    {},
-    cliProgress.Presets.shades_classic
+  console.log(
+    high_mmr_player_info_map.length,
+    high_mmr_player_info_map[0],
+    high_mmr_player_info_map[1]
   );
-  progress_bar.start([...prospect_account_ids].length, 0);
-  const prospectives_complete_statistics = [];
-  prospect_account_ids = [...prospect_account_ids];
-  await Promise.all(
-    prospect_account_ids.splice(0, 30).map(async (prospect_account_id) => {
-      await kayn.Summoner.by
-        .accountID(prospect_account_id)
-        .region(region)
-        .then(async (res) => {
-          prospectives_complete_statistics.push({
-            true_summoner_name: res.name,
-            accountId: prospect_account_id,
-            region,
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      progress_bar.increment();
-    })
-  );
-  progress_bar.stop();
-
-  console.log(prospectives_complete_statistics.length);
   // await high_mmr_playerset_model.deleteMany({ region });
   // await high_mmr_playerset_model.insertMany(prospectives_complete_statistics);
   return match_ids;
 }
 
-async function updateAllRegions() {
-  await getRecentLeadersMatchlistForRegion(REGIONS.NORTH_AMERICA);
-  await getRecentLeadersMatchlistForRegion(REGIONS.EUROPE);
-  await getRecentLeadersMatchlistForRegion(REGIONS.EUROPE_WEST);
+async function updateAllRegions(beginTimeMs) {
+  await getRecentLeadersMatchlistForRegion(REGIONS.NORTH_AMERICA, beginTimeMs);
+  await getRecentLeadersMatchlistForRegion(REGIONS.EUROPE, beginTimeMs);
+  await getRecentLeadersMatchlistForRegion(REGIONS.EUROPE_WEST, beginTimeMs);
 }
 
 function logDate() {
@@ -164,12 +146,12 @@ async function entrypoint() {
       }
     }
   );
-  updateAllRegions().then(() => {
+  const unixtimestamp_in_milliseconds = Date.now() - MILLISECONDS_IN_10_DAYS;
+  updateAllRegions(unixtimestamp_in_milliseconds).then(() => {
     console.log('Finished');
     logDate();
     mongoose.connection.close();
   });
 }
 
-logDate();
-entrypoint().then().catch();
+entrypoint();
