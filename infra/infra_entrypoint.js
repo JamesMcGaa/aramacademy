@@ -1,6 +1,6 @@
 const user_model = require('../models/user_model.js');
 const utils = require('./utils.js');
-const kayn_calls = require('./kayn_calls.js');
+const galeforce_calls = require('./galeforce_calls.js');
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -22,11 +22,11 @@ async function create_summoner_entry(
   let last_processed_game_timestamp;
   try {
     account_id = await utils.retry_async_function(
-      kayn_calls.get_account_id,
+      galeforce_calls.get_account_id,
       account_args
     );
     true_summoner_name = await utils.retry_async_function(
-      kayn_calls.get_true_summoner_name,
+      galeforce_calls.get_true_summoner_name,
       account_args
     );
   } catch (error) {
@@ -38,7 +38,7 @@ async function create_summoner_entry(
   try {
     const timestamp_args = [account_id, region];
     last_processed_game_timestamp = await utils.retry_async_function(
-      kayn_calls.get_last_processed_game_timestamp,
+      galeforce_calls.get_last_processed_game_timestamp,
       timestamp_args
     );
   } catch (error) {
@@ -46,14 +46,14 @@ async function create_summoner_entry(
       'User ' + username + ' in ' + region + ' has no ARAM games played.'
     );
   }
-  const recent_matches = await kayn_calls.get_recent_matches(
+  const recent_matches = await galeforce_calls.get_ten_recent_matches(
     account_id,
     region,
     champ_dict,
     username
   );
   const icon_id = await utils.retry_async_function(
-    kayn_calls.get_icon_id,
+    galeforce_calls.get_icon_id,
     account_args
   );
   let aggregate_stats;
@@ -98,7 +98,7 @@ async function create_or_update_user(
   let account_id;
   try {
     account_id = await utils.retry_async_function(
-      kayn_calls.get_account_id,
+      galeforce_calls.get_account_id,
       account_args
     );
   } catch (error) {
@@ -146,7 +146,7 @@ async function convert_matchlist_to_aggregate_champ_data(
       const match_args = [match_id, platform_id, account_id, region, username];
 
       const match_info = utils.retry_async_function(
-        kayn_calls.get_match_info,
+        galeforce_calls.get_match_info,
         match_args
       );
       match_infos_must_await.push(match_info);
@@ -184,7 +184,7 @@ async function get_full_matchlist(account_id, region, start_timestamp = 0) {
       start_timestamp,
     ];
     matchlist = await utils.retry_async_function(
-      kayn_calls.get_subsection_matchlist,
+      galeforce_calls.get_subsection_matchlist,
       args
     );
     if (matchlist.matches.length > 0) {
@@ -211,7 +211,7 @@ let processUser = async (username, region, existing_user_data = null) => {
   let db_entry;
   try {
     const champ_dict = await utils.retry_async_function(
-      kayn_calls.get_champ_dict,
+      galeforce_calls.get_champ_dict,
       []
     );
     db_entry = await create_summoner_entry(
@@ -320,14 +320,14 @@ let getLiveGame = async (username, region) => {
   let account_args = [username, region];
   try {
     sum_id = await utils.retry_async_function(
-      kayn_calls.get_summoner_id,
+      galeforce_calls.get_summoner_id,
       account_args
     );
   } catch (error) {
     return null;
   }
   try {
-    players = await utils.retry_async_function(kayn_calls.get_live_game, [
+    players = await utils.retry_async_function(galeforce_calls.get_live_game, [
       sum_id,
     ]);
   } catch (error) {

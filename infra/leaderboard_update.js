@@ -4,8 +4,7 @@
 const dotenv = require('dotenv');
 dotenv.config();
 const mongoose = require('mongoose');
-const { Kayn, REGIONS } = require('kayn');
-const kayn = Kayn(process.env.RIOT_API_KEY)();
+const galeforce_calls = require('./galeforce_calls.js');
 const leaderboard_model = require('../models/leaderboard_model.js');
 const WHATISMYMMR_RATELIMIT_RPS = 1;
 const BACKOFF_FOR_ERROR_SECONDS = 5;
@@ -63,9 +62,8 @@ async function getRecentLeadersMatchlistForRegion(region) {
   progress_bar.start(region_leaders.length, 0);
   await Promise.all(
     region_leaders.map(async (region_leader) => {
-      const account_id = await kayn.Summoner.by
-        .name(region_leader.true_summoner_name)
-        .region(region)
+      const account_id = await galeforce_calls
+        .get_summoner_from_name(region_leader.true_summoner_name, region)
         .then((res) => {
           prospect_account_ids.add(res.accountId);
           return res.accountId;
@@ -79,13 +77,8 @@ async function getRecentLeadersMatchlistForRegion(region) {
 
       const unixtimestamp_in_milliseconds =
         Date.now() - 1.5 * 1000 * 60 * 60 * 24;
-      const recent_matches = await kayn.Matchlist.by
-        .accountID(account_id)
-        .region(region)
-        .query({
-          queue: [450],
-          beginTime: unixtimestamp_in_milliseconds,
-        })
+      const recent_matches = await galeforce_calls
+        .get_recent_matches(account_id, region, unixtimestamp_in_milliseconds)
         .then((res) => {
           return res;
         })
@@ -116,8 +109,8 @@ async function getRecentLeadersMatchlistForRegion(region) {
   progress_bar.start([...match_ids].length, 0);
   await Promise.all(
     [...match_ids].map(async (match_id) => {
-      await kayn.Match.get(match_id)
-        .region(region)
+      await galeforce_calls
+        .get_match(match_id, region)
         .then((res) => {
           res.participantIdentities.forEach((participant_identity) => {
             prospect_account_ids.add(
@@ -142,9 +135,8 @@ async function getRecentLeadersMatchlistForRegion(region) {
   while (prospect_account_ids.length) {
     await Promise.all(
       prospect_account_ids.splice(0, 30).map(async (prospect_account_id) => {
-        await kayn.Summoner.by
-          .accountID(prospect_account_id)
-          .region(region)
+        await galeforce_calls
+          .get_summoner_from_id(account_id, region)
           .then(async (res) => {
             const args = [
               'https://' +
@@ -200,9 +192,9 @@ async function getRecentLeadersMatchlistForRegion(region) {
 }
 
 async function updateAllRegions() {
-  await getRecentLeadersMatchlistForRegion(REGIONS.NORTH_AMERICA);
-  await getRecentLeadersMatchlistForRegion(REGIONS.EUROPE);
-  await getRecentLeadersMatchlistForRegion(REGIONS.EUROPE_WEST);
+  await getRecentLeadersMatchlistForRegion('na');
+  await getRecentLeadersMatchlistForRegion('euw');
+  await getRecentLeadersMatchlistForRegion('eune');
 }
 
 function logDate() {
