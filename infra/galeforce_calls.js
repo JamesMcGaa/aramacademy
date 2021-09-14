@@ -1,21 +1,26 @@
 const GaleForceModule = require('galeforce');
 const utils = require('./utils.js');
 const dotenv = require('dotenv').config();
+const fetch = require('node-fetch');
+const AbortController = require('abort-controller');
+
+const REQUEST_TIMEOUT_EXTERNAL_FETCH_MS = 15000;
+
 
 galeforce_config = {
-  'riot-api': {
-    key: process.env.RIOT_API_KEY,
+  "riot-api": {
+     "key": process.env.RIOT_API_KEY,
   },
-  'rate-limit': {
-    type: 'bottleneck',
-    cache: {
-      type: 'internal',
-    },
-    options: {
-      'max-concurrent': null,
-      'retry-count-after-429': 3,
-    },
-  },
+  "rate-limit": {
+     "type": "bottleneck",
+     "cache": {
+        "type": "internal"
+     },
+     "options": {
+        "max-concurrent": null,
+        "retry-count-after-429": 3
+     }
+  }
 };
 
 const galeforce = new GaleForceModule(galeforce_config);
@@ -204,15 +209,13 @@ async function get_match_info(
     query_region = utils.PLATFORM_ID_TO_REGION[platform_id];
   }
   return await get_match(match_id, region).then((match) => {
-    const participant_identities = match['participantIdentities'];
+    const participant_identities = match.info.participants;
 
     let desired_id = null;
     for (i = 0; i < participant_identities.length; i++) {
       participant = participant_identities[i];
       if (
-        participant['player']['accountId'] === account_id ||
-        participant['player']['currentAccountId'] === account_id ||
-        participant['player']['summonerName'].toLowerCase() ===
+        participant['summonerName'].toLowerCase() ===
           username.toLowerCase() //checking lowercased username as well in case
       ) {
         desired_id = participant['participantId'];
@@ -245,14 +248,14 @@ async function get_match_info(
       }
       return error;
     }
-    const participants = match['participants'];
+    const participants = match.info.participants;
     let desired_participant;
     for (i = 0; i < participants.length; i++) {
       if (participants[i]['participantId'] === desired_id) {
         desired_participant = participants[i];
       }
     }
-    const match_stats = desired_participant['stats'];
+    const match_stats = desired_participant;
     let match_info = {};
 
     champ_id = desired_participant['championId'];
@@ -287,9 +290,9 @@ async function get_ten_recent_matches(
   console.log(matchlist, 'recent matches matchlist');
   let match_infos_must_await = [];
   let recent_matches = [];
-  for (let j = 0; j < matchlist.matches.length; j++) {
-    let match_id = matchlist.matches[j].gameId;
-    let platform_id = matchlist.matches[j].platformId;
+  for (let j = 0; j < matchlist.length; j++) {
+    let match_id = matchlist[j].metadata.matchId;
+    let platform_id = matchlist[j].info.platformId;
     const match_args = [match_id, platform_id, account_id, region, username];
     const match_info_must_await = utils.retry_async_function(
       get_match_info,
@@ -314,11 +317,30 @@ async function get_ten_recent_matches(
   return recent_matches;
 }
 
+async function getCurrentPatch() {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => {
+    controller.abort();
+  }, REQUEST_TIMEOUT_EXTERNAL_FETCH_MS);
+  let patch_json = ['11.5.1'];
+  try {
+    let patch_url = 'https://ddragon.leagueoflegends.com/api/versions.json';
+    let patch_response = await fetch(patch_url, { signal: controller.signal });
+    patch_json = await patch_response.json();
+  } catch (error) {
+  } finally {
+    clearTimeout(timeout);
+  }
+  return patch_json[0];
+}
+
+
 async function get_champ_dict() {
-  //gets a dictionary mapping (String) champ_id -> (String) champ name, e.g. 420 -> taric or whatever taric's number is
+  //gets a dictionary mapping (String) champ_id -> (String) champ name, e.g. 420 -> taric or whatever taric's number is\
+  const patch = await getCurrentPatch();
   payload = await galeforce.lol.ddragon.champion
     .list()
-    .version('11.2.1')
+    .version(patch)
     .locale('en_US')
     .exec();
   champ_list = payload.data;

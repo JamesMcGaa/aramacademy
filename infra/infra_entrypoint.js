@@ -139,9 +139,9 @@ async function convert_matchlist_to_aggregate_champ_data(
   let match_infos_must_await = [];
   for (let i = 0; i < full_matchlist.length; i++) {
     matchlist = full_matchlist[i];
-    for (let j = 0; j < matchlist.matches.length; j++) {
-      match_id = matchlist.matches[j].gameId;
-      platform_id = matchlist.matches[j].platformId;
+    for (let j = 0; j < matchlist.length; j++) {
+      match_id = matchlist[j].matchId;
+      platform_id = matchlist[j].platformId;
       //ISSUE with users who have transferred regions - platform_id and region may not be the same - need to query platform_id instead of region in this case
       const match_args = [match_id, platform_id, account_id, region, username];
 
@@ -187,11 +187,11 @@ async function get_full_matchlist(account_id, region, start_timestamp = 0) {
       galeforce_calls.get_subsection_matchlist,
       args
     );
-    if (matchlist.matches.length > 0) {
+    if (matchlist.length > 0) {
       full_matchlist.push(matchlist);
     }
     start_index += 100;
-  } while (matchlist.matches.length === 100);
+  } while (matchlist.length === 100);
   return full_matchlist;
 }
 
