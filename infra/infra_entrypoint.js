@@ -210,10 +210,7 @@ let processUser = async (username, region, existing_user_data = null) => {
   }
   let db_entry;
   try {
-    const champ_dict = await utils.retry_async_function(
-      galeforce_calls.get_champ_dict,
-      []
-    );
+    const champ_dict = await galeforce_calls.get_champ_dict(); // TODO RETRY
     db_entry = await create_summoner_entry(
       username,
       region,
@@ -268,10 +265,10 @@ let processUser = async (username, region, existing_user_data = null) => {
       standardized_summoner_name: db_entry.standardized_summoner_name,
       region: db_entry.region,
     };
-    let doc = await user_model.findOneAndUpdate(filter, db_entry, {
-      new: true,
-      upsert: true,
-    });
+    // let doc = await user_model.findOneAndUpdate(filter, db_entry, {
+    //   new: true,
+    //   upsert: true,
+    // });
     console.log('finished creating new ' + username);
     return db_entry;
   } else {
@@ -284,10 +281,10 @@ let processUser = async (username, region, existing_user_data = null) => {
       standardized_summoner_name: updated_db_entry.standardized_summoner_name,
       region: updated_db_entry.region,
     };
-    let doc = await user_model.findOneAndUpdate(filter, updated_db_entry, {
-      new: true,
-      upsert: true,
-    });
+    // let doc = await user_model.findOneAndUpdate(filter, updated_db_entry, {
+    //   new: true,
+    //   upsert: true,
+    // });
     console.log('finished updating ' + username);
     return updated_db_entry;
   }

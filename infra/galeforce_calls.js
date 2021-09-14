@@ -1,5 +1,6 @@
 const GaleForceModule = require('galeforce');
 const utils = require('./utils.js');
+const dotenv = require('dotenv').config();
 
 galeforce_config = {
   'riot-api': {
@@ -115,7 +116,7 @@ async function get_matches_from_index(
   const puuid = await get_puuid(account_id, region);
   return galeforce.lol.match
     .list()
-    .region(DB_REGION_TO_GALCEFORCE_REGION[region])
+    .region(galeforce.region.riot.AMERICAS)
     .puuid(puuid)
     .query({
       queue: [450],
@@ -133,9 +134,9 @@ async function get_matches_from_index_and_time(
   begin_time_unix
 ) {
   const puuid = await get_puuid(account_id, region);
-  return galeforce.lol.match
+  const result = await galeforce.lol.match
     .list()
-    .region(DB_REGION_TO_GALCEFORCE_REGION[region])
+    .region(galeforce.region.riot.AMERICAS)
     .puuid(puuid)
     .query({
       queue: [450],
@@ -144,6 +145,8 @@ async function get_matches_from_index_and_time(
       beginTime: begin_time_unix,
     })
     .exec();
+  console.log('get_matches_from_index_and_time', result);
+  return result;
 }
 
 // Return match dto from matchid
@@ -162,11 +165,13 @@ async function get_last_processed_game_timestamp(account_id, region) {
       return matchlist;
     }
   );
-  if (matchlist.matches.length === 0) {
-    return null;
-  }
-  const timestamp = matchlist.matches[0].timestamp;
-  return timestamp;
+  const most_recent_match_id = matchlist[0];
+  match = await galeforce.lol.match
+    .match()
+    .region(galeforce.region.riot.AMERICAS) //TODO
+    .matchId(most_recent_match_id)
+    .exec();
+  return match.info.gameStartTimestamp;
 }
 
 async function get_subsection_matchlist(
@@ -332,8 +337,12 @@ async function get_ten_recent_matches(
 }
 
 async function get_champ_dict() {
-  //gets a dictionary mapping champ_id -> champ name, e.g. 420 -> taric or whatever taric's number is
-  payload = await galeforce.lol.ddragon.champion.list().exec();
+  //gets a dictionary mapping (String) champ_id -> (String) champ name, e.g. 420 -> taric or whatever taric's number is
+  payload = await galeforce.lol.ddragon.champion
+    .list()
+    .version('11.2.1')
+    .locale('en_US')
+    .exec(); //TODO
   champ_list = payload.data;
   champ_dict = {};
   for (champ in champ_list) {

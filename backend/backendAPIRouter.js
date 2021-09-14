@@ -284,6 +284,7 @@ router.get('/update/:region/:unsanitized_summoner_name', async (req, res) => {
     getMMR(req.params.region, req.params.unsanitized_summoner_name), // Fetch whatismymmr using unsanitized name
   ]);
 
+  console.log([matching_user_data, patch, mmr]);
   user_data = await issueUpdate(
     standardized_summoner_name,
     req.params.region,

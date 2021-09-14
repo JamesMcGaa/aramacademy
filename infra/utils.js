@@ -95,9 +95,11 @@ async function retry_async_function(func, args, retry_num = 0) {
     );
   }
   try {
+    console.log('try', retry_num, func.name);
     func_return = await func(...args);
     return func_return;
   } catch (error) {
+    console.log(error);
     //console.log('retrying', func, '. attempt: ', retry_num);
     return await retry_async_function(func, args, retry_num + 1);
   }
