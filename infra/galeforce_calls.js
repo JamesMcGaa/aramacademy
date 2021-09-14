@@ -20,7 +20,7 @@ galeforce_config = {
 
 const galeforce = new GaleForceModule(galeforce_config);
 
-const PLATFORM_ID_TO_GALCEFORCE_REGION = Object.freeze({
+const PLATFORM_ID_TO_GALEFORCE_REGION = Object.freeze({
   EUW1: galeforce.region.lol.EUROPE_WEST,
   NA1: galeforce.region.lol.NORTH_AMERICA,
   BR1: galeforce.region.lol.BRAZIL,
@@ -34,7 +34,7 @@ const PLATFORM_ID_TO_GALCEFORCE_REGION = Object.freeze({
   KR: galeforce.region.lol.KOREA,
 });
 
-const DB_REGION_TO_GALCEFORCE_REGION = Object.freeze({
+const DB_REGION_TO_GALEFORCE_LEAGUE_REGION = Object.freeze({
   euw: galeforce.region.lol.EUROPE_WEST,
   na: galeforce.region.lol.NORTH_AMERICA,
   br: galeforce.region.lol.BRAZIL,
@@ -48,20 +48,35 @@ const DB_REGION_TO_GALCEFORCE_REGION = Object.freeze({
   kr: galeforce.region.lol.KOREA,
 });
 
+const DB_REGION_TO_GALEFORCE_RIOT_REGION = Object.freeze({
+  euw: galeforce.region.riot.EUROPE,
+  na: galeforce.region.riot.AMERICAS,
+  br: galeforce.region.riot.AMERICAS,
+  eune: galeforce.region.riot.EUROPE,
+  lan: galeforce.region.riot.AMERICAS,
+  las: galeforce.region.riot.AMERICAS,
+  oce: galeforce.region.riot.AMERICAS,
+  ru: galeforce.region.riot.EUROPE,
+  tr: galeforce.region.riot.EUROPE,
+  jp: galeforce.region.riot.ASIA,
+  kr: galeforce.region.riot.ASIA,
+});
+
 // Return summoner dto
 async function get_summoner_from_name(summoner_name, region) {
   return galeforce.lol
     .summoner()
-    .region(DB_REGION_TO_GALCEFORCE_REGION[region])
+    .region(DB_REGION_TO_GALEFORCE_LEAGUE_REGION[region])
     .name(summoner_name)
     .exec();
 }
 
 // Return summoner dto
 async function get_summoner_from_id(account_id, region) {
+  console.log(DB_REGION_TO_GALEFORCE_LEAGUE_REGION[region]);
   return galeforce.lol
     .summoner()
-    .region(DB_REGION_TO_GALCEFORCE_REGION[region])
+    .region(DB_REGION_TO_GALEFORCE_LEAGUE_REGION[region])
     .accountId(account_id)
     .exec();
 }
@@ -98,7 +113,7 @@ async function get_recent_matches(account_id, region, begin_time_unix) {
   const puuid = await get_puuid(account_id, region);
   return galeforce.lol.match
     .list()
-    .region(DB_REGION_TO_GALCEFORCE_REGION[region])
+    .region(DB_REGION_TO_GALEFORCE_LEAGUE_REGION[region])
     .puuid(puuid)
     .query({
       queue: [450],
@@ -107,32 +122,7 @@ async function get_recent_matches(account_id, region, begin_time_unix) {
     .exec();
 }
 
-async function get_matches_from_index(
-  account_id,
-  region,
-  begin_index,
-  end_index
-) {
-  const puuid = await get_puuid(account_id, region);
-  return galeforce.lol.match
-    .list()
-    .region(galeforce.region.riot.AMERICAS)
-    .puuid(puuid)
-    .query({
-      queue: [450],
-      beginIndex: begin_index,
-      endIndex: end_index,
-    })
-    .exec();
-}
-
-async function get_matches_from_index_and_time(
-  account_id,
-  region,
-  begin_index,
-  end_index,
-  begin_time_unix
-) {
+async function get_match_list(account_id, region, start, count) {
   const puuid = await get_puuid(account_id, region);
   const result = await galeforce.lol.match
     .list()
@@ -140,12 +130,11 @@ async function get_matches_from_index_and_time(
     .puuid(puuid)
     .query({
       queue: [450],
-      beginIndex: begin_index,
-      endIndex: end_index,
-      beginTime: begin_time_unix,
+      start: start,
+      count: count,
     })
     .exec();
-  console.log('get_matches_from_index_and_time', result);
+  console.log('get_match_list', result);
   return result;
 }
 
@@ -153,18 +142,22 @@ async function get_matches_from_index_and_time(
 async function get_match(match_id, region) {
   return galeforce.lol.match
     .match()
-    .region(DB_REGION_TO_GALCEFORCE_REGION[region])
+    .region(DB_REGION_TO_GALEFORCE_LEAGUE_REGION[region])
     .matchId(match_id)
     .exec();
 }
 
 // Returns last processed game timestamp for this account
 async function get_last_processed_game_timestamp(account_id, region) {
-  const matchlist = await get_matches_from_index(account_id, region, 0, 1).then(
-    (matchlist) => {
-      return matchlist;
-    }
-  );
+  const puuid = await get_puuid(account_id, region);
+  matchlist = await galeforce.lol.match
+    .list()
+    .region(galeforce.region.riot.AMERICAS)
+    .puuid(puuid)
+    .query({
+      queue: [450],
+    })
+    .exec();
   const most_recent_match_id = matchlist[0];
   match = await galeforce.lol.match
     .match()
@@ -181,35 +174,12 @@ async function get_subsection_matchlist(
   num_matches = 100,
   start_timestamp
 ) {
-  //Riot api only allows up to 100 matches to be returned at a time, so this function is recursively called on groups
-  //of 100 matches to get the full desired matchlist. see get_full_matchlist for additional comment
-  const matchlist = await get_matches_from_index_and_time(
+  const matchlist = await get_match_list(
     account_id,
     region,
-    start_index,
-    num_matches,
-    start_timestamp
-  )
-    .then((matchlist) => {
-      console.log(
-        'found',
-        matchlist.startIndex,
-        ' to ',
-        matchlist.endIndex,
-        'matches'
-      );
-      return matchlist;
-    })
-    .catch((error) => {
-      //the reason this is here is because when we ask riot api
-      //for a matchlist with a timestamp that is too large (i.e. this player has no games since then)
-      //riot api returns a 404 error specifically. This deals with it.
-      if (error.statusCode === 404) {
-        const matchlist = { matches: [] };
-        return matchlist;
-      }
-      throw error;
-    });
+    0, //TODO
+    100 //TODO
+  );
   return matchlist;
 }
 
