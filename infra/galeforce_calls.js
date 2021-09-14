@@ -126,7 +126,7 @@ async function get_match_list(account_id, region, start, count) {
   const puuid = await get_puuid(account_id, region);
   const result = await galeforce.lol.match
     .list()
-    .region(galeforce.region.riot.AMERICAS)
+    .region(DB_REGION_TO_GALEFORCE_RIOT_REGION[region])
     .puuid(puuid)
     .query({
       queue: [450],
@@ -142,7 +142,7 @@ async function get_match_list(account_id, region, start, count) {
 async function get_match(match_id, region) {
   return galeforce.lol.match
     .match()
-    .region(DB_REGION_TO_GALEFORCE_LEAGUE_REGION[region])
+    .region(DB_REGION_TO_GALEFORCE_RIOT_REGION[region])
     .matchId(match_id)
     .exec();
 }
@@ -152,7 +152,7 @@ async function get_last_processed_game_timestamp(account_id, region) {
   const puuid = await get_puuid(account_id, region);
   matchlist = await galeforce.lol.match
     .list()
-    .region(galeforce.region.riot.AMERICAS)
+    .region(DB_REGION_TO_GALEFORCE_RIOT_REGION[region])
     .puuid(puuid)
     .query({
       queue: [450],
@@ -161,7 +161,7 @@ async function get_last_processed_game_timestamp(account_id, region) {
   const most_recent_match_id = matchlist[0];
   match = await galeforce.lol.match
     .match()
-    .region(galeforce.region.riot.AMERICAS) //TODO
+    .region(DB_REGION_TO_GALEFORCE_RIOT_REGION[region])
     .matchId(most_recent_match_id)
     .exec();
   return match.info.gameStartTimestamp;
@@ -178,9 +178,16 @@ async function get_subsection_matchlist(
     account_id,
     region,
     0, //TODO
-    100 //TODO
+    10 //TODO
   );
-  return matchlist;
+  results = [];
+  await Promise.all(
+    matchlist.map(async (match_id) => {
+      match = await get_match(match_id, region);
+      results.push(match);
+    })
+  );
+  return results;
 }
 
 async function get_match_info(
@@ -277,6 +284,7 @@ async function get_ten_recent_matches(
   const num_matches = 10;
   const args = [account_id, region, start_index, num_matches, 0];
   matchlist = await utils.retry_async_function(get_subsection_matchlist, args);
+  console.log(matchlist, 'recent matches matchlist');
   let match_infos_must_await = [];
   let recent_matches = [];
   for (let j = 0; j < matchlist.matches.length; j++) {
@@ -312,7 +320,7 @@ async function get_champ_dict() {
     .list()
     .version('11.2.1')
     .locale('en_US')
-    .exec(); //TODO
+    .exec();
   champ_list = payload.data;
   champ_dict = {};
   for (champ in champ_list) {
