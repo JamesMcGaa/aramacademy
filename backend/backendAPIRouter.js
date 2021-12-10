@@ -226,7 +226,7 @@ router.get(
       getUserData(standardized_summoner_name, req.params.region),
       getCurrentPatch(),
       getMMR(req.params.region, req.params.unsanitized_summoner_name), // Fetch whatismymmr using unsanitized name
-      getLiveGameStatus(standardized_summoner_name, req.params.region),
+      null,
     ]);
     let user_data = null;
     if (matching_user_data.length === 0) {

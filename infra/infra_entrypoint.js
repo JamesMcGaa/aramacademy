@@ -140,8 +140,8 @@ async function convert_matchlist_to_aggregate_champ_data(
   for (let i = 0; i < full_matchlist.length; i++) {
     matchlist = full_matchlist[i];
     for (let j = 0; j < matchlist.length; j++) {
-      match_id = matchlist[j].matchId;
-      platform_id = matchlist[j].platformId;
+      match_id = matchlist[j].metadata.matchId;
+      platform_id = matchlist[j].info.platformId;
       //ISSUE with users who have transferred regions - platform_id and region may not be the same - need to query platform_id instead of region in this case
       const match_args = [match_id, platform_id, account_id, region, username];
 
@@ -164,6 +164,7 @@ async function convert_matchlist_to_aggregate_champ_data(
   return aggregate;
 }
 
+
 async function get_full_matchlist(account_id, region, start_timestamp = 0) {
   /**
    * Calls Riot's API for matchlists 100 at a time in order to get a full list of matchlists for this player starting from start_timestamp
@@ -171,6 +172,11 @@ async function get_full_matchlist(account_id, region, start_timestamp = 0) {
    * This function awaits in a for loop, but this is actually what we want - there is no way to tell how many games an account has, as
    * the field total_games is currently busted from Riot API.
    */
+
+
+  // Riot did some weird stuff with timestamps lol
+  start_timestamp = Math.max(start_timestamp, 1623975046);
+
   let full_matchlist = [];
   let start_index = 0;
   const num_matches = 100;
@@ -210,7 +216,7 @@ let processUser = async (username, region, existing_user_data = null) => {
   }
   let db_entry;
   try {
-    const champ_dict = await galeforce_calls.get_champ_dict(); // TODO RETRY
+    const champ_dict = await galeforce_calls.get_champ_dict();
     db_entry = await create_summoner_entry(
       username,
       region,

@@ -6,24 +6,7 @@ const AbortController = require('abort-controller');
 
 const REQUEST_TIMEOUT_EXTERNAL_FETCH_MS = 15000;
 
-
-galeforce_config = {
-  "riot-api": {
-     "key": process.env.RIOT_API_KEY,
-  },
-  "rate-limit": {
-     "type": "bottleneck",
-     "cache": {
-        "type": "internal"
-     },
-     "options": {
-        "max-concurrent": null,
-        "retry-count-after-429": 3
-     }
-  }
-};
-
-const galeforce = new GaleForceModule(galeforce_config);
+const galeforce = new GaleForceModule('infra/galeforce_config.yaml');
 
 const PLATFORM_ID_TO_GALEFORCE_REGION = Object.freeze({
   EUW1: galeforce.region.lol.EUROPE_WEST,
@@ -78,7 +61,6 @@ async function get_summoner_from_name(summoner_name, region) {
 
 // Return summoner dto
 async function get_summoner_from_id(account_id, region) {
-  console.log(DB_REGION_TO_GALEFORCE_LEAGUE_REGION[region]);
   return galeforce.lol
     .summoner()
     .region(DB_REGION_TO_GALEFORCE_LEAGUE_REGION[region])
@@ -121,32 +103,32 @@ async function get_recent_matches(account_id, region, begin_time_unix) {
     .region(DB_REGION_TO_GALEFORCE_LEAGUE_REGION[region])
     .puuid(puuid)
     .query({
-      queue: [450],
-      beginTime: begin_time_unix,
+      queue: 450,
+      count: 10,
     })
     .exec();
 }
 
-async function get_match_list(account_id, region, start, count) {
+async function get_match_list(account_id, region, start, count, start_timestamp) {
+  console.log(account_id);
   const puuid = await get_puuid(account_id, region);
   const result = await galeforce.lol.match
     .list()
     .region(DB_REGION_TO_GALEFORCE_RIOT_REGION[region])
     .puuid(puuid)
     .query({
-      queue: [450],
+      queue: 450,
       start: start,
       count: count,
+      startTime: start_timestamp
     })
     .exec();
-  console.log('get_match_list', result);
   return result;
 }
 
 // Return match dto from matchid
 async function get_match(match_id, region) {
-  return galeforce.lol.match
-    .match()
+  return galeforce.lol.match.match()
     .region(DB_REGION_TO_GALEFORCE_RIOT_REGION[region])
     .matchId(match_id)
     .exec();
@@ -160,12 +142,11 @@ async function get_last_processed_game_timestamp(account_id, region) {
     .region(DB_REGION_TO_GALEFORCE_RIOT_REGION[region])
     .puuid(puuid)
     .query({
-      queue: [450],
+      queue: 450,
     })
     .exec();
   const most_recent_match_id = matchlist[0];
-  match = await galeforce.lol.match
-    .match()
+  match = await galeforce.lol.match.match()
     .region(DB_REGION_TO_GALEFORCE_RIOT_REGION[region])
     .matchId(most_recent_match_id)
     .exec();
@@ -182,10 +163,13 @@ async function get_subsection_matchlist(
   const matchlist = await get_match_list(
     account_id,
     region,
-    0, //TODO
-    10 //TODO
+    start_index,
+    num_matches,
+    start_timestamp
   );
   results = [];
+  console.log(matchlist.length);
+  console.log(matchlist);
   await Promise.all(
     matchlist.map(async (match_id) => {
       match = await get_match(match_id, region);
@@ -215,8 +199,7 @@ async function get_match_info(
     for (i = 0; i < participant_identities.length; i++) {
       participant = participant_identities[i];
       if (
-        participant['summonerName'].toLowerCase() ===
-          username.toLowerCase() //checking lowercased username as well in case
+        participant['summonerName'].toLowerCase() === username.toLowerCase() //checking lowercased username as well in case
       ) {
         desired_id = participant['participantId'];
       }
@@ -285,19 +268,13 @@ async function get_ten_recent_matches(
 ) {
   const start_index = 0;
   const num_matches = 10;
-  const args = [account_id, region, start_index, num_matches, 0];
-  matchlist = await utils.retry_async_function(get_subsection_matchlist, args);
-  console.log(matchlist, 'recent matches matchlist');
+  matchlist = await get_subsection_matchlist(account_id, region, start_index, num_matches, 0);
   let match_infos_must_await = [];
   let recent_matches = [];
   for (let j = 0; j < matchlist.length; j++) {
     let match_id = matchlist[j].metadata.matchId;
     let platform_id = matchlist[j].info.platformId;
-    const match_args = [match_id, platform_id, account_id, region, username];
-    const match_info_must_await = utils.retry_async_function(
-      get_match_info,
-      match_args
-    );
+    const match_info_must_await = get_match_info(match_id, platform_id, account_id, region, username);
     match_infos_must_await.push(match_info_must_await);
   }
   let match_infos = await Promise.all(match_infos_must_await);
@@ -333,7 +310,6 @@ async function getCurrentPatch() {
   }
   return patch_json[0];
 }
-
 
 async function get_champ_dict() {
   //gets a dictionary mapping (String) champ_id -> (String) champ name, e.g. 420 -> taric or whatever taric's number is\

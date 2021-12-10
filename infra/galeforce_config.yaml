@@ -1,0 +1,9 @@
+riot-api: 
+  key: ${RIOT_API_KEY}
+rate-limit: 
+  type: 'bottleneck'
+  cache:
+    type: 'internal'
+  options:
+    max-concurrent: null
+    retry-count-after-429: 3
