@@ -175,8 +175,9 @@ async function get_full_matchlist(account_id, region, start_timestamp = 0) {
    */
 
   // Riot did some weird stuff with timestamps lol
-  // I figured it out - Riot's hardcoded 1623975046 timestamp is in seconds and our timestamps in aram academy are in milliseconds.
-  // This means that  we need to divide our timestamps by 1000. Riot stores this timestamp and all future timetsamps from match v5 onward in seconds!!!
+  // Riot's hardcoded 1623975046 timestamp is in seconds BUT the timestamps returned from each matchlist match gameinfo are in milliseconds.
+  // Additionally, when querying by startTime, seconds is required.
+  // This means that we need to divide our stored timestamps by 1000.
   start_timestamp = Math.max(Math.ceil(start_timestamp / 1000), 1623975046);
   console.log('start timestamp in full matchlist', start_timestamp);
 
