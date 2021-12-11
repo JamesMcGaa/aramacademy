@@ -109,9 +109,15 @@ async function get_recent_matches(account_id, region, begin_time_unix) {
     .exec();
 }
 
-async function get_match_list(account_id, region, start, count, start_timestamp) {
-  console.log(account_id);
+async function get_match_list(
+  account_id,
+  region,
+  start,
+  count,
+  start_timestamp
+) {
   const puuid = await get_puuid(account_id, region);
+
   const result = await galeforce.lol.match
     .list()
     .region(DB_REGION_TO_GALEFORCE_RIOT_REGION[region])
@@ -120,7 +126,7 @@ async function get_match_list(account_id, region, start, count, start_timestamp)
       queue: 450,
       start: start,
       count: count,
-      startTime: start_timestamp
+      startTime: start_timestamp,
     })
     .exec();
   return result;
@@ -128,7 +134,8 @@ async function get_match_list(account_id, region, start, count, start_timestamp)
 
 // Return match dto from matchid
 async function get_match(match_id, region) {
-  return galeforce.lol.match.match()
+  return galeforce.lol.match
+    .match()
     .region(DB_REGION_TO_GALEFORCE_RIOT_REGION[region])
     .matchId(match_id)
     .exec();
@@ -146,7 +153,8 @@ async function get_last_processed_game_timestamp(account_id, region) {
     })
     .exec();
   const most_recent_match_id = matchlist[0];
-  match = await galeforce.lol.match.match()
+  match = await galeforce.lol.match
+    .match()
     .region(DB_REGION_TO_GALEFORCE_RIOT_REGION[region])
     .matchId(most_recent_match_id)
     .exec();
@@ -168,8 +176,7 @@ async function get_subsection_matchlist(
     start_timestamp
   );
   results = [];
-  console.log(matchlist.length);
-  console.log(matchlist);
+  console.log('matchlist length', matchlist.length);
   await Promise.all(
     matchlist.map(async (match_id) => {
       match = await get_match(match_id, region);
@@ -192,15 +199,16 @@ async function get_match_info(
   if (utils.PLATFORM_ID_TO_REGION[platform_id] !== region) {
     query_region = utils.PLATFORM_ID_TO_REGION[platform_id];
   }
+  const puuid = await get_puuid(account_id, region);
+
   return await get_match(match_id, region).then((match) => {
     const participant_identities = match.info.participants;
-
     let desired_id = null;
     for (i = 0; i < participant_identities.length; i++) {
+      console.log('participants', participant_identities);
+
       participant = participant_identities[i];
-      if (
-        participant['summonerName'].toLowerCase() === username.toLowerCase() //checking lowercased username as well in case
-      ) {
+      if (participant['puuid'] === puuid) {
         desired_id = participant['participantId'];
       }
     }
@@ -268,16 +276,29 @@ async function get_ten_recent_matches(
 ) {
   const start_index = 0;
   const num_matches = 10;
-  matchlist = await get_subsection_matchlist(account_id, region, start_index, num_matches, 0);
+  matchlist = await get_subsection_matchlist(
+    account_id,
+    region,
+    start_index,
+    num_matches,
+    0
+  );
   let match_infos_must_await = [];
   let recent_matches = [];
   for (let j = 0; j < matchlist.length; j++) {
     let match_id = matchlist[j].metadata.matchId;
     let platform_id = matchlist[j].info.platformId;
-    const match_info_must_await = get_match_info(match_id, platform_id, account_id, region, username);
+    const match_info_must_await = get_match_info(
+      match_id,
+      platform_id,
+      account_id,
+      region,
+      username
+    );
     match_infos_must_await.push(match_info_must_await);
   }
   let match_infos = await Promise.all(match_infos_must_await);
+
   match_infos = match_infos.filter((match_info) => {
     return !(match_info instanceof utils.SummonerNotInMatchError);
   });

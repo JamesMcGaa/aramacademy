@@ -36,11 +36,12 @@ async function create_summoner_entry(
   }
 
   try {
-    const timestamp_args = [account_id, region];
-    last_processed_game_timestamp = await utils.retry_async_function(
-      galeforce_calls.get_last_processed_game_timestamp,
-      timestamp_args
+    last_processed_game_timestamp = await galeforce_calls.get_last_processed_game_timestamp(
+      account_id,
+      region
     );
+    console.log('timestamp in args', last_game_timestamp);
+    console.log('last processed game timestamp', last_game_timestamp);
   } catch (error) {
     throw new utils.SummonerHasNoGamesError(
       'User ' + username + ' in ' + region + ' has no ARAM games played.'
@@ -110,6 +111,7 @@ async function create_or_update_user(
   if (last_game_timestamp === null) {
     matchlist_to_add = await get_full_matchlist(account_id, region);
   } else {
+    console.log('updating from last_game_timestamp', last_game_timestamp);
     matchlist_to_add = await get_full_matchlist(
       account_id,
       region,
@@ -164,7 +166,6 @@ async function convert_matchlist_to_aggregate_champ_data(
   return aggregate;
 }
 
-
 async function get_full_matchlist(account_id, region, start_timestamp = 0) {
   /**
    * Calls Riot's API for matchlists 100 at a time in order to get a full list of matchlists for this player starting from start_timestamp
@@ -173,9 +174,11 @@ async function get_full_matchlist(account_id, region, start_timestamp = 0) {
    * the field total_games is currently busted from Riot API.
    */
 
-
   // Riot did some weird stuff with timestamps lol
-  start_timestamp = Math.max(start_timestamp, 1623975046);
+  // I figured it out - Riot's hardcoded 1623975046 timestamp is in seconds and our timestamps in aram academy are in milliseconds.
+  // This means that  we need to divide our timestamps by 1000. Riot stores this timestamp and all future timetsamps from match v5 onward in seconds!!!
+  start_timestamp = Math.max(Math.ceil(start_timestamp / 1000), 1623975046);
+  console.log('start timestamp in full matchlist', start_timestamp);
 
   let full_matchlist = [];
   let start_index = 0;

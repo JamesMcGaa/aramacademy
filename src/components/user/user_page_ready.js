@@ -287,7 +287,7 @@ export default function UserPageReady({ props }) {
                     MMR: {state.mmr}
                   </p>
                 </Container>
-                {LiveGameComponent()}
+                {/* {LiveGameComponent()} */}
               </Paper>
 
               <Paper classes={{ root: classes.paperRoot }}>
