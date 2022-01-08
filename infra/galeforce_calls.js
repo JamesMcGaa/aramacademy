@@ -190,7 +190,8 @@ async function get_match_info(
   platform_id,
   account_id,
   region,
-  username
+  username,
+  include_start_timestamp = false
 ) {
   // return dictionary of win, kills, deaths, assists, cs, etc for this match and this participant player
   // if account_id is not a participant in this match, throws error
@@ -254,6 +255,9 @@ async function get_match_info(
     match_info['assists'] = match_stats['assists'];
     match_info['pentakills'] = match_stats['pentaKills'];
     match_info_return = match_info;
+    if (include_start_timestamp) {
+      match_info.gameStartTimestamp = match.info.gameStartTimestamp;
+    }
     return match_info;
   });
 }
@@ -284,7 +288,8 @@ async function get_ten_recent_matches(
       platform_id,
       account_id,
       region,
-      username
+      username,
+      (include_start_timestamp = true)
     );
     match_infos_must_await.push(match_info_must_await);
   }
@@ -292,6 +297,9 @@ async function get_ten_recent_matches(
 
   match_infos = match_infos.filter((match_info) => {
     return !(match_info instanceof utils.SummonerNotInMatchError);
+  });
+  match_infos.sort(function (a, b) {
+    return b.gameStartTimestamp - a.gameStartTimestamp;
   });
   for (let i = 0; i < match_infos.length; i++) {
     let match_info = match_infos[i];
