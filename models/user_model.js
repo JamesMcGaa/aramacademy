@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
-const Schema = mongoose.Schema;
 
 const schema = new mongoose.Schema({
   accountId: String,
@@ -17,12 +16,7 @@ const schema = new mongoose.Schema({
       kills: Number,
       deaths: Number,
       assists: Number,
-      cs: Number,
-      gold: Number,
-      damage_dealt: Number,
-      damage_taken: Number,
       pentakills: Number,
-      duration_in_seconds: Number,
     },
   ],
   recent_games: [

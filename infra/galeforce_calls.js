@@ -158,7 +158,6 @@ async function get_last_processed_game_timestamp(account_id, region) {
     .region(DB_REGION_TO_GALEFORCE_RIOT_REGION[region])
     .matchId(most_recent_match_id)
     .exec();
-  console.log('last processed timetsamp', match.info.gameStartTimestamp);
   return match.info.gameStartTimestamp;
 }
 
@@ -177,7 +176,6 @@ async function get_subsection_matchlist(
     start_timestamp
   );
   results = [];
-  console.log('matchlist length', matchlist.length);
   await Promise.all(
     matchlist.map(async (match_id) => {
       match = await get_match(match_id, region);
@@ -206,8 +204,6 @@ async function get_match_info(
     const participant_identities = match.info.participants;
     let desired_id = null;
     for (i = 0; i < participant_identities.length; i++) {
-      console.log('participants', participant_identities);
-
       participant = participant_identities[i];
       if (participant['puuid'] === puuid) {
         desired_id = participant['participantId'];
@@ -252,16 +248,10 @@ async function get_match_info(
 
     champ_id = desired_participant['championId'];
     match_info['champ'] = champ_id;
-    match_info['duration'] = match['gameDuration'];
     match_info['win'] = match_stats['win'];
     match_info['kills'] = match_stats['kills'];
     match_info['deaths'] = match_stats['deaths'];
     match_info['assists'] = match_stats['assists'];
-    match_info['cs'] = match_stats['totalMinionsKilled'];
-    match_info['gold'] = match_stats['goldEarned'];
-    match_info['obj_dmg'] = match_stats['damageDealtToObjectives'];
-    match_info['dmg_dealt'] = match_stats['totalDamageDealtToChampions'];
-    match_info['dmg_taken'] = match_stats['totalDamageTaken'];
     match_info['pentakills'] = match_stats['pentaKills'];
     match_info_return = match_info;
     return match_info;

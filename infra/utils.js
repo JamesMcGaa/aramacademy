@@ -95,7 +95,7 @@ async function retry_async_function(func, args, retry_num = 0) {
     );
   }
   try {
-    console.log('try', retry_num, func.name);
+    // console.log('try', retry_num, func.name);
     func_return = await func(...args);
     return func_return;
   } catch (error) {
@@ -112,13 +112,7 @@ function get_aggregate_stats_from_match_infos(match_infos, champ_dict) {
     entry['kills'] += match['kills'];
     entry['deaths'] += match['deaths'];
     entry['assists'] += match['assists'];
-    entry['cs'] += match['cs'];
-    entry['gold'] += match['gold'];
-    //entry['obj_dmg'] += match['obj_dmg'];
-    entry['damage_dealt'] += match['dmg_dealt'];
-    entry['damage_taken'] += match['dmg_taken'];
     entry['pentakills'] += match['pentakills'];
-    entry['duration_in_seconds'] += match['duration'];
     return entry;
   }
   let rows = ['overall'];
@@ -134,13 +128,7 @@ function get_aggregate_stats_from_match_infos(match_infos, champ_dict) {
       kills: 0,
       deaths: 0,
       assists: 0,
-      cs: 0,
-      gold: 0,
-      //obj_dmg: 0,
-      damage_dealt: 0,
-      damage_taken: 0,
       pentakills: 0,
-      duration_in_seconds: 0,
     };
     champ_data[champ] = stats;
   }
@@ -174,18 +162,8 @@ function get_updated_user_data_with_delta(existing_user_data, db_entry) {
           existing_user_data.per_champion_data[j].deaths;
         updated_db_entry.per_champion_data[i].assists +=
           existing_user_data.per_champion_data[j].assists;
-        updated_db_entry.per_champion_data[i].cs +=
-          existing_user_data.per_champion_data[j].cs;
-        updated_db_entry.per_champion_data[i].gold +=
-          existing_user_data.per_champion_data[j].gold;
-        updated_db_entry.per_champion_data[i].damage_dealt +=
-          existing_user_data.per_champion_data[j].damage_dealt;
-        updated_db_entry.per_champion_data[i].damage_taken +=
-          existing_user_data.per_champion_data[j].damage_taken;
         updated_db_entry.per_champion_data[i].pentakills +=
           existing_user_data.per_champion_data[j].pentakills;
-        updated_db_entry.per_champion_data[i].duration_in_seconds +=
-          existing_user_data.per_champion_data[j].duration_in_seconds;
       }
     }
   }

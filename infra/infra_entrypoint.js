@@ -216,7 +216,6 @@ let processUser = async (username, region, existing_user_data = null) => {
     //need to set timestamp and update user instead of creating new
     timestamp = existing_user_data.last_processed_game_timestamp_ms;
     log_usecase = utils.LOGGING.UPDATE;
-    console.log('last processed game timestamp is ' + timestamp);
   }
   let db_entry;
   try {
@@ -275,10 +274,10 @@ let processUser = async (username, region, existing_user_data = null) => {
       standardized_summoner_name: db_entry.standardized_summoner_name,
       region: db_entry.region,
     };
-    // let doc = await user_model.findOneAndUpdate(filter, db_entry, {
-    //   new: true,
-    //   upsert: true,
-    // });
+    await user_model.findOneAndUpdate(filter, db_entry, {
+      new: true,
+      upsert: true,
+    });
     console.log('finished creating new ' + username);
     return db_entry;
   } else {
@@ -291,10 +290,10 @@ let processUser = async (username, region, existing_user_data = null) => {
       standardized_summoner_name: updated_db_entry.standardized_summoner_name,
       region: updated_db_entry.region,
     };
-    // let doc = await user_model.findOneAndUpdate(filter, updated_db_entry, {
-    //   new: true,
-    //   upsert: true,
-    // });
+    await user_model.findOneAndUpdate(filter, updated_db_entry, {
+      new: true,
+      upsert: true,
+    });
     console.log('finished updating ' + username);
     return updated_db_entry;
   }
