@@ -14,7 +14,7 @@ export default class Navigation extends React.Component {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            <NavDropdown title="Leaderboards" id="collasible-nav-dropdown">
+            {/* <NavDropdown title="Leaderboards" id="collasible-nav-dropdown">
               <NavDropdown.Item href="/leaderboards/na">NA</NavDropdown.Item>
               <NavDropdown.Item href="/leaderboards/euw">EUW</NavDropdown.Item>
               <NavDropdown.Item href="/leaderboards/eune">
@@ -22,7 +22,7 @@ export default class Navigation extends React.Component {
               </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link href="/champions">Builds</Nav.Link>
-            <Nav.Link href="/tierlist">Tier List</Nav.Link>
+            <Nav.Link href="/tierlist">Tier List</Nav.Link> */}
             <Nav.Link href="/research">Research</Nav.Link>
           </Nav>
           <Nav className="mr-sm-2">

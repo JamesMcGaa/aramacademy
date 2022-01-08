@@ -55,7 +55,7 @@ function App() {
               <Route path="/users/:region/:summonerName">
                 <Users />
               </Route>
-              <Route path="/leaderboards/:region">
+              {/* <Route path="/leaderboards/:region">
                 <Leaderboards />
               </Route>
               <Route path="/champions/:champion">
@@ -66,15 +66,12 @@ function App() {
               </Route>
               <Route path="/tierlist">
                 <TierlistPage />
-              </Route>
+              </Route> */}
               <Route path="/about">
                 <About />
               </Route>
               <Route path="/FAQ">
                 <Faq />
-              </Route>
-              <Route path="/tierlist">
-                <TierlistPage />
               </Route>
               <Route path="/research/:article">
                 <ResearchPost />
@@ -98,5 +95,5 @@ ReactDOM.render(
     <CssBaseline />
     <App />
   </MuiThemeProvider>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );

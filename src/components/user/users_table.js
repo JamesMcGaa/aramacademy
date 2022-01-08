@@ -269,22 +269,22 @@ export default function EnhancedTable({ per_champion_data }) {
                       classes={{ root: classes.iconCell }}
                       align="center"
                     >
-                      <a href={'/champions/' + row.champion}>
-                        <img
-                          className={classes.resizeChampIcon}
-                          src={resources.champ_icons[row.champion]}
-                        />
-                      </a>
+                      {/* <a href={'/champions/' + row.champion}> */}
+                      <img
+                        className={classes.resizeChampIcon}
+                        src={resources.champ_icons[row.champion]}
+                      />
+                      {/* </a> */}
                     </TableCell>
                     <TableCell align="left" style={{ paddingLeft: '0px' }}>
-                      <Link
+                      {/* <Link
                         href={'/champions/' + row.champion}
                         style={{ color: 'inherit', textDecoration: 'none' }}
-                      >
-                        {resources.two_word_champs.has(row.champion)
-                          ? resources.two_word_champs.get(row.champion)
-                          : row.champion}
-                      </Link>
+                      > */}
+                      {resources.two_word_champs.has(row.champion)
+                        ? resources.two_word_champs.get(row.champion)
+                        : row.champion}
+                      {/* </Link> */}
                     </TableCell>
 
                     <TableCell align="right">{row.total_games}</TableCell>

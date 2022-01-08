@@ -236,15 +236,16 @@ export default function Home() {
       <Snackbar
         open={open}
         onClose={handleClose}
-        message="Learn from the top 1% of ARAM players"
+        message="Make feature requests, share bugs, or contribute to open source"
+        message="Meet fellow ARAM players, discuss strategies, and more!"
         action={
           <Container>
             <Button
               color="primary"
               size="medium"
-              href="https://aram.academy/champions"
+              href="https://discord.gg/MydvqhqWmM"
             >
-              Browse the ARAM Academy builds pages
+              Join the ARAM Academy Discord
             </Button>
             <IconButton
               aria-label="close"
