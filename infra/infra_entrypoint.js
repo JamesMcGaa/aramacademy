@@ -178,6 +178,8 @@ async function get_full_matchlist(account_id, region, start_timestamp = 0) {
   // Riot's hardcoded 1623975046 timestamp is in seconds BUT the timestamps returned from each matchlist match gameinfo are in milliseconds.
   // Additionally, when querying by startTime, seconds is required.
   // This means that we need to divide our stored timestamps by 1000.
+  // Further note that this startTime queries against matchInfo.gameEndTimestamp
+
   start_timestamp = Math.max(Math.ceil(start_timestamp / 1000), 1623975046);
   console.log('start timestamp in full matchlist', start_timestamp);
 

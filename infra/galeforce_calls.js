@@ -158,7 +158,7 @@ async function get_last_processed_game_timestamp(account_id, region) {
     .region(DB_REGION_TO_GALEFORCE_RIOT_REGION[region])
     .matchId(most_recent_match_id)
     .exec();
-  return match.info.gameStartTimestamp;
+  return match.info.gameEndTimestamp;
 }
 
 async function get_subsection_matchlist(
