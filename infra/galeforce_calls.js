@@ -68,6 +68,15 @@ async function get_summoner_from_id(account_id, region) {
     .exec();
 }
 
+// Return summoner dto
+async function get_summoner_from_puuid(puuid, region) {
+  return galeforce.lol
+    .summoner()
+    .region(DB_REGION_TO_GALEFORCE_LEAGUE_REGION[region])
+    .puuid(puuid)
+    .exec();
+}
+
 // Return puuid from account_id + region
 async function get_puuid(account_id, region) {
   return get_summoner_from_id(account_id, region).then((res) => {
@@ -105,6 +114,18 @@ async function get_recent_matches(account_id, region, begin_time_unix) {
     .query({
       queue: 450,
       count: 10,
+    })
+    .exec();
+}
+
+async function get_recent_matches_leaderboard(puuid, region, begin_time_unix) {
+  return galeforce.lol.match
+    .list()
+    .region(DB_REGION_TO_GALEFORCE_RIOT_REGION[region])
+    .puuid(puuid)
+    .query({
+      queue: 450,
+      startTime: begin_time_unix,
     })
     .exec();
 }
@@ -358,6 +379,7 @@ module.exports = {
   get_account_id,
   get_true_summoner_name,
   get_recent_matches,
+  get_recent_matches_leaderboard,
   get_ten_recent_matches,
   get_match,
   get_last_processed_game_timestamp,
@@ -366,4 +388,5 @@ module.exports = {
   get_subsection_matchlist,
   get_champ_dict,
   get_live_game,
+  get_summoner_from_puuid,
 };

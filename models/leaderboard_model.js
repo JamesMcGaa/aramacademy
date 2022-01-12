@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const schema = new mongoose.Schema({
-  accountId: String,
+  puuid: String,
   true_summoner_name: String,
   mmr: Number,
   region: String,
