@@ -18,6 +18,7 @@ module.exports = {
     'no-plusplus': 0,
     'comma-dangle': 0,
     'prefer-destructuring': 0,
+    'react/prefer-stateless-function': 0,
     camelcase: 0,
   },
 };

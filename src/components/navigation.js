@@ -2,7 +2,7 @@ import React from 'react';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { isAndroid } from 'mobile-device-detect';
 import logo from '../images/logo.png';
-import { Container } from '@material-ui/core';
+
 export default class Navigation extends React.Component {
   render() {
     return (
@@ -14,16 +14,16 @@ export default class Navigation extends React.Component {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            {/* <NavDropdown title="Leaderboards" id="collasible-nav-dropdown">
+            <NavDropdown title="Leaderboards" id="collasible-nav-dropdown">
               <NavDropdown.Item href="/leaderboards/na">NA</NavDropdown.Item>
               <NavDropdown.Item href="/leaderboards/euw">EUW</NavDropdown.Item>
               <NavDropdown.Item href="/leaderboards/eune">
                 EUNE
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href="/champions">Builds</Nav.Link>
-            <Nav.Link href="/tierlist">Tier List</Nav.Link> */}
-            <Nav.Link href="/research">Research</Nav.Link>
+            {/* <Nav.Link href="/champions">Builds</Nav.Link>
+            <Nav.Link href="/tierlist">Tier List</Nav.Link>
+            <Nav.Link href="/research">Research</Nav.Link> */}
           </Nav>
           <Nav className="mr-sm-2">
             <Nav.Link href="/about">About</Nav.Link>

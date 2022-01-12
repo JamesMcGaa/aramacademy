@@ -55,10 +55,10 @@ function App() {
               <Route path="/users/:region/:summonerName">
                 <Users />
               </Route>
-              {/* <Route path="/leaderboards/:region">
+              <Route path="/leaderboards/:region">
                 <Leaderboards />
               </Route>
-              <Route path="/champions/:champion">
+              {/* <Route path="/champions/:champion">
                 <Champion />
               </Route>
               <Route path="/champions">

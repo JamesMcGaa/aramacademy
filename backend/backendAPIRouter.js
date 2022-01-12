@@ -168,15 +168,6 @@ async function getCurrentPatch() {
 }
 
 /*
- * this patch gets the current patch prefix, e.g. getCurrentPatch returns 11.3.1, and this returns 11.3, the patch number people want to see\
- */
-async function getCurrentPatchPrefix() {
-  const patch = await getCurrentPatch();
-  const tokens = patch.split('.');
-  return tokens.slice(0, 2).join('.');
-}
-
-/*
  * Fetches the patch from whatismymmr, if timeout is exceeded it defaults
  */
 async function getMMR(region, unsanitized_summoner_name) {
