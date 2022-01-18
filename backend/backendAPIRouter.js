@@ -1,14 +1,11 @@
 const express = require('express');
+
 const router = express.Router();
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const fetch = require('node-fetch');
 
+const AbortController = require('abort-controller');
 const user_model = require('../models/user_model.js');
 const leaderboard_model = require('../models/leaderboard_model.js');
-
-const AbortController = require('abort-controller');
 
 const globals = require('../globals.js');
 const builds_json = require('../src/jsons/champ_data_11_8.json');
@@ -30,13 +27,13 @@ const RANKS = {
 const REQUEST_TIMEOUT_EXTERNAL_FETCH_MS = 15000;
 const MAX_ASYNC_USERS_QUEUE = 20;
 
-let infra = require('../infra/infra_entrypoint.js');
+const infra = require('../infra/infra_entrypoint.js');
 
-//https://dev.to/ycmjason/limit-concurrent-asynchronous-calls-5bae
+// https://dev.to/ycmjason/limit-concurrent-asynchronous-calls-5bae
 const asyncLimit = (fn, n) => {
   let pendingPromises = [];
-  //let argSet = new Set();
-  //Commented code here is for stopping spam reload from being an issue -> creating multiple processUser promises makes a bunch of infra calls
+  // let argSet = new Set();
+  // Commented code here is for stopping spam reload from being an issue -> creating multiple processUser promises makes a bunch of infra calls
 
   return async function (...args) {
     // let args_already_in_set = false;
@@ -71,20 +68,19 @@ const asyncLimit = (fn, n) => {
   };
 };
 
-const asyncLimitProcessUser = infra.processUser; //asyncLimit(processUser, MAX_ASYNC_USERS_QUEUE);
+const asyncLimitProcessUser = infra.processUser; // asyncLimit(processUser, MAX_ASYNC_USERS_QUEUE);
 
 async function getUserData(standardized_summoner_name, region) {
-  standardized_summoner_name = standardized_summoner_name.toLowerCase();
   console.log('getuserdata sumname', standardized_summoner_name);
-  let user_data = await user_model.find({
-    standardized_summoner_name: standardized_summoner_name,
-    region: region,
+  const user_data = await user_model.find({
+    standardized_summoner_name,
+    region,
   });
   return user_data;
 }
 
 async function issueUpdate(username, region, existing_user_data = null) {
-  let user_data = await asyncLimitProcessUser(
+  const user_data = await asyncLimitProcessUser(
     username,
     region,
     existing_user_data
@@ -93,8 +89,8 @@ async function issueUpdate(username, region, existing_user_data = null) {
 }
 
 async function getLeaderboardData(region) {
-  let mongo_docs = await leaderboard_model.find({
-    region: region,
+  const mongo_docs = await leaderboard_model.find({
+    region,
   });
   return mongo_docs;
 }
@@ -113,15 +109,15 @@ function getRankEstimate(mmr) {
     return RANKS.UNRANKED;
   }
 
-  lower_mmr_count = 0;
-  total = 0;
+  let lower_mmr_count = 0;
+  let total = 0;
   for (const bucket in mmr_distribution) {
     if (bucket < mmr) {
       lower_mmr_count += mmr_distribution[bucket];
     }
     total += mmr_distribution[bucket];
   }
-  percentile = lower_mmr_count / total;
+  const percentile = lower_mmr_count / total;
 
   let rank;
   if (percentile > 0.9995) {
@@ -157,8 +153,10 @@ async function getCurrentPatch() {
   }, REQUEST_TIMEOUT_EXTERNAL_FETCH_MS);
   let patch_json = ['11.5.1'];
   try {
-    let patch_url = 'https://ddragon.leagueoflegends.com/api/versions.json';
-    let patch_response = await fetch(patch_url, { signal: controller.signal });
+    const patch_url = 'https://ddragon.leagueoflegends.com/api/versions.json';
+    const patch_response = await fetch(patch_url, {
+      signal: controller.signal,
+    });
     patch_json = await patch_response.json();
   } catch (error) {
   } finally {
@@ -173,11 +171,9 @@ async function getCurrentPatch() {
 async function getMMR(region, unsanitized_summoner_name) {
   let mmr_response = null;
   let mmr_json = null;
-  let formatted_URI =
-    'https://' +
-    region +
-    '.whatismymmr.com/api/v1/summoner?name=' +
-    encodeURI(unsanitized_summoner_name);
+  const formatted_URI = `https://${region}.whatismymmr.com/api/v1/summoner?name=${encodeURI(
+    unsanitized_summoner_name
+  )}`;
   const controller = new AbortController();
   const timeout = setTimeout(() => {
     controller.abort();
@@ -213,12 +209,13 @@ router.get(
     const standardized_summoner_name = sanitizeSummonerName(
       req.params.unsanitized_summoner_name
     );
-    let [matching_user_data, patch, mmr, live_game_status] = await Promise.all([
-      getUserData(standardized_summoner_name, req.params.region),
-      getCurrentPatch(),
-      getMMR(req.params.region, req.params.unsanitized_summoner_name), // Fetch whatismymmr using unsanitized name
-      null,
-    ]);
+    const [matching_user_data, patch, mmr, live_game_status] =
+      await Promise.all([
+        getUserData(standardized_summoner_name, req.params.region),
+        getCurrentPatch(),
+        getMMR(req.params.region, req.params.unsanitized_summoner_name), // Fetch whatismymmr using unsanitized name
+        null,
+      ]);
     let user_data = null;
     if (matching_user_data.length === 0) {
       user_data = await issueUpdate(
@@ -233,32 +230,25 @@ router.get(
       user_data === globals.ERRORS.SUMMONER_HAS_NO_GAMES
     ) {
       // user doesnt exist in region
-      user_data_response = {
+      const user_data_response = {
         status: globals.USER_PAGE_STATES.DOES_NOT_EXIST,
       };
       res.send(user_data_response);
       return;
     }
 
-    let rank = getRankEstimate(mmr);
-    const icon_id = user_data.icon_id;
-    const icon_path =
-      'https://ddragon.leagueoflegends.com/cdn/' +
-      patch +
-      '/img/profileicon/' +
-      user_data.icon_id +
-      '.png';
+    const rank = getRankEstimate(mmr);
+    const icon_path = `https://ddragon.leagueoflegends.com/cdn/${patch}/img/profileicon/${user_data.icon_id}.png`;
 
-    user_data_response = {
-      user_data: user_data,
+    const user_data_response = {
+      user_data,
       status: globals.USER_PAGE_STATES.SUCCESS,
-      icon_path: icon_path,
-      mmr: mmr,
-      rank: rank,
-      live_game_status: live_game_status,
+      icon_path,
+      mmr,
+      rank,
+      live_game_status,
     };
     res.send(user_data_response);
-    return;
   }
 );
 
@@ -269,38 +259,30 @@ router.get('/update/:region/:unsanitized_summoner_name', async (req, res) => {
   const standardized_summoner_name = sanitizeSummonerName(
     req.params.unsanitized_summoner_name
   );
-  let [matching_user_data, patch, mmr] = await Promise.all([
+  const [matching_user_data, patch, mmr] = await Promise.all([
     getUserData(standardized_summoner_name, req.params.region),
     getCurrentPatch(),
     getMMR(req.params.region, req.params.unsanitized_summoner_name), // Fetch whatismymmr using unsanitized name
   ]);
 
-  console.log([matching_user_data, patch, mmr]);
-  user_data = await issueUpdate(
+  const user_data = await issueUpdate(
     standardized_summoner_name,
     req.params.region,
     matching_user_data[0]
   );
 
-  let rank = getRankEstimate(mmr);
-  const icon_id = user_data.icon_id;
-  const icon_path =
-    'https://ddragon.leagueoflegends.com/cdn/' +
-    patch +
-    '/img/profileicon/' +
-    user_data.icon_id +
-    '.png';
+  const rank = getRankEstimate(mmr);
+  const icon_path = `https://ddragon.leagueoflegends.com/cdn/${patch}/img/profileicon/${user_data.icon_id}.png`;
 
-  user_data_response = {
-    user_data: user_data,
+  const user_data_response = {
+    user_data,
     status: globals.USER_PAGE_STATES.SUCCESS,
-    icon_path: icon_path,
-    mmr: mmr,
-    rank: rank,
+    icon_path,
+    mmr,
+    rank,
     in_live_game: true,
   };
   res.send(user_data_response);
-  return;
 });
 
 function sanitizeSummonerName(unsanitized_summoner_name) {
@@ -318,9 +300,8 @@ function sanitizeSummonerName(unsanitized_summoner_name) {
  * Returns the current leaderboard for a (region)
  */
 router.get('/leaderboard/:region', async (req, res) => {
-  let matches = await getLeaderboardData(req.params.region);
+  const matches = await getLeaderboardData(req.params.region);
   res.send(matches);
-  return;
 });
 
 /*
@@ -332,19 +313,18 @@ router.get('/patch', async (req, res) => {
     patch: current_patch,
   };
   res.send(resp);
-  return;
 });
 
 async function getLiveGameStatus(summoner_name, region) {
   const player_list = await infra.getLiveGame(summoner_name, region);
   if (player_list === null) {
-    //not in aram game or not found
+    // not in aram game or not found
     return globals.LIVE_GAME_STATES.NO_MATCH;
   }
   return globals.LIVE_GAME_STATES.MATCH;
 }
 async function getLiveGameBasicData(summoner_name, region) {
-  return await infra.getLiveGame(summoner_name, region);
+  return infra.getLiveGame(summoner_name, region);
 }
 
 /*
@@ -360,7 +340,7 @@ router.get(
       sanitized_summoner_name,
       req.params.region
     );
-    let live_game_status = globals.LIVE_GAME_STATES.MATCH;
+    const live_game_status = globals.LIVE_GAME_STATES.MATCH;
     let resp;
     if (full_data === globals.LIVE_GAME_STATES.NO_MATCH) {
       resp = {
@@ -369,33 +349,35 @@ router.get(
       };
     } else {
       resp = {
-        live_game_status: live_game_status,
-        full_data: full_data,
+        live_game_status,
+        full_data,
       };
     }
     res.send(resp);
-    return;
   }
 );
 
 async function getLiveGameFullData(summoner_name, region) {
-  //this function is run when you click on live game button
-  //it is run separately because it has to do up to 9 fetches on player, so we
+  // this function is run when you click on live game button
+  // it is run separately because it has to do up to 9 fetches on player, so we
   // dont want to run all 9 to load this particular players user page
   const player_list = await getLiveGameBasicData(summoner_name, region);
   if (player_list === null) {
-    //not in aram game
+    // not in aram game
     return globals.LIVE_GAME_STATES.NO_MATCH;
   }
-  let name_array = [];
+  const name_array = [];
   for (let i = 0; i < player_list.length; i++) {
     const standardized_summoner_name = sanitizeSummonerName(
       player_list[i].summonerName
     );
-    matching_user_data = await getUserData(standardized_summoner_name, region);
+    const matching_user_data = await getUserData(
+      standardized_summoner_name,
+      region
+    );
     if (matching_user_data.length === 0) {
       console.log('issuing update on new user', standardized_summoner_name);
-      const user_data = await issueUpdate(standardized_summoner_name, region);
+      await issueUpdate(standardized_summoner_name, region);
     }
     name_array.push(standardized_summoner_name);
   }
@@ -405,7 +387,7 @@ async function getLiveGameFullData(summoner_name, region) {
     region
   );
 
-  let final_player_data_list = [];
+  const final_player_data_list = [];
   for (let i = 0; i < player_list.length; i++) {
     const true_summoner_name = player_list[i].summonerName;
     const desired_champ = player_list[i].champion;
@@ -413,7 +395,7 @@ async function getLiveGameFullData(summoner_name, region) {
     let found_matching_player = false;
     live_game_row_data = {};
     for (let j = 0; j < mongo_per_champ_data.length; j++) {
-      //check for correct summoner name
+      // check for correct summoner name
       if (true_summoner_name === mongo_per_champ_data[j].true_summoner_name) {
         found_matching_player = true;
         per_champ_data = mongo_per_champ_data[j].per_champion_data;
@@ -425,7 +407,7 @@ async function getLiveGameFullData(summoner_name, region) {
         live_game_row_data.mmr = mmr;
         live_game_row_data.rank = rank;
         live_game_row_data.side = team_id;
-        //looking for the right champ and overall
+        // looking for the right champ and overall
         for (let k = 0; k < per_champ_data.length; k++) {
           if (per_champ_data[k].champion === desired_champ) {
             live_game_row_data.champion_games = per_champ_data[k].total_games;
@@ -442,7 +424,7 @@ async function getLiveGameFullData(summoner_name, region) {
         final_player_data_list.push(live_game_row_data);
       }
     }
-    //no matching player found in mongo - this means this player has no aram games
+    // no matching player found in mongo - this means this player has no aram games
     if (!found_matching_player) {
       live_game_row_data.champion = desired_champ;
       live_game_row_data.summoner_name = true_summoner_name;
@@ -472,7 +454,7 @@ module.exports = router;
  * Returns builds/runes/sum spells for this champion
  */
 
-/*we want to feed the following back to the champion.js client
+/* we want to feed the following back to the champion.js client
 * winrate pickrate
 * primary/secondary rune tree name
 * primary/secondary rune tree name filepath
@@ -505,16 +487,16 @@ mythic: Shieldbow
 boots: mercs
 first item: essence reaver
 second item: navori quickblades
- 
+
 }
- 
+
 give champion.js the entire sorcery/resolve two trees worth of json and feed in the names of the 7 runes + 3 adaptive whatever you've chosen
 champion.js displays the rune trees in a flexible manner such that name/icon changes are automatic from riot json
 highlight the 10 choices
 */
 router.get('/builds/:champion', async (req, res) => {
   let champ = req.params.champion;
-  let two_word_champs = new Map();
+  const two_word_champs = new Map();
   two_word_champs.set('AurelionSol', 'Aurelion Sol');
   two_word_champs.set('Chogath', "Cho'Gath");
   two_word_champs.set('DrMundo', 'Dr. Mundo');
@@ -541,7 +523,7 @@ router.get('/builds/:champion', async (req, res) => {
   const item_json = await getItemJson();
   const sums_json = await getSummonerSpellsJson();
   const item_build_json = build_json.items_json;
-  let item_build_json_full = {};
+  const item_build_json_full = {};
   for (key in item_build_json) {
     item_build_json_full[key] = [];
     for (index in item_build_json[key]) {
@@ -555,13 +537,13 @@ router.get('/builds/:champion', async (req, res) => {
         );
       }
       item_build_json_full[key].push({
-        items: items,
+        items,
         items_winrate: item_build_json[key][index].items_winrate,
       });
     }
   }
   const runes = build_json.runes;
-  let runes_full = [];
+  const runes_full = [];
   for (index in runes) {
     runes_full.push({
       ...runes[index],
@@ -579,18 +561,18 @@ router.get('/builds/:champion', async (req, res) => {
   const patch = await getCurrentPatch();
   build_response = {
     ...build_json,
-    runes_full: runes_full,
+    runes_full,
     items_json_full: item_build_json_full,
-    sums_json: sums_json,
-    champion_json: champion_json,
-    patch: patch,
+    sums_json,
+    champion_json,
+    patch,
   };
   res.send(build_response);
 });
 
 function getRuneTreeJson(tree_name, runes_json) {
-  for (var i = 0; i < runes_json.length; i++) {
-    var tree = runes_json[i];
+  for (let i = 0; i < runes_json.length; i++) {
+    const tree = runes_json[i];
     if (tree.key === tree_name) {
       return tree;
     }
@@ -600,10 +582,7 @@ function getRuneTreeJson(tree_name, runes_json) {
 async function getItemJson() {
   let item_json = null;
   const patch = await getCurrentPatch();
-  let formatted_URI =
-    'https://ddragon.leagueoflegends.com/cdn/' +
-    patch +
-    '/data/en_US/item.json';
+  const formatted_URI = `https://ddragon.leagueoflegends.com/cdn/${patch}/data/en_US/item.json`;
   const controller = new AbortController();
   const timeout = setTimeout(() => {
     controller.abort();
@@ -619,7 +598,7 @@ async function getItemJson() {
 }
 
 function getDesiredItemJson(item_name, item_json) {
-  for (var id in item_json.data) {
+  for (const id in item_json.data) {
     if (item_json.data[id].name === item_name) {
       return item_json.data[id];
     }
@@ -630,10 +609,7 @@ function getDesiredItemJson(item_name, item_json) {
 async function getRunesJson() {
   const patch = await getCurrentPatch();
 
-  const runes_path =
-    'https://ddragon.leagueoflegends.com/cdn/' +
-    patch +
-    '/data/en_US/runesReforged.json';
+  const runes_path = `https://ddragon.leagueoflegends.com/cdn/${patch}/data/en_US/runesReforged.json`;
   let runes_json = null;
   const controller = new AbortController();
   const timeout = setTimeout(() => {
@@ -654,10 +630,7 @@ async function getRunesJson() {
 async function getSummonerSpellsJson() {
   const patch = await getCurrentPatch();
 
-  const path =
-    'https://ddragon.leagueoflegends.com/cdn/' +
-    patch +
-    '/data/en_US/summoner.json';
+  const path = `https://ddragon.leagueoflegends.com/cdn/${patch}/data/en_US/summoner.json`;
   let json = null;
   const controller = new AbortController();
   const timeout = setTimeout(() => {
@@ -676,12 +649,7 @@ async function getSummonerSpellsJson() {
 async function getChampionJson(champ_name) {
   const patch = await getCurrentPatch();
 
-  const path =
-    'https://ddragon.leagueoflegends.com/cdn/' +
-    patch +
-    '/data/en_US/champion/' +
-    champ_name +
-    '.json';
+  const path = `https://ddragon.leagueoflegends.com/cdn/${patch}/data/en_US/champion/${champ_name}.json`;
   console.log(path);
   let json = null;
   const controller = new AbortController();

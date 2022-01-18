@@ -19,6 +19,10 @@ module.exports = {
     'comma-dangle': 0,
     'prefer-destructuring': 0,
     'react/prefer-stateless-function': 0,
+    'no-empty': [2, { allowEmptyCatch: true }],
     camelcase: 0,
+    'max-len': 0,
+    'no-use-before-define': 0,
+    'import/extensions': 0,
   },
 };

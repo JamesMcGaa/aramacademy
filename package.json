@@ -79,11 +79,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "proxy": "http://localhost:3000",
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint-staged"
-    }
-  },
+  "husky": {},
   "prettier": {
     "trailingComma": "es5",
     "tabWidth": 2,
