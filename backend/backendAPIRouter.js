@@ -190,10 +190,10 @@ async function getMMR(region, unsanitized_summoner_name) {
   }
 
   if (
-    mmr_json &&
-    'ARAM' in mmr_json &&
-    'avg' in mmr_json.ARAM &&
-    mmr_json.ARAM.avg !== null
+    mmr_json
+    && 'ARAM' in mmr_json
+    && 'avg' in mmr_json.ARAM
+    && mmr_json.ARAM.avg !== null
   ) {
     return mmr_json.ARAM.avg;
   }
@@ -209,13 +209,12 @@ router.get(
     const standardized_summoner_name = sanitizeSummonerName(
       req.params.unsanitized_summoner_name
     );
-    const [matching_user_data, patch, mmr, live_game_status] =
-      await Promise.all([
-        getUserData(standardized_summoner_name, req.params.region),
-        getCurrentPatch(),
-        getMMR(req.params.region, req.params.unsanitized_summoner_name), // Fetch whatismymmr using unsanitized name
-        null,
-      ]);
+    const [matching_user_data, patch, mmr, live_game_status] = await Promise.all([
+      getUserData(standardized_summoner_name, req.params.region),
+      getCurrentPatch(),
+      getMMR(req.params.region, req.params.unsanitized_summoner_name), // Fetch whatismymmr using unsanitized name
+      null,
+    ]);
     let user_data = null;
     if (matching_user_data.length === 0) {
       user_data = await issueUpdate(
@@ -226,8 +225,8 @@ router.get(
       user_data = matching_user_data[0];
     }
     if (
-      user_data === globals.ERRORS.SUMMONER_DOES_NOT_EXIST ||
-      user_data === globals.ERRORS.SUMMONER_HAS_NO_GAMES
+      user_data === globals.ERRORS.SUMMONER_DOES_NOT_EXIST
+      || user_data === globals.ERRORS.SUMMONER_HAS_NO_GAMES
     ) {
       // user doesnt exist in region
       const user_data_response = {
