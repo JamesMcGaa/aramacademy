@@ -79,29 +79,21 @@ async function get_summoner_from_puuid(puuid, region) {
 
 // Return puuid from account_id + region
 async function get_puuid(account_id, region) {
-  return get_summoner_from_id(account_id, region).then((res) => {
-    return res.puuid;
-  });
+  return get_summoner_from_id(account_id, region).then((res) => res.puuid);
 }
 
 // Return accountId from name + region
 async function get_account_id(summoner_name, region) {
-  return get_summoner_from_name(summoner_name, region).then((res) => {
-    return res.accountId;
-  });
+  return get_summoner_from_name(summoner_name, region).then((res) => res.accountId);
 }
 
 // Return formatted summoner name from name + region
 async function get_true_summoner_name(summoner_name, region) {
-  return get_summoner_from_name(summoner_name, region).then((res) => {
-    return res.name;
-  });
+  return get_summoner_from_name(summoner_name, region).then((res) => res.name);
 }
 
 async function get_icon_id(summoner_name, region) {
-  return get_summoner_from_name(summoner_name, region).then((res) => {
-    return res.profileIconId;
-  });
+  return get_summoner_from_name(summoner_name, region).then((res) => res.profileIconId);
 }
 
 // Return list of matchids
@@ -145,8 +137,8 @@ async function get_match_list(
     .puuid(puuid)
     .query({
       queue: 450,
-      start: start,
-      count: count,
+      start,
+      count,
       startTime: start_timestamp,
     })
     .exec();
@@ -227,28 +219,28 @@ async function get_match_info(
     let desired_id = null;
     for (i = 0; i < participant_identities.length; i++) {
       participant = participant_identities[i];
-      if (participant['puuid'] === puuid) {
-        desired_id = participant['participantId'];
+      if (participant.puuid === puuid) {
+        desired_id = participant.participantId;
       }
     }
     if (desired_id === null) {
-      //Edge case: goodend4 in EUW1 played a few games in NA. Then he swapped to EUW1 (and got a new accountId). After he swapped,
-      //his accountID was taken by a new NA player named Senná. When we query based on accountId, Senna games
-      //come up. For now, when we do not find the desired participant, we just return an empty match info obj
+      // Edge case: goodend4 in EUW1 played a few games in NA. Then he swapped to EUW1 (and got a new accountId). After he swapped,
+      // his accountID was taken by a new NA player named Senná. When we query based on accountId, Senna games
+      // come up. For now, when we do not find the desired participant, we just return an empty match info obj
 
-      let error = new utils.SummonerNotInMatchError(
-        'The match ' +
-          match_id +
-          ' does not contain the user ' +
-          username +
-          ' with account_id ' +
-          account_id +
-          ' as a participant. query_region is' +
-          query_region
+      const error = new utils.SummonerNotInMatchError(
+        `The match ${
+          match_id
+        } does not contain the user ${
+          username
+        } with account_id ${
+          account_id
+        } as a participant. query_region is${
+          query_region}`
       );
       rand = Math.random();
       if (rand > 0.995) {
-        //Logging 1/200
+        // Logging 1/200
         utils.sendErrorLog(
           username,
           region,
@@ -261,20 +253,20 @@ async function get_match_info(
     const participants = match.info.participants;
     let desired_participant;
     for (i = 0; i < participants.length; i++) {
-      if (participants[i]['participantId'] === desired_id) {
+      if (participants[i].participantId === desired_id) {
         desired_participant = participants[i];
       }
     }
     const match_stats = desired_participant;
-    let match_info = {};
+    const match_info = {};
 
-    champ_id = desired_participant['championId'];
-    match_info['champ'] = champ_id;
-    match_info['win'] = match_stats['win'];
-    match_info['kills'] = match_stats['kills'];
-    match_info['deaths'] = match_stats['deaths'];
-    match_info['assists'] = match_stats['assists'];
-    match_info['pentakills'] = match_stats['pentaKills'];
+    champ_id = desired_participant.championId;
+    match_info.champ = champ_id;
+    match_info.win = match_stats.win;
+    match_info.kills = match_stats.kills;
+    match_info.deaths = match_stats.deaths;
+    match_info.assists = match_stats.assists;
+    match_info.pentakills = match_stats.pentaKills;
     match_info_return = match_info;
     if (include_start_timestamp) {
       match_info.gameStartTimestamp = match.info.gameStartTimestamp;
@@ -299,11 +291,11 @@ async function get_ten_recent_matches(
     num_matches,
     0
   );
-  let match_infos_must_await = [];
-  let recent_matches = [];
+  const match_infos_must_await = [];
+  const recent_matches = [];
   for (let j = 0; j < matchlist.length; j++) {
-    let match_id = matchlist[j].metadata.matchId;
-    let platform_id = matchlist[j].info.platformId;
+    const match_id = matchlist[j].metadata.matchId;
+    const platform_id = matchlist[j].info.platformId;
     const match_info_must_await = get_match_info(
       match_id,
       platform_id,
@@ -316,20 +308,16 @@ async function get_ten_recent_matches(
   }
   let match_infos = await Promise.all(match_infos_must_await);
 
-  match_infos = match_infos.filter((match_info) => {
-    return !(match_info instanceof utils.SummonerNotInMatchError);
-  });
-  match_infos.sort(function (a, b) {
-    return b.gameStartTimestamp - a.gameStartTimestamp;
-  });
+  match_infos = match_infos.filter((match_info) => !(match_info instanceof utils.SummonerNotInMatchError));
+  match_infos.sort((a, b) => b.gameStartTimestamp - a.gameStartTimestamp);
   for (let i = 0; i < match_infos.length; i++) {
-    let match_info = match_infos[i];
-    let match_entry = {};
-    match_entry['champion'] = champ_dict[match_info['champ']];
-    match_entry['win'] = match_info['win'];
-    match_entry['kills'] = match_info['kills'];
-    match_entry['deaths'] = match_info['deaths'];
-    match_entry['assists'] = match_info['assists'];
+    const match_info = match_infos[i];
+    const match_entry = {};
+    match_entry.champion = champ_dict[match_info.champ];
+    match_entry.win = match_info.win;
+    match_entry.kills = match_info.kills;
+    match_entry.deaths = match_info.deaths;
+    match_entry.assists = match_info.assists;
     recent_matches.push(match_entry);
   }
   return recent_matches;
@@ -342,8 +330,8 @@ async function getCurrentPatch() {
   }, REQUEST_TIMEOUT_EXTERNAL_FETCH_MS);
   let patch_json = ['11.5.1'];
   try {
-    let patch_url = 'https://ddragon.leagueoflegends.com/api/versions.json';
-    let patch_response = await fetch(patch_url, { signal: controller.signal });
+    const patch_url = 'https://ddragon.leagueoflegends.com/api/versions.json';
+    const patch_response = await fetch(patch_url, { signal: controller.signal });
     patch_json = await patch_response.json();
   } catch (error) {
   } finally {
@@ -353,7 +341,7 @@ async function getCurrentPatch() {
 }
 
 async function get_champ_dict() {
-  //gets a dictionary mapping (String) champ_id -> (String) champ name, e.g. 420 -> taric or whatever taric's number is\
+  // gets a dictionary mapping (String) champ_id -> (String) champ name, e.g. 420 -> taric or whatever taric's number is\
   const patch = await getCurrentPatch();
   payload = await galeforce.lol.ddragon.champion
     .list()
@@ -369,7 +357,7 @@ async function get_champ_dict() {
 }
 
 async function get_live_game(summoner_id) {
-  //gets live game from summoner_id - only aram games. if aram game not available returns null
+  // gets live game from summoner_id - only aram games. if aram game not available returns null
   return [];
 }
 

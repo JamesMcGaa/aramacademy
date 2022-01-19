@@ -5,9 +5,9 @@ import UserPageReady from './user_page_ready.js';
 import UserPageDoesNotExist from './user_page_doesnotexist.js';
 import UserPageReadyMobile from './user_page_ready_mobile.js';
 
-const globals = require('../../../globals.js');
 const fetch = require('node-fetch');
 const mobile = require('is-mobile');
+const globals = require('../../../globals.js');
 
 export default function Users() {
   const params = useParams();
@@ -33,36 +33,33 @@ export default function Users() {
 
   // if no summoner name set reroutes back to homepage
   if (params.summonerName.trim() === '') {
-    history.push(`/`);
+    history.push('/');
   }
 
   if (state.page_state === globals.USER_PAGE_STATES.LOADING) {
     fetch(
-      '/api/winrate_data/' +
-        params.region +
-        '/' +
-        encodeURI(params.summonerName)
+      `/api/winrate_data/${
+        params.region
+      }/${
+        encodeURI(params.summonerName)}`
     )
       .then((response) => response.json())
       .then((json) => {
         handleUserDataResponse(json);
       });
     return <UserPageLoading summonerName={params.summonerName} />;
-  } else if (state.page_state === globals.USER_PAGE_STATES.DOES_NOT_EXIST) {
+  } if (state.page_state === globals.USER_PAGE_STATES.DOES_NOT_EXIST) {
     return (
       <UserPageDoesNotExist
         summonerName={params.summonerName}
         region={params.region}
       />
     );
-  } else if (
-    state.page_state === globals.USER_PAGE_STATES.SUCCESS &&
-    mobile()
+  } if (
+    state.page_state === globals.USER_PAGE_STATES.SUCCESS
+    && mobile()
   ) {
-    console.log('its mobile time');
     return <UserPageReadyMobile props={state} />;
-  } else {
-    // Success
-    return <UserPageReady props={state} />;
   }
+  return <UserPageReady props={state} />;
 }

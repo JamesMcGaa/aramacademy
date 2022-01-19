@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 mongoose.set('useFindAndModify', false);
 
 const schema = new mongoose.Schema({
@@ -31,7 +32,7 @@ const schema = new mongoose.Schema({
   icon_id: Number,
 });
 
-//Third argument to prevent pluralization
+// Third argument to prevent pluralization
 const user_model = mongoose.model('user_data', schema, 'user_data');
 
 module.exports = user_model;

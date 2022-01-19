@@ -4,6 +4,7 @@ const router = express.Router();
 const fetch = require('node-fetch');
 
 const AbortController = require('abort-controller');
+const user_model_v5 = require('../models/user_model_v5.js');
 const user_model = require('../models/user_model.js');
 const leaderboard_model = require('../models/leaderboard_model.js');
 
@@ -28,6 +29,7 @@ const REQUEST_TIMEOUT_EXTERNAL_FETCH_MS = 15000;
 const MAX_ASYNC_USERS_QUEUE = 20;
 
 const infra = require('../infra/infra_entrypoint.js');
+const galeforceCalls = require('../infra/galeforce_calls.js');
 
 // https://dev.to/ycmjason/limit-concurrent-asynchronous-calls-5bae
 const asyncLimit = (fn, n) => {
@@ -77,6 +79,37 @@ async function getUserData(standardized_summoner_name, region) {
     region,
   });
   return user_data;
+}
+
+async function getWinrateDataWithMigration(standardized_summoner_name, region, raw_summoner_name) {
+  const { puuid, name } = await galeforceCalls.get_summoner_from_name(raw_summoner_name, region);
+  const migrated_user_data = await user_model_v5.find({
+    puuid,
+  }, '-_id -__v');
+  if (migrated_user_data.length > 0) {
+    const result = migrated_user_data[0]; // TODO LOG MULTIPLES
+    result.true_summoner_name = name;
+    return result;
+  }
+
+  const deprecated_user_data = await user_model.find({
+    true_summoner_name: name,
+    region,
+  }, '-_id -__v');
+  if (deprecated_user_data.length === 0) {
+    return null;
+  }
+
+  const oldest_user_data = deprecated_user_data.sort((a, b) => a.last_processed_game_timestamp_ms - b.last_processed_game_timestamp_ms)[0].toObject(); // Furthest back first
+  oldest_user_data.puuid = puuid;
+
+  // await user_model.deleteMany({ true_summoner_name: name });
+  await user_model_v5.insertMany(
+    [oldest_user_data]
+  );
+  oldest_user_data.true_summoner_name = name;
+
+  return new_summoner_data;
 }
 
 async function issueUpdate(username, region, existing_user_data = null) {
@@ -210,19 +243,19 @@ router.get(
       req.params.unsanitized_summoner_name
     );
     const [matching_user_data, patch, mmr, live_game_status] = await Promise.all([
-      getUserData(standardized_summoner_name, req.params.region),
+      getWinrateDataWithMigration(standardized_summoner_name, req.params.region, req.params.unsanitized_summoner_name),
       getCurrentPatch(),
       getMMR(req.params.region, req.params.unsanitized_summoner_name), // Fetch whatismymmr using unsanitized name
       null,
     ]);
     let user_data = null;
-    if (matching_user_data.length === 0) {
+    if (matching_user_data.length === null) {
       user_data = await issueUpdate(
         standardized_summoner_name,
         req.params.region
       );
     } else {
-      user_data = matching_user_data[0];
+      user_data = matching_user_data;
     }
     if (
       user_data === globals.ERRORS.SUMMONER_DOES_NOT_EXIST
@@ -235,10 +268,8 @@ router.get(
       res.send(user_data_response);
       return;
     }
-
     const rank = getRankEstimate(mmr);
     const icon_path = `https://ddragon.leagueoflegends.com/cdn/${patch}/img/profileicon/${user_data.icon_id}.png`;
-
     const user_data_response = {
       user_data,
       status: globals.USER_PAGE_STATES.SUCCESS,
@@ -373,6 +404,7 @@ async function getLiveGameFullData(summoner_name, region) {
     const matching_user_data = await getUserData(
       standardized_summoner_name,
       region
+
     );
     if (matching_user_data.length === 0) {
       console.log('issuing update on new user', standardized_summoner_name);

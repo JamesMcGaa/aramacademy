@@ -5,15 +5,16 @@ import Typography from '@material-ui/core/Typography';
 import React, { useState } from 'react';
 import { PieChart } from 'react-minimal-pie-chart';
 import { useParams } from 'react-router-dom';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Resources from '../resources.js';
 import RecentMatchesTable from './recent_matches_table.js';
 import EnhancedTable from './users_table.js';
 import LiveGameTable from './live_game_table_desktop.js';
-import CircularProgress from '@material-ui/core/CircularProgress';
-const globals = require('../../../globals.js');
 
 const fetch = require('node-fetch');
 const moment = require('moment');
+const globals = require('../../../globals.js');
+
 moment().format();
 
 const UPDATE_STATE = {
@@ -27,7 +28,7 @@ const TAB_STATE = {
   LIVE_GAME: 'LIVE_GAME',
 };
 
-var resources = Resources.Resources;
+const resources = Resources.Resources;
 const useStyles = makeStyles({
   paperRoot: {
     'background-color': 'rgba(66,66,66,.8)',
@@ -76,16 +77,16 @@ export default function UserPageReady({ props }) {
   const [updateState, setUpdateState] = useState(UPDATE_STATE.UPDATE);
   const [tab, setTab] = useState(TAB_STATE.SUMMARY);
   const [fullLiveGameData, setFullLiveGameData] = useState(null);
-  console.log(state.rank);
+
   // Nested to access params
   function handleUpdateClick() {
     setUpdateState(UPDATE_STATE.UPDATING);
 
     fetch(
-      '/api/update/' +
-        encodeURI(params.region) +
-        '/' +
-        encodeURI(params.summonerName)
+      `/api/update/${
+        encodeURI(params.region)
+      }/${
+        encodeURI(params.summonerName)}`
     )
       .then((response) => response.json())
       .then((json) => {
@@ -113,15 +114,14 @@ export default function UserPageReady({ props }) {
     setTab(TAB_STATE.LIVE_GAME);
     if (fullLiveGameData === null) {
       fetch(
-        '/api/live_game/' +
-          encodeURI(params.region) +
-          '/' +
-          encodeURI(params.summonerName)
+        `/api/live_game/${
+          encodeURI(params.region)
+        }/${
+          encodeURI(params.summonerName)}`
       )
         .then((response) => response.json())
         .then((json) => {
           setFullLiveGameData(json.full_data);
-          console.log('full', fullLiveGameData);
         });
     }
   }
@@ -138,8 +138,8 @@ export default function UserPageReady({ props }) {
     />
   );
 
-  var wins = 0;
-  var losses = 0;
+  let wins = 0;
+  let losses = 0;
   state.user_data.recent_games.forEach((game) => {
     if (game.win) {
       wins += 1;
@@ -161,7 +161,7 @@ export default function UserPageReady({ props }) {
             variant="text"
             size="large"
             onClick={handleSummaryClick}
-            fullWidth={true}
+            fullWidth
             className={classes.tabButton}
           >
             Summary
@@ -173,7 +173,7 @@ export default function UserPageReady({ props }) {
             size="large"
             color="secondary"
             onClick={handleLiveGameClick}
-            fullWidth={true}
+            fullWidth
             className={classes.tabButton}
           >
             Live Game
@@ -201,12 +201,12 @@ export default function UserPageReady({ props }) {
     }
   };
 
-  var now = moment.utc();
-  //var last_updated = moment.utc(state.user_data.last_updated_timestamp_ms);
-  //var last_updated_string = moment.utc(lastUpdatedTimestamp).fromNow();
+  const now = moment.utc();
+  // var last_updated = moment.utc(state.user_data.last_updated_timestamp_ms);
+  // var last_updated_string = moment.utc(lastUpdatedTimestamp).fromNow();
   return (
     <div>
-      <div style={{ height: '100px' }}></div>
+      <div style={{ height: '100px' }} />
       <Container fixed className={classes.largeContainer}>
         <div style={{ display: 'flex' }}>
           <div style={{ flex: '25%' }}>
@@ -232,7 +232,8 @@ export default function UserPageReady({ props }) {
                         className={classes.resizeSummonerIcon}
                         alt="summoner icon"
                         src={state.icon_path}
-                      />{' '}
+                      />
+                      {' '}
                     </div>
                     <div style={{ flex: '60%' }}>
                       <Container style={{ padding: '0px' }}>
@@ -251,7 +252,8 @@ export default function UserPageReady({ props }) {
                           )}
                         </Button>
                         <Typography variant="body2">
-                          Last updated:{' '}
+                          Last updated:
+                          {' '}
                           {moment
                             .utc(state.user_data.last_updated_timestamp_ms)
                             .fromNow()}
@@ -277,14 +279,20 @@ export default function UserPageReady({ props }) {
                   {rank_badge}
 
                   <p style={{ marginBottom: '0px' }}>
-                    Total ARAMs: {overall.total_games}
-                    <br></br>
-                    Winrate:{' '}
+                    Total ARAMs:
+                    {' '}
+                    {overall.total_games}
+                    <br />
+                    Winrate:
+                    {' '}
                     {Math.round(
                       (overall.wins / Math.max(1, overall.total_games)) * 10000
                     ) / 100}
-                    %<br></br>
-                    MMR: {state.mmr}
+                    %
+                    <br />
+                    MMR:
+                    {' '}
+                    {state.mmr}
                   </p>
                 </Container>
                 {/* {LiveGameComponent()} */}
