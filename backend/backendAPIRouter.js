@@ -82,7 +82,7 @@ async function getUserData(standardized_summoner_name, region) {
 }
 
 async function getWinrateDataWithMigration(standardized_summoner_name, region, raw_summoner_name) {
-  const { puuid, name } = await galeforceCalls.get_summoner_from_name(raw_summoner_name, region);
+  const { puuid, name, accountId } = await galeforceCalls.get_summoner_from_name(raw_summoner_name, region);
   const migrated_user_data = await user_model_v5.find({
     puuid,
   }, '-_id -__v');
@@ -92,10 +92,14 @@ async function getWinrateDataWithMigration(standardized_summoner_name, region, r
     return result;
   }
 
-  const deprecated_user_data = await user_model.find({
+  const deprecated_user_data_by_name = await user_model.find({
     true_summoner_name: name,
     region,
   }, '-_id -__v');
+  const deprecated_user_data_by_account_id = await user_model.find({
+    accountId
+  }, '-_id -__v');
+  const deprecated_user_data = deprecated_user_data_by_name.concat(deprecated_user_data_by_account_id);
   if (deprecated_user_data.length === 0) {
     return null;
   }
@@ -103,13 +107,13 @@ async function getWinrateDataWithMigration(standardized_summoner_name, region, r
   const oldest_user_data = deprecated_user_data.sort((a, b) => a.last_processed_game_timestamp_ms - b.last_processed_game_timestamp_ms)[0].toObject(); // Furthest back first
   oldest_user_data.puuid = puuid;
 
-  // await user_model.deleteMany({ true_summoner_name: name });
+  await user_model.deleteMany({ true_summoner_name: name });
   await user_model_v5.insertMany(
     [oldest_user_data]
   );
   oldest_user_data.true_summoner_name = name;
 
-  return new_summoner_data;
+  return oldest_user_data;
 }
 
 async function issueUpdate(username, region, existing_user_data = null) {
@@ -249,7 +253,7 @@ router.get(
       null,
     ]);
     let user_data = null;
-    if (matching_user_data.length === null) {
+    if (matching_user_data === null) {
       user_data = await issueUpdate(
         standardized_summoner_name,
         req.params.region
