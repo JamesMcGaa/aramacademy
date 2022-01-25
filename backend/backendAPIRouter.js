@@ -116,15 +116,6 @@ async function getWinrateDataWithMigration(standardized_summoner_name, region, r
   return oldest_user_data;
 }
 
-async function issueUpdate(username, region, existing_user_data = null) {
-  const user_data = await asyncLimitProcessUser(
-    username,
-    region,
-    existing_user_data
-  );
-  return user_data;
-}
-
 async function getLeaderboardData(region) {
   const mongo_docs = await leaderboard_model.find({
     region,
@@ -254,7 +245,7 @@ router.get(
     ]);
     let user_data = null;
     if (matching_user_data === null) {
-      user_data = await issueUpdate(
+      user_data = await asyncLimitProcessUser(
         standardized_summoner_name,
         req.params.region
       );
@@ -299,9 +290,9 @@ router.get('/update/:region/:unsanitized_summoner_name', async (req, res) => {
     getMMR(req.params.region, req.params.unsanitized_summoner_name), // Fetch whatismymmr using unsanitized name
   ]);
 
-  const user_data = await issueUpdate(
-    standardized_summoner_name,
+  const user_data = await asyncLimitProcessUser(
     req.params.region,
+    req.params.unsanitized_summoner_name,
     matching_user_data[0]
   );
 

@@ -92,8 +92,8 @@ async function get_true_summoner_name(summoner_name, region) {
   return get_summoner_from_name(summoner_name, region).then((res) => res.name);
 }
 
-async function get_icon_id(summoner_name, region) {
-  return get_summoner_from_name(summoner_name, region).then((res) => res.profileIconId);
+async function get_icon_id(puuid, region) {
+  return get_summoner_from_puuid(puuid, region).then((res) => res.profileIconId);
 }
 
 // Return list of matchids
@@ -123,14 +123,12 @@ async function get_recent_matches_leaderboard(puuid, region, begin_time_unix) {
 }
 
 async function get_match_list(
-  account_id,
+  puuid,
   region,
   start,
   count,
   start_timestamp
 ) {
-  const puuid = await get_puuid(account_id, region);
-
   const result = await galeforce.lol.match
     .list()
     .region(DB_REGION_TO_GALEFORCE_RIOT_REGION[region])
@@ -155,9 +153,8 @@ async function get_match(match_id, region) {
 }
 
 // Returns last processed game timestamp for this account
-async function get_last_processed_game_timestamp(account_id, region) {
-  const puuid = await get_puuid(account_id, region);
-  matchlist = await galeforce.lol.match
+async function get_last_processed_game_timestamp(puuid, region) {
+  const matchlist = await galeforce.lol.match
     .list()
     .region(DB_REGION_TO_GALEFORCE_RIOT_REGION[region])
     .puuid(puuid)
@@ -166,7 +163,7 @@ async function get_last_processed_game_timestamp(account_id, region) {
     })
     .exec();
   const most_recent_match_id = matchlist[0];
-  match = await galeforce.lol.match
+  const match = await galeforce.lol.match
     .match()
     .region(DB_REGION_TO_GALEFORCE_RIOT_REGION[region])
     .matchId(most_recent_match_id)
@@ -175,23 +172,23 @@ async function get_last_processed_game_timestamp(account_id, region) {
 }
 
 async function get_subsection_matchlist(
-  account_id,
+  puuid,
   region,
   start_index,
   num_matches = 100,
   start_timestamp
 ) {
   const matchlist = await get_match_list(
-    account_id,
+    puuid,
     region,
     start_index,
     num_matches,
     start_timestamp
   );
-  results = [];
+  const results = [];
   await Promise.all(
     matchlist.map(async (match_id) => {
-      match = await get_match(match_id, region);
+      const match = await get_match(match_id, region);
       results.push(match);
     })
   );
@@ -201,9 +198,8 @@ async function get_subsection_matchlist(
 async function get_match_info(
   match_id,
   platform_id,
-  account_id,
+  puuid,
   region,
-  username,
   include_start_timestamp = false
 ) {
   // return dictionary of win, kills, deaths, assists, cs, etc for this match and this participant player
@@ -212,13 +208,11 @@ async function get_match_info(
   if (utils.PLATFORM_ID_TO_REGION[platform_id] !== region) {
     query_region = utils.PLATFORM_ID_TO_REGION[platform_id];
   }
-  const puuid = await get_puuid(account_id, region);
-
-  return await get_match(match_id, region).then((match) => {
+  return get_match(match_id, region).then((match) => {
     const participant_identities = match.info.participants;
     let desired_id = null;
-    for (i = 0; i < participant_identities.length; i++) {
-      participant = participant_identities[i];
+    for (let i = 0; i < participant_identities.length; i++) {
+      const participant = participant_identities[i];
       if (participant.puuid === puuid) {
         desired_id = participant.participantId;
       }
@@ -231,18 +225,16 @@ async function get_match_info(
       const error = new utils.SummonerNotInMatchError(
         `The match ${
           match_id
-        } does not contain the user ${
-          username
-        } with account_id ${
-          account_id
+        } does not contain the user with puuid ${
+          puuid
         } as a participant. query_region is${
           query_region}`
       );
-      rand = Math.random();
+      const rand = Math.random();
       if (rand > 0.995) {
         // Logging 1/200
         utils.sendErrorLog(
-          username,
+          puuid,
           region,
           utils.ERRORS.SUMMONER_NOT_IN_MATCH,
           error
@@ -252,7 +244,7 @@ async function get_match_info(
     }
     const participants = match.info.participants;
     let desired_participant;
-    for (i = 0; i < participants.length; i++) {
+    for (let i = 0; i < participants.length; i++) {
       if (participants[i].participantId === desired_id) {
         desired_participant = participants[i];
       }
@@ -260,14 +252,12 @@ async function get_match_info(
     const match_stats = desired_participant;
     const match_info = {};
 
-    champ_id = desired_participant.championId;
-    match_info.champ = champ_id;
+    match_info.champ = desired_participant.championId;
     match_info.win = match_stats.win;
     match_info.kills = match_stats.kills;
     match_info.deaths = match_stats.deaths;
     match_info.assists = match_stats.assists;
     match_info.pentakills = match_stats.pentaKills;
-    match_info_return = match_info;
     if (include_start_timestamp) {
       match_info.gameStartTimestamp = match.info.gameStartTimestamp;
     }
@@ -277,15 +267,14 @@ async function get_match_info(
 
 // Returns most recent 10 games - just champ, KDA
 async function get_ten_recent_matches(
-  account_id,
+  puuid,
   region,
   champ_dict,
-  username
 ) {
   const start_index = 0;
   const num_matches = 10;
-  matchlist = await get_subsection_matchlist(
-    account_id,
+  const matchlist = await get_subsection_matchlist(
+    puuid,
     region,
     start_index,
     num_matches,
@@ -299,10 +288,9 @@ async function get_ten_recent_matches(
     const match_info_must_await = get_match_info(
       match_id,
       platform_id,
-      account_id,
+      puuid,
       region,
-      username,
-      (include_start_timestamp = true)
+      true
     );
     match_infos_must_await.push(match_info_must_await);
   }

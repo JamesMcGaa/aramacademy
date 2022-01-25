@@ -1,12 +1,12 @@
 const dotenv = require('dotenv');
-const user_model = require('../models/user_model.js');
+const user_model_v5 = require('../models/user_model_v5.js');
 const utils = require('./utils.js');
 const galeforce_calls = require('./galeforce_calls.js');
 
 dotenv.config();
 
 async function create_summoner_entry(
-  username,
+  puuid,
   region,
   champ_dict,
   last_game_timestamp = null
@@ -16,42 +16,25 @@ async function create_summoner_entry(
    * per champion data, recent games, etc. last_game_timestamp is optional paramater - if provided, this will
    * search games only after this timestamp
    */
-  const account_args = [username, region];
-  let account_id;
-  let true_summoner_name;
+  const account_args = [puuid, region];
   let last_processed_game_timestamp;
-  try {
-    account_id = await utils.retry_async_function(
-      galeforce_calls.get_account_id,
-      account_args
-    );
-    true_summoner_name = await utils.retry_async_function(
-      galeforce_calls.get_true_summoner_name,
-      account_args
-    );
-  } catch (error) {
-    throw new utils.SummonerDoesNotExistError(
-      `User ${username} does not exist in ${region}`
-    );
-  }
 
   try {
     last_processed_game_timestamp = await galeforce_calls.get_last_processed_game_timestamp(
-      account_id,
+      puuid,
       region
     );
     console.log('timestamp in args', last_game_timestamp);
     console.log('last processed game timestamp', last_game_timestamp);
   } catch (error) {
     throw new utils.SummonerHasNoGamesError(
-      `User ${username} in ${region} has no ARAM games played.`
+      `User ${puuid} in ${region} has no ARAM games played.`
     );
   }
   const recent_matches = await galeforce_calls.get_ten_recent_matches(
-    account_id,
+    puuid,
     region,
     champ_dict,
-    username
   );
   const icon_id = await utils.retry_async_function(
     galeforce_calls.get_icon_id,
@@ -60,11 +43,11 @@ async function create_summoner_entry(
   let aggregate_stats;
   if (last_game_timestamp === null) {
     // new user
-    aggregate_stats = await create_or_update_user(username, region, champ_dict);
+    aggregate_stats = await create_or_update_user(puuid, region, champ_dict);
   } else {
     // existing user
     aggregate_stats = await create_or_update_user(
-      username,
+      puuid,
       region,
       champ_dict,
       last_game_timestamp
@@ -74,8 +57,7 @@ async function create_summoner_entry(
     aggregate_stats
   );
   const db_entry = {};
-  db_entry.accountId = account_id;
-  db_entry.true_summoner_name = true_summoner_name;
+  db_entry.puuid = puuid;
   db_entry.last_processed_game_timestamp_ms = last_processed_game_timestamp;
   db_entry.per_champion_data = per_champion_data;
   db_entry.recent_games = recent_matches;
@@ -85,7 +67,7 @@ async function create_summoner_entry(
 }
 
 async function create_or_update_user(
-  username,
+  puuid,
   region,
   champ_dict,
   last_game_timestamp = null
@@ -94,45 +76,30 @@ async function create_or_update_user(
    * returns aggregate winrate data for all champs for new user for all games if last_game_timestamp is null
    * if timestamp is provided, only provides aggregate champ data for games after this timestamp
    */
-
-  const account_args = [username, region];
-  let account_id;
-  try {
-    account_id = await utils.retry_async_function(
-      galeforce_calls.get_account_id,
-      account_args
-    );
-  } catch (error) {
-    throw new utils.SummonerDoesNotExistError(
-      `User ${username} does not exist in ${region}`
-    );
-  }
   let matchlist_to_add;
   if (last_game_timestamp === null) {
-    matchlist_to_add = await get_full_matchlist(account_id, region);
+    matchlist_to_add = await get_full_matchlist(puuid, region);
   } else {
     console.log('updating from last_game_timestamp', last_game_timestamp);
     matchlist_to_add = await get_full_matchlist(
-      account_id,
+      puuid,
       region,
       last_game_timestamp + 1
     );
   }
-  return await convert_matchlist_to_aggregate_champ_data(
+  return convert_matchlist_to_aggregate_champ_data(
     matchlist_to_add,
-    account_id,
+    puuid,
     champ_dict,
     region,
-    username
   );
 }
 
 async function convert_matchlist_to_aggregate_champ_data(
   full_matchlist,
-  account_id,
+  puuid,
   champ_dict,
   region,
-  username
 ) {
   /**
    * Data manipulation function that converts a raw list of matchlists (returned from Riot API) to aggregate per champion
@@ -140,13 +107,12 @@ async function convert_matchlist_to_aggregate_champ_data(
    */
   const match_infos_must_await = [];
   for (let i = 0; i < full_matchlist.length; i++) {
-    matchlist = full_matchlist[i];
+    const matchlist = full_matchlist[i];
     for (let j = 0; j < matchlist.length; j++) {
-      match_id = matchlist[j].metadata.matchId;
-      platform_id = matchlist[j].info.platformId;
+      const match_id = matchlist[j].metadata.matchId;
+      const platform_id = matchlist[j].info.platformId;
       // ISSUE with users who have transferred regions - platform_id and region may not be the same - need to query platform_id instead of region in this case
-      const match_args = [match_id, platform_id, account_id, region, username];
-
+      const match_args = [match_id, platform_id, puuid, region];
       const match_info = utils.retry_async_function(
         galeforce_calls.get_match_info,
         match_args
@@ -164,7 +130,7 @@ async function convert_matchlist_to_aggregate_champ_data(
   return aggregate;
 }
 
-async function get_full_matchlist(account_id, region, start_timestamp = 0) {
+async function get_full_matchlist(puuid, region, start_timestamp = 0) {
   /**
    * Calls Riot's API for matchlists 100 at a time in order to get a full list of matchlists for this player starting from start_timestamp
    * full_matchlist is a list of matchlist objects returned by Riot API, which are themselves lists of matches, so is a nested list
@@ -178,7 +144,7 @@ async function get_full_matchlist(account_id, region, start_timestamp = 0) {
   // This means that we need to divide our stored timestamps by 1000.
   // Further note that this startTime queries against matchInfo.gameEndTimestamp
 
-  start_timestamp = Math.max(Math.ceil(start_timestamp / 1000), 1623975046);
+  const adjusted_start_timestamp = Math.max(Math.ceil(start_timestamp / 1000), 1623975046);
   console.log('start timestamp in full matchlist', start_timestamp);
 
   const full_matchlist = [];
@@ -187,11 +153,11 @@ async function get_full_matchlist(account_id, region, start_timestamp = 0) {
   let matchlist;
   do {
     const args = [
-      account_id,
+      puuid,
       region,
       start_index,
       num_matches,
-      start_timestamp,
+      adjusted_start_timestamp,
     ];
     matchlist = await utils.retry_async_function(
       galeforce_calls.get_subsection_matchlist,
@@ -205,7 +171,7 @@ async function get_full_matchlist(account_id, region, start_timestamp = 0) {
   return full_matchlist;
 }
 
-async function processUser(username, region, existing_user_data = null) {
+async function processUser(unsanitized_username, region, existing_user_data = null) {
   /**
    * Main entrypoint function from backendapirouter.js. Does a full summoner process for username in region
    * If existing_user_data is supplied from backend, this will only process new games after the last processed timestamp
@@ -216,10 +182,17 @@ async function processUser(username, region, existing_user_data = null) {
     timestamp = existing_user_data.last_processed_game_timestamp_ms;
   }
   let db_entry;
+  let puuid;
+  try {
+    // https://stackoverflow.com/questions/35576307/declaration-or-statement-expected-javascript-typescript/51547129
+    ({ puuid } = await galeforce_calls.get_summoner_from_name(unsanitized_username, region));
+  } catch (error) {
+    return utils.ERRORS.SUMMONER_DOES_NOT_EXIST;
+  }
   try {
     const champ_dict = await galeforce_calls.get_champ_dict();
     db_entry = await create_summoner_entry(
-      username,
+      puuid,
       region,
       champ_dict,
       timestamp
@@ -227,7 +200,7 @@ async function processUser(username, region, existing_user_data = null) {
   } catch (error) {
     if (error instanceof utils.SummonerDoesNotExistError) {
       utils.sendErrorLog(
-        username,
+        puuid,
         region,
         utils.ERRORS.SUMMONER_DOES_NOT_EXIST,
         error
@@ -235,7 +208,7 @@ async function processUser(username, region, existing_user_data = null) {
       return utils.ERRORS.SUMMONER_DOES_NOT_EXIST;
     } if (error instanceof utils.SummonerHasNoGamesError) {
       utils.sendErrorLog(
-        username,
+        puuid,
         region,
         utils.ERRORS.SUMMONER_HAS_NO_GAMES,
         error
@@ -243,7 +216,7 @@ async function processUser(username, region, existing_user_data = null) {
       return utils.ERRORS.SUMMONER_HAS_NO_GAMES;
     } if (error instanceof utils.SummonerNotInMatchError) {
       utils.sendErrorLog(
-        username,
+        puuid,
         region,
         utils.ERRORS.SUMMONER_NOT_IN_MATCH,
         error
@@ -251,31 +224,28 @@ async function processUser(username, region, existing_user_data = null) {
       return utils.ERRORS.SUMMONER_NOT_IN_MATCH;
     } if (error instanceof utils.RetryAsyncFunctionError) {
       utils.sendErrorLog(
-        username,
+        puuid,
         region,
         utils.ERRORS.RETRY_ASYNC_FUNCTION,
         error
       );
       return utils.ERRORS.RETRY_ASYNC_FUNCTION;
     }
-    utils.sendErrorLog(username, region, utils.ERRORS.UNKNOWN, error);
+    utils.sendErrorLog(puuid, region, utils.ERRORS.UNKNOWN, error);
     throw error;
   }
 
   db_entry.last_updated_timestamp_ms = Date.now();
-  db_entry.standardized_summoner_name = username.toLowerCase();
-  db_entry.region = region;
   if (existing_user_data === null) {
     // new entry
     const filter = {
-      standardized_summoner_name: db_entry.standardized_summoner_name,
-      region: db_entry.region,
+      puuid: db_entry.puuid,
     };
-    await user_model.findOneAndUpdate(filter, db_entry, {
+    await user_model_v5.findOneAndUpdate(filter, db_entry, {
       new: true,
       upsert: true,
     });
-    console.log(`finished creating new ${username}`);
+    console.log(`finished creating new ${puuid}`);
     return db_entry;
   }
   // update
@@ -287,11 +257,11 @@ async function processUser(username, region, existing_user_data = null) {
     standardized_summoner_name: updated_db_entry.standardized_summoner_name,
     region: updated_db_entry.region,
   };
-  await user_model.findOneAndUpdate(filter, updated_db_entry, {
+  await user_model_v5.findOneAndUpdate(filter, updated_db_entry, {
     new: true,
     upsert: true,
   });
-  console.log(`finished updating ${username}`);
+  console.log(`finished updating ${puuid}`);
   return updated_db_entry;
 }
 
