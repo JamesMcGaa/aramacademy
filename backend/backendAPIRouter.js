@@ -72,13 +72,11 @@ const asyncLimit = (fn, n) => {
 
 const asyncLimitProcessUser = infra.processUser; // asyncLimit(processUser, MAX_ASYNC_USERS_QUEUE);
 
-async function getUserData(standardized_summoner_name, region) {
-  console.log('getuserdata sumname', standardized_summoner_name);
-  const user_data = await user_model.find({
-    standardized_summoner_name,
-    region,
-  });
-  return user_data;
+async function getUserDataForUpdate(puuid) {
+  const results = await user_model_v5.find({
+    puuid,
+  }, '-_id -__v');
+  return results[0].toObject();
 }
 
 async function getWinrateDataWithMigration(standardized_summoner_name, region, raw_summoner_name) {
@@ -87,7 +85,7 @@ async function getWinrateDataWithMigration(standardized_summoner_name, region, r
     puuid,
   }, '-_id -__v');
   if (migrated_user_data.length > 0) {
-    const result = migrated_user_data[0]; // TODO LOG MULTIPLES
+    const result = migrated_user_data[0].toObject(); // TODO LOG MULTIPLES
     result.true_summoner_name = name;
     return result;
   }
@@ -278,24 +276,19 @@ router.get(
 );
 
 /*
- * Places a given (region, standardized_summoner_name) on the update queue
+ * Places a given (region, puuid) on the update queue
  */
-router.get('/update/:region/:unsanitized_summoner_name', async (req, res) => {
-  const standardized_summoner_name = sanitizeSummonerName(
-    req.params.unsanitized_summoner_name
-  );
+router.get('/update/:region/:puuid/:unsanitized_summoner_name', async (req, res) => {
   const [matching_user_data, patch, mmr] = await Promise.all([
-    getUserData(standardized_summoner_name, req.params.region),
+    getUserDataForUpdate(req.params.puuid),
     getCurrentPatch(),
     getMMR(req.params.region, req.params.unsanitized_summoner_name), // Fetch whatismymmr using unsanitized name
   ]);
-
   const user_data = await asyncLimitProcessUser(
-    req.params.region,
     req.params.unsanitized_summoner_name,
+    req.params.region,
     matching_user_data[0]
   );
-
   const rank = getRankEstimate(mmr);
   const icon_path = `https://ddragon.leagueoflegends.com/cdn/${patch}/img/profileicon/${user_data.icon_id}.png`;
 

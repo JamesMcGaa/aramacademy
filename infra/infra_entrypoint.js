@@ -183,9 +183,10 @@ async function processUser(unsanitized_username, region, existing_user_data = nu
   }
   let db_entry;
   let puuid;
+  let name;
   try {
     // https://stackoverflow.com/questions/35576307/declaration-or-statement-expected-javascript-typescript/51547129
-    ({ puuid } = await galeforce_calls.get_summoner_from_name(unsanitized_username, region));
+    ({ puuid, name } = await galeforce_calls.get_summoner_from_name(unsanitized_username, region));
   } catch (error) {
     return utils.ERRORS.SUMMONER_DOES_NOT_EXIST;
   }
@@ -246,6 +247,7 @@ async function processUser(unsanitized_username, region, existing_user_data = nu
       upsert: true,
     });
     console.log(`finished creating new ${puuid}`);
+    db_entry.true_summoner_name = name;
     return db_entry;
   }
   // update
@@ -254,14 +256,14 @@ async function processUser(unsanitized_username, region, existing_user_data = nu
     db_entry
   );
   const filter = {
-    standardized_summoner_name: updated_db_entry.standardized_summoner_name,
-    region: updated_db_entry.region,
+    puuid: updated_db_entry.puuid,
   };
   await user_model_v5.findOneAndUpdate(filter, updated_db_entry, {
     new: true,
     upsert: true,
   });
   console.log(`finished updating ${puuid}`);
+  updated_db_entry.true_summoner_name = name;
   return updated_db_entry;
 }
 

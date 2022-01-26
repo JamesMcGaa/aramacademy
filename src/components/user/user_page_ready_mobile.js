@@ -5,13 +5,14 @@ import Typography from '@material-ui/core/Typography';
 import React, { useState } from 'react';
 import { PieChart } from 'react-minimal-pie-chart';
 import { useParams } from 'react-router-dom';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Resources from '../resources.js';
 import RecentMatchesTable from './recent_matches_table.js';
 import UserTableMobile from './users_table_mobile.js';
-import CircularProgress from '@material-ui/core/CircularProgress';
 
 const fetch = require('node-fetch');
 const moment = require('moment');
+
 moment().format();
 
 const UPDATE_STATE = {
@@ -20,7 +21,7 @@ const UPDATE_STATE = {
   UPDATED: 'UPDATED',
 };
 
-var resources = Resources.Resources;
+const resources = Resources.Resources;
 const useStyles = makeStyles({
   paperRoot: {
     'background-color': 'rgba(66,66,66,.8)',
@@ -56,10 +57,11 @@ export default function UserPageReadyMobile({ props }) {
     setUpdateState(UPDATE_STATE.UPDATING);
 
     fetch(
-      '/api/update/' +
-        encodeURI(params.region) +
-        '/' +
-        encodeURI(params.summonerName)
+      `/api/update/${
+        encodeURI(params.region)
+      }/${
+        encodeURI(props.user_data.puuid)}/${
+        encodeURI(params.summonerName)}`
     )
       .then((response) => response.json())
       .then((json) => {
@@ -91,8 +93,8 @@ export default function UserPageReadyMobile({ props }) {
     />
   );
 
-  var wins = 0;
-  var losses = 0;
+  let wins = 0;
+  let losses = 0;
   state.user_data.recent_games.forEach((game) => {
     if (game.win) {
       wins += 1;
@@ -101,9 +103,9 @@ export default function UserPageReadyMobile({ props }) {
     }
   });
 
-  var now = moment.utc();
-  //var last_updated = moment.utc(state.user_data.last_updated_timestamp_ms);
-  //var last_updated_string = moment.utc(lastUpdatedTimestamp).fromNow();
+  const now = moment.utc();
+  // var last_updated = moment.utc(state.user_data.last_updated_timestamp_ms);
+  // var last_updated_string = moment.utc(lastUpdatedTimestamp).fromNow();
   return (
     <Container fixed className={classes.largeContainer}>
       <Paper
@@ -127,7 +129,8 @@ export default function UserPageReadyMobile({ props }) {
                 className={classes.resizeSummonerIcon}
                 alt="summoner icon"
                 src={state.icon_path}
-              />{' '}
+              />
+              {' '}
             </div>
             <div style={{ flex: '60%' }}>
               <Container style={{ padding: '10px', paddingTop: '23px' }}>
@@ -146,7 +149,8 @@ export default function UserPageReadyMobile({ props }) {
                   )}
                 </Button>
                 <Typography variant="body2">
-                  Last updated:{' '}
+                  Last updated:
+                  {' '}
                   {moment
                     .utc(state.user_data.last_updated_timestamp_ms)
                     .fromNow()}
@@ -171,14 +175,20 @@ export default function UserPageReadyMobile({ props }) {
         >
           <div style={{ marginRight: '15px' }}>{rank_badge}</div>
           <p style={{ marginBottom: '0px' }}>
-            Total ARAMs: {overall.total_games}
-            <br></br>
-            Winrate:{' '}
+            Total ARAMs:
+            {' '}
+            {overall.total_games}
+            <br />
+            Winrate:
+            {' '}
             {Math.round(
               (overall.wins / Math.max(1, overall.total_games)) * 10000
             ) / 100}
-            %<br></br>
-            MMR: {state.mmr}
+            %
+            <br />
+            MMR:
+            {' '}
+            {state.mmr}
           </p>
         </Container>
       </Paper>

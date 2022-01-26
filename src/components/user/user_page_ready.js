@@ -86,6 +86,7 @@ export default function UserPageReady({ props }) {
       `/api/update/${
         encodeURI(params.region)
       }/${
+        encodeURI(props.user_data.puuid)}/${
         encodeURI(params.summonerName)}`
     )
       .then((response) => response.json())
@@ -200,7 +201,6 @@ export default function UserPageReady({ props }) {
         );
     }
   };
-
   const now = moment.utc();
   // var last_updated = moment.utc(state.user_data.last_updated_timestamp_ms);
   // var last_updated_string = moment.utc(lastUpdatedTimestamp).fromNow();
