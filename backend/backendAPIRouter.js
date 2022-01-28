@@ -287,7 +287,7 @@ router.get('/update/:region/:puuid/:unsanitized_summoner_name', async (req, res)
   const user_data = await asyncLimitProcessUser(
     req.params.unsanitized_summoner_name,
     req.params.region,
-    matching_user_data[0]
+    matching_user_data
   );
   const rank = getRankEstimate(mmr);
   const icon_path = `https://ddragon.leagueoflegends.com/cdn/${patch}/img/profileicon/${user_data.icon_id}.png`;
