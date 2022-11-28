@@ -49,14 +49,13 @@ export default function Farewell() {
                 style={{ marginBottom: '30vh' }}
             ></header>
             <main role="main" className="inner cover">
-                <h1 className="cover-heading" style={{marginBottom: '30px'}}>Farewell - ARAM Academy </h1>
-                <p className="body" style={mobile() ? { fontSize: '16px' , textAlign: 'left'} : {maxWidth: '800px', textAlign: 'left', fontSize: '18px'}}>
-                    For over two years ARAM Academy was the premier source of competitive ARAM statistics. However we are sad to announce that the site will be put on pause due to resource constraints. For updates, please join us in the ARAM Academy Discord - which will remain open as one of the largest ARAM communities. It has been an absolute privilege to serve the ARAM Academy community, and we hope to see you again on the Howling Abyss one day. 
-                    </p>
-                <p className="body" style={mobile() ? { fontSize: '16px' , textAlign: 'left', marginBottom: '30px'} : { maxWidth: '800px', textAlign: 'left', fontSize: '18px', marginBottom: '30px'}}>
+                <h1 className="cover-heading" style={{ marginBottom: '30px' }}> On Pause - ARAM Academy </h1>
+                <p className="body" style={mobile() ? { fontSize: '16px' , textAlign: 'center'} : {maxWidth: '800px', textAlign: 'center', fontSize: '18px'}}>
+For over two years ARAM Academy has been the premier source of competitive ARAM statistics. However for the foreseeable future the site will be put on pause due to resource constraints. For updates, please join us in the ARAM Academy Discord - which will remain open as one of the largest ARAM communities. It has been an absolute privilege to serve the ARAM Academy community, and we hope to see you again on the Howling Abyss.                     </p>
+                <p className="body" style={mobile() ? { fontSize: '20px' , textAlign: 'center', marginBottom: '30px'} : { maxWidth: '800px', textAlign: 'center', fontSize: '22px', marginBottom: '30px'}}>
                     - The ARAM Academy Team
                 </p>
-                <div style={mobile() ? { width: '249px', margin: 'auto' } : {width: '374px', margin: 'auto'}}> 
+                <div style={mobile() ? { width: '200px', margin: 'auto' } : {width: '300px', margin: 'auto'}}> 
                 <Link href={"https://discord.gg/MydvqhqWmM"} style={{ textDecoration: 'none'}}>
                 <Card>
                     <CardActionArea>
@@ -65,7 +64,6 @@ export default function Farewell() {
                             alt="Discord Link"
                             image={discord_uri}
                             title="Discord Link"
-                            style={mobile() ? { height: '80px', width: 'auto', } : {height: '120px', width: 'auto', }}
                         />
                     </CardActionArea>
                 </Card>
