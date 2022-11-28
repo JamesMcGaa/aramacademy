@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(DIST_DIR));
 
-app.use('/api', backendAPIRouter);
+// app.use('/api', backendAPIRouter);
 
 app.get('/*', (req, res) => {
   res.sendFile(REACT_ENTRY_POINT);

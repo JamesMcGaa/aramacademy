@@ -13,21 +13,21 @@ export default class Navigation extends React.Component {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="/">Home</Nav.Link>
-            <NavDropdown title="Leaderboards" id="collasible-nav-dropdown">
+            {/* <Nav.Link href="/">Home</Nav.Link> */}
+            {/* <NavDropdown title="Leaderboards" id="collasible-nav-dropdown">
               <NavDropdown.Item href="/leaderboards/na">NA</NavDropdown.Item>
               <NavDropdown.Item href="/leaderboards/euw">EUW</NavDropdown.Item>
               <NavDropdown.Item href="/leaderboards/eune">
                 EUNE
               </NavDropdown.Item>
-            </NavDropdown>
+            </NavDropdown> */}
             {/* <Nav.Link href="/champions">Builds</Nav.Link>
             <Nav.Link href="/tierlist">Tier List</Nav.Link>
             <Nav.Link href="/research">Research</Nav.Link> */}
           </Nav>
           <Nav className="mr-sm-2">
             <Nav.Link href="/about">About</Nav.Link>
-            <Nav.Link href="/FAQ">FAQ</Nav.Link>
+            {/* <Nav.Link href="/FAQ">FAQ</Nav.Link> */}
             <div style={{ marginLeft: '10px', marginRight: '10px' }}>
               <a href="https://discord.gg/MydvqhqWmM" target="_blank">
                 <img
@@ -42,7 +42,7 @@ export default class Navigation extends React.Component {
                   src="/static/discord.svg"
                 />
               </a>
-              <a
+               {/* <a
                 href={
                   isAndroid
                     ? 'fb://page/106500547936727'
@@ -73,8 +73,8 @@ export default class Navigation extends React.Component {
                   height="32"
                   width="32"
                   src="/static/patreon.svg"
-                />
-              </a>{' '}
+                /> 
+              </a>{' '} */}
             </div>
           </Nav>
         </Navbar.Collapse>

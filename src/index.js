@@ -7,6 +7,7 @@ import { Container } from '@material-ui/core';
 import { CookiesProvider } from 'react-cookie';
 import { Helmet } from 'react-helmet';
 import Home from './components/home/home_page.js';
+import Farewell from './components/farewell/farewell_page.js';
 import Users from './components/user/user_page.js';
 import Navigation from './components/navigation.js';
 import Leaderboards from './components/leaderboard/leaderboard_page.js';
@@ -52,12 +53,12 @@ function App() {
           <Container style={{ height: '100%' }}>
             <Navigation />
             <Switch>
-              <Route path="/users/:region/:summonerName">
+              {/* <Route path="/users/:region/:summonerName">
                 <Users />
-              </Route>
-              <Route path="/leaderboards/:region">
+              </Route> */}
+              {/* <Route path="/leaderboards/:region">
                 <Leaderboards />
-              </Route>
+              </Route> */}
               {/* <Route path="/champions/:champion">
                 <Champion />
               </Route>
@@ -70,7 +71,7 @@ function App() {
               <Route path="/about">
                 <About />
               </Route>
-              <Route path="/FAQ">
+              {/* <Route path="/FAQ">
                 <Faq />
               </Route>
               <Route path="/research/:article">
@@ -78,9 +79,9 @@ function App() {
               </Route>
               <Route path="/research">
                 <ResearchList />
-              </Route>
+              </Route> */}
               <Route path="/">
-                <Home />
+                <Farewell />
               </Route>
             </Switch>
           </Container>
